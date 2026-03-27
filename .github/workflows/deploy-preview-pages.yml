@@ -57,6 +57,9 @@ jobs:
   preview-itgrep:
     if: ${{ !github.event.pull_request.draft && needs.detect-changes.outputs.itgrep == 'true' }}
     needs: detect-changes
+    permissions:
+      contents: read
+      deployments: write
     uses: ./.github/workflows/_deploy-pages-site.yml
     with:
       site_dir: itgrep.com
@@ -67,6 +70,9 @@ jobs:
   preview-nodejs-tech:
     if: ${{ !github.event.pull_request.draft && needs.detect-changes.outputs.nodejs_tech == 'true' }}
     needs: detect-changes
+    permissions:
+      contents: read
+      deployments: write
     uses: ./.github/workflows/_deploy-pages-site.yml
     with:
       site_dir: nodejs.tech
@@ -77,6 +83,9 @@ jobs:
   preview-traefik-tech:
     if: ${{ !github.event.pull_request.draft && needs.detect-changes.outputs.traefik_tech == 'true' }}
     needs: detect-changes
+    permissions:
+      contents: read
+      deployments: write
     uses: ./.github/workflows/_deploy-pages-site.yml
     with:
       site_dir: traefik.tech

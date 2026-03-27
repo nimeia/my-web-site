@@ -15,6 +15,9 @@ on:
 
 jobs:
   deploy:
+    permissions:
+      contents: read
+      deployments: write
     uses: ./.github/workflows/_deploy-pages-site.yml
     with:
       site_dir: nodejs.tech
