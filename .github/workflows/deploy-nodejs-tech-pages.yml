@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - master
     paths:
       - "nodejs.tech/**"
       - "ads.txt/nodejs.tech.txt"

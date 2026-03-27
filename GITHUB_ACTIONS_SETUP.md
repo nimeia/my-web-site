@@ -47,16 +47,18 @@ Each workflow:
 
 ## Trigger behavior
 
-- Automatic production deploy on `push` to `main` when the relevant site files change.
+- Automatic production deploy on `push` to `main` or `master` when the relevant site files change.
 - Manual deploy from the GitHub Actions UI with `workflow_dispatch`.
 - Automatic preview deploy on pull requests for changed sites only.
+
+The `Run workflow` button only appears when the workflow file already exists on the repository default branch. If the workflow was only pushed to a feature branch, GitHub will not show the manual trigger yet.
 
 ## One-time Cloudflare setup
 
 Before the workflows can deploy successfully:
 
 1. Create three Cloudflare Pages projects.
-2. Set each project's production branch to `main`.
+2. Set each project's production branch to your actual default branch, usually `main` or `master`.
 3. Bind the custom domains in Cloudflare Pages.
 4. Configure `www -> apex` redirects and `Always Use HTTPS` in Cloudflare.
 

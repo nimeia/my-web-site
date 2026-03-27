@@ -51,6 +51,8 @@ Each workflow:
 2. Runs `node scripts/prepare-cloudflare-static.mjs <site_dir>`.
 3. Uploads the prepared directory with `wrangler pages deploy`.
 
+Production deploys trigger on `push` to `main` or `master` when the matching site paths change. The manual `Run workflow` button only appears after the workflow file is present on the repository default branch.
+
 ### Manual local deploy
 
 Examples:
