@@ -1,0 +1,157 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Node.js のタイマー | Node.js node js 学习 中文网</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Node.js のタイマー | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Node.js のタイマー | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/ja/docs/guides/timers-in-node"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/ja/docs/guides/timers-in-node-afe2dc2a8a4fa4fa.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-2WRNZHGVQT"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-2WRNZHGVQT");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8264273508355034" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/ja"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/ja">ホーム</a></li><li class=""><a href="/ja/about">Node.js とは</a></li><li class=""><a href="/ja/download">ダウンロード</a></li><li class="active"><a href="/ja/docs">ドキュメント</a></li><li class=""><a href="/ja/get-involved">参加する</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">セキュリティ</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class=""><a href="/ja/blog">ニュース</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/timers-in-node">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/timers-in-node">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/timers-in-node">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/timers-in-node">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/timers-in-node">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/timers-in-node">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/timers-in-node">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/timers-in-node">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/timers-in-node">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/timers-in-node">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/timers-in-node">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/timers-in-node">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/timers-in-node">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/timers-in-node">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/timers-in-node">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/timers-in-node">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/timers-in-node">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/timers-in-node">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/ja/docs">ドキュメント</a></li><li class=""><a href="/ja/docs/es6">ES6 について</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/ja/docs/guides">ガイド</a></li><li class=""><a href="/ja/docs/meta/topics/dependencies">依存関係</a></li></ul></nav><article dir="auto"><h1 id="node.js-のタイマーと仕組み">Node.js のタイマーと仕組み<a id="header-node.js-のタイマーと仕組み" class="anchor" href="#node.js-のタイマーと仕組み" aria-labelledby="node.js-のタイマーと仕組み"></a></h1>
+<p>Node.js のタイマーモジュールには、
+一定期間後にコードを実行する関数が含まれています。
+ブラウザの JavaScript API をエミュレートするためにすべてのメソッドがグローバルに利用可能であるため、
+<code>require()</code> を介してタイマーをインポートする必要はありません。
+タイマー関数がいつ実行されるかを完全に理解するためには、
+Node.js の<a href="/ja/docs/guides/event-loop-timers-and-nexttick/">イベントループ</a>を読むことをお勧めします。</p>
+<!-- -->
+<h2 id="nodejs-を使って連続した時間を制御する">Node.js を使って連続した時間を制御する<a id="header-nodejs-を使って連続した時間を制御する" class="anchor" href="#nodejs-を使って連続した時間を制御する" aria-labelledby="nodejs-を使って連続した時間を制御する"></a></h2>
+<p>Node.js APIには、現時点以降のある時点でコードを実行するように
+スケジューリングする方法がいくつかあります。
+以下の関数はほとんどのブラウザで利用可能であるためおなじみのように思われるかもしれませんが、
+Node.js は実際にはこれらのメソッドの独自の実装を提供します。
+タイマーはシステムと非常に密接に統合されており、
+API がブラウザ API を反映しているという事実があるにもかかわらず、実装にはいくつかの違いがあります。</p>
+<!-- -->
+<h3 id="そう言うとき-実行する--settimeout">&quot;そう言うとき&quot; 実行する ~ <em><code>setTimeout()</code></em><a id="header-そう言うとき-実行する--settimeout" class="anchor" href="#そう言うとき-実行する--settimeout" aria-labelledby="そう言うとき-実行する--settimeout"></a></h3>
+<p><code>setTimeout()</code> を使用して、
+指定したミリ秒後に
+コードの実行をスケジュールすることができます。
+この関数はブラウザの JavaScript API の <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout"><code>window.setTimeout()</code></a>に似ていますが、
+コードの文字列を渡して実行することはできません。</p>
+<p><code>setTimeout()</code> は、最初の引数として実行する関数と、
+2番目の引数として数値として定義されたミリ秒の遅延を受け入れます。
+追加の引数も含めることができ、これらは関数に渡されます。
+これはその一例です:</p>
+<pre><code class="language-js">function myFunc(arg) {
+  console.log(`arg was =&gt; ${arg}`);
+}
+
+setTimeout(myFunc, 1500, &#x27;funky&#x27;);
+</code></pre>
+<p>上記の関数 <code>myFunc()</code> は、<code>setTimeout()</code> の呼び出しにより、
+可能な限り 1500 ミリ秒 (または 1.5 秒) くらいで実行されます。</p>
+<p>設定されたタイムアウト間隔は、
+その<em>正確な</em>ミリ秒数の後に実行することに依存することはできません。
+これは、イベントループをブロックまたは保留している他の実行コードがタイムアウトの実行を遅らせるためです。
+<em>唯一</em>保証されているのは、
+タイムアウトが宣言されたタイムアウト間隔より早く実行されないということです。</p>
+<p><code>setTimeout()</code> は、設定されたタイムアウトを参照するために使用できる
+<code>Timeout</code> オブジェクトを返します。
+この返されたオブジェクトを使用して、タイムアウトをキャンセル (下記の <code>clearTimeout()</code> を参照) し、
+実行動作を変更 (下記の<code>unref()</code> を参照) することができます。</p>
+<!-- -->
+<h3 id="この直後に-実行する--setimmediate">&quot;この直後に&quot; 実行する ~ <em><code>setImmediate()</code></em><a id="header-この直後に-実行する--setimmediate" class="anchor" href="#この直後に-実行する--setimmediate" aria-labelledby="この直後に-実行する--setimmediate"></a></h3>
+<p><code>setImmediate()</code> は現在のイベントループサイクルの終わりにコードを実行します。
+このコードは、現在のイベントループ内の I/O 操作の<em>後</em>、
+および次のイベントループのためにスケジュールされたタイマーの<em>前</em>に実行されます。
+このコードの実行は「この直後」に行われると考えることができます。
+つまり、<code>setImmediate()</code> 関数呼び出しに続くコードは、
+<code>setImmediate()</code>関数引数の前に実行されます。</p>
+<p><code>setImmediate()</code> の最初の引数は実行する関数になります。
+それ以降の引数は、実行時に関数に渡されます。これが例です:</p>
+<pre><code class="language-js">console.log(&#x27;before immediate&#x27;);
+
+setImmediate((arg) =&gt; {
+  console.log(`executing immediate: ${arg}`);
+}, &#x27;so immediate&#x27;);
+
+console.log(&#x27;after immediate&#x27;);
+</code></pre>
+<p><code>setImmediate()</code> に渡された上記の関数は、すべての実行可能コードが実行された後に実行され、
+コンソール出力は次のようになります:</p>
+<pre><code class="language-text">before immediate
+after immediate
+executing immediate: so immediate
+</code></pre>
+<p><code>setImmediate()</code> は <code>Immediate</code> オブジェクトを返します。
+これを使用して、スケジュールされた Immediate をキャンセル (下記の <code>clearImmediate()</code> を参照) できます。</p>
+<p>注意: <code>setImmediate()</code> を <code>process.nextTick()</code> と混同しないでください。
+いくつかの大きな違いがあります。
+1つ目は、<code>process.nextTick()</code> は、設定されている <code>Immediate</code> やスケジュールされている I/O の<em>前</em>に実行されるということです。
+2つ目は、<code>process.nextTick()</code> は消去不可能であるということです。
+つまり、一度 <code>process.nextTick()</code> でコードを実行するようにスケジュールされると、
+通常の関数のように実行を停止することはできません。
+<code>process.nextTick()</code> の操作をよく理解するために<a href="/ja/docs/guides/event-loop-timers-and-nexttick/#process-nexttick">このガイド</a>を参照してください。</p>
+<!-- -->
+<h3 id="無限ループ-実行--setinterval">&quot;無限ループ&quot; 実行 ~ <em><code>setInterval()</code></em><a id="header-無限ループ-実行--setinterval" class="anchor" href="#無限ループ-実行--setinterval" aria-labelledby="無限ループ-実行--setinterval"></a></h3>
+<p>複数回実行する必要があるコードブロックがある場合、
+<code>setInterval()</code> を使用してそのコードを実行できます。
+<code>setInterval()</code> は2番目の引数として指定されたミリ秒の遅れで無限回実行する関数の引数を取ります。
+<code>setTimeout()</code> と同じように、遅延を超えて追加の引数を追加することができ、
+それらは関数呼び出しに渡されます。
+<code>setTimeout()</code> と同様に、イベントループに耐えることができる操作のために遅延を保証することはできません。
+したがっておおよその遅延として扱われるべきです。
+以下の例を参照してください。</p>
+<pre><code class="language-js">function intervalFunc() {
+  console.log(&#x27;Cant stop me now!&#x27;);
+}
+
+setInterval(intervalFunc, 1500);
+</code></pre>
+<p>上の例では、<code>intervalFunc()</code> は停止されるまで
+約 1500 ミリ秒 (1.5秒) ごとに実行されます(下記参照)。</p>
+<p><code>setTimeout()</code> と同様に、
+<code>setInterval()</code> もまた設定された間隔を参照したり修正したりするのに使用できる <code>Timeout</code> オブジェクトを返します。</p>
+<!-- -->
+<h2 id="未来をクリアする">未来をクリアする<a id="header-未来をクリアする" class="anchor" href="#未来をクリアする" aria-labelledby="未来をクリアする"></a></h2>
+<p><code>Timeout</code> または <code>Immediate</code> オブジェクトをキャンセルする必要がある場合はどうすればいいですか？
+<code>setTimeout()</code>、<code>setImmediate()</code>、および <code>setInterval()</code> は、
+set <code>Timeout</code>または <code>Immediate</code> オブジェクトを参照するために使用できるタイマーオブジェクトを返します。
+前述のオブジェクトをそれぞれの <code>clear</code> 関数に渡すことによって、
+そのオブジェクトの実行は完全に停止されます。
+それぞれの関数は <code>clearTimeout()</code>、<code>clearImmediate()</code>、そして <code>clearInterval()</code> です。
+それぞれの例については、以下の例を参照してください:</p>
+<pre><code class="language-js">const timeoutObj = setTimeout(() =&gt; {
+  console.log(&#x27;timeout beyond time&#x27;);
+}, 1500);
+
+const immediateObj = setImmediate(() =&gt; {
+  console.log(&#x27;immediately executing immediate&#x27;);
+});
+
+const intervalObj = setInterval(() =&gt; {
+  console.log(&#x27;interviewing the interval&#x27;);
+}, 500);
+
+clearTimeout(timeoutObj);
+clearImmediate(immediateObj);
+clearInterval(intervalObj);
+</code></pre>
+<!-- -->
+<h2 id="後ろにタイムアウトを残す">後ろにタイムアウトを残す<a id="header-後ろにタイムアウトを残す" class="anchor" href="#後ろにタイムアウトを残す" aria-labelledby="後ろにタイムアウトを残す"></a></h2>
+<p><code>Timeout</code> オブジェクトは <code>setTimeout</code> と <code>setInterval</code> によって返されることを忘れないでください。
+<code>Timeout</code> オブジェクトは <code>unref()</code> と <code>ref()</code> で <code>Timeout</code> の振る舞いを増強することを目的とした2つの関数を提供します。
+<code>set</code> 関数を使ってスケジュールされた <code>Timeout</code> オブジェクトがあれば、
+そのオブジェクトに対して <code>unref()</code> を呼び出すことができます。
+これはふるまいをわずかに変えます、
+そして<em>それが実行する最後のコードであるなら</em> <code>Timeout</code> オブジェクトを呼ばないでください。
+<code>Timeout</code> オブジェクトはプロセスを実行し続け、実行するのを待ちません。</p>
+<p>同様に、<code>unref()</code> が呼び出された <code>Timeout</code> オブジェクトは、
+同じ <code>Timeout</code> オブジェクトに対して <code>ref()</code> を呼び出すことでその振る舞いを取り除くことができ、
+それによってその実行が保証されます。
+ただし、パフォーマンス上の理由から、これによって初期の動作が<em>正確</em>に復元されるわけではないことに注意してください。
+両方の例については、以下を参照してください。</p>
+<pre><code class="language-js">const timerObj = setTimeout(() =&gt; {
+  console.log(&#x27;will i run?&#x27;);
+});
+
+// このままにしておくと、
+// タイムアウトがプログラムの終了を妨げる唯一のものになるので、
+// このステートメントで上記のタイムアウトを実行しないようにします。
+timerObj.unref();
+
+// immediate 内で ref() を呼び出すことでそれを元の状態に
+// 戻すことができます。
+setImmediate(() =&gt; {
+  timerObj.ref();
+});
+</code></pre>
+<!-- -->
+<h2 id="イベントループのさらに下へ">イベントループのさらに下へ<a id="header-イベントループのさらに下へ" class="anchor" href="#イベントループのさらに下へ" aria-labelledby="イベントループのさらに下へ"></a></h2>
+<p>このガイドでカバーしてきた以上に
+イベントループとタイマーにはもっとたくさんのものがあります。
+Node.js イベントループの内部と、
+実行中のタイマーの動作の詳細については、
+この Node.js ガイド <a href="/ja/docs/guides/event-loop-timers-and-nexttick/">Node.js イベントループ、タイマー、および process.nextTick()</a> を参照してください。</p></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->上部へスクロールする</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"ja","localName":"日本語","name":"Japanese","langDir":"ltr","dateFormat":"YYYY.MM.DD","hrefLang":"ja","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"上部へスクロールする","components.header.links.home":"ホーム","components.header.links.about":"Node.js とは","components.header.links.download":"ダウンロード","components.header.links.docs":"ドキュメント","components.header.links.getInvolved":"参加する","components.header.links.security":"セキュリティ","components.header.links.certification":"Certification","components.header.links.blog":"ニュース","components.navigation.about.links.governance":"委員会","components.navigation.docs.links.es6":"ES6 について","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"ガイド","components.navigation.docs.links.dependencies":"依存関係","components.navigation.getInvolved.links.collabSummit":"Collab Summit","components.navigation.getInvolved.links.contribute":"貢献する","components.navigation.getInvolved.links.codeOfConduct":"行動規範","components.downloadList.links.previousReleases":"バージョンの一覧","components.downloadList.links.packageManager":"Iパッケージマネージャを使用したダウンロード","components.downloadList.links.shaSums":"リリースファイルのための SHASUM 署名","components.downloadList.links.shaSums.howToVerify":" (How to verify)","components.downloadList.links.allDownloads":"All download options","components.downloadList.links.nightlyReleases":"Nightly builds","components.downloadList.links.unofficialBuilds":"非公式のビルド版","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Installing Node.js via binary archive","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"変更履歴","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"ドキュメント","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"次 | ","components.pagination.previous":"前","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/ja/docs/guides/timers-in-node","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

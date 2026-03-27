@@ -1,0 +1,140 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>デバッグ - 入門 | Node.js node js 学习 中文网</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="デバッグ - 入門 | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="デバッグ - 入門 | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/ja/docs/guides/debugging-getting-started"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/ja/docs/guides/debugging-getting-started-d9317c168d78a135.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-2WRNZHGVQT"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-2WRNZHGVQT");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8264273508355034" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/ja"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/ja">ホーム</a></li><li class=""><a href="/ja/about">Node.js とは</a></li><li class=""><a href="/ja/download">ダウンロード</a></li><li class="active"><a href="/ja/docs">ドキュメント</a></li><li class=""><a href="/ja/get-involved">参加する</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">セキュリティ</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class=""><a href="/ja/blog">ニュース</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/debugging-getting-started">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/debugging-getting-started">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/debugging-getting-started">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/debugging-getting-started">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/debugging-getting-started">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/debugging-getting-started">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/debugging-getting-started">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/debugging-getting-started">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/debugging-getting-started">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/debugging-getting-started">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/debugging-getting-started">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/debugging-getting-started">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/debugging-getting-started">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/debugging-getting-started">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/debugging-getting-started">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/debugging-getting-started">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/debugging-getting-started">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/debugging-getting-started">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/ja/docs">ドキュメント</a></li><li class=""><a href="/ja/docs/es6">ES6 について</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/ja/docs/guides">ガイド</a></li><li class=""><a href="/ja/docs/meta/topics/dependencies">依存関係</a></li></ul></nav><article dir="auto"><h1 id="デバッグガイド">デバッグガイド<a id="header-デバッグガイド" class="anchor" href="#デバッグガイド" aria-labelledby="デバッグガイド"></a></h1>
+<p>このガイドは、Node.js アプリケーションとスクリプトのデバッグを開始するのに役立ちます。</p>
+<!-- -->
+<h2 id="インスペクタを有効にする">インスペクタを有効にする<a id="header-インスペクタを有効にする" class="anchor" href="#インスペクタを有効にする" aria-labelledby="インスペクタを有効にする"></a></h2>
+<p><code>--inspect</code> スイッチを指定して起動すると、Node.js プロセスはデバッグクライアントを待機します。
+デフォルトでは、ホストとポート 127.0.0.1:9229 で待機します。
+各プロセスには固有の <a href="https://tools.ietf.org/html/rfc4122">UUID</a> も割り当てられています。</p>
+<p>インスペクタクライアントは、接続するホストアドレス、ポート、および UUID を認識して指定する必要があります。
+フル URL は、
+<code>ws://127.0.0.1:9229/0f2c936f-b1cd-4ac9-aab3-f63b0f33d55e</code> のようになります。</p>
+<p>Node.js は、<code>SIGUSR1</code> シグナルを受信した場合にもデバッグメッセージの受信を開始します
+(<code>SIGUSR1</code> は Windows では使用できません)。
+Node.js 7 以前では、これにより古い Debugger API がアクティブになります。
+Node.js 8 以降では、Inspector API を起動します。</p>
+<hr/>
+<!-- -->
+<h2 id="セキュリティへの影響">セキュリティへの影響<a id="header-セキュリティへの影響" class="anchor" href="#セキュリティへの影響" aria-labelledby="セキュリティへの影響"></a></h2>
+<p>デバッガは Node.js 実行環境にフルアクセスできるため、
+このポートに接続できる悪意のあるアクターが Node プロセスに代わって任意のコードを実行できる可能性があります。
+パブリックおよびプライベートネットワークでデバッガポートを公開することによる
+セキュリティへの影響を理解することが重要です。</p>
+<!-- -->
+<h3 id="デバッグポートを公開するのは危険です">デバッグポートを公開するのは危険です<a id="header-デバッグポートを公開するのは危険です" class="anchor" href="#デバッグポートを公開するのは危険です" aria-labelledby="デバッグポートを公開するのは危険です"></a></h3>
+<p>デバッガがパブリック IP アドレス、または 0.0.0.0 にバインドされている場合、
+自分の IP アドレスに到達できるクライアントは制限なしにデバッガに接続でき、
+任意のコードを実行できます。</p>
+<p>デフォルトでは、<code>node --inspect</code> は 127.0.0.1 にバインドします。
+デバッガへの外部接続を許可する場合は、明示的にパブリック IP アドレスまたは 0.0.0.0 などを指定する必要があります。
+これを行うと、潜在的に重大なセキュリティ上の脅威にさらされる可能性があります。
+セキュリティ上の問題を防ぐために、適切なファイアウォールとアクセス制御を
+適切に設定することをお勧めします。</p>
+<p>リモートデバッガクライアントの接続を安全に許可する方法については、
+&#x27;<a href="#enabling-remote-debugging-scenarios">リモートデバッグシナリオの有効化</a>&#x27;のセクションを参照してください。</p>
+<!-- -->
+<h3 id="ローカルアプリケーションはインスペクタにフルアクセスできます">ローカルアプリケーションはインスペクタにフルアクセスできます<a id="header-ローカルアプリケーションはインスペクタにフルアクセスできます" class="anchor" href="#ローカルアプリケーションはインスペクタにフルアクセスできます" aria-labelledby="ローカルアプリケーションはインスペクタにフルアクセスできます"></a></h3>
+<p>インスペクタポートを 127.0.0.1 (デフォルト) にバインドしても、
+マシン上でローカルに実行されているすべてのアプリケーションに無制限のアクセス権が与えられます。
+これはローカルデバッガが便利にアタッチできるようにするための仕様です。</p>
+<!-- -->
+<h3 id="ブラウザwebsocketおよび同一生成元ポリシー">ブラウザ、WebSocket、および同一生成元ポリシー<a id="header-ブラウザwebsocketおよび同一生成元ポリシー" class="anchor" href="#ブラウザwebsocketおよび同一生成元ポリシー" aria-labelledby="ブラウザwebsocketおよび同一生成元ポリシー"></a></h3>
+<p>Web ブラウザで開かれた Web サイトは、ブラウザセキュリティモデルの下で
+WebSocket および HTTP リクエストを行うことができます。
+一意のデバッガセッション ID を取得するには、
+最初の HTTP 接続が必要です。
+同一生成元ポリシーは、Web サイトがこの HTTP 接続を確立できないようにします。
+<a href="https://en.wikipedia.org/wiki/DNS_rebinding">DNS リバインド攻撃</a>に対するさらなるセキュリティのために、
+Node.js は接続のための &#x27;Host&#x27; ヘッダが IP アドレスまたは <code>localhost</code> もしくは <code>localhost6</code> を正確に指定していることを検証します。</p>
+<p>これらのセキュリティポリシーでは、ホスト名を指定してリモートデバッグサーバーに接続することを禁止しています。
+この制限を回避するには、IP アドレスを指定するか、
+または後述のように ssh トンネルを使用します。</p>
+<!-- -->
+<h2 id="インスペクタクライアント">インスペクタクライアント<a id="header-インスペクタクライアント" class="anchor" href="#インスペクタクライアント" aria-labelledby="インスペクタクライアント"></a></h2>
+<p>一部の商用およびオープンソースのツールが Node の Inspector に接続できます。
+これらに関する基本的な情報は次のとおりです。</p>
+<!-- -->
+<h3 id="node-inspect"><a href="https://github.com/nodejs/node-inspect">node-inspect</a><a id="header-node-inspect" class="anchor" href="#node-inspect" aria-labelledby="node-inspect"></a></h3>
+<ul>
+<li><a href="https://chromedevtools.github.io/debugger-protocol-viewer/v8/">Inspector プロトコル</a>を使用する Node.js Foundation によってサポートされている CLI デバッガ</li>
+<li>バージョンは Node にバンドルされており、<code>node inspect myscript.js</code>と一緒に使うことができます</li>
+<li>最新バージョンは独立してインストールすることもでき (例えば <code>npm install -g node-inspect</code>)、 <code>node-inspect myscript.js</code> と一緒に使うことができます</li>
+</ul>
+<!-- -->
+<h3 id="chrome-devtools-55"><a href="https://github.com/ChromeDevTools/devtools-frontend">Chrome DevTools</a> 55+<a id="header-chrome-devtools-55" class="anchor" href="#chrome-devtools-55" aria-labelledby="chrome-devtools-55"></a></h3>
+<ul>
+<li><strong>オプション 1</strong>: Chromium ベースのブラウザで <code>chrome://inspect</code> を開きます。設定ボタンをクリックして、ターゲットホストとポートが表示されていることを確認します。</li>
+<li><strong>オプション 2</strong>: <code>/json/list</code>の出力 (上記を参照) または --inspect ヒントテキストから <code>devtoolsFrontendUrl</code> をコピーして Chrome に貼り付けます</li>
+</ul>
+<!-- -->
+<h3 id="visual-studio-code-110"><a href="https://github.com/microsoft/vscode">Visual Studio Code</a> 1.10+<a id="header-visual-studio-code-110" class="anchor" href="#visual-studio-code-110" aria-labelledby="visual-studio-code-110"></a></h3>
+<ul>
+<li>デバッグパネルで、設定アイコンをクリックして <code>.vscode/launch.json</code> を開きます。初期設定は &quot;Node.js&quot; を選択してください</li>
+</ul>
+<!-- -->
+<h3 id="visual-studio-2017"><a href="https://github.com/Microsoft/nodejstools">Visual Studio</a> 2017+<a id="header-visual-studio-2017" class="anchor" href="#visual-studio-2017" aria-labelledby="visual-studio-2017"></a></h3>
+<ul>
+<li>メニューから &quot;デバッグ &gt; デバッグの開始&quot; を選択するか、F5 を押します</li>
+<li><a href="https://github.com/Microsoft/nodejstools/wiki/Debugging">詳しい説明</a></li>
+</ul>
+<!-- -->
+<h3 id="jetbrains-webstorm-20171-と他の-jetbrains-ide"><a href="https://www.jetbrains.com/webstorm/">JetBrains WebStorm</a> 2017.1+ と他の JetBrains IDE<a id="header-jetbrains-webstorm-20171-と他の-jetbrains-ide" class="anchor" href="#jetbrains-webstorm-20171-と他の-jetbrains-ide" aria-labelledby="jetbrains-webstorm-20171-と他の-jetbrains-ide"></a></h3>
+<ul>
+<li>新しい Node.js デバッグ設定を作成して Debug をクリックします。Node.js 7 以降の場合、<code>--inspect</code> がデフォルトで使用されます。IDE レジストリで <code>js.debugger.node.use.inspect</code> のチェックを外します</li>
+</ul>
+<!-- -->
+<h3 id="chrome-remote-interface"><a href="https://github.com/cyrus-and/chrome-remote-interface">chrome-remote-interface</a><a id="header-chrome-remote-interface" class="anchor" href="#chrome-remote-interface" aria-labelledby="chrome-remote-interface"></a></h3>
+<ul>
+<li>Inspector Protocol エンドポイントへの接続を容易にするためのライブラリ</li>
+</ul>
+<!-- -->
+<h3 id="gitpod"><a href="https://www.gitpod.io">Gitpod</a><a id="header-gitpod" class="anchor" href="#gitpod" aria-labelledby="gitpod"></a></h3>
+<ul>
+<li><code>Debug</code> ビュー から Node.js デバッグ設定を開始するか、<code>F5</code> を押します。<a href="https://medium.com/gitpod/debugging-node-js-applications-in-theia-76c94c76f0a1">詳しい説明</a></li>
+</ul>
+<hr/>
+<!-- -->
+<h2 id="コマンドラインオプション">コマンドラインオプション<a id="header-コマンドラインオプション" class="anchor" href="#コマンドラインオプション" aria-labelledby="コマンドラインオプション"></a></h2>
+<p>次の表は、デバッグ時のさまざまなランタイムフラグの影響を示しています。</p>
+<!-- -->
+<hr/>
+<!-- -->
+<h2 id="enabling-remote-debugging-scenarios">リモートデバッグシナリオを有効にする<a id="header-enabling-remote-debugging-scenarios" class="anchor" href="#enabling-remote-debugging-scenarios" aria-labelledby="enabling-remote-debugging-scenarios"></a></h2>
+<p>デバッガがパブリック IP アドレスを待ち受けないようにすることをお勧めします。
+リモートデバッグ接続を許可する必要がある場合は、代わりに ssh トンネルを使用することをお勧めします。
+以下の例は、説明のみを目的として提供されています。
+続行する前に特権サービスへのリモートアクセスを許可することの
+セキュリティリスクを理解してください。</p>
+<p>リモートマシン remote.example.com で Node を実行していて、デバッグできるようにしたいとしましょう。
+そのマシンでは、インスペクタが localhost (デフォルト) のみを監視して
+ノードプロセスを開始する必要があります。</p>
+<pre><code class="language-bash">node --inspect server.js
+</code></pre>
+<p>これで、デバッグクライアント接続を開始したい場所から
+ローカルマシンに SSH トンネルを設定できます。</p>
+<pre><code class="language-bash">ssh -L 9221:localhost:9229 user@remote.example.com
+</code></pre>
+<p>これにより、ローカルマシンの 9221 ポートへの接続が
+remote.example.com の 9229 ポートに転送される ssh トンネルセッションが開始されます。
+これで、Chrome DevTools や Visual Studio Code などのデバッガを localhost:9221 にアタッチできます。
+Node.js アプリケーションがローカルで実行されているかのようにデバッグできるはずです。</p>
+<hr/>
+<!-- -->
+<h2 id="レガシーデバッガ">レガシーデバッガ<a id="header-レガシーデバッガ" class="anchor" href="#レガシーデバッガ" aria-labelledby="レガシーデバッガ"></a></h2>
+<p><strong>レガシーデバッガは Node 7.7.0 の時点で非推奨になりました。代わりに --inspect と Inspector を使ってください。</strong></p>
+<p>バージョン7以前の <strong>--debug</strong> または <strong>--debug-brk</strong> スイッチを指定して起動すると、
+Node.js は TCP ポートで廃止された V8 デバッグプロトコルで定義されている
+デバッグコマンド (デフォルトでは <code>5858</code>) を待ち受けます。
+これで実行中のプロセスに接続してデバッグできます。
+いくつかのポピュラーなものは以下のとおりです。</p>
+<p>V8 デバッグプロトコルは、もはや保守もドキュメンテーションもされていません。</p>
+<!-- -->
+<h3 id="組み込みデバッガhttpsnodejsorgdistvar-currentversiondocsapidebuggerhtml">[組み込みデバッガ](<a href="https://nodejs.org/dist/%7B#var">https://nodejs.org/dist/{#var</a> currentVersion}/docs/api/debugger.html)<a id="header-組み込みデバッガhttpsnodejsorgdistvar-currentversiondocsapidebuggerhtml" class="anchor" href="#組み込みデバッガhttpsnodejsorgdistvar-currentversiondocsapidebuggerhtml" aria-labelledby="組み込みデバッガhttpsnodejsorgdistvar-currentversiondocsapidebuggerhtml"></a></h3>
+<p>Node の組み込みコマンドラインデバッガの下でスクリプトを起動するには、
+<code>node debug script_name.js</code> を起動します。
+スクリプトは <code>--debug-brk</code> オプションで開始された別のノードプロセスで開始され、
+最初のノードプロセスは <code>_debugger.js</code> スクリプトを実行してターゲットに接続します。</p>
+<!-- -->
+<h3 id="node-inspector"><a href="https://github.com/node-inspector/node-inspector">node-inspector</a><a id="header-node-inspector" class="anchor" href="#node-inspector" aria-labelledby="node-inspector"></a></h3>
+<p>Chromium で使用されるインスペクタプロトコルを
+Node.js で使用される V8 デバッガプロトコルに変換する中間プロセスを使用して、
+Chrome DevTools で Node.js アプリケーションをデバッグします。</p></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->上部へスクロールする</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"ja","localName":"日本語","name":"Japanese","langDir":"ltr","dateFormat":"YYYY.MM.DD","hrefLang":"ja","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"上部へスクロールする","components.header.links.home":"ホーム","components.header.links.about":"Node.js とは","components.header.links.download":"ダウンロード","components.header.links.docs":"ドキュメント","components.header.links.getInvolved":"参加する","components.header.links.security":"セキュリティ","components.header.links.certification":"Certification","components.header.links.blog":"ニュース","components.navigation.about.links.governance":"委員会","components.navigation.docs.links.es6":"ES6 について","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"ガイド","components.navigation.docs.links.dependencies":"依存関係","components.navigation.getInvolved.links.collabSummit":"Collab Summit","components.navigation.getInvolved.links.contribute":"貢献する","components.navigation.getInvolved.links.codeOfConduct":"行動規範","components.downloadList.links.previousReleases":"バージョンの一覧","components.downloadList.links.packageManager":"Iパッケージマネージャを使用したダウンロード","components.downloadList.links.shaSums":"リリースファイルのための SHASUM 署名","components.downloadList.links.shaSums.howToVerify":" (How to verify)","components.downloadList.links.allDownloads":"All download options","components.downloadList.links.nightlyReleases":"Nightly builds","components.downloadList.links.unofficialBuilds":"非公式のビルド版","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Installing Node.js via binary archive","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"変更履歴","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"ドキュメント","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"次 | ","components.pagination.previous":"前","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/ja/docs/guides/debugging-getting-started","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

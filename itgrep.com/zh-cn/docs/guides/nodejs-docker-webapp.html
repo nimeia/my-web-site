@@ -1,0 +1,173 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>把一个 Node.js web 应用程序给 Docker 化 | Node.js</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="把一个 Node.js web 应用程序给 Docker 化 | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="把一个 Node.js web 应用程序给 Docker 化 | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/zh-cn/docs/guides/nodejs-docker-webapp"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/zh-cn/docs/guides/nodejs-docker-webapp-0c91e44f0f310d99.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NDMJQNDPS"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-6NDMJQNDPS");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7950559866369342" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/zh-cn"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/zh-cn">首页</a></li><li class=""><a href="/zh-cn/about">关于</a></li><li class=""><a href="/zh-cn/download">下载</a></li><li class="active"><a href="/zh-cn/docs">文档</a></li><li class=""><a href="/zh-cn/get-involved">加入我们</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">安全</a></li><li class=""><a href="https://openjsf.org/certification">相关认证</a></li><li class=""><a href="/zh-cn/blog">新闻</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/nodejs-docker-webapp">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/nodejs-docker-webapp">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/nodejs-docker-webapp">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/nodejs-docker-webapp">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/nodejs-docker-webapp">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/nodejs-docker-webapp">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/nodejs-docker-webapp">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/nodejs-docker-webapp">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/nodejs-docker-webapp">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/nodejs-docker-webapp">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/nodejs-docker-webapp">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/nodejs-docker-webapp">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/nodejs-docker-webapp">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/nodejs-docker-webapp">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/nodejs-docker-webapp">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/nodejs-docker-webapp">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/nodejs-docker-webapp">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/nodejs-docker-webapp">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/zh-cn/docs">文档</a></li><li class=""><a href="/zh-cn/docs/es6">ES6 及更高</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/zh-cn/docs/guides">指南</a></li><li class=""><a href="/zh-cn/docs/meta/topics/dependencies">依赖项</a></li></ul></nav><article dir="auto"><h1 id="把一个-node.js-web-应用程序给-docker-化">把一个 Node.js web 应用程序给 Docker 化<a id="header-把一个-node.js-web-应用程序给-docker-化" class="anchor" href="#把一个-node.js-web-应用程序给-docker-化" aria-labelledby="把一个-node.js-web-应用程序给-docker-化"></a></h1>
+<p>本示例的目标是给你演示如何将一个 Node.js 的应用装入到 Docker 容器中。本教程旨在针对于开发人员，而 <em>非</em> 产品发布人员。此教程同样假定你有一个可以正常工作的 <a href="https://docs.docker.com/engine/installation/">Docker 安装</a>，并且对于 Node.js 的应用程序是如何组织的有一个大致的基本了解。</p>
+<p>在本教程的第一部分我们在 Node.js 中创建一个 Web 的应用程序，然后我们为那个应用构建一个 Docker 镜像；最后我们将把那个镜像作为容器运行之。</p>
+<p>Docker 允许你以应用程序所有的依赖全部打包成一个标准化的单元，这被称为一个容器。对于应用开发而言，一个容器就是一个蜕化到最基础的 Linux 操作系统。一个镜像是你加载到容器中的软件。</p>
+<h2 id="创建-nodejs-应用">创建 Node.js 应用<a id="header-创建-nodejs-应用" class="anchor" href="#创建-nodejs-应用" aria-labelledby="创建-nodejs-应用"></a></h2>
+<p>首先，创建一个新文件夹以便于容纳需要的所有文件，并且在此其中创建一个 <code>package.json</code> 文件，描述你应用程序以及需要的依赖：</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;docker_web_app&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;Node.js on Docker&quot;,
+  &quot;author&quot;: &quot;First Last &lt;first.last@example.com&gt;&quot;,
+  &quot;main&quot;: &quot;server.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;start&quot;: &quot;node server.js&quot;
+  },
+  &quot;dependencies&quot;: {
+    &quot;express&quot;: &quot;^4.16.1&quot;
+  }
+}
+</code></pre>
+<p>配合着你的 <code>package.json</code> 请运行 <code>npm install</code>。如果你使用的 <code>npm</code> 是版本 5 或者之后的版本，这会自动生成一个 <code>package-lock.json</code> 文件，它将一起被拷贝进入你的 Docker 镜像中。</p>
+<p>然后，创建一个 <code>server.js</code> 文件，使用 <a href="https://expressjs.com/">Express.js</a> 框架定义一个 Web 应用：</p>
+<pre><code class="language-javascript">&#x27;use strict&#x27;;
+
+const express = require(&#x27;express&#x27;);
+
+// Constants
+const PORT = 8080;
+const HOST = &#x27;0.0.0.0&#x27;;
+
+// App
+const app = express();
+app.get(&#x27;/&#x27;, (req, res) =&gt; {
+  res.send(&#x27;Hello World&#x27;);
+});
+
+app.listen(PORT, HOST, () =&gt; {
+  console.log(`Running on http://${HOST}:${PORT}`);
+});
+</code></pre>
+<p>在稍后的步骤中我们将看一下借助使用官方的 Docker 镜像，你如何在 Docker 镜像中运行这个应用。首先，你需要一个构建一个应用程序的 Docker 应用。</p>
+<h2 id="创建一个名称为-dockerfile-的文件">创建一个名称为 <code>Dockerfile</code> 的文件<a id="header-创建一个名称为-dockerfile-的文件" class="anchor" href="#创建一个名称为-dockerfile-的文件" aria-labelledby="创建一个名称为-dockerfile-的文件"></a></h2>
+<p>创建一个空文件，命名为 <code>Dockerfile</code>：</p>
+<pre><code class="language-markup">touch Dockerfile
+</code></pre>
+<p>用你最喜欢的文本编辑器打开这个 <code>Dockerfile</code>。</p>
+<p>我们要做的第一件事是定义我们需要从哪个镜像进行构建。这里我们将使用最新的 LTS（长期服务器支持版），<code>Node</code> 的版本号为 <code>12</code>。你可以从 <a href="https://hub.docker.com/">Docker 站点</a> 获取相关镜像：</p>
+<pre><code class="language-docker">FROM node:12
+</code></pre>
+<p>下一步在镜像中创建一个文件夹存放应用程序代码，这将是你的应用程序工作目录：</p>
+<pre><code class="language-docker"># Create app directory
+WORKDIR /usr/src/app
+</code></pre>
+<p>此镜像中 Node.js 和 NPM 都已经安装，所以下一件事对于我们而言是使用 <code>npm</code> 安装你的应用程序的所有依赖。请注意，如果你的 <code>npm</code> 的版本是 4 或者更早的版本，<code>package-lock.json</code> 文件将不会自动生成。</p>
+<pre><code class="language-docker"># Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
+
+RUN npm install
+# If you are building your code for production
+# RUN npm ci --only=production
+</code></pre>
+<p>请注意，我们只是拷贝了 <code>package.json</code> 文件而非整个工作目录。这允许我们利用缓存 Docker 层的优势。bitJudo 对此有一个很好的解释，请<a href="http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/">见此</a>。
+进一步说，对于生产环境而言，注释中提及的 <code>npm ci</code> 命令协助提供了一个更快、可靠、可再生的构建环境。欲知详情，可以参考<a href="https://blog.npmjs.org/post/171556855892/introducing-npm-ci-for-faster-more-reliable">此处</a>。</p>
+<p>在 Docker 镜像中使用 <code>COPY</code> 命令绑定你的应用程序：</p>
+<pre><code class="language-docker"># Bundle app source
+COPY . .
+</code></pre>
+<p>你的应用程序绑定的端口为 <code>8080</code>，所以你可以使用 <code>EXPOSE</code> 命令使它与 <code>docker</code> 的镜像做映射：</p>
+<pre><code class="language-docker">EXPOSE 8080
+</code></pre>
+<p>最后但同样重要的事是，使用定义运行时的 <code>CMD</code> 定义命令来运行应用程序。这里我们使用 <code>node server.js</code> 来启动你的服务器：</p>
+<pre><code class="language-docker">CMD [ &quot;node&quot;, &quot;server.js&quot; ]
+</code></pre>
+<p>你的 <code>Dockerfile</code> 现在看上去是这个样子：</p>
+<pre><code class="language-docker">FROM node:12
+
+# Create app directory
+WORKDIR /usr/src/app
+
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
+
+RUN npm install
+# If you are building your code for production
+# RUN npm ci --only=production
+
+# Bundle app source
+COPY . .
+
+EXPOSE 8080
+CMD [ &quot;node&quot;, &quot;server.js&quot; ]
+</code></pre>
+<h2 id="dockerignore-文件">.dockerignore 文件<a id="header-dockerignore-文件" class="anchor" href="#dockerignore-文件" aria-labelledby="dockerignore-文件"></a></h2>
+<p>在 <code>Dockerfile</code> 的同一个文件夹中创建一个 <code>.dockerignore</code> 文件，带有以下内容：</p>
+<pre><code class="language-text">node_modules
+npm-debug.log
+</code></pre>
+<p>这将避免你的本地模块以及调试日志被拷贝进入到你的 Docker 镜像中，以至于把你镜像原有安装的模块给覆盖了。</p>
+<h2 id="构建你的镜像">构建你的镜像<a id="header-构建你的镜像" class="anchor" href="#构建你的镜像" aria-labelledby="构建你的镜像"></a></h2>
+<p>进入到 <code>Dockerfile</code> 所在的那个目录中，运行以下命令构建 Docker 镜像。开关符 <code>-t</code> 让你标记你的镜像，以至于让你以后很容易地用 <code>docker images</code> 找到它。</p>
+<pre><code class="language-bash">docker build . -t &lt;your username&gt;/node-web-app
+</code></pre>
+<p>Docker 现在将给出你的镜像列表：</p>
+<pre><code class="language-bash">$ docker images
+
+# Example
+REPOSITORY                      TAG        ID              CREATED
+node                            12         1934b0b038d1    5 days ago
+&lt;your username&gt;/node-web-app    latest     d64d3505b0d2    1 minute ago
+</code></pre>
+<h2 id="运行镜像">运行镜像<a id="header-运行镜像" class="anchor" href="#运行镜像" aria-labelledby="运行镜像"></a></h2>
+<p>使用 <code>-d</code> 模式运行镜像将以分离模式运行 Docker 容器，使得容器在后台自助运行。开关符 <code>-p</code> 在容器中把一个公共端口导向到私有的端口，请用以下命令运行你之前构建的镜像：</p>
+<pre><code class="language-bash">docker run -p 49160:8080 -d &lt;your username&gt;/node-web-app
+</code></pre>
+<p>把你应用程序的输出打印出来：</p>
+<pre><code class="language-bash"># Get container ID
+$ docker ps
+
+# Print app output
+$ docker logs &lt;container id&gt;
+
+# Example
+Running on http://localhost:8080
+</code></pre>
+<p>如果你需要进入容器中，请运行 <code>exec</code> 命令：</p>
+<pre><code class="language-bash"># Enter the container
+$ docker exec -it &lt;container id&gt; /bin/bash
+</code></pre>
+<h2 id="测试">测试<a id="header-测试" class="anchor" href="#测试" aria-labelledby="测试"></a></h2>
+<p>为测试你的应用程序，给出与 Docker 映射过的端口号：</p>
+<pre><code class="language-bash">$ docker ps
+
+# Example
+ID            IMAGE                                COMMAND    ...   PORTS
+ecce33b30ebf  &lt;your username&gt;/node-web-app:latest  npm start  ...   49160-&gt;8080
+</code></pre>
+<p>在上面的例子中，在容器中 Docker 把端口号 <code>8080</code> 映射到你机器上的 <code>49160</code> 。</p>
+<p>现在你可以使用 <code>curl</code>（如果需要的话请通过 <code>sudo apt-get install curl</code> 安装）调用你的程序了：</p>
+<pre><code class="language-bash">$ curl -i localhost:49160
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: text/html; charset=utf-8
+Content-Length: 12
+ETag: W/&quot;c-M6tWOb/Y57lesdjQuHeB1P/qTV0&quot;
+Date: Mon, 13 Nov 2017 20:53:59 GMT
+Connection: keep-alive
+
+Hello world
+</code></pre>
+<h2 id="关闭镜像">关闭镜像<a id="header-关闭镜像" class="anchor" href="#关闭镜像" aria-labelledby="关闭镜像"></a></h2>
+<p>我们可以通过使用  <code>kill</code> 命令来关闭我们已经开启的镜像。这里使用到了容器的 ID，
+在本示例代码中是 <code>ecce33b30ebf</code>。</p>
+<pre><code class="language-bash"># Kill our running container
+$ docker kill &lt;container id&gt;
+&lt;container id&gt;
+# Confirm that the app has stopped
+$ curl -i localhost:49160
+curl: (7) Failed to connect to localhost port 49160: Connection refused
+</code></pre>
+<p>我们希望本教程能够帮助你起步，在 Docker 中运行一个简单的 Node.js 应用程序。</p>
+<p>你也可以在以下一些地方寻觅到更多有关于 Docker 和基于 Docker 的 Node.js 相关内容：</p>
+<ul>
+<li><a href="https://hub.docker.com/_/node/">官方 Node.js 的 Docker 镜像</a></li>
+<li><a href="https://github.com/nodejs/docker-node/blob/master/docs/BestPractices">Node.js 基于 Docker 使用的最佳经验</a></li>
+<li><a href="https://docs.docker.com/">官方 Docker 文档</a></li>
+<li><a href="https://stackoverflow.com/questions/tagged/docker">在 StackOverFlow 上有关 Docker 标记内容</a></li>
+<li><a href="https://reddit.com/r/docker">Docker Subreddit</a></li>
+</ul></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->回到页顶</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"zh-cn","localName":"简体中文","name":"Simplified Chinese","langDir":"ltr","dateFormat":"YYYY/MM/DD","hrefLang":"zh-Hans","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"回到页顶","components.header.links.home":"首页","components.header.links.about":"关于","components.header.links.download":"下载","components.header.links.docs":"文档","components.header.links.getInvolved":"加入我们","components.header.links.security":"安全","components.header.links.certification":"相关认证","components.header.links.blog":"新闻","components.navigation.about.links.governance":"管理规则","components.navigation.docs.links.es6":"ES6 及更高","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"指南","components.navigation.docs.links.dependencies":"依赖项","components.navigation.getInvolved.links.collabSummit":"协作者峰会","components.navigation.getInvolved.links.contribute":"贡献","components.navigation.getInvolved.links.codeOfConduct":"管理","components.downloadList.links.previousReleases":"以往的版本","components.downloadList.links.packageManager":"使用包管理器安装 Node.js","components.downloadList.links.shaSums":"Signed SHASUMS for release files","components.downloadList.links.shaSums.howToVerify":" (如何校验)","components.downloadList.links.allDownloads":"所有下载选项","components.downloadList.links.nightlyReleases":"每日构建","components.downloadList.links.unofficialBuilds":"非官方构建版","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"在 Linux 上，通过二进制文件安装 Node.js","components.downloadList.links.installingOnWsl":"在适用于 Linux 的 Windows 子系统（WSL）上安装 Node.js","components.downloadReleasesTable.changelog":"更新日志","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"文档","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"下一个 | ","components.pagination.previous":"以前","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/zh-cn/docs/guides/nodejs-docker-webapp","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

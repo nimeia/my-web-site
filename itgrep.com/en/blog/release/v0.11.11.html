@@ -1,0 +1,112 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Node v0.11.11 (Unstable) | Node.js</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Node v0.11.11 (Unstable) | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Node v0.11.11 (Unstable) | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/en/blog/release/v0.11.11"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/en/blog/release/v0.11.11-3731ad99979f829d.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NDMJQNDPS"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-6NDMJQNDPS");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7950559866369342" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/en"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/en">Home</a></li><li class=""><a href="/en/about">About</a></li><li class=""><a href="/en/download">Downloads</a></li><li class=""><a href="/en/docs">Docs</a></li><li class=""><a href="/en/get-involved">Get Involved</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">Security</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class="active"><a href="/en/blog">News</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/blog/release/v0.11.11">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/blog/release/v0.11.11">Catalan</a></li><li><a data-lang="de" title="German" href="/de/blog/release/v0.11.11">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/blog/release/v0.11.11">English</a></li><li><a data-lang="es" title="Spanish" href="/es/blog/release/v0.11.11">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/blog/release/v0.11.11">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/blog/release/v0.11.11">Français</a></li><li><a data-lang="it" title="Italian" href="/it/blog/release/v0.11.11">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/blog/release/v0.11.11">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/blog/release/v0.11.11">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/blog/release/v0.11.11">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/blog/release/v0.11.11">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/blog/release/v0.11.11">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/blog/release/v0.11.11">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/blog/release/v0.11.11">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/blog/release/v0.11.11">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/blog/release/v0.11.11">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/blog/release/v0.11.11">繁體中文</a></li></ul></div></header><main id="main"><div class="container"><article dir="auto"><div class="blogpost-header"><h1>Node v0.11.11 (Unstable)</h1><span class="blogpost-meta"><time dateTime="2014-01-29T11:46:04+0800">2014-01-29</time></span></div><p>2014.01.29, Version 0.11.11 (Unstable)</p>
+<ul>
+<li>
+<p>v8: Upgrade to 3.22.24.19</p>
+</li>
+<li>
+<p>http_parser: Upgrade to 2.2.1</p>
+</li>
+<li>
+<p>openssl: Upgrade to 1.0.1f</p>
+</li>
+<li>
+<p>uv: Upgrade to 0.11.18</p>
+</li>
+<li>
+<p>async-listener: revamp of subsystem (Trevor Norris)</p>
+</li>
+<li>
+<p>node: do not ever close stdio (Fedor Indutny)</p>
+</li>
+<li>
+<p>http: use writev on chunked encoding (Trevor Norris)</p>
+</li>
+<li>
+<p>async_wrap/timers: remove Add/RemoveAsyncListener (Trevor Norris)</p>
+</li>
+<li>
+<p>child_process: better error reporting for exec (Fedor Indutny)</p>
+</li>
+<li>
+<p>crypto: add newline to cert and key if not present (Fedor Indutny)</p>
+</li>
+<li>
+<p>crypto: clear error in GetPeerCertificate (Fedor Indutny)</p>
+</li>
+<li>
+<p>crypto: honor default ciphers in client mode (Jacob Hoffman-Andrews)</p>
+</li>
+<li>
+<p>crypto: introduce .setEngine(engine, [flags]) (Fedor Indutny)</p>
+</li>
+<li>
+<p>crypto: support custom pbkdf2 digest methods (Ben Noordhuis)</p>
+</li>
+<li>
+<p>domain: fix off-by-one in Domain.exit() (Ryan Graham)</p>
+</li>
+<li>
+<p>http: concatenate duplicate headers by default (Alex Kocharin)</p>
+</li>
+<li>
+<p>http: do not emit EOF non-readable socket (Fedor Indutny)</p>
+</li>
+<li>
+<p>node: fix argument parsing with -p arg (Alexis Campailla)</p>
+</li>
+<li>
+<p>path: improve POSIX path.join() performance (Jo Liss)</p>
+</li>
+<li>
+<p>tls: emit <code>clientError</code> on early socket close (Fedor Indutny)</p>
+</li>
+<li>
+<p>tls: introduce <code>.setMaxSendFragment(size)</code> (Fedor Indutny)</p>
+</li>
+<li>
+<p>tls: make cert/pfx optional in tls.createServer() (Ben Noordhuis)</p>
+</li>
+<li>
+<p>tls: process accumulated input (Fedor Indutny)</p>
+</li>
+<li>
+<p>tls: show human-readable error messages (Ben Noordhuis)</p>
+</li>
+<li>
+<p>util: handle escaped forward slashes correctly (Tom Gallacher)</p>
+</li>
+</ul>
+<p>Source Code: <a href="https://nodejs.org/dist/v0.11.11/node-v0.11.11.tar.gz">https://nodejs.org/dist/v0.11.11/node-v0.11.11.tar.gz</a></p>
+<p>Macintosh Installer (Universal): <a href="https://nodejs.org/dist/v0.11.11/node-v0.11.11.pkg">https://nodejs.org/dist/v0.11.11/node-v0.11.11.pkg</a></p>
+<p>Windows Installer: <a href="https://nodejs.org/dist/v0.11.11/node-v0.11.11-x86.msi">https://nodejs.org/dist/v0.11.11/node-v0.11.11-x86.msi</a></p>
+<p>Windows x64 Installer: <a href="https://nodejs.org/dist/v0.11.11/x64/node-v0.11.11-x64.msi">https://nodejs.org/dist/v0.11.11/x64/node-v0.11.11-x64.msi</a></p>
+<p>Windows x64 Files: <a href="https://nodejs.org/dist/v0.11.11/x64/">https://nodejs.org/dist/v0.11.11/x64/</a></p>
+<p>Linux 32-bit Binary: <a href="https://nodejs.org/dist/v0.11.11/node-v0.11.11-linux-x86.tar.gz">https://nodejs.org/dist/v0.11.11/node-v0.11.11-linux-x86.tar.gz</a></p>
+<p>Linux 64-bit Binary: <a href="https://nodejs.org/dist/v0.11.11/node-v0.11.11-linux-x64.tar.gz">https://nodejs.org/dist/v0.11.11/node-v0.11.11-linux-x64.tar.gz</a></p>
+<p>Solaris 32-bit Binary: <a href="https://nodejs.org/dist/v0.11.11/node-v0.11.11-sunos-x86.tar.gz">https://nodejs.org/dist/v0.11.11/node-v0.11.11-sunos-x86.tar.gz</a></p>
+<p>Solaris 64-bit Binary: <a href="https://nodejs.org/dist/v0.11.11/node-v0.11.11-sunos-x64.tar.gz">https://nodejs.org/dist/v0.11.11/node-v0.11.11-sunos-x64.tar.gz</a></p>
+<p>Other release files: <a href="https://nodejs.org/dist/v0.11.11/">https://nodejs.org/dist/v0.11.11/</a></p>
+<p>Website: <a href="https://nodejs.org/docs/v0.11.11/">https://nodejs.org/docs/v0.11.11/</a></p>
+<p>Documentation: <a href="https://nodejs.org/docs/v0.11.11/api/">https://nodejs.org/docs/v0.11.11/api/</a></p>
+<p>Shasums:</p>
+<pre><code class="language-text">b14d62e992a12cb552277770942a89b94c9edddd  node-v0.11.11-darwin-x64.tar.gz
+62ebf588c1909f0d820e975ee88cd506c0c8de30  node-v0.11.11-darwin-x86.tar.gz
+cb0f4477d6ec96993e0b538885e960027872a936  node-v0.11.11-linux-x64.tar.gz
+ac9e91f268f1ac1bad79a0c817d5d8689ece1095  node-v0.11.11-linux-x86.tar.gz
+e25eab9e2e560d02b0ca57a219a0eba3d4e3d14d  node-v0.11.11-sunos-x64.tar.gz
+3a1ce4e226edf56fb7811ebe13da9163ae0a1460  node-v0.11.11-sunos-x86.tar.gz
+a0b237df15b1ce07049f72b4a49b4ab5109dfe67  node-v0.11.11-x86.msi
+78807abf9b4faeea4b405ad9fb13daab09306772  node-v0.11.11.pkg
+65b257ec6584bf339f06f58a8a02ba024e13f283  node-v0.11.11.tar.gz
+33fa2097f75f5077bb1ef34930594a591d922a7f  node.exe
+192b4503b351fd9a98a136f697e85c4372c71bd1  node.exp
+bd9a3482a6be8b5708172450abe9358a3956816e  node.lib
+d51780e8f3a936d2dd28fa00f832424ad6e7ca42  node.pdb
+a687afbb8e4d5a3a120a812e889dae2f0eca2fa4  pkgsrc/nodejs-ia32-0.11.11.tgz
+3da73af5f7059000b1a898259de9e7197b6e9bac  pkgsrc/nodejs-x64-0.11.11.tgz
+9fa14e245795b7adf0dfebe317490fefd40bfbe9  x64/node-v0.11.11-x64.msi
+e19bcf90ef4d864a11744648cadb864911ee5f4e  x64/node.exe
+83e31621bfc45b9b86f4724a3255cf3afdb3236a  x64/node.exp
+c778c1853e45686e5fefb463a419658ff9b966e1  x64/node.lib
+ced8fe51cd619d07c53c0f1f1fdcfc5ff3c70373  x64/node.pdb
+</code></pre></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->Scroll to top</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"en","localName":"English","name":"English","langDir":"ltr","dateFormat":"MM.DD.YYYY","hrefLang":"en-US","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"Scroll to top","components.header.links.home":"Home","components.header.links.about":"About","components.header.links.download":"Downloads","components.header.links.docs":"Docs","components.header.links.getInvolved":"Get Involved","components.header.links.security":"Security","components.header.links.certification":"Certification","components.header.links.blog":"News","components.navigation.about.links.governance":"Governance","components.navigation.docs.links.es6":"ES6 and beyond","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"Guides","components.navigation.docs.links.dependencies":"Dependencies","components.navigation.getInvolved.links.collabSummit":"Collab Summit","components.navigation.getInvolved.links.contribute":"Contribute","components.navigation.getInvolved.links.codeOfConduct":"Code of Conduct","components.downloadList.links.previousReleases":"Previous Releases","components.downloadList.links.packageManager":"Installing Node.js via package manager","components.downloadList.links.shaSums":"Signed SHASUMS for release files","components.downloadList.links.shaSums.howToVerify":" (How to verify)","components.downloadList.links.allDownloads":"All download options","components.downloadList.links.nightlyReleases":"Nightly builds","components.downloadList.links.unofficialBuilds":"Unofficial builds","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Installing Node.js via binary archive","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"Changelog","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"Docs","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"Newer | ","components.pagination.previous":"Older","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}}},"__N_SSG":true},"page":"/en/blog/release/v0.11.11","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

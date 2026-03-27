@@ -1,0 +1,94 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>의존성 | Node.js node js 学习 中文网</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="의존성 | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="의존성 | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/ko/docs/meta/topics/dependencies"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/ko/docs/meta/topics/dependencies-e2b6755604c97ee3.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-2WRNZHGVQT"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-2WRNZHGVQT");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8264273508355034" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/ko"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/ko">홈</a></li><li class=""><a href="/ko/about">About</a></li><li class=""><a href="/ko/download">다운로드</a></li><li class="active"><a href="/ko/docs">문서</a></li><li class=""><a href="/ko/get-involved">참여하기</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">보안</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class=""><a href="/ko/blog">뉴스</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/meta/topics/dependencies">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/meta/topics/dependencies">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/meta/topics/dependencies">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/meta/topics/dependencies">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/meta/topics/dependencies">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/meta/topics/dependencies">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/meta/topics/dependencies">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/meta/topics/dependencies">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/meta/topics/dependencies">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/meta/topics/dependencies">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/meta/topics/dependencies">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/meta/topics/dependencies">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/meta/topics/dependencies">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/meta/topics/dependencies">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/meta/topics/dependencies">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/meta/topics/dependencies">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/meta/topics/dependencies">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/meta/topics/dependencies">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/ko/docs">문서</a></li><li class=""><a href="/ko/docs/es6">ES6와 그 이후</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/ko/docs/guides">안내</a></li><li class="active"><a href="/ko/docs/meta/topics/dependencies">의존성</a></li></ul></nav><article dir="auto"><h1 id="의존성">의존성<a id="header-의존성" class="anchor" href="#의존성" aria-labelledby="의존성"></a></h1>
+<p>Node.js가 의존하고 있는 여러 의존성</p>
+<ul>
+<li><a href="#libraries">라이브러리</a>
+<ul>
+<li><a href="#v8">V8</a></li>
+<li><a href="#libuv">libuv</a></li>
+<li><a href="#llhttp">llhttp</a></li>
+<li><a href="#c-ares">c-ares</a></li>
+<li><a href="#openssl">OpenSSL</a></li>
+<li><a href="#zlib">zlib</a></li>
+</ul>
+</li>
+<li><a href="#tools">도구</a>
+<ul>
+<li><a href="#npm">npm</a></li>
+<li><a href="#gyp">gyp</a></li>
+<li><a href="#gtest">gtest</a></li>
+</ul>
+</li>
+</ul>
+<!-- -->
+<h2 id="libraries">라이브러리<a id="header-libraries" class="anchor" href="#libraries" aria-labelledby="libraries"></a></h2>
+<h3 id="v8">V8<a id="header-v8" class="anchor" href="#v8" aria-labelledby="v8"></a></h3>
+<p>V8 라이브러리는 Node.js가 V8 C++ API로 제어하는 JavaScript 엔진을 제공합니다.
+V8은 구글이 관리하고 크롬에서 사용 중인 엔진입니다.</p>
+<ul>
+<li><a href="https://v8.dev/docs/">문서</a></li>
+</ul>
+<!-- -->
+<h3 id="libuv">libuv<a id="header-libuv" class="anchor" href="#libuv" aria-labelledby="libuv"></a></h3>
+<p>또 하나의 중요한 의존성은 libuv입니다. libuv는 C 라이브러리로 논블로킹 I/O 작업을 지원하는
+모든 플랫폼에서 일관된 인터페이스로 추상화하는 데 사용됩니다. libuv는 파일 시스템, DNS, 네트워크,
+자식 프로세스, 파이프, 신호 처리, 폴링, 스트리밍을 다루는 메커니즘을 제공하고 운영체제 수준에서
+비동기로 처리될 수 없는 작업을 위한 스레드 풀도 포함하고 있습니다.</p>
+<ul>
+<li><a href="http://docs.libuv.org/">문서</a></li>
+</ul>
+<!-- -->
+<h3 id="llhttp">llhttp<a id="header-llhttp" class="anchor" href="#llhttp" aria-labelledby="llhttp"></a></h3>
+<p>HTTP 파싱은 llhttp라는 경량 C 라이브러리가 처리합니다. 이는 시스템 호출이나 할당을 하려고
+만들어진 것이 아니므로 요청당 아주 작은 메모리 공간만 차지합니다.</p>
+<ul>
+<li><a href="https://github.com/nodejs/llhttp">문서</a></li>
+</ul>
+<!-- -->
+<h3 id="c-ares">c-ares<a id="header-c-ares" class="anchor" href="#c-ares" aria-labelledby="c-ares"></a></h3>
+<p>일부 비동기 DNS 요청을 위해서 Node.js는 c-ares라는 C 라이브러리를 사용합니다. c-ares는
+JavaScript DNS 모듈로 <code>resolve()</code> 류의 함수들을 노출합니다. 코어의 다른 부분에서 사용하는
+<code>lookup()</code> 함수는 libuv에서 스레드로 관리되는 <code>getaddrinfo(3)</code> 호출을 사용합니다. 이렇게 사용하는
+이유는 c-ares가 /etc/hosts, /etc/resolv.conf, /etc/svc.conf는 지원하지만
+mDNS 같은 것은 지원하지 않기 때문입니다.</p>
+<ul>
+<li><a href="https://c-ares.haxx.se/docs.html">문서</a></li>
+</ul>
+<!-- -->
+<h3 id="openssl">OpenSSL<a id="header-openssl" class="anchor" href="#openssl" aria-labelledby="openssl"></a></h3>
+<p>OpenSSL은 <code>tls</code>와 <code>crypto</code> 모듈에서 광범위하게 사용되고 있습니다. OpenSSL은 현대 웹이
+보안에서 사용하는 수많은 암호화 함수에 대한 검증된 구현체를 제공합니다.</p>
+<ul>
+<li><a href="https://www.openssl.org/docs/">문서</a></li>
+</ul>
+<!-- -->
+<h3 id="zlib">zlib<a id="header-zlib" class="anchor" href="#zlib" aria-labelledby="zlib"></a></h3>
+<p>빠른 압축과 압축 해제를 하기 위해 Node.js는 산업 표준인 zlib 라이브러리를 사용하고 zlib은
+gzip과 libpng를 사용한다고 알려져 있습니다. Node.js는 동기, 비동기, 스트리밍 압축과
+압축 해제 인터페이스에 zlib을 사용합니다.</p>
+<ul>
+<li><a href="https://www.zlib.net/manual.html">문서</a></li>
+</ul>
+<!-- -->
+<h2 id="tools">도구<a id="header-tools" class="anchor" href="#tools" aria-labelledby="tools"></a></h2>
+<h3 id="npm">npm<a id="header-npm" class="anchor" href="#npm" aria-labelledby="npm"></a></h3>
+<p>Node.js는 모든 것이 모듈화되어 있으므로 질 좋은 패키지 매니저가 필요해졌습니다. 이 목적 때문에
+npm이 만들어졌습니다. npm이 모든 프로그래밍 생태계에서 커뮤니티가 만든 커다란 패키지 선택권을
+제공해 주므로 Node.js를 빠르고 쉽게 만들 수 있습니다.</p>
+<ul>
+<li><a href="https://docs.npmjs.com/">문서</a></li>
+</ul>
+<!-- -->
+<h3 id="gyp">gyp<a id="header-gyp" class="anchor" href="#gyp" aria-labelledby="gyp"></a></h3>
+<p>V8에서 파생된 Python 기반의 프로젝트 제너레이터인 gyp가 빌드 시스템을 다룹니다. gyp는 다수의
+플랫폼에서 빌드 시스템을 사용하기 위한 프로젝트 파일을 생성할 수 있습니다. Node.js는 컴파일이
+필요한 언어로 작성된 부분이 많이 있으므로(혹은 의존성 라이브러리에서) 빌드 시스템이 필요합니다.</p>
+<ul>
+<li><a href="https://gyp.gsrc.io/docs/UserDocumentation">문서</a></li>
+</ul>
+<!-- -->
+<h3 id="gtest">gtest<a id="header-gtest" class="anchor" href="#gtest" aria-labelledby="gtest"></a></h3>
+<p>네이티브 코드는 Chromium의 gtest로 테스트할 수 있습니다. gtest로 C/C++를 시작하는
+기존의 node 실행 파일 없이 C/C++를 테스트할 수 있습니다.</p>
+<ul>
+<li><a href="https://code.google.com/p/googletest/wiki/V1_7_Documentation">문서</a></li>
+</ul></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->맨 위로</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"ko","localName":"한국어","name":"Korean","langDir":"ltr","dateFormat":"YYYY.MM.DD","hrefLang":"ko","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"맨 위로","components.header.links.home":"홈","components.header.links.about":"About","components.header.links.download":"다운로드","components.header.links.docs":"문서","components.header.links.getInvolved":"참여하기","components.header.links.security":"보안","components.header.links.certification":"Certification","components.header.links.blog":"뉴스","components.navigation.about.links.governance":"거버넌스","components.navigation.docs.links.es6":"ES6와 그 이후","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"안내","components.navigation.docs.links.dependencies":"의존성","components.navigation.getInvolved.links.collabSummit":"협업자 서밋","components.navigation.getInvolved.links.contribute":"기여하기","components.navigation.getInvolved.links.codeOfConduct":"행동강령","components.downloadList.links.previousReleases":"이전 릴리스","components.downloadList.links.packageManager":"패키지 관리자를 통한 Node.js 설치","components.downloadList.links.shaSums":"릴리스 파일에 서명된 SHASUMS","components.downloadList.links.shaSums.howToVerify":" (검증 방법)","components.downloadList.links.allDownloads":"모든 다운로드 보기","components.downloadList.links.nightlyReleases":"나이틀리 빌드","components.downloadList.links.unofficialBuilds":"비공식 빌드","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Linux에서 바이너리 아카이브를 통해 Node.js 설치하기","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"변경사항","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"문서","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"다음 | ","components.pagination.previous":"이전","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/ko/docs/meta/topics/dependencies","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

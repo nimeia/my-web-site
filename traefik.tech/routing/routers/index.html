@@ -1,0 +1,2431 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Traefik 文档，traefik 是一个负载均衡器，可以对后端服务进行反向代理，同时支持服务自动发现">
+      
+      
+        <link rel="canonical" href="https://www.traefik.tech/docs/routing/routers/">
+      
+      
+        <meta name="author" content="containo.us">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/img/traefik.icon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.1">
+    
+    
+      
+        <title>路由-Routers - Traefik 中文网 - 最新中文文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#00bcd4">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../assets/styles/extra.css">
+    
+      <link rel="stylesheet" href="../../assets/styles/atom-one-light.css"><script async src="https://www.googletagmanager.com/gtag/js?id=G-ZP0D43CZ94"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-ZP0D43CZ94");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4861113683111015" crossorigin="anonymous"></script></head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="cyan" data-md-color-accent="cyan">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#_1" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://www.traefik.tech/docs/" title="Traefik 中文网 - 最新中文文档" class="md-header-nav__button md-logo">
+          
+            <img src="../../assets/img/traefik.logo.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Traefik 中文网 - 最新中文文档
+            </span>
+            <span class="md-header-nav__topic">
+              
+                路由-Routers
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/containous/traefik/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://www.traefik.tech/docs/" title="Traefik 中文网 - 最新中文文档" class="md-nav__button md-logo">
+      
+        <img src="../../assets/img/traefik.logo.png" width="48" height="48">
+      
+    </a>
+    Traefik 中文网 - 最新中文文档
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/containous/traefik/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="欢迎" class="md-nav__link">
+      欢迎
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      入门
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        入门
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../getting-started/concepts/" title="概念" class="md-nav__link">
+      概念
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../getting-started/quick-start/" title="快速开始" class="md-nav__link">
+      快速开始
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../getting-started/configuration-overview/" title="配置简介" class="md-nav__link">
+      配置简介
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../getting-started/install-traefik/" title="安装Traefik" class="md-nav__link">
+      安装Traefik
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      配置发现
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        配置发现
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../providers/overview/" title="概述" class="md-nav__link">
+      概述
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../providers/docker/" title="Docker" class="md-nav__link">
+      Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../providers/kubernetes-crd/" title="Kubernetes IngressRoute" class="md-nav__link">
+      Kubernetes IngressRoute
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../providers/kubernetes-ingress/" title="Kubernetes Ingress" class="md-nav__link">
+      Kubernetes Ingress
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../providers/rancher/" title="Rancher" class="md-nav__link">
+      Rancher
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../providers/file/" title="File" class="md-nav__link">
+      File
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../providers/marathon/" title="Marathon" class="md-nav__link">
+      Marathon
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      路由和负载平衡
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        路由和负载平衡
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../overview/" title="概述" class="md-nav__link">
+      概述
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../entrypoints/" title="入口-Entrypoints" class="md-nav__link">
+      入口-Entrypoints
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        路由-Routers
+      </label>
+    
+    <a href="./" title="路由-Routers" class="md-nav__link md-nav__link--active">
+      路由-Routers
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="配置示例" class="md-nav__link">
+    配置示例
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http" title="配置HTTP路由器" class="md-nav__link">
+    配置HTTP路由器
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="入口点" class="md-nav__link">
+    入口点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule" title="Rule" class="md-nav__link">
+    Rule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="中间件" class="md-nav__link">
+    中间件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="服务" class="md-nav__link">
+    服务
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tls" title="TLS" class="md-nav__link">
+    TLS
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general" title="General" class="md-nav__link">
+    General
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options" title="options" class="md-nav__link">
+    options
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#certresolver" title="certResolver" class="md-nav__link">
+    certResolver
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domains" title="domains" class="md-nav__link">
+    domains
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tcp" title="配置TCP路由器" class="md-nav__link">
+    配置TCP路由器
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general_1" title="General" class="md-nav__link">
+    General
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="入口点" class="md-nav__link">
+    入口点
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#domains_1" title="domains" class="md-nav__link">
+    domains
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../services/" title="服务-Services" class="md-nav__link">
+      服务-Services
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      HTTPS & TLS
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        HTTPS & TLS
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../https/overview/" title="概述" class="md-nav__link">
+      概述
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../https/tls/" title="TLS" class="md-nav__link">
+      TLS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../https/acme/" title="Let`s Encrypt" class="md-nav__link">
+      Let`s Encrypt
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      中间件
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        中间件
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/overview/" title="概述" class="md-nav__link">
+      概述
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/addprefix/" title="路径匹配" class="md-nav__link">
+      路径匹配
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/basicauth/" title="基本验证" class="md-nav__link">
+      基本验证
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/buffering/" title="缓冲" class="md-nav__link">
+      缓冲
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/chain/" title="链路" class="md-nav__link">
+      链路
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/circuitbreaker/" title="断路器-CircuitBreaker" class="md-nav__link">
+      断路器-CircuitBreaker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/compress/" title="压缩-Compress" class="md-nav__link">
+      压缩-Compress
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/digestauth/" title="数据验证-DigestAuth" class="md-nav__link">
+      数据验证-DigestAuth
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/errorpages/" title="错误处理" class="md-nav__link">
+      错误处理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/forwardauth/" title="委派验证" class="md-nav__link">
+      委派验证
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/headers/" title="http头-Headers" class="md-nav__link">
+      http头-Headers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/ipwhitelist/" title="IP白名单" class="md-nav__link">
+      IP白名单
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/maxconnection/" title="最大连接数" class="md-nav__link">
+      最大连接数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/passtlsclientcert/" title="安全证书" class="md-nav__link">
+      安全证书
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/ratelimit/" title="频率控制" class="md-nav__link">
+      频率控制
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/redirectregex/" title="重定向" class="md-nav__link">
+      重定向
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/redirectscheme/" title="协议重定向" class="md-nav__link">
+      协议重定向
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/replacepath/" title="路径替换" class="md-nav__link">
+      路径替换
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/replacepathregex/" title="前缀正则替换" class="md-nav__link">
+      前缀正则替换
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/retry/" title="重试" class="md-nav__link">
+      重试
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/stripprefix/" title="严格前缀匹配" class="md-nav__link">
+      严格前缀匹配
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/stripprefixregex/" title="严格前缀正则匹配" class="md-nav__link">
+      严格前缀正则匹配
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      管理介绍
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        管理介绍
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operations/cli/" title="命令行" class="md-nav__link">
+      命令行
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operations/dashboard/" title="web控制台" class="md-nav__link">
+      web控制台
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operations/api/" title="接口-API" class="md-nav__link">
+      接口-API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operations/ping/" title="Ping检查" class="md-nav__link">
+      Ping检查
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      监控功能
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        监控功能
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/logs/" title="服务日志" class="md-nav__link">
+      服务日志
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/access-logs/" title="访问" class="md-nav__link">
+      访问
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-3" type="checkbox" id="nav-8-3">
+    
+    <label class="md-nav__link" for="nav-8-3">
+      度量
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-3">
+        度量
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/metrics/overview/" title="概述" class="md-nav__link">
+      概述
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/metrics/datadog/" title="DataDog" class="md-nav__link">
+      DataDog
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/metrics/influxdb/" title="InfluxDB" class="md-nav__link">
+      InfluxDB
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/metrics/prometheus/" title="Prometheus" class="md-nav__link">
+      Prometheus
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/metrics/statsd/" title="StatsD" class="md-nav__link">
+      StatsD
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-4" type="checkbox" id="nav-8-4">
+    
+    <label class="md-nav__link" for="nav-8-4">
+      链路跟踪
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-4">
+        链路跟踪
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/tracing/overview/" title="概述" class="md-nav__link">
+      概述
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/tracing/jaeger/" title="Jaeger" class="md-nav__link">
+      Jaeger
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/tracing/zipkin/" title="Zipkin" class="md-nav__link">
+      Zipkin
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/tracing/datadog/" title="DataDog" class="md-nav__link">
+      DataDog
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/tracing/instana/" title="Instana" class="md-nav__link">
+      Instana
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/tracing/haystack/" title="Haystack" class="md-nav__link">
+      Haystack
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      用户指南
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        用户指南
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guides/crd-acme/" title="Kubernetes and Let's Encrypt" class="md-nav__link">
+      Kubernetes and Let's Encrypt
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guides/grpc/" title="gRPC 例子" class="md-nav__link">
+      gRPC 例子
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guides/marathon/" title="Marathon" class="md-nav__link">
+      Marathon
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4" type="checkbox" id="nav-9-4">
+    
+    <label class="md-nav__link" for="nav-9-4">
+      Docker
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-9-4">
+        Docker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guides/docker-compose/basic-example/" title="基本例子" class="md-nav__link">
+      基本例子
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4-2" type="checkbox" id="nav-9-4-2">
+    
+    <label class="md-nav__link" for="nav-9-4-2">
+      HTTPS with Let's Encrypt
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-9-4-2">
+        HTTPS with Let's Encrypt
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guides/docker-compose/acme-tls/" title="TLS" class="md-nav__link">
+      TLS 
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guides/docker-compose/acme-http/" title="HTTP" class="md-nav__link">
+      HTTP 
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guides/docker-compose/acme-dns/" title="DNS" class="md-nav__link">
+      DNS 
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="配置示例" class="md-nav__link">
+    配置示例
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http" title="配置HTTP路由器" class="md-nav__link">
+    配置HTTP路由器
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="入口点" class="md-nav__link">
+    入口点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule" title="Rule" class="md-nav__link">
+    Rule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="中间件" class="md-nav__link">
+    中间件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="服务" class="md-nav__link">
+    服务
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tls" title="TLS" class="md-nav__link">
+    TLS
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general" title="General" class="md-nav__link">
+    General
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options" title="options" class="md-nav__link">
+    options
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#certresolver" title="certResolver" class="md-nav__link">
+    certResolver
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domains" title="domains" class="md-nav__link">
+    domains
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tcp" title="配置TCP路由器" class="md-nav__link">
+    配置TCP路由器
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general_1" title="General" class="md-nav__link">
+    General
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="入口点" class="md-nav__link">
+    入口点
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#domains_1" title="domains" class="md-nav__link">
+    domains
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/containous/traefik/edit/master/docs/routing/routers/index.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="_1">路由<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p class="subtitle">将请求连接到服务</p>
+<p><img alt="routers" src="../../assets/img/routers.png" /></p>
+<p>路由器负责将传入请求连接到可以处理它们的服务。在此过程中，路由器可以使用多个<a href="../../middlewares/overview/">中间件</a> 来更新请求，或者在将请求转发给服务之前采取行动。</p>
+<h2 id="_2">配置示例<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<details class="example"><summary>请求/ foo 由 service-foo 处理 - 使用<a href="../../providers/file/">文件提供程序</a></summary><div class="superfences-tabs">
+<input name="__tabs_1" type="radio" id="__tab_1_0" checked="checked" />
+<label for="__tab_1_0">TOML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-toml">  [http.routers]
+    [http.routers.my-router]
+      rule = "Path(`/foo`)"
+      service = "service-foo"</code></pre></div>
+<input name="__tabs_1" type="radio" id="__tab_1_1" />
+<label for="__tab_1_1">YAML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-yaml">  http:
+    routers:
+      my-router:
+        rule: "Path(`/foo`)"
+        service: service-foo</code></pre></div>
+</div>
+</details>
+<details class="example"><summary>使用<a href="../../middlewares/overview/">中间件</a> - 使用<a href="../../providers/file/">文件提供程序</a> </summary><div class="superfences-tabs">
+<input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked" />
+<label for="__tab_2_0">TOML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-toml">  [http.routers]
+    [http.routers.my-router]
+      rule = "Path(`/foo`)"
+      # declared elsewhere
+      middlewares = ["authentication"]
+      service = "service-foo"</code></pre></div>
+<input name="__tabs_2" type="radio" id="__tab_2_1" />
+<label for="__tab_2_1">YAML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-yaml">  http:
+    routers:
+      my-router:
+        rule: "Path(`/foo`)"
+        # declared elsewhere
+        middlewares:
+        - authentication
+        service: service-foo</code></pre></div>
+</div>
+</details>
+<details class="example"><summary>将端口 3306 上的所有（非 tls）请求转发到数据库服务</summary><div class="superfences-tabs">
+<input name="__tabs_3" type="radio" id="__tab_3_0" checked="checked" />
+<label for="__tab_3_0">TOML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-toml">## Static configuration ##
+
+[entryPoints]
+  [entryPoints.web]
+    address = ":80"
+  [entryPoints.mysql-default]
+    address = ":3306"
+
+## Dynamic configuration ##
+
+[tcp]
+  [tcp.routers]
+    [tcp.routers.to-database]
+      entryPoints = ["mysql-default"]
+      # Catch every request (only available rule for non-tls routers. See below.)
+      rule = "HostSNI(`*`)"
+      service = "database"</code></pre></div>
+<input name="__tabs_3" type="radio" id="__tab_3_1" />
+<label for="__tab_3_1">YAML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-yaml">## Static configuration ##
+
+entryPoints:
+  web:
+    address: ":80"
+  mysql-default:
+    address: ":3306"
+
+## Dynamic configuration ##
+
+tcp:
+  routers:
+    to-database:
+      entryPoints:
+      - "mysql-default"
+      # Catch every request (only available rule for non-tls routers. See below.)
+      rule: "HostSNI(`*`)"
+      service: database</code></pre></div>
+</div>
+</details>
+<h2 id="http">配置HTTP路由器<a class="headerlink" href="#http" title="Permanent link">&para;</a></h2>
+<h3 id="_3">入口点<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>如果未指定，HTTP路由器将接受来自所有已定义入口点的请求。
+如果要将路由器范围限制为一组入口点，请设置该<code>entryPoints</code>选项。</p>
+<details class="example"><summary>Listens to Every EntryPoint</summary><div class="superfences-tabs">
+<input name="__tabs_4" type="radio" id="__tab_4_0" checked="checked" />
+<label for="__tab_4_0">TOML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-toml">## Static configuration ##
+
+[entryPoints]
+  [entryPoints.web]
+    # ...
+  [entryPoints.web-secure]
+    # ...
+  [entryPoints.other]
+    # ...
+
+
+## Dynamic configuration ##
+
+[http.routers]
+  [http.routers.Router-1]
+    # By default, routers listen to every entry points
+    rule = "Host(`traefik.io`)"
+    service = "service-1"</code></pre></div>
+<input name="__tabs_4" type="radio" id="__tab_4_1" />
+<label for="__tab_4_1">YAML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-yaml">## Static configuration ##
+
+entryPoints:
+  web:
+    # ...
+  web-secure:
+    # ...
+  other:
+    # ...
+
+## Dynamic configuration ##
+
+http:
+  routers:
+    Router-1:
+      # By default, routers listen to every entry points
+      rule: "Host(`traefik.io`)"
+      service: "service-1"</code></pre></div>
+</div>
+</details>
+<details class="example"><summary>Listens to Specific EntryPoints</summary><div class="superfences-tabs">
+<input name="__tabs_5" type="radio" id="__tab_5_0" checked="checked" />
+<label for="__tab_5_0">TOML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-toml">## Static configuration ##
+
+[entryPoints]
+  [entryPoints.web]
+    # ...
+  [entryPoints.web-secure]
+    # ...
+  [entryPoints.other]
+    # ...
+
+## Dynamic configuration ##
+
+[http.routers]
+  [http.routers.Router-1]
+    # won't listen to entry point web
+    entryPoints = ["web-secure", "other"]
+    rule = "Host(`traefik.io`)"
+    service = "service-1"</code></pre></div>
+<input name="__tabs_5" type="radio" id="__tab_5_1" />
+<label for="__tab_5_1">YAML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-yaml">## Static configuration ##
+
+entryPoints:
+  web:
+    # ...
+  web-secure:
+    # ...
+  other:
+    # ...
+
+## Dynamic configuration ##
+
+http:
+  routers:
+    Router-1:
+      # won't listen to entry point web
+      entryPoints:
+      - "web-secure"
+      - "other"
+      rule: "Host(`traefik.io`)"
+      service: "service-1"</code></pre></div>
+</div>
+</details>
+<h3 id="rule">Rule<a class="headerlink" href="#rule" title="Permanent link">&para;</a></h3>
+<p>规则是一组匹配器，用于确定特定请求是否符合特定条件。
+如果验证为真，则路由器变为活动状态，调用中间件，然后将请求转发给服务。</p>
+<details class="example"><summary>Host is traefik.io</summary><pre class="highlight"><code class="language-toml">rule = "Host(`traefik.io`)"</code></pre>
+
+</details>
+<details class="example"><summary>Host is traefik.io OR Host is containo.us AND path is /traefik</summary><pre class="highlight"><code class="language-toml">rule = "Host(`traefik.io`) || (Host(`containo.us`) &amp;&amp; Path(`/traefik`))"</code></pre>
+
+</details>
+<p>下表列出了所有可用的匹配器：</p>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Headers(`key`, `value`)</code></td>
+<td>检查 key 标头中是否定义了一个带有值的密钥 value</td>
+</tr>
+<tr>
+<td><code>HeadersRegexp(`key`, `regexp`)</code></td>
+<td>检查 key 标头中是否定义了一个键，其值与正则表达式匹配 regexp</td>
+</tr>
+<tr>
+<td><code>Host(`domain-1`, ...)</code></td>
+<td>检查请求域是否针对给定的一个 domains。.</td>
+</tr>
+<tr>
+<td><code>HostRegexp(`traefik.io`, `{subdomain:[a-z]+}.traefik.io`, ...)</code></td>
+<td>检查请求域是否与给定域匹配 regexp。.</td>
+</tr>
+<tr>
+<td><code>Method(`GET`, ...)</code></td>
+<td>检查请求方法是给定的一个 methods（GET，POST，PUT，DELETE，PATCH）</td>
+</tr>
+<tr>
+<td><code>Path(`path`, `/articles/{category}/{id:[0-9]+}`, ...)</code></td>
+<td>匹配确切的请求路径。它接受一系列文字和正则表达式路径。</td>
+</tr>
+<tr>
+<td><code>PathPrefix(`/products/`, `/articles/{category}/{id:[0-9]+}`)</code></td>
+<td>匹配请求前缀路径。它接受一系列文字和正则表达式前缀路径。</td>
+</tr>
+<tr>
+<td><code>Query(`foo=bar`, `bar=baz`)</code></td>
+<td>Match`查询字符串参数。它接受一系列 key = value 对。</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="admonition-title">Regexp 语法</p>
+<p>为了使用带有Host和Path表达式的正则表达式，必须声明一个任意命名的变量，后跟冒号分隔的正则表达式，全部用大括号括起来。
+可以使用<a href="https://golang.org/pkg/regexp/">Go的regexp</a>包支持的任何模式（例如:)/posts/{id:[0-9]+}。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">使用运算符和括号组合匹配器</p>
+<p>您可以使用AND（&amp;&amp;）和OR（||）运算符组合多个匹配器。您也可以使用括号。</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">规则，中间件和服务</p>
+<p>该规则在“之前”任何中间件有机会工作之前进行评估，并且在“之前”将请求转发给服务。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Path Vs PathPrefix</p>
+<p>使用Path，如果你的服务只的确切路径上侦听。例如，Path: /products匹配/products但不匹配/products/shoes</p>
+<p>如果您的服务侦听特定的基本路径，但也在子路径上提供请求，请使用匹配器<code>*Prefix*</code>。
+例如，<code>PathPrefix: /products</code> 匹配 <code>/products</code>也匹配<code>/products/shoes</code>和<code>/products/shirts</code>。
+由于路径按原样转发，因此您的服务应该监听/products。</p>
+</div>
+<h3 id="_4">中间件<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>您可以将<a href="../../middlewares/overview/">中间件</a> 列表附加到每个HTTP路由器。
+只有规则匹配，并且在将请求转发给服务之前，中间件才会生效。</p>
+<h3 id="_5">服务<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>您必须为每个路由器附加<a href="../services/">服务</a>。
+服务是路由器的目标。</p>
+<div class="admonition note">
+<p class="admonition-title">仅限HTTP</p>
+<p>HTTP路由器只能定位HTTP服务（而不是TCP服务）。</p>
+</div>
+<h3 id="tls">TLS<a class="headerlink" href="#tls" title="Permanent link">&para;</a></h3>
+<h4 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h4>
+<p>Traefik will terminate the SSL connections (meaning that it will send decrypted data to the services).
+当指定TLS部分时，它指示Traefik当前路由器仅专用于HTTPS请求（并且路由器应忽略HTTP（非TLS）请求）。
+Traefik将终止SSL连接（意味着它将解密数据发送到服务）。</p>
+<details class="example"><summary>配置路由器仅接受HTTPS请求</summary><div class="superfences-tabs">
+<input name="__tabs_6" type="radio" id="__tab_6_0" checked="checked" />
+<label for="__tab_6_0">TOML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-toml">[http.routers]
+  [http.routers.Router-1]
+    rule = "Host(`foo-domain`) &amp;&amp; Path(`/foo-path/`)"
+    service = "service-id"
+    # will terminate the TLS request
+    [http.routers.Router-1.tls]</code></pre></div>
+<input name="__tabs_6" type="radio" id="__tab_6_1" />
+<label for="__tab_6_1">YAML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-yaml">http:
+  routers:
+    Router-1:
+      rule: "Host(`foo-domain`) &amp;&amp; Path(`/foo-path/`)"
+      service: service-id
+      # will terminate the TLS request
+      tls: {}</code></pre></div>
+</div>
+</details>
+<div class="admonition note">
+<p class="admonition-title">HTTPS和ACME</p>
+<p>在当前版本中，启用<a href="../../https/acme/">ACME</a> 后，自动证书生成将应用于声明TLS部分的每个路由器。</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">HTTP和HTTPS路由</p>
+<p>如果需要为HTTP和HTTPS请求定义相同的路由，则需要定义两个不同的路由器：一个带有tls部分，一个没有。</p>
+<details class="example"><summary>HTTP和HTTPS路由</summary><div class="superfences-tabs">
+<input name="__tabs_7" type="radio" id="__tab_7_0" checked="checked" />
+<label for="__tab_7_0">TOML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-toml">[http.routers]
+  [http.routers.my-https-router]
+    rule = "Host(`foo-domain`) &amp;&amp; Path(`/foo-path/`)"
+    service = "service-id"
+    # will terminate the TLS request
+    [http.routers.my-https-router.tls]
+
+  [http.routers.my-http-router]
+    rule = "Host(`foo-domain`) &amp;&amp; Path(`/foo-path/`)"
+    service = "service-id"</code></pre></div>
+<input name="__tabs_7" type="radio" id="__tab_7_1" />
+<label for="__tab_7_1">YAML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-yaml">http:
+  routers:
+    my-https-router:
+      rule: "Host(`foo-domain`) &amp;&amp; Path(`/foo-path/`)"
+      service: service-id
+      # will terminate the TLS request
+      tls: {}
+
+    my-http-router:
+      rule: "Host(`foo-domain`) &amp;&amp; Path(`/foo-path/`)"
+      service: service-id</code></pre></div>
+</div>
+</details>
+</div>
+<h4 id="options"><code>options</code><a class="headerlink" href="#options" title="Permanent link">&para;</a></h4>
+<p>options字段可以对TLS参数进行细粒度控制。
+它指的是<a href="../../https/tls/#tls-options">TLS选项</a>，仅在<code>Host</code>定义规则时才会应用。</p>
+<div class="admonition note">
+<p class="admonition-title">服务器名称关联</p>
+<p>即使有人可能会得到TLS选项引用映射到路由器或路由器的规则，
+但应该意识到它实际上只映射到Host规则部分中找到的主机名。
+当然，规则中也可能有几个Host部分，在这种情况下，TLS选项引用将映射到尽可能多的主机名.</p>
+<p>要记住的另一件事是：从上面提到的映射中选择TLS选项，并根据TLS握手期间提供的服务器名称，这一切都发生在路由实际发生之前。</p>
+</div>
+<details class="example"><summary>配置TLS选项</summary><div class="superfences-tabs">
+<input name="__tabs_8" type="radio" id="__tab_8_0" checked="checked" />
+<label for="__tab_8_0">TOML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-toml">[http.routers]
+  [http.routers.Router-1]
+    rule = "Host(`foo-domain`) &amp;&amp; Path(`/foo-path/`)"
+    service = "service-id"
+    # will terminate the TLS request
+    [http.routers.Router-1.tls]
+      options = "foo"
+
+[tls.options]
+  [tls.options.foo]
+    minVersion = "VersionTLS12"
+    cipherSuites = [
+      "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+      "TLS_RSA_WITH_AES_256_GCM_SHA384"
+    ]</code></pre></div>
+<input name="__tabs_8" type="radio" id="__tab_8_1" />
+<label for="__tab_8_1">YAML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-yaml">http:
+  routers:
+    Router-1:
+      rule: "Host(`foo-domain`) &amp;&amp; Path(`/foo-path/`)"
+      service: service-id
+      # will terminate the TLS request
+      tls:
+        options: foo
+
+tls:
+  options:
+    foo:
+      minVersion: VersionTLS12
+      cipherSuites:
+      - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+      - TLS_RSA_WITH_AES_256_GCM_SHA384</code></pre></div>
+</div>
+</details>
+<div class="admonition important">
+<p class="admonition-title">冲突的TLS选项</p>
+<p>由于TLS选项引用映射到主机名，因此如果配置引入了相同主机名（来自Host规则）与两个TLS选项引用匹配的情况，则会发生冲突，例如下面的示例：</p>
+<div class="superfences-tabs">
+<input name="__tabs_9" type="radio" id="__tab_9_0" checked="checked" />
+<label for="__tab_9_0">TOML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-toml">[http.routers]
+  [http.routers.routerfoo]
+    rule = "Host(`snitest.com`) &amp;&amp; Path(`/foo`)"
+    [http.routers.routerfoo.tls]
+      options = "foo"
+
+[http.routers]
+  [http.routers.routerbar]
+    rule = "Host(`snitest.com`) &amp;&amp; Path(`/bar`)"
+    [http.routers.routerbar.tls]
+      options = "bar"</code></pre></div>
+<input name="__tabs_9" type="radio" id="__tab_9_1" />
+<label for="__tab_9_1">YAML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-yaml">http:
+  routers:
+    routerfoo:
+      rule: "Host(`snitest.com`) &amp;&amp; Path(`/foo`)"
+      tls:
+        options: foo
+
+    routerbar:
+      rule: "Host(`snitest.com`) &amp;&amp; Path(`/bar`)"
+      tls:
+        options: bar</code></pre></div>
+</div>
+<p>如果发生这种情况，两个映射都将被丢弃，并且snitest.com这些路由器的主机名（在本例中）将与默认的TLS选项相关联。</p>
+</div>
+<h4 id="certresolver"><code>certResolver</code><a class="headerlink" href="#certresolver" title="Permanent link">&para;</a></h4>
+<p>如果 <code>certResolver</code> 已定义，Traefik将尝试根据路由器<code>Host</code>和<code>HostSNI</code>规则生成证书。</p>
+<div class="superfences-tabs">
+<input name="__tabs_10" type="radio" id="__tab_10_0" checked="checked" />
+<label for="__tab_10_0">TOML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-toml">[http.routers]
+  [http.routers.routerfoo]
+    rule = "Host(`snitest.com`) &amp;&amp; Path(`/foo`)"
+    [http.routers.routerfoo.tls]
+      certResolver = "foo"</code></pre></div>
+<input name="__tabs_10" type="radio" id="__tab_10_1" />
+<label for="__tab_10_1">YAML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-yaml">http:
+  routers:
+    routerfoo:
+      rule: "Host(`snitest.com`) &amp;&amp; Path(`/foo`)"
+      tls:
+        certResolver: foo</code></pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">规则中的多个主机</p>
+</div>
+<p>该规则<code>Host(test1.traefik.io,test2.traefik.io)</code> 将请求具有主域<code>test1.traefik.io</code>和SAN 的证书<code>test2.traefik.io</code>。</p>
+<h4 id="domains"><code>domains</code><a class="headerlink" href="#domains" title="Permanent link">&para;</a></h4>
+<p>您可以为每个主域设置SAN（备用域）。
+每个域必须有指向Traefik的A / AAAA记录。
+每个域和SAN都将导致证书请求。</p>
+<div class="superfences-tabs">
+<input name="__tabs_11" type="radio" id="__tab_11_0" checked="checked" />
+<label for="__tab_11_0">TOML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-toml">[http.routers]
+  [http.routers.routerbar]
+    rule = "Host(`snitest.com`) &amp;&amp; Path(`/bar`)"
+    [http.routers.routerbar.tls]
+      certResolver = "bar"
+      [[http.routers.routerbar.tls.domains]]
+        main = "snitest.com"
+        sans = "*.snitest.com"</code></pre></div>
+<input name="__tabs_11" type="radio" id="__tab_11_1" />
+<label for="__tab_11_1">YAML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-yaml">http:
+  routers:
+    routerbar:
+      rule: "Host(`snitest.com`) &amp;&amp; Path(`/bar`)"
+      tls:
+        certResolver: "bar"
+        domains:
+          - main: "snitest.com"
+            sans: "*.snitest.com"</code></pre></div>
+</div>
+<p><a href="https://community.letsencrypt.org/t/acme-v2-and-wildcard-certificate-support-is-live/55579">ACME v2支</a>持通配符证书。
+正如<a href="https://community.letsencrypt.org/t/staging-endpoint-for-acme-v2/49605">Let's Encrypt</a>的帖子所述，通配符证书只能通过<a href="../../https/acme/#dnschallenge">DNS-01</a>生成。</p>
+<p>很可能根域也应该收到证书，因此需要将其指定为SAN并DNS-01执行2个配置。
+在这种情况下，两个域生成的DNS TXT记录是相同的。尽管此行为符合DNS RFC，但它可能会导致问题，因为所有DNS提供程序都会将DNS记录缓存一段时间（TTL），并且此TTL可能大于挑战超时，从而导致DNS-01质询失败。</p>
+<p>Traefik ACME客户端库<a href="https://github.com/go-acme/lego">LEGO</a>支持部分但不是所有DNS提供商来解决此问题。
+的支持的<a href="../../https/acme/#providers">provider</a>表指示是否它们允许通配符域及其根域产生证书</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+</div>
+<p>通配符证书只能通过<a href="../../https/acme/#dnschallenge"><code>DNS-01</code> challenge</a>.进行验证。</p>
+<div class="admonition note">
+<p class="admonition-title">Double Wildcard Certificates</p>
+</div>
+<p>无法为域请求双通配符证书（例如<em>.</em>.local.com）。</p>
+<h2 id="tcp">配置TCP路由器<a class="headerlink" href="#tcp" title="Permanent link">&para;</a></h2>
+<h3 id="general_1">General<a class="headerlink" href="#general_1" title="Permanent link">&para;</a></h3>
+<p>如果HTTP路由器和TCP路由器都侦听相同的入口点，则TCP路由器将在 HTTP路由器之前应用。
+如果没有找到TCP路由器的匹配路由，则HTTP路由器将接管。</p>
+<h3 id="_6">入口点<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>如果未指定，TCP路由器将接受来自所有已定义入口点的请求。
+如果要将路由器范围限制为一组入口点，请设置入口点选项。</p>
+<details class="example"><summary>Listens to Every Entry Point</summary><div class="superfences-tabs">
+<input name="__tabs_12" type="radio" id="__tab_12_0" checked="checked" />
+<label for="__tab_12_0">TOML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-toml">## Static configuration ##
+
+[entryPoints]
+  [entryPoints.web]
+    # ...
+  [entryPoints.web-secure]
+    # ...
+  [entryPoints.other]
+    # ...
+
+## Dynamic configuration ##
+
+[tcp.routers]
+  [tcp.routers.Router-1]
+    # By default, routers listen to every entrypoints
+    rule = "HostSNI(`traefik.io`)"
+    service = "service-1"
+    # will route TLS requests (and ignore non tls requests)
+    [tcp.routers.Router-1.tls]</code></pre></div>
+<input name="__tabs_12" type="radio" id="__tab_12_1" />
+<label for="__tab_12_1">YAML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-yaml">## Static configuration ##
+
+entryPoints:
+  web:
+    # ...
+  web-secure:
+    # ...
+  other:
+    # ...
+
+## Dynamic configuration ##
+
+tcp:
+  routers:
+    Router-1:
+      # By default, routers listen to every entrypoints
+      rule: "HostSNI(`traefik.io`)"
+      service: "service-1"
+      # will route TLS requests (and ignore non tls requests)
+      tls: {}</code></pre></div>
+</div>
+</details>
+<details class="example"><summary>Listens to Specific Entry Points</summary></details>
+<div class="superfences-tabs">
+<input name="__tabs_13" type="radio" id="__tab_13_0" checked="checked" />
+<label for="__tab_13_0">TOML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-toml"> ## Static configuration ##
+
+ [entryPoints]
+   [entryPoints.web]
+     # ...
+   [entryPoints.web-secure]
+     # ...
+   [entryPoints.other]
+     # ...
+
+ ## Dynamic configuration ##
+
+ [tcp.routers]
+   [tcp.routers.Router-1]
+     # won't listen to entry point web
+     entryPoints = ["web-secure", "other"]
+     rule = "HostSNI(`traefik.io`)"
+     service = "service-1"
+     # will route TLS requests (and ignore non tls requests)
+     [tcp.routers.Router-1.tls]
+ ```
+
+ ```yaml tab="YAML"
+ ## Static configuration ##
+
+ entryPoints:
+   web:
+     # ...
+   web-secure:
+     # ...
+   other:
+     # ...
+
+ ## Dynamic configuration ##
+
+ tcp:
+   routers:
+     Router-1:
+       # won't listen to entry point web
+       entryPoints:
+       - "web-secure"
+       - "other"
+       rule: "HostSNI(`traefik.io`)"
+       service: "service-1"
+       # will route TLS requests (and ignore non tls requests)
+       tls: {}
+ ```
+
+
+
+### Rule
+
+| Rule                           | Description                                                             |
+|--------------------------------|-------------------------------------------------------------------------|
+| ```HostSNI(`domain-1`, ...)``` | Check if the Server Name Indication corresponds to the given `domains`. |
+
+!!! important "HostSNI &amp; TLS"
+
+ It is important to note that the Server Name Indication is an extension of the TLS protocol.
+ Hence, only TLS routers will be able to specify a domain name with that rule.
+ However, non-TLS routers will have to explicitly use that rule with `*` (every domain) to state that every non-TLS request will be handled by the router.
+
+### Services
+
+You must attach a TCP [service](../services/index.md) per TCP router.
+Services are the target for the router.
+
+!!! note "TCP Only"
+
+ TCP routers can only target TCP services (not HTTP services).
+
+### TLS
+
+#### General
+
+When a TLS section is specified, it instructs Traefik that the current router is dedicated to TLS requests only (and that the router should ignore non-TLS requests).
+By default, Traefik will terminate the SSL connections (meaning that it will send decrypted data to the services), but Traefik can be configured in order to let the requests pass through (keeping the data encrypted), and be forwarded to the service "as is".
+By default, Traefik will terminate the SSL connections (meaning that it will send decrypted data to the services), but Traefik can be configured in order to let the requests pass through (keeping the data encrypted), and be forwarded to the service "as is".
+By default, Traefik will terminate the SSL connections (meaning that it will send decrypted data to the services), but Traefik can be configured in order to let the requests pass through (keeping the data encrypted), and be forwarded to the service "as is".
+By default, Traefik will terminate the SSL connections (meaning that it will send decrypted data to the services), but Traefik can be configured in order to let the requests pass through (keeping the data encrypted), and be forwarded to the service "as is".
+By default, Traefik will terminate the SSL connections (meaning that it will send decrypted data to the services), but Traefik can be configured in order to let the requests pass through (keeping the data encrypted), and be forwarded to the service "as is".
+By default, Traefik will terminate the SSL connections (meaning that it will send decrypted data to the services), but Traefik can be configured in order to let the requests pass through (keeping the data encrypted), and be forwarded to the service "as is".
+By default, Traefik will terminate the SSL connections (meaning that it will send decrypted data to the services), but Traefik can be configured in order to let the requests pass through (keeping the data encrypted), and be forwarded to the service "as is".
+By default, Traefik will terminate the SSL connections (meaning that it will send decrypted data to the services), but Traefik can be configured in order to let the requests pass through (keeping the data encrypted), and be forwarded to the service "as is".
+By default, Traefik will terminate the SSL connections (meaning that it will send decrypted data to the services), but Traefik can be configured in order to let the requests pass through (keeping the data encrypted), and be forwarded to the service "as is".
+By default, Traefik will terminate the SSL connections (meaning that it will send decrypted data to the services), but Traefik can be configured in order to let the requests pass through (keeping the data encrypted), and be forwarded to the service "as is".
+By default, Traefik will terminate the SSL connections (meaning that it will send decrypted data to the services), but Traefik can be configured in order to let the requests pass through (keeping the data encrypted), and be forwarded to the service "as is".
+By default, Traefik will terminate the SSL connections (meaning that it will send decrypted data to the services), but Traefik can be configured in order to let the requests pass through (keeping the data encrypted), and be forwarded to the service "as is".
+By default, Traefik will terminate the SSL connections (meaning that it will send decrypted data to the services), but Traefik can be configured in order to let the requests pass through (keeping the data encrypted), and be forwarded to the service "as is".
+By default, Traefik will terminate the SSL connections (meaning that it will send decrypted data to the services), but Traefik can be configured in order to let the requests pass through (keeping the data encrypted), and be forwarded to the service "as is".
+By default, Traefik will terminate the SSL connections (meaning that it will send decrypted data to the services), but Traefik can be configured in order to let the requests pass through (keeping the data encrypted), and be forwarded to the service "as is".
+By default, Traefik will terminate the SSL connections (meaning that it will send decrypted data to the services), but Traefik can be configured in order to let the requests pass through (keeping the data encrypted), and be forwarded to the service "as is".
+By default, Traefik will terminate the SSL connections (meaning that it will send decrypted data to the services), but Traefik can be configured in order to let the requests pass through (keeping the data encrypted), and be forwarded to the service "as is".
+
+??? example "Configuring TLS Termination"
+
+ ```toml tab="TOML"
+ [tcp.routers]
+   [tcp.routers.Router-1]
+     rule = "HostSNI(`foo-domain`)"
+     service = "service-id"
+     # will terminate the TLS request by default
+     [tcp.routers.Router-1.tls]
+ ```
+
+ ```yaml tab="YAML"
+ tcp:
+   routers:
+     Router-1:
+       rule: "HostSNI(`foo-domain`)"
+       service: service-id
+       # will terminate the TLS request by default
+       tld: {}
+ ```
+
+??? example "Configuring passthrough"
+
+ ```toml tab="TOML"
+ [tcp.routers]
+   [tcp.routers.Router-1]
+     rule = "HostSNI(`foo-domain`)"
+     service = "service-id"
+     [tcp.routers.Router-1.tls]
+       passthrough = true
+ ```
+
+ ```yaml tab="YAML"
+ tcp:
+   routers:
+     Router-1:
+       rule: "HostSNI(`foo-domain`)"
+       service: service-id
+       tls:
+         passthrough: true
+ ```
+
+!!! note "TLS &amp; ACME"
+
+ In the current version, with [ACME](../../https/acme.md) enabled, automatic certificate generation will apply to every router declaring a TLS section.
+
+#### `options`
+
+The `options` field enables fine-grained control of the TLS parameters.
+It refers to a [TLS Options](../../https/tls.md#tls-options) and will be applied only if a `HostSNI` rule is defined.
+
+??? example "Configuring the tls options"
+
+ ```toml tab="TOML"
+ [tcp.routers]
+   [tcp.routers.Router-1]
+     rule = "HostSNI(`foo-domain`)"
+     service = "service-id"
+     # will terminate the TLS request
+     [tcp.routers.Router-1.tls]
+       options = "foo"
+
+ [tls.options]
+   [tls.options.foo]
+     minVersion = "VersionTLS12"
+     cipherSuites = [
+       "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+       "TLS_RSA_WITH_AES_256_GCM_SHA384"
+     ]
+ ```
+
+ ```yaml tab="YAML"
+ tcp:
+   routers:
+     Router-1:
+       rule: "HostSNI(`foo-domain`)"
+       service: service-id
+       # will terminate the TLS request
+       tls:
+         options: foo
+
+ tls:
+   options:
+     foo:
+       minVersion: VersionTLS12
+       cipherSuites:
+       - "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+       - "TLS_RSA_WITH_AES_256_GCM_SHA384"
+ ```
+
+#### `certResolver`
+
+See [`certResolver` for HTTP router](./index.md#certresolver) for more information.
+
+```toml tab="TOML"
+[tcp.routers]
+[tcp.routers.routerfoo]
+ rule = "HostSNI(`snitest.com`)"
+ [tcp.routers.routerfoo.tls]
+   certResolver = "foo"</code></pre></div>
+<input name="__tabs_13" type="radio" id="__tab_13_1" />
+<label for="__tab_13_1">YAML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-yaml">tcp:
+  routers:
+    routerfoo:
+      rule: "HostSNI(`snitest.com`)"
+      tls:
+        certResolver: foo</code></pre></div>
+</div>
+<h4 id="domains_1"><code>domains</code><a class="headerlink" href="#domains_1" title="Permanent link">&para;</a></h4>
+<p>See <a href="./#domains"><code>domains</code> for HTTP router</a> for more information.</p>
+<div class="superfences-tabs">
+<input name="__tabs_14" type="radio" id="__tab_14_0" checked="checked" />
+<label for="__tab_14_0">TOML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-toml">[tcp.routers]
+  [tcp.routers.routerbar]
+    rule = "HostSNI(`snitest.com`)"
+    [tcp.routers.routerbar.tls]
+      certResolver = "bar"
+      [[tcp.routers.routerbar.tls.domains]]
+        main = "snitest.com"
+        sans = "*.snitest.com"</code></pre></div>
+<input name="__tabs_14" type="radio" id="__tab_14_1" />
+<label for="__tab_14_1">YAML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-yaml">tcp:
+  routers:
+    routerbar:
+      rule: "HostSNI(`snitest.com`)"
+      tls:
+        certResolver: "bar"
+        domains:
+          - main: "snitest.com"
+            sans: "*.snitest.com"</code></pre></div>
+</div>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+
+
+
+<!-- Application footer -->
+<footer class="md-footer">
+
+    <!-- Further information -->
+    <div class="md-footer-meta md-typeset">
+        <div class="md-footer-meta__inner md-grid">
+
+            <!-- Copyright and theme information -->
+            <div class="md-footer-copyright">
+                
+                <div class="md-footer-copyright__highlight">
+                    Copyright &copy; 2016-2019 Containous
+                </div>
+                
+                powered by
+                <a href="https://www.mkdocs.org" title="MkDocs">MkDocs</a>
+                and
+                <a href="https://squidfunk.github.io/mkdocs-material/"
+                   title="Material for MkDocs">
+                    Material for MkDocs</a>
+            </div>
+
+            <!-- Social links -->
+            
+            
+            
+        </div>
+    </div>
+</footer>
+
+
+    </div>
+    
+      <script src="../../assets/javascripts/application.c648116f.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../assets/js/hljs/highlight.pack.js"></script>
+      
+        <script src="../../assets/js/extra.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Domain Module Postmortem | Node.js node js 学习 中文网</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Domain Module Postmortem | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Domain Module Postmortem | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/en/docs/guides/domain-postmortem"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/en/docs/guides/domain-postmortem-c1d27e8ffafb66b4.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-2WRNZHGVQT"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-2WRNZHGVQT");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8264273508355034" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/en"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/en">Home</a></li><li class=""><a href="/en/about">About</a></li><li class=""><a href="/en/download">Downloads</a></li><li class="active"><a href="/en/docs">Docs</a></li><li class=""><a href="/en/get-involved">Get Involved</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">Security</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class=""><a href="/en/blog">News</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/domain-postmortem">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/domain-postmortem">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/domain-postmortem">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/domain-postmortem">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/domain-postmortem">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/domain-postmortem">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/domain-postmortem">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/domain-postmortem">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/domain-postmortem">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/domain-postmortem">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/domain-postmortem">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/domain-postmortem">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/domain-postmortem">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/domain-postmortem">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/domain-postmortem">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/domain-postmortem">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/domain-postmortem">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/domain-postmortem">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/en/docs">Docs</a></li><li class=""><a href="/en/docs/es6">ES6 and beyond</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/en/docs/guides">Guides</a></li><li class=""><a href="/en/docs/meta/topics/dependencies">Dependencies</a></li></ul></nav><article dir="auto"><h1 id="domain-module-postmortem">Domain Module Postmortem<a id="header-domain-module-postmortem" class="anchor" href="#domain-module-postmortem" aria-labelledby="domain-module-postmortem"></a></h1>
+<h2 id="usability-issues">Usability Issues<a id="header-usability-issues" class="anchor" href="#usability-issues" aria-labelledby="usability-issues"></a></h2>
+<h3 id="implicit-behavior">Implicit Behavior<a id="header-implicit-behavior" class="anchor" href="#implicit-behavior" aria-labelledby="implicit-behavior"></a></h3>
+<p>It&#x27;s possible for a developer to create a new domain and then simply run
+<code>domain.enter()</code>. Which then acts as a catch-all for any exception in the
+future that couldn&#x27;t be observed by the thrower. Allowing a module author to
+intercept the exceptions of unrelated code in a different module. Preventing
+the originator of the code from knowing about its own exceptions.</p>
+<p>Here&#x27;s an example of how one indirectly linked modules can affect another:</p>
+<pre><code class="language-js">// module a.js
+const b = require(&#x27;./b&#x27;);
+const c = require(&#x27;./c&#x27;);
+
+// module b.js
+const d = require(&#x27;domain&#x27;).create();
+d.on(&#x27;error&#x27;, () =&gt; {
+  /* silence everything */
+});
+d.enter();
+
+// module c.js
+const dep = require(&#x27;some-dep&#x27;);
+dep.method(); // Uh-oh! This method doesn&#x27;t actually exist.
+</code></pre>
+<p>Since module <code>b</code> enters the domain but never exits any uncaught exception will
+be swallowed. Leaving module <code>c</code> in the dark as to why it didn&#x27;t run the entire
+script. Leaving a potentially partially populated <code>module.exports</code>. Doing this
+is not the same as listening for <code>&#x27;uncaughtException&#x27;</code>. As the latter is
+explicitly meant to globally catch errors. The other issue is that domains are
+processed prior to any <code>&#x27;uncaughtException&#x27;</code> handlers, and prevent them from
+running.</p>
+<p>Another issue is that domains route errors automatically if no <code>&#x27;error&#x27;</code>
+handler was set on the event emitter. There is no opt-in mechanism for this,
+and automatically propagates across the entire asynchronous chain. This may
+seem useful at first, but once asynchronous calls are two or more modules deep
+and one of them doesn&#x27;t include an error handler the creator of the domain will
+suddenly be catching unexpected exceptions, and the thrower&#x27;s exception will go
+unnoticed by the author.</p>
+<p>The following is a simple example of how a missing <code>&#x27;error&#x27;</code> handler allows
+the active domain to hijack the error:</p>
+<pre><code class="language-js">const domain = require(&#x27;domain&#x27;);
+const net = require(&#x27;net&#x27;);
+const d = domain.create();
+d.on(&#x27;error&#x27;, (err) =&gt; console.error(err.message));
+
+d.run(() =&gt;
+  net
+    .createServer((c) =&gt; {
+      c.end();
+      c.write(&#x27;bye&#x27;);
+    })
+    .listen(8000)
+);
+</code></pre>
+<p>Even manually removing the connection via <code>d.remove(c)</code> does not prevent the
+connection&#x27;s error from being automatically intercepted.</p>
+<p>Failures that plagues both error routing and exception handling are the
+inconsistencies in how errors are bubbled. The following is an example of how
+nested domains will and won&#x27;t bubble the exception based on when they happen:</p>
+<pre><code class="language-js">const domain = require(&#x27;domain&#x27;);
+const net = require(&#x27;net&#x27;);
+const d = domain.create();
+d.on(&#x27;error&#x27;, () =&gt; console.error(&#x27;d intercepted an error&#x27;));
+
+d.run(() =&gt; {
+  const server = net
+    .createServer((c) =&gt; {
+      const e = domain.create(); // No &#x27;error&#x27; handler being set.
+      e.run(() =&gt; {
+        // This will not be caught by d&#x27;s error handler.
+        setImmediate(() =&gt; {
+          throw new Error(&#x27;thrown from setImmediate&#x27;);
+        });
+        // Though this one will bubble to d&#x27;s error handler.
+        throw new Error(&#x27;immediately thrown&#x27;);
+      });
+    })
+    .listen(8080);
+});
+</code></pre>
+<p>It may be expected that nested domains always remain nested, and will always
+propagate the exception up the domain stack. Or that exceptions will never
+automatically bubble. Unfortunately both these situations occur, leading to
+potentially confusing behavior that may even be prone to difficult to debug
+timing conflicts.</p>
+<h3 id="api-gaps">API Gaps<a id="header-api-gaps" class="anchor" href="#api-gaps" aria-labelledby="api-gaps"></a></h3>
+<p>While APIs based on using <code>EventEmitter</code> can use <code>bind()</code> and errback style
+callbacks can use <code>intercept()</code>, alternative APIs that implicitly bind to the
+active domain must be executed inside of <code>run()</code>. Meaning if module authors
+wanted to support domains using a mechanism alternative to those mentioned they
+must manually implement domain support themselves. Instead of being able to
+leverage the implicit mechanisms already in place.</p>
+<h3 id="error-propagation">Error Propagation<a id="header-error-propagation" class="anchor" href="#error-propagation" aria-labelledby="error-propagation"></a></h3>
+<p>Propagating errors across nested domains is not straight forward, if even
+possible. Existing documentation shows a simple example of how to <code>close()</code> an
+<code>http</code> server if there is an error in the request handler. What it does not
+explain is how to close the server if the request handler creates another
+domain instance for another async request. Using the following as a simple
+example of the failing of error propagation:</p>
+<pre><code class="language-js">const d1 = domain.create();
+d1.foo = true; // custom member to make more visible in console
+d1.on(&#x27;error&#x27;, (er) =&gt; {
+  /* handle error */
+});
+
+d1.run(() =&gt;
+  setTimeout(() =&gt; {
+    const d2 = domain.create();
+    d2.bar = 43;
+    d2.on(&#x27;error&#x27;, (er) =&gt; console.error(er.message, domain._stack));
+    d2.run(() =&gt; {
+      setTimeout(() =&gt; {
+        setTimeout(() =&gt; {
+          throw new Error(&#x27;outer&#x27;);
+        });
+        throw new Error(&#x27;inner&#x27;);
+      });
+    });
+  })
+);
+</code></pre>
+<p>Even in the case that the domain instances are being used for local storage so
+access to resources are made available there is still no way to allow the error
+to continue propagating from <code>d2</code> back to <code>d1</code>. Quick inspection may tell us
+that simply throwing from <code>d2</code>&#x27;s domain <code>&#x27;error&#x27;</code> handler would allow <code>d1</code> to
+then catch the exception and execute its own error handler. Though that is not
+the case. Upon inspection of <code>domain._stack</code> you&#x27;ll see that the stack only
+contains <code>d2</code>.</p>
+<p>This may be considered a failing of the API, but even if it did operate in this
+way there is still the issue of transmitting the fact that a branch in the
+asynchronous execution has failed, and that all further operations in that
+branch must cease. In the example of the http request handler, if we fire off
+several asynchronous requests and each one then <code>write()</code>&#x27;s data back to the
+client many more errors will arise from attempting to <code>write()</code> to a closed
+handle. More on this in <em>Resource Cleanup on Exception</em>.</p>
+<h3 id="resource-cleanup-on-exception">Resource Cleanup on Exception<a id="header-resource-cleanup-on-exception" class="anchor" href="#resource-cleanup-on-exception" aria-labelledby="resource-cleanup-on-exception"></a></h3>
+<p>The following script contains a more complex example of properly cleaning up
+in a small resource dependency tree in the case that an exception occurs in a
+given connection or any of its dependencies. Breaking down the script into its
+basic operations:</p>
+<pre><code class="language-js">&#x27;use strict&#x27;;
+
+const domain = require(&#x27;domain&#x27;);
+const EventEmitter = require(&#x27;events&#x27;);
+const fs = require(&#x27;fs&#x27;);
+const net = require(&#x27;net&#x27;);
+const print = process._rawDebug;
+
+const pipeList = [];
+const FILENAME = &#x27;/tmp/tmp.tmp&#x27;;
+const PIPENAME = &#x27;/tmp/node-domain-example-&#x27;;
+const FILESIZE = 1024;
+let uid = 0;
+
+// Setting up temporary resources
+const buf = Buffer.alloc(FILESIZE);
+for (let i = 0; i &lt; buf.length; i++) buf[i] = ((Math.random() * 1e3) % 78) + 48; // Basic ASCII
+fs.writeFileSync(FILENAME, buf);
+
+class ConnectionResource extends EventEmitter {
+  constructor(c) {
+    super();
+
+    this._connection = c;
+    this._alive = true;
+    this._domain = domain.create();
+    this._id = Math.random().toString(32).substr(2).substr(0, 8) + ++uid;
+
+    this._domain.add(c);
+    this._domain.on(&#x27;error&#x27;, () =&gt; {
+      this._alive = false;
+    });
+  }
+
+  end(chunk) {
+    this._alive = false;
+    this._connection.end(chunk);
+    this.emit(&#x27;end&#x27;);
+  }
+
+  isAlive() {
+    return this._alive;
+  }
+
+  id() {
+    return this._id;
+  }
+
+  write(chunk) {
+    this.emit(&#x27;data&#x27;, chunk);
+    return this._connection.write(chunk);
+  }
+}
+
+// Example begin
+net
+  .createServer((c) =&gt; {
+    const cr = new ConnectionResource(c);
+
+    const d1 = domain.create();
+    fs.open(
+      FILENAME,
+      &#x27;r&#x27;,
+      d1.intercept((fd) =&gt; {
+        streamInParts(fd, cr, 0);
+      })
+    );
+
+    pipeData(cr);
+
+    c.on(&#x27;close&#x27;, () =&gt; cr.end());
+  })
+  .listen(8080);
+
+function streamInParts(fd, cr, pos) {
+  const d2 = domain.create();
+  const alive = true;
+  d2.on(&#x27;error&#x27;, (er) =&gt; {
+    print(&#x27;d2 error:&#x27;, er.message);
+    cr.end();
+  });
+  fs.read(
+    fd,
+    Buffer.alloc(10),
+    0,
+    10,
+    pos,
+    d2.intercept((bRead, buf) =&gt; {
+      if (!cr.isAlive()) {
+        return fs.close(fd);
+      }
+      if (cr._connection.bytesWritten &lt; FILESIZE) {
+        // Documentation says callback is optional, but doesn&#x27;t mention that if
+        // the write fails an exception will be thrown.
+        const goodtogo = cr.write(buf);
+        if (goodtogo) {
+          setTimeout(() =&gt; streamInParts(fd, cr, pos + bRead), 1000);
+        } else {
+          cr._connection.once(&#x27;drain&#x27;, () =&gt;
+            streamInParts(fd, cr, pos + bRead)
+          );
+        }
+        return;
+      }
+      cr.end(buf);
+      fs.close(fd);
+    })
+  );
+}
+
+function pipeData(cr) {
+  const pname = PIPENAME + cr.id();
+  const ps = net.createServer();
+  const d3 = domain.create();
+  const connectionList = [];
+  d3.on(&#x27;error&#x27;, (er) =&gt; {
+    print(&#x27;d3 error:&#x27;, er.message);
+    cr.end();
+  });
+  d3.add(ps);
+  ps.on(&#x27;connection&#x27;, (conn) =&gt; {
+    connectionList.push(conn);
+    conn.on(&#x27;data&#x27;, () =&gt; {}); // don&#x27;t care about incoming data.
+    conn.on(&#x27;close&#x27;, () =&gt; {
+      connectionList.splice(connectionList.indexOf(conn), 1);
+    });
+  });
+  cr.on(&#x27;data&#x27;, (chunk) =&gt; {
+    for (let i = 0; i &lt; connectionList.length; i++) {
+      connectionList[i].write(chunk);
+    }
+  });
+  cr.on(&#x27;end&#x27;, () =&gt; {
+    for (let i = 0; i &lt; connectionList.length; i++) {
+      connectionList[i].end();
+    }
+    ps.close();
+  });
+  pipeList.push(pname);
+  ps.listen(pname);
+}
+
+process.on(&#x27;SIGINT&#x27;, () =&gt; process.exit());
+process.on(&#x27;exit&#x27;, () =&gt; {
+  try {
+    for (let i = 0; i &lt; pipeList.length; i++) {
+      fs.unlinkSync(pipeList[i]);
+    }
+    fs.unlinkSync(FILENAME);
+  } catch (e) {}
+});
+</code></pre>
+<ul>
+<li>When a new connection happens, concurrently:<!-- -->
+<ul>
+<li>Open a file on the file system</li>
+<li>Open Pipe to unique socket</li>
+</ul>
+</li>
+<li>Read a chunk of the file asynchronously</li>
+<li>Write chunk to both the TCP connection and any listening sockets</li>
+<li>If any of these resources error, notify all other attached resources that
+they need to clean up and shutdown</li>
+</ul>
+<p>As we can see from this example a lot more must be done to properly clean up
+resources when something fails than what can be done strictly through the
+domain API. All that domains offer is an exception aggregation mechanism. Even
+the potentially useful ability to propagate data with the domain is easily
+countered, in this example, by passing the needed resources as a function
+argument.</p>
+<p>One problem domains perpetuated was the supposed simplicity of being able to
+continue execution, contrary to what the documentation stated, of the
+application despite an unexpected exception. This example demonstrates the
+fallacy behind that idea.</p>
+<p>Attempting proper resource cleanup on unexpected exception becomes more complex
+as the application itself grows in complexity. This example only has 3 basic
+resources in play, and all of them with a clear dependency path. If an
+application uses something like shared resources or resource reuse the ability
+to cleanup, and properly test that cleanup has been done, grows greatly.</p>
+<p>In the end, in terms of handling errors, domains aren&#x27;t much more than a
+glorified <code>&#x27;uncaughtException&#x27;</code> handler. Except with more implicit and
+unobservable behavior by third-parties.</p>
+<h3 id="resource-propagation">Resource Propagation<a id="header-resource-propagation" class="anchor" href="#resource-propagation" aria-labelledby="resource-propagation"></a></h3>
+<p>Another use case for domains was to use it to propagate data along asynchronous
+data paths. One problematic point is the ambiguity of when to expect the
+correct domain when there are multiple in the stack (which must be assumed if
+the async stack works with other modules). Also the conflict between being
+able to depend on a domain for error handling while also having it available to
+retrieve the necessary data.</p>
+<p>The following is a involved example demonstrating the failing using domains to
+propagate data along asynchronous stacks:</p>
+<pre><code class="language-js">const domain = require(&#x27;domain&#x27;);
+const net = require(&#x27;net&#x27;);
+
+const server = net
+  .createServer((c) =&gt; {
+    // Use a domain to propagate data across events within the
+    // connection so that we don&#x27;t have to pass arguments
+    // everywhere.
+    const d = domain.create();
+    d.data = { connection: c };
+    d.add(c);
+    // Mock class that does some useless async data transformation
+    // for demonstration purposes.
+    const ds = new DataStream(dataTransformed);
+    c.on(&#x27;data&#x27;, (chunk) =&gt; ds.data(chunk));
+  })
+  .listen(8080, () =&gt; console.log(&#x27;listening on 8080&#x27;));
+
+function dataTransformed(chunk) {
+  // FAIL! Because the DataStream instance also created a
+  // domain we have now lost the active domain we had
+  // hoped to use.
+  domain.active.data.connection.write(chunk);
+}
+
+class DataStream {
+  constructor(cb) {
+    this.cb = cb;
+    // DataStream wants to use domains for data propagation too!
+    // Unfortunately this will conflict with any domain that
+    // already exists.
+    this.domain = domain.create();
+    this.domain.data = { inst: this };
+  }
+
+  data(chunk) {
+    // This code is self contained, but pretend it&#x27;s a complex
+    // operation that crosses at least one other module. So
+    // passing along &quot;this&quot;, etc., is not easy.
+    this.domain.run(() =&gt; {
+      // Simulate an async operation that does the data transform.
+      setImmediate(() =&gt; {
+        for (let i = 0; i &lt; chunk.length; i++)
+          chunk[i] = ((chunk[i] + Math.random() * 100) % 96) + 33;
+        // Grab the instance from the active domain and use that
+        // to call the user&#x27;s callback.
+        const self = domain.active.data.inst;
+        self.cb(chunk);
+      });
+    });
+  }
+}
+</code></pre>
+<p>The above shows that it is difficult to have more than one asynchronous API
+attempt to use domains to propagate data. This example could possibly be fixed
+by assigning <code>parent: domain.active</code> in the <code>DataStream</code> constructor. Then
+restoring it via <code>domain.active = domain.active.data.parent</code> just before the
+user&#x27;s callback is called. Also the instantiation of <code>DataStream</code> in the
+<code>&#x27;connection&#x27;</code> callback must be run inside <code>d.run()</code>, instead of simply using
+<code>d.add(c)</code>, otherwise there will be no active domain.</p>
+<p>In short, for this to have a prayer of a chance usage would need to strictly
+adhere to a set of guidelines that would be difficult to enforce or test.</p>
+<h2 id="performance-issues">Performance Issues<a id="header-performance-issues" class="anchor" href="#performance-issues" aria-labelledby="performance-issues"></a></h2>
+<p>A significant deterrent from using domains is the overhead. Using node&#x27;s
+built-in http benchmark, <code>http_simple.js</code>, without domains it can handle over
+22,000 requests/second. Whereas if it&#x27;s run with <code>NODE_USE_DOMAINS=1</code> that
+number drops down to under 17,000 requests/second. In this case there is only
+a single global domain. If we edit the benchmark so the http request callback
+creates a new domain instance performance drops further to 15,000
+requests/second.</p>
+<p>While this probably wouldn&#x27;t affect a server only serving a few hundred or even
+a thousand requests per second, the amount of overhead is directly proportional
+to the number of asynchronous requests made. So if a single connection needs to
+connect to several other services all of those will contribute to the overall
+latency of delivering the final product to the client.</p>
+<p>Using <code>AsyncWrap</code> and tracking the number of times
+<code>init</code>/<code>pre</code>/<code>post</code>/<code>destroy</code> are called in the mentioned benchmark we find
+that the sum of all events called is over 170,000 times per second. This means
+even adding 1 microsecond overhead per call for any type of setup or tear down
+will result in a 17% performance loss. Granted, this is for the optimized
+scenario of the benchmark, but I believe this demonstrates the necessity for a
+mechanism such as domain to be as cheap to run as possible.</p>
+<h2 id="looking-ahead">Looking Ahead<a id="header-looking-ahead" class="anchor" href="#looking-ahead" aria-labelledby="looking-ahead"></a></h2>
+<p>The domain module has been soft deprecated since Dec 2014, but has not yet been
+removed because node offers no alternative functionality at the moment. As of
+this writing there is ongoing work building out the <code>AsyncWrap</code> API and a
+proposal for Zones being prepared for the TC39. At such time there is suitable
+functionality to replace domains it will undergo the full deprecation cycle and
+eventually be removed from core.</p></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->Scroll to top</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"en","localName":"English","name":"English","langDir":"ltr","dateFormat":"MM.DD.YYYY","hrefLang":"en-US","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"Scroll to top","components.header.links.home":"Home","components.header.links.about":"About","components.header.links.download":"Downloads","components.header.links.docs":"Docs","components.header.links.getInvolved":"Get Involved","components.header.links.security":"Security","components.header.links.certification":"Certification","components.header.links.blog":"News","components.navigation.about.links.governance":"Governance","components.navigation.docs.links.es6":"ES6 and beyond","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"Guides","components.navigation.docs.links.dependencies":"Dependencies","components.navigation.getInvolved.links.collabSummit":"Collab Summit","components.navigation.getInvolved.links.contribute":"Contribute","components.navigation.getInvolved.links.codeOfConduct":"Code of Conduct","components.downloadList.links.previousReleases":"Previous Releases","components.downloadList.links.packageManager":"Installing Node.js via package manager","components.downloadList.links.shaSums":"Signed SHASUMS for release files","components.downloadList.links.shaSums.howToVerify":" (How to verify)","components.downloadList.links.allDownloads":"All download options","components.downloadList.links.nightlyReleases":"Nightly builds","components.downloadList.links.unofficialBuilds":"Unofficial builds","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Installing Node.js via binary archive","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"Changelog","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"Docs","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"Newer | ","components.pagination.previous":"Older","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/en/docs/guides/domain-postmortem","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

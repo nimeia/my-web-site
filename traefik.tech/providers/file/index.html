@@ -1,0 +1,1767 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Traefik 文档，traefik 是一个负载均衡器，可以对后端服务进行反向代理，同时支持服务自动发现">
+      
+      
+        <link rel="canonical" href="https://www.traefik.tech/docs/providers/file/">
+      
+      
+        <meta name="author" content="containo.us">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/img/traefik.icon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.1">
+    
+    
+      
+        <title>File - Traefik 中文网 - 最新中文文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#00bcd4">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../assets/styles/extra.css">
+    
+      <link rel="stylesheet" href="../../assets/styles/atom-one-light.css"><script async src="https://www.googletagmanager.com/gtag/js?id=G-ZP0D43CZ94"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-ZP0D43CZ94");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4861113683111015" crossorigin="anonymous"></script></head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="cyan" data-md-color-accent="cyan">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#traefik-file" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://www.traefik.tech/docs/" title="Traefik 中文网 - 最新中文文档" class="md-header-nav__button md-logo">
+          
+            <img src="../../assets/img/traefik.logo.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Traefik 中文网 - 最新中文文档
+            </span>
+            <span class="md-header-nav__topic">
+              
+                File
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/containous/traefik/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://www.traefik.tech/docs/" title="Traefik 中文网 - 最新中文文档" class="md-nav__button md-logo">
+      
+        <img src="../../assets/img/traefik.logo.png" width="48" height="48">
+      
+    </a>
+    Traefik 中文网 - 最新中文文档
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/containous/traefik/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="欢迎" class="md-nav__link">
+      欢迎
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      入门
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        入门
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../getting-started/concepts/" title="概念" class="md-nav__link">
+      概念
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../getting-started/quick-start/" title="快速开始" class="md-nav__link">
+      快速开始
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../getting-started/configuration-overview/" title="配置简介" class="md-nav__link">
+      配置简介
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../getting-started/install-traefik/" title="安装Traefik" class="md-nav__link">
+      安装Traefik
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      配置发现
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        配置发现
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../overview/" title="概述" class="md-nav__link">
+      概述
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../docker/" title="Docker" class="md-nav__link">
+      Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../kubernetes-crd/" title="Kubernetes IngressRoute" class="md-nav__link">
+      Kubernetes IngressRoute
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../kubernetes-ingress/" title="Kubernetes Ingress" class="md-nav__link">
+      Kubernetes Ingress
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../rancher/" title="Rancher" class="md-nav__link">
+      Rancher
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        File
+      </label>
+    
+    <a href="./" title="File" class="md-nav__link md-nav__link--active">
+      File
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="配置示例" class="md-nav__link">
+    配置示例
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="提供者配置选项" class="md-nav__link">
+    提供者配置选项
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filename" title="filename" class="md-nav__link">
+    filename
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directory" title="directory" class="md-nav__link">
+    directory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#watch" title="watch" class="md-nav__link">
+    watch
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="模板" class="md-nav__link">
+    模板
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../marathon/" title="Marathon" class="md-nav__link">
+      Marathon
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      路由和负载平衡
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        路由和负载平衡
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../routing/overview/" title="概述" class="md-nav__link">
+      概述
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../routing/entrypoints/" title="入口-Entrypoints" class="md-nav__link">
+      入口-Entrypoints
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../routing/routers/" title="路由-Routers" class="md-nav__link">
+      路由-Routers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../routing/services/" title="服务-Services" class="md-nav__link">
+      服务-Services
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      HTTPS & TLS
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        HTTPS & TLS
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../https/overview/" title="概述" class="md-nav__link">
+      概述
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../https/tls/" title="TLS" class="md-nav__link">
+      TLS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../https/acme/" title="Let`s Encrypt" class="md-nav__link">
+      Let`s Encrypt
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      中间件
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        中间件
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/overview/" title="概述" class="md-nav__link">
+      概述
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/addprefix/" title="路径匹配" class="md-nav__link">
+      路径匹配
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/basicauth/" title="基本验证" class="md-nav__link">
+      基本验证
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/buffering/" title="缓冲" class="md-nav__link">
+      缓冲
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/chain/" title="链路" class="md-nav__link">
+      链路
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/circuitbreaker/" title="断路器-CircuitBreaker" class="md-nav__link">
+      断路器-CircuitBreaker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/compress/" title="压缩-Compress" class="md-nav__link">
+      压缩-Compress
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/digestauth/" title="数据验证-DigestAuth" class="md-nav__link">
+      数据验证-DigestAuth
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/errorpages/" title="错误处理" class="md-nav__link">
+      错误处理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/forwardauth/" title="委派验证" class="md-nav__link">
+      委派验证
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/headers/" title="http头-Headers" class="md-nav__link">
+      http头-Headers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/ipwhitelist/" title="IP白名单" class="md-nav__link">
+      IP白名单
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/maxconnection/" title="最大连接数" class="md-nav__link">
+      最大连接数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/passtlsclientcert/" title="安全证书" class="md-nav__link">
+      安全证书
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/ratelimit/" title="频率控制" class="md-nav__link">
+      频率控制
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/redirectregex/" title="重定向" class="md-nav__link">
+      重定向
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/redirectscheme/" title="协议重定向" class="md-nav__link">
+      协议重定向
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/replacepath/" title="路径替换" class="md-nav__link">
+      路径替换
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/replacepathregex/" title="前缀正则替换" class="md-nav__link">
+      前缀正则替换
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/retry/" title="重试" class="md-nav__link">
+      重试
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/stripprefix/" title="严格前缀匹配" class="md-nav__link">
+      严格前缀匹配
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middlewares/stripprefixregex/" title="严格前缀正则匹配" class="md-nav__link">
+      严格前缀正则匹配
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      管理介绍
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        管理介绍
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operations/cli/" title="命令行" class="md-nav__link">
+      命令行
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operations/dashboard/" title="web控制台" class="md-nav__link">
+      web控制台
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operations/api/" title="接口-API" class="md-nav__link">
+      接口-API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operations/ping/" title="Ping检查" class="md-nav__link">
+      Ping检查
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      监控功能
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        监控功能
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/logs/" title="服务日志" class="md-nav__link">
+      服务日志
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/access-logs/" title="访问" class="md-nav__link">
+      访问
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-3" type="checkbox" id="nav-8-3">
+    
+    <label class="md-nav__link" for="nav-8-3">
+      度量
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-3">
+        度量
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/metrics/overview/" title="概述" class="md-nav__link">
+      概述
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/metrics/datadog/" title="DataDog" class="md-nav__link">
+      DataDog
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/metrics/influxdb/" title="InfluxDB" class="md-nav__link">
+      InfluxDB
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/metrics/prometheus/" title="Prometheus" class="md-nav__link">
+      Prometheus
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/metrics/statsd/" title="StatsD" class="md-nav__link">
+      StatsD
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-4" type="checkbox" id="nav-8-4">
+    
+    <label class="md-nav__link" for="nav-8-4">
+      链路跟踪
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-4">
+        链路跟踪
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/tracing/overview/" title="概述" class="md-nav__link">
+      概述
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/tracing/jaeger/" title="Jaeger" class="md-nav__link">
+      Jaeger
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/tracing/zipkin/" title="Zipkin" class="md-nav__link">
+      Zipkin
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/tracing/datadog/" title="DataDog" class="md-nav__link">
+      DataDog
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/tracing/instana/" title="Instana" class="md-nav__link">
+      Instana
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../observability/tracing/haystack/" title="Haystack" class="md-nav__link">
+      Haystack
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      用户指南
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        用户指南
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guides/crd-acme/" title="Kubernetes and Let's Encrypt" class="md-nav__link">
+      Kubernetes and Let's Encrypt
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guides/grpc/" title="gRPC 例子" class="md-nav__link">
+      gRPC 例子
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guides/marathon/" title="Marathon" class="md-nav__link">
+      Marathon
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4" type="checkbox" id="nav-9-4">
+    
+    <label class="md-nav__link" for="nav-9-4">
+      Docker
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-9-4">
+        Docker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guides/docker-compose/basic-example/" title="基本例子" class="md-nav__link">
+      基本例子
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4-2" type="checkbox" id="nav-9-4-2">
+    
+    <label class="md-nav__link" for="nav-9-4-2">
+      HTTPS with Let's Encrypt
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-9-4-2">
+        HTTPS with Let's Encrypt
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guides/docker-compose/acme-tls/" title="TLS" class="md-nav__link">
+      TLS 
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guides/docker-compose/acme-http/" title="HTTP" class="md-nav__link">
+      HTTP 
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guides/docker-compose/acme-dns/" title="DNS" class="md-nav__link">
+      DNS 
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="配置示例" class="md-nav__link">
+    配置示例
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="提供者配置选项" class="md-nav__link">
+    提供者配置选项
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filename" title="filename" class="md-nav__link">
+    filename
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directory" title="directory" class="md-nav__link">
+    directory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#watch" title="watch" class="md-nav__link">
+    watch
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="模板" class="md-nav__link">
+    模板
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/containous/traefik/edit/master/docs/providers/file.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="traefik-file">Traefik &amp; File<a class="headerlink" href="#traefik-file" title="Permanent link">&para;</a></h1>
+<p class="subtitle">旧配置文件</p>
+<p>文件提供程序允许您在 TOML 或 YAML 文件中定义<a href="../overview/">动态配置</a>。您可以编写以下配置元素：</p>
+<ul>
+<li>在 <a href="#filename">专用文件中</a></li>
+<li>在 <a href="#directory">几个专用文件中</a></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+</div>
+<p>文件提供程序是整个文档中使用的默认格式，用于显示许多功能的配置示例。</p>
+<div class="admonition tip">
+<p class="admonition-title">提示</p>
+</div>
+<p>文件提供程序可以是您希望从其他提供程序重用的常用元素的良好位置; 例如，声明白名单中间件，基本身份验证，......</p>
+<h2 id="_1">配置示例<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<details class="example"><summary>声明路由器，中间件和服务</summary><p>启用文件提供程序：</p>
+<div class="superfences-tabs">
+<input name="__tabs_1" type="radio" id="__tab_1_0" checked="checked" />
+<label for="__tab_1_0">File (TOML)</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-toml">[providers.file]
+  filename = "/my/path/to/dynamic-conf.toml"</code></pre></div>
+<input name="__tabs_1" type="radio" id="__tab_1_1" />
+<label for="__tab_1_1">File (YAML)</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-yaml">providers:
+  file:
+    filename: "/my/path/to/dynamic-conf.yml"</code></pre></div>
+<input name="__tabs_1" type="radio" id="__tab_1_2" />
+<label for="__tab_1_2">CLI</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-bash">--providers.file.filename=/my/path/to/dynamic_conf.toml</code></pre></div>
+</div>
+<p>声明路由器，中间件和服务：</p>
+<div class="superfences-tabs">
+<input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked" />
+<label for="__tab_2_0">TOML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-toml">[http]
+  # Add the router
+  [http.routers]
+    [http.routers.router0]
+      entryPoints = ["web"]
+      middlewares = ["my-basic-auth"]
+      service = "service-foo"
+      rule = "Path(`foo`)"
+
+    # Add the middleware
+    [http.middlewares]
+      [http.middlewares.my-basic-auth.basicAuth]
+        users = ["test:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/",
+                  "test2:$apr1$d9hr9HBB$4HxwgUir3HP4EsggP/QNo0"]
+        usersFile = "etc/traefik/.htpasswd"
+
+    # Add the service
+    [http.services]
+      [http.services.service-foo]
+        [http.services.service-foo.loadBalancer]
+          [[http.services.service-foo.loadBalancer.servers]]
+            url = "http://foo/"
+          [[http.services.service-foo.loadBalancer.servers]]
+            url = "http://bar/"</code></pre></div>
+<input name="__tabs_2" type="radio" id="__tab_2_1" />
+<label for="__tab_2_1">YAML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-yaml">http:
+  # Add the router
+  routers:
+    router0:
+      entryPoints:
+      - web
+      middlewares:
+      - my-basic-auth
+      service: service-foo
+      rule: Path(`foo`)
+
+  # Add the middleware
+  middlewares:
+    my-basic-auth:
+      basicAuth:
+        users:
+        - test:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/
+        - test2:$apr1$d9hr9HBB$4HxwgUir3HP4EsggP/QNo0
+        usersFile: etc/traefik/.htpasswd
+
+  # Add the service
+  services:
+    service-foo:
+      loadBalancer:
+        servers:
+        - url: http://foo/
+        - url: http://bar/
+        passHostHeader: false</code></pre></div>
+</div>
+</details>
+<h2 id="_2">提供者配置选项<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">浏览参考</p>
+</div>
+<p>如果你赶时间，也许你宁愿通过<a href="../../reference/static-configuration/overview/">静态</a>和<a href="../../reference/dynamic-configuration/file/">动态配置</a>参考。</p>
+<h3 id="filename"><code>filename</code><a class="headerlink" href="#filename" title="Permanent link">&para;</a></h3>
+<p><em>Optional</em></p>
+<p>定义配置文件的路径。</p>
+<div class="superfences-tabs">
+<input name="__tabs_3" type="radio" id="__tab_3_0" checked="checked" />
+<label for="__tab_3_0">File (TOML)</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-toml">[providers]
+  [providers.file]
+    filename = "dynamic_conf.toml"</code></pre></div>
+<input name="__tabs_3" type="radio" id="__tab_3_1" />
+<label for="__tab_3_1">File (YAML)</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-yaml">providers:
+  file:
+    filename: dynamic_conf.yml</code></pre></div>
+<input name="__tabs_3" type="radio" id="__tab_3_2" />
+<label for="__tab_3_2">CLI</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-bash">--providers.file.filename=dynamic_conf.toml</code></pre></div>
+</div>
+<h3 id="directory"><code>directory</code><a class="headerlink" href="#directory" title="Permanent link">&para;</a></h3>
+<p><em>Optional</em></p>
+<p>定义包含配置文件的目录。</p>
+<div class="superfences-tabs">
+<input name="__tabs_4" type="radio" id="__tab_4_0" checked="checked" />
+<label for="__tab_4_0">File (TOML)</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-toml">[providers]
+  [providers.file]
+    directory = "/path/to/config"</code></pre></div>
+<input name="__tabs_4" type="radio" id="__tab_4_1" />
+<label for="__tab_4_1">File (YAML)</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-yaml">providers:
+  file:
+    directory: /path/to/config</code></pre></div>
+<input name="__tabs_4" type="radio" id="__tab_4_2" />
+<label for="__tab_4_2">CLI</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-bash">--providers.file.directory=/path/to/config</code></pre></div>
+</div>
+<h3 id="watch"><code>watch</code><a class="headerlink" href="#watch" title="Permanent link">&para;</a></h3>
+<p><em>Optional</em></p>
+<p>将<code>watch</code>选项设置<code>true</code>为允许<code>Traefik</code>自动监视文件更改。
+它适用于<code>filename</code>和<code>directory</code>选项。</p>
+<div class="superfences-tabs">
+<input name="__tabs_5" type="radio" id="__tab_5_0" checked="checked" />
+<label for="__tab_5_0">File (TOML)</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-toml">[providers]
+  [providers.file]
+    filename = "dynamic_conf.toml"
+    watch = true</code></pre></div>
+<input name="__tabs_5" type="radio" id="__tab_5_1" />
+<label for="__tab_5_1">File (YAML)</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-yaml">providers:
+  file:
+    filename: dynamic_conf.yml
+    watch: true</code></pre></div>
+<input name="__tabs_5" type="radio" id="__tab_5_2" />
+<label for="__tab_5_2">CLI</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-bash">--providers.file.filename=dynamic_conf.toml
+--providers.file.watch=true</code></pre></div>
+</div>
+<h3 id="_3">模板<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+</div>
+<p>Go Templating 仅适用于专用配置文件。模板在 Traefik 主配置文件中不起作用。</p>
+<p>Traefik 允许使用 Go 模板。
+因此，可以轻松定义许多路由器，服务和 TLS 证书，如文件中所述<code>template-rules.toml</code>：</p>
+<details class="example"><summary>使用模板配置</summary><div class="superfences-tabs">
+<input name="__tabs_6" type="radio" id="__tab_6_0" checked="checked" />
+<label for="__tab_6_0">TOML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-toml"># template-rules.toml
+[http]
+
+  [http.routers]
+  {{ range $i, $e := until 100 }}
+    [http.routers.router{{ $e }}]
+    # ...
+  {{ end }}  
+
+
+  [http.services]
+  {{ range $i, $e := until 100 }}
+      [http.services.service{{ $e }}]
+      # ...
+  {{ end }}  
+
+[tcp]
+
+  [tcp.routers]
+  {{ range $i, $e := until 100 }}
+    [tcp.routers.router{{ $e }}]
+    # ...
+  {{ end }}  
+
+
+  [tcp.services]
+  {{ range $i, $e := until 100 }}
+      [http.services.service{{ $e }}]
+      # ...
+  {{ end }}  
+
+{{ range $i, $e := until 10 }}
+[[tls.certificates]]
+  certFile = "/etc/traefik/cert-{{ $e }}.pem"
+  keyFile = "/etc/traefik/cert-{{ $e }}.key"
+  store = ["my-store-foo-{{ $e }}", "my-store-bar-{{ $e }}"]
+{{ end }}
+
+[tls.config]
+{{ range $i, $e := until 10 }}
+  [tls.config.TLS{{ $e }}]
+  # ...
+{{ end }}</code></pre></div>
+<input name="__tabs_6" type="radio" id="__tab_6_1" />
+<label for="__tab_6_1">YAML</label>
+<div class="superfences-content"><pre class="highlight"><code class="language-yaml">http:
+
+{{range $i, $e := until 100 }}
+  routers:
+    router{{ $e }:
+      # ...
+{{end}}
+
+{{range $i, $e := until 100 }}
+  services:
+    application{{ $e }}:
+      # ...
+{{end}}
+
+tcp:
+
+{{range $i, $e := until 100 }}
+  routers:
+    router{{ $e }:
+      # ...
+{{end}}
+
+{{range $i, $e := until 100 }}
+  services:
+    service{{ $e }}:
+      # ...
+{{end}}
+
+{{ range $i, $e := until 10 }}
+tls:
+  certificates:
+  - certFile: "/etc/traefik/cert-{{ $e }}.pem"
+    keyFile: "/etc/traefik/cert-{{ $e }}.key"
+    store:
+    - "my-store-foo-{{ $e }}"
+    - "my-store-bar-{{ $e }}"
+{{end}}</code></pre></div>
+</div>
+</details>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+
+
+
+<!-- Application footer -->
+<footer class="md-footer">
+
+    <!-- Further information -->
+    <div class="md-footer-meta md-typeset">
+        <div class="md-footer-meta__inner md-grid">
+
+            <!-- Copyright and theme information -->
+            <div class="md-footer-copyright">
+                
+                <div class="md-footer-copyright__highlight">
+                    Copyright &copy; 2016-2019 Containous
+                </div>
+                
+                powered by
+                <a href="https://www.mkdocs.org" title="MkDocs">MkDocs</a>
+                and
+                <a href="https://squidfunk.github.io/mkdocs-material/"
+                   title="Material for MkDocs">
+                    Material for MkDocs</a>
+            </div>
+
+            <!-- Social links -->
+            
+            
+            
+        </div>
+    </div>
+</footer>
+
+
+    </div>
+    
+      <script src="../../assets/javascripts/application.c648116f.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../assets/js/hljs/highlight.pack.js"></script>
+      
+        <script src="../../assets/js/extra.js"></script>
+      
+    
+  </body>
+</html>

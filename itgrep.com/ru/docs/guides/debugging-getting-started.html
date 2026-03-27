@@ -1,0 +1,136 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Отладка - Начало Работы | Node.js</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Отладка - Начало Работы | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Отладка - Начало Работы | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/ru/docs/guides/debugging-getting-started"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/ru/docs/guides/debugging-getting-started-bb36480734fdb79e.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NDMJQNDPS"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-6NDMJQNDPS");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7950559866369342" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/ru"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/ru">Главная</a></li><li class=""><a href="/ru/about">О проекте</a></li><li class=""><a href="/ru/download">Загрузка</a></li><li class="active"><a href="/ru/docs">Документация</a></li><li class=""><a href="/ru/get-involved">Присоединиться</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">Безопасность</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class=""><a href="/ru/blog">Новости</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/debugging-getting-started">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/debugging-getting-started">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/debugging-getting-started">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/debugging-getting-started">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/debugging-getting-started">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/debugging-getting-started">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/debugging-getting-started">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/debugging-getting-started">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/debugging-getting-started">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/debugging-getting-started">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/debugging-getting-started">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/debugging-getting-started">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/debugging-getting-started">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/debugging-getting-started">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/debugging-getting-started">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/debugging-getting-started">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/debugging-getting-started">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/debugging-getting-started">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/ru/docs">Документация</a></li><li class=""><a href="/ru/docs/es6">ES6 и выше</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/ru/docs/guides">Руководства</a></li><li class=""><a href="/ru/docs/meta/topics/dependencies">Зависимости</a></li></ul></nav><article dir="auto"><h1 id="руководство-по-отладке">Руководство по отладке<a id="header-руководство-по-отладке" class="anchor" href="#руководство-по-отладке" aria-labelledby="руководство-по-отладке"></a></h1>
+<p>Это руководство поможет вам начать отладку ваших приложений и скриптов Node.js.</p>
+<h2 id="enable-inspector">Активация инспектора<a id="header-enable-inspector" class="anchor" href="#enable-inspector" aria-labelledby="enable-inspector"></a></h2>
+<p>При запуске с аргументом <code>--inspect</code> процесс Node.js прослушивает клиент отладки.
+По умолчанию клиент прослушивается на хосте 127.0.0.1 с портом 9229.
+Каждому процессу также назначается уникальный <a href="https://tools.ietf.org/html/rfc4122">UUID</a>.</p>
+<p>Клиенты инспектора должны знать и указывать адрес хоста, порт и UUID для подключения.
+Полный URL будет выглядеть примерно так:
+<code>ws://127.0.0.1:9229/0f2c936f-b1cd-4ac9-aab3-f63b0f33d55e</code>.</p>
+<p>Процесс Node.js также начнет прослушивать сообщения отладки, если он получит
+сигнал <code>SIGUSR1</code>. (<code>SIGUSR1</code> не доступен в среде Windows.) В Node.js версии 7
+и ниже это активирует устаревший Debugger API. В Node.js версии 8 и выше будет
+активирован Inspector API.</p>
+<hr/>
+<h2 id="security-implications">Последствия для безопасности<a id="header-security-implications" class="anchor" href="#security-implications" aria-labelledby="security-implications"></a></h2>
+<p>Так как дебаггер имеет полный доступ к среде выполнения Node.js, злоумышленник,
+способный подключиться к этому порту, сможет выполнить произвольный код от имени
+процесса Node. Поэтому важно понимать последствия для безопасности при обличении
+порта отладчика в публичных и частных сетях.</p>
+<h3 id="exposing-the-debug-port-publicly-is-unsafe">Публичное обличение порта отладки небезопасно<a id="header-exposing-the-debug-port-publicly-is-unsafe" class="anchor" href="#exposing-the-debug-port-publicly-is-unsafe" aria-labelledby="exposing-the-debug-port-publicly-is-unsafe"></a></h3>
+<p>Если отладчик привязан к какому-либо публичному IP-адресу, или к 0.0.0.0, любой клиент,
+способный достичь вашего IP-адреса сможет подключиться к отладчику без каких-либо
+ограничений и сможет запускать произвольный код.</p>
+<p>По умолчанию <code>node --inspect</code> привязывается к 127.0.0.1. Чтобы разрешить внешние подключения,
+вы должны явно предоставить общедоступный IP-адрес или 0.0.0.0 и т.д. Однако это может
+подвергнуть приложение потенциально значительной угрозе его безопасности. Мы предлагаем
+вам обеспечить наличие файрволов и других соответствующих средств контроля доступа для
+того, чтобы предотвратить такую угрозу.</p>
+<p>См. раздел &#x27;<a href="#enabling-remote-debugging-scenarios">Включение сценариев удаленной отладки</a>&#x27;, который
+включает рекомендации о том, как безопасно подключить удаленные клиенты отладчика.</p>
+<h3 id="local-applications-have-full-access-to-the-inspector">Локальные приложения имеют полный доступ к инспектору<a id="header-local-applications-have-full-access-to-the-inspector" class="anchor" href="#local-applications-have-full-access-to-the-inspector" aria-labelledby="local-applications-have-full-access-to-the-inspector"></a></h3>
+<p>Даже если вы привязали порт инспектора к 127.0.0.1 (по умолчанию), любые приложения,
+запущенные локально на вашем компьютере, будут иметь неограниченный доступ.
+Это сделано для того, чтобы локальные отладчики могли легко подключаться.</p>
+<h3 id="browsers-websockets-same-origin-policy">Браузеры, WebSockets, same-origin policy<a id="header-browsers-websockets-same-origin-policy" class="anchor" href="#browsers-websockets-same-origin-policy" aria-labelledby="browsers-websockets-same-origin-policy"></a></h3>
+<p>Веб-сайты, открытые в веб-браузере, могут отправлять запросы WebSocket и HTTP
+в соответствии с моделью безопасности браузера. Начальное HTTP-соединение необходимо
+для получения уникального идентификатора сеанса отладчика. Правило ограничения домена
+(Same Origin Policy) не позволяет веб-сайтам устанавливать это HTTP-соединение.
+Для дополнительной защиты от <a href="https://ru.wikipedia.org/wiki/DNS_rebinding">атак DNS rebinding</a>
+Node.js проверяет, что заголовки &#x27;Host&#x27; для соединения точно указывают IP-адрес,
+localhost или localhost6.</p>
+<p>Эти политики безопасности запрещают подключение к удаленному серверу отладки c
+указанием имени хоста. Вы можете обойти это ограничение, указав либо IP-адрес,
+либо используя ssh-туннели, как описано ниже.</p>
+<h2 id="inspector-clients">Клиенты инспектора<a id="header-inspector-clients" class="anchor" href="#inspector-clients" aria-labelledby="inspector-clients"></a></h2>
+<p>Несколько коммерческих и открытых инструментов могут подключаться к инспектору Node.js.
+Основная информация по ним:</p>
+<h3 id="node-inspect"><a href="https://github.com/nodejs/node-inspect">node-inspect</a><a id="header-node-inspect" class="anchor" href="#node-inspect" aria-labelledby="node-inspect"></a></h3>
+<ul>
+<li>Отладчик CLI, поддерживаемый Фондом Node.js, который использует <a href="https://chromedevtools.github.io/debugger-protocol-viewer/v8/">Протокол Инспектора</a>.</li>
+<li>Соответствующая версия собирается вместе с Node.js,
+можно использовать с помощью команды <code>node inspect myscript.js</code>.</li>
+<li>Последняя версия также может быть установлена независимо (например, <code>npm install -g node-inspect</code>)
+и использоваться через <code>node-inspect myscript.js</code>.</li>
+</ul>
+<h3 id="инструменты-разработчика-chrome-55-microsoft-edge"><a href="https://github.com/ChromeDevTools/devtools-frontend">Инструменты разработчика Chrome</a> 55+, <a href="https://www.microsoftedgeinsider.com">Microsoft Edge</a><a id="header-инструменты-разработчика-chrome-55-microsoft-edge" class="anchor" href="#инструменты-разработчика-chrome-55-microsoft-edge" aria-labelledby="инструменты-разработчика-chrome-55-microsoft-edge"></a></h3>
+<ul>
+<li><strong>Вариант 1</strong>: Откройте <code>chrome://inspect</code> в браузере на основе Chromium
+или <code>edge://inspect</code> в браузере Edge. Нажмите кнопку Configure и убедитесь,
+что нужные вам хост и порт перечислены в списке.</li>
+<li><strong>Вариант 2</strong>: Скопируйте значение <code>devtoolsFrontendUrl</code> из вывода <code>/json/list</code>
+(<code>curl http://localhost:9229/json/list</code>) или текст подсказки --inspect и откройте его в Chrome.</li>
+</ul>
+<h3 id="visual-studio-code-110"><a href="https://github.com/microsoft/vscode">Visual Studio Code</a> 1.10+<a id="header-visual-studio-code-110" class="anchor" href="#visual-studio-code-110" aria-labelledby="visual-studio-code-110"></a></h3>
+<ul>
+<li>На панели &quot;Отладка&quot; (Debug) щелкните значок настроек, чтобы открыть файл <code>.vscode/launch.json</code>.
+Выберите &quot;Node.js&quot; для первоначальной настройки.</li>
+</ul>
+<h3 id="visual-studio-2017"><a href="https://github.com/Microsoft/nodejstools">Visual Studio</a> 2017+<a id="header-visual-studio-2017" class="anchor" href="#visual-studio-2017" aria-labelledby="visual-studio-2017"></a></h3>
+<ul>
+<li>В меню выберите &quot;Debug &gt; Start Debugging&quot; или нажмите <code>F5</code>.</li>
+<li><a href="https://github.com/Microsoft/nodejstools/wiki/Debugging">Детальные инструкции</a>.</li>
+</ul>
+<h3 id="jetbrains-webstorm-20171-и-другие-ide-jetbrains"><a href="https://www.jetbrains.com/webstorm/">JetBrains WebStorm</a> 2017.1+ и другие IDE JetBrains<a id="header-jetbrains-webstorm-20171-и-другие-ide-jetbrains" class="anchor" href="#jetbrains-webstorm-20171-и-другие-ide-jetbrains" aria-labelledby="jetbrains-webstorm-20171-и-другие-ide-jetbrains"></a></h3>
+<ul>
+<li>Создайте новую конфигурацию отладки Node.js и нажмите кнопку &quot;Debug&quot; (<code>Shift+F9</code>). <code>--inspect</code> будет
+использоваться по умолчанию для Node.js 7+. Чтобы отключить, снимите флажок
+<code>js.debugger.node.use.inspect</code> в реестре IDE.</li>
+</ul>
+<h3 id="chrome-remote-interface"><a href="https://github.com/cyrus-and/chrome-remote-interface">chrome-remote-interface</a><a id="header-chrome-remote-interface" class="anchor" href="#chrome-remote-interface" aria-labelledby="chrome-remote-interface"></a></h3>
+<ul>
+<li>Библиотека для облегчения подключения к эндпоинтам Протокола Инспектора.</li>
+</ul>
+<h3 id="gitpod"><a href="https://www.gitpod.io">Gitpod</a><a id="header-gitpod" class="anchor" href="#gitpod" aria-labelledby="gitpod"></a></h3>
+<ul>
+<li>Запустите конфигурацию отладки Node.js из представления <code>Debug</code> или нажмите <code>F5</code>. <a href="https://medium.com/gitpod/debugging-node-js-applications-in-theia-76c94c76f0a1">Детальные инструкции</a></li>
+</ul>
+<h3 id="eclipse-ide-c-расширением-eclipse-wild-web-developer"><a href="https://eclipse.org/eclipseide">Eclipse IDE</a> c расширением Eclipse Wild Web Developer<a id="header-eclipse-ide-c-расширением-eclipse-wild-web-developer" class="anchor" href="#eclipse-ide-c-расширением-eclipse-wild-web-developer" aria-labelledby="eclipse-ide-c-расширением-eclipse-wild-web-developer"></a></h3>
+<ul>
+<li>Открыв файл .js, выберите &quot;Debug As... &gt; Node program&quot;, или</li>
+<li>Создайте конфигурацию отладки, чтобы присоединить отладчик к запущенному приложению Node (уже запущенному с <code>--inspect</code>).</li>
+</ul>
+<hr/>
+<h2 id="command-line-options">Аргументы командной строки<a id="header-command-line-options" class="anchor" href="#command-line-options" aria-labelledby="command-line-options"></a></h2>
+<p>В следующей таблице перечислено влияние различных runtime флагов при отладке:</p>
+<!-- -->
+<hr/>
+<h2 id="enabling-remote-debugging-scenarios">Включение сценариев удаленной отладки<a id="header-enabling-remote-debugging-scenarios" class="anchor" href="#enabling-remote-debugging-scenarios" aria-labelledby="enabling-remote-debugging-scenarios"></a></h2>
+<p>Мы рекомендуем, чтобы отладчик никогда не прослушивал общедоступный IP-адрес.
+Если вам необходимо разрешить удаленные подключения для отладки, мы рекомендуем
+использовать SSH-тунелли. Следующий пример предоставляется только в целях
+иллюстрации возможностей. Вы должны понимать все риски информационной безопасности,
+связанные с предоставлением удаленного доступа к привилегированной службе.</p>
+<p>Допустим вы запускаете на удаленной машине, remote.example.com, приложение Node,
+которое вы хотите отлаживать. На этой машине следует запустить процесс Node
+с инспектором, прослушивающим только localhost (по умолчанию).</p>
+<pre><code class="language-bash">node --inspect server.js
+</code></pre>
+<p>Теперь вы можете настроить ssh-туннель на локальном компьютере, с которого
+вы хотите инициировать подключение клиента отладки.</p>
+<pre><code class="language-bash">ssh -L 9221:localhost:9229 user@remote.example.com
+</code></pre>
+<p>Это запустит сессию ssh, в которой соединение с портом 9221 на вашем локальном
+компьютере будет перенаправлено к порту 9229 на remote.example.com. Теперь вы
+можете подключить к localhost:9221 отладчик, такой как Chrome DevTools или
+Visual Studio Code, у которого будет возможность отладки так, как если бы приложение
+Node.js работало локально.</p>
+<hr/>
+<h2 id="устаревший-debugger">Устаревший Debugger<a id="header-устаревший-debugger" class="anchor" href="#устаревший-debugger" aria-labelledby="устаревший-debugger"></a></h2>
+<p><strong>Debugger API устарело начиная с Node.js версии 7.7.0.
+Вместо него следует использовать Inspector API с флагом --inspect.</strong></p>
+<p>При запуске с флагом <strong>--debug</strong> или <strong>--debug-brk</strong> в версии 7 или ниже,
+Node.js прослушивает команды отладки, определенные протоколом
+отладки V8, на порту TCP (по умолчанию <code>5858</code>). Любой клиент отладки, который
+понимает этот протокол, может подключиться и отладить работающий процесс;
+пара популярных клиентов перечислены ниже.</p>
+<p>Протокол отладки V8 более не поддерживается и не документируется.</p>
+<h3 id="встроенный-отладчикhttpsnodejsorgdistvar-currentversiondocsapidebuggerhtml">[Встроенный отладчик](<a href="https://nodejs.org/dist/%7B#var">https://nodejs.org/dist/{#var</a> currentVersion}/docs/api/debugger.html)<a id="header-встроенный-отладчикhttpsnodejsorgdistvar-currentversiondocsapidebuggerhtml" class="anchor" href="#встроенный-отладчикhttpsnodejsorgdistvar-currentversiondocsapidebuggerhtml" aria-labelledby="встроенный-отладчикhttpsnodejsorgdistvar-currentversiondocsapidebuggerhtml"></a></h3>
+<p>Введите <code>node debug script_name.js</code> для запуска скрипта со встроенным CLI отладчиком.
+Сам скрипт будет запущен с флагом <code>--debug-brk</code> в другом процессе Node, а первоначальный
+процесс Node запускает скрипт <code>_debugger.js</code> и подключается к целевому скрипту.</p>
+<h3 id="node-inspector"><a href="https://github.com/node-inspector/node-inspector">node-inspector</a><a id="header-node-inspector" class="anchor" href="#node-inspector" aria-labelledby="node-inspector"></a></h3>
+<p>Отлаживайте приложение Node.js с помощью Chrome DevTools используя
+промежуточный процесс, который переводит протокол инспектора, используемый в Chromium,
+в протокол отладчика V8, используемый в Node.js.</p></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->Вверх</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"ru","localName":"Русский","name":"Russian","langDir":"ltr","dateFormat":"DD.MM.YYYY","hrefLang":"ru","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"Вверх","components.header.links.home":"Главная","components.header.links.about":"О проекте","components.header.links.download":"Загрузка","components.header.links.docs":"Документация","components.header.links.getInvolved":"Присоединиться","components.header.links.security":"Безопасность","components.header.links.certification":"Certification","components.header.links.blog":"Новости","components.navigation.about.links.governance":"Управление","components.navigation.docs.links.es6":"ES6 и выше","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"Руководства","components.navigation.docs.links.dependencies":"Зависимости","components.navigation.getInvolved.links.collabSummit":"Саммит сотрудников","components.navigation.getInvolved.links.contribute":"Участие","components.navigation.getInvolved.links.codeOfConduct":"Правила","components.downloadList.links.previousReleases":"Предыдущие релизы","components.downloadList.links.packageManager":"Установка Node.js с помощью пакетного менеджера","components.downloadList.links.shaSums":"Подписанные SHASUMS для файлов релиза","components.downloadList.links.shaSums.howToVerify":" (Как проверить)","components.downloadList.links.allDownloads":"Все варианты загрузки","components.downloadList.links.nightlyReleases":"Ночные сборки","components.downloadList.links.unofficialBuilds":"Неофициальные сборки","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Установка Node.js через бинарный архив в Linux","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"Список изменений","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"Документация","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"Следующий | ","components.pagination.previous":"Предыдущий","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/ru/docs/guides/debugging-getting-started","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

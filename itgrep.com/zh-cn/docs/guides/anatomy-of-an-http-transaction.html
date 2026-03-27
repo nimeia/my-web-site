@@ -1,0 +1,240 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>HTTP 传输解析 | Node.js</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="HTTP 传输解析 | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="HTTP 传输解析 | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/zh-cn/docs/guides/anatomy-of-an-http-transaction"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/zh-cn/docs/guides/anatomy-of-an-http-transaction-ee5f938d2a401330.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NDMJQNDPS"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-6NDMJQNDPS");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7950559866369342" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/zh-cn"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/zh-cn">首页</a></li><li class=""><a href="/zh-cn/about">关于</a></li><li class=""><a href="/zh-cn/download">下载</a></li><li class="active"><a href="/zh-cn/docs">文档</a></li><li class=""><a href="/zh-cn/get-involved">加入我们</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">安全</a></li><li class=""><a href="https://openjsf.org/certification">相关认证</a></li><li class=""><a href="/zh-cn/blog">新闻</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/anatomy-of-an-http-transaction">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/anatomy-of-an-http-transaction">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/anatomy-of-an-http-transaction">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/anatomy-of-an-http-transaction">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/anatomy-of-an-http-transaction">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/anatomy-of-an-http-transaction">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/anatomy-of-an-http-transaction">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/anatomy-of-an-http-transaction">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/anatomy-of-an-http-transaction">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/anatomy-of-an-http-transaction">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/anatomy-of-an-http-transaction">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/anatomy-of-an-http-transaction">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/anatomy-of-an-http-transaction">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/anatomy-of-an-http-transaction">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/anatomy-of-an-http-transaction">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/anatomy-of-an-http-transaction">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/anatomy-of-an-http-transaction">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/anatomy-of-an-http-transaction">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/zh-cn/docs">文档</a></li><li class=""><a href="/zh-cn/docs/es6">ES6 及更高</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/zh-cn/docs/guides">指南</a></li><li class=""><a href="/zh-cn/docs/meta/topics/dependencies">依赖项</a></li></ul></nav><article dir="auto"><h1 id="一次-http-传输解析">一次 HTTP 传输解析<a id="header-一次-http-传输解析" class="anchor" href="#一次-http-传输解析" aria-labelledby="一次-http-传输解析"></a></h1>
+<p>本指南的宗旨将让你对 HTTP 传输处理有一个清晰完整的了解。在不考虑特定编程语言及开发环境下，我们假设你已经知道在一般情况下 HTTP 是如何进行工作的。我们同样假定你熟悉 Node.js 的 <a href="https://nodejs.org/api/events.html"><code>EventEmitters</code></a> 和 <a href="https://nodejs.org/api/stream.html"><code>Streams</code></a>。当然，如果你确实不了解它们，我们强烈建议你把以上列出的内容快速而完整地阅读一遍。</p>
+<h2 id="创建一个后台服务">创建一个后台服务<a id="header-创建一个后台服务" class="anchor" href="#创建一个后台服务" aria-labelledby="创建一个后台服务"></a></h2>
+<p>任何网络服务应用程序总是要先创建一个服务对象。这在 Node.js 中通常通过 <a href="https://nodejs.org/api/http.html#http_http_createserver_requestlistener"><code>createServer</code></a> 方法。</p>
+<pre><code class="language-javascript">const http = require(&#x27;http&#x27;);
+
+const server = http.createServer((request, response) =&gt; {
+  // magic happens here!
+});
+</code></pre>
+<p>每当有 HTTP 请求到达服务器时，<a href="https://nodejs.org/api/http.html#http_http_createserver_requestlistener"><code>createServer</code></a> 中传入的函数就被自动执行。所以这个函数也被称为是请求处理函数。实际上，由 <a href="https://nodejs.org/api/http.html#http_http_createserver_requestlistener"><code>createServer</code></a> 构造函数返回的 <a href="https://nodejs.org/api/http.html#http_class_http_server"><code>Server</code></a> 对象是一个 <a href="https://nodejs.org/api/events.html#events_class_eventemitter"><code>EventEmitter</code></a>，我们在这里仅是对创建 <code>server</code> 和对它添加监听事件进行了简化处理。</p>
+<pre><code class="language-javascript">const server = http.createServer();
+server.on(&#x27;request&#x27;, (request, response) =&gt; {
+  // the same kind of magic happens here!
+});
+</code></pre>
+<p>当一个 HTTP 到达服务端，node 调用 request 处理程序，并产生一些唾手可得的对象用以处理传输，这些对象就是 <code>request</code> 和 <code>response</code>。我们马上会讲到。</p>
+<p>实际上，为了处理请求，<a href="https://nodejs.org/api/http.html#http_server_listen_port_hostname_backlog_callback"><code>listen</code></a> 方法需要在 <code>server</code> 对象上被显式调用。在大多数情况下，你只要把端口号作为参数传入 <code>listen</code> 方法中，作为监听端口即可。当然也有一些其它选项，具体可以参考 <a href="https://nodejs.org/api/http.html">API 参考文档</a>。</p>
+<h2 id="方法访问地址以及请求头">方法、访问地址以及请求头<a id="header-方法访问地址以及请求头" class="anchor" href="#方法访问地址以及请求头" aria-labelledby="方法访问地址以及请求头"></a></h2>
+<p>当处理一个请求时，第一件事你需要做的是看一下这个方法和其访问地址，以此决定你到底采取何种合理的行为。Node.js 通过把这些行为属性附加到 <code>request</code> 对象上，使得我们处理起来相对而言可以轻松一些。</p>
+<pre><code class="language-javascript">const { method, url } = request;
+</code></pre>
+<div class="highlight-box">
+<p><strong>注意：</strong> <code>request</code> 对象是 <a href="https://nodejs.org/api/http.html#http_class_http_incomingmessage"><code>IncomingMessage</code></a> 的一个实例。</p>
+</div>
+<p>这里的 <code>method</code> 总是一个普通的 HTTP 方法动作行为 (verb)，<code>url</code> 是指没有服务器协议和
+端口号的完整访问地址。一个典型的访问地址通常意味着包括第三个斜杠以及后面的所有内容。</p>
+<p>请求头也不是很难得到，它们也在 <code>request</code> 对象里，称为 <code>headers</code>。</p>
+<pre><code class="language-javascript">const { headers } = request;
+const userAgent = headers[&#x27;user-agent&#x27;];
+</code></pre>
+<p>非常重要的一点是：所有的请求头全是小写字母，而不管实际上它们是怎么进行传输的。所以在无论任何
+情况下，解析请求头就得到了简化。</p>
+<p>如果一些请求头出现重复，它们的值不是被覆盖，就是通过英文分号进行分割。究竟哪种方式取决于具体的信息头。在某些情况下这可能出现问题，所以我们还可以直接使用 <a href="https://nodejs.org/api/http.html#http_message_rawheaders"><code>rawHeaders</code></a>。</p>
+<h2 id="请求体">请求体<a id="header-请求体" class="anchor" href="#请求体" aria-labelledby="请求体"></a></h2>
+<p>当接受到了一个 <code>POST</code> 或者 <code>PUT</code> 请求时，请求体对于你的应用程序非常重要。相对于访问请求
+头而言，获取请求体有些麻烦。传入请求对象的 <code>request</code> 其实实现了 <a href="https://nodejs.org/api/stream.html#stream_class_stream_readable"><code>ReadableStream</code></a> 接口，
+这个信息流可以被监听，或者与其它流进行对接。我们可以通过监听 <code>&#x27;data&#x27;</code> 和 <code>&#x27;end&#x27;</code> 事件从而把
+数据给取出来。</p>
+<p>每次在 <code>&#x27;data&#x27;</code> 事件中触发抓获的数据块是一个 <a href="https://nodejs.org/api/buffer.html"><code>Buffer</code></a>。如果你已知是一个字符串对象，那么
+最好的方案就是把这些数据收集到一个数组中，然后在 <code>&#x27;end&#x27;</code> 事件中拼接并且把它转化为字符串。</p>
+<pre><code class="language-javascript">let body = [];
+request.on(&#x27;data&#x27;, (chunk) =&gt; {
+  body.push(chunk);
+}).on(&#x27;end&#x27;, () =&gt; {
+  body = Buffer.concat(body).toString();
+  // at this point, `body` has the entire request body stored in it as a string
+});
+</code></pre>
+<div class="highlight-box">
+<p><strong>注意：</strong> 这看起来有些单调乏味，大多数情况下也确实是这样。
+不过庆幸的是因为 <a href="https://www.npmjs.com"><code>npm</code></a> 上实在有太多的诸如 <a href="https://www.npmjs.com/package/concat-stream"><code>concat-stream</code></a> 和 <a href="https://www.npmjs.com/package/body"><code>body</code></a> 一类类库屏蔽了部分细节逻辑而替你做了这些事情。当然，对于你而言在使用这些类库前知道它们到底干了什么非常重要，这就是你为什么需要读这篇文章！</p>
+</div>
+<h2 id="一笔带过关于错误的一些信息">一笔带过关于错误的一些信息<a id="header-一笔带过关于错误的一些信息" class="anchor" href="#一笔带过关于错误的一些信息" aria-labelledby="一笔带过关于错误的一些信息"></a></h2>
+<p>因为 <code>request</code> 是一个 <a href="https://nodejs.org/api/stream.html#stream_class_stream_readable"><code>ReadableStream</code></a> 对象，它同样也是 <a href="https://nodejs.org/api/events.html#events_class_eventemitter"><code>EventEmitter</code></a> 对象。所以当有错误发生时，表现的行为是很相像的。当有错误在 <code>request</code> 流上发生时，它会自动激发自身的 <code>&#x27;error&#x27;</code> 事件。<strong>如果你不去处理监听这个事件，此错误将被<em>抛出</em>，这导致你的程序崩溃。</strong> 你应该无论如何都要添加 <code>&#x27;error&#x27;</code> 事件去监听你的请求对象，哪怕你只是做一个日志或者用你自己的独有方式去处理（当然，最佳的处理方式是返回一些出错的信息，这已是后话了）。</p>
+<pre><code class="language-javascript">request.on(&#x27;error&#x27;, (err) =&gt; {
+  // This prints the error message and stack trace to `stderr`.
+  console.error(err.stack);
+});
+</code></pre>
+<p>当然还有一些其它的方法来<a href="https://nodejs.org/api/errors.html">处理错误</a>，诸如其它的抽象化概念和工具等。但是你总是要意识到错误的确会发生，所以你应当处理它们。</p>
+<h2 id="我们已经聊得那么多了">我们已经聊得那么多了<a id="header-我们已经聊得那么多了" class="anchor" href="#我们已经聊得那么多了" aria-labelledby="我们已经聊得那么多了"></a></h2>
+<p>直到现在，我们已经谈到了如何创建一个对象，如果从请求中获取方法，请求地址，请求头和请求体。当我们把它们组合到一起，它就看上去是这个样子：</p>
+<pre><code class="language-javascript">const http = require(&#x27;http&#x27;);
+
+http.createServer((request, response) =&gt; {
+  const { headers, method, url } = request;
+  let body = [];
+  request.on(&#x27;error&#x27;, (err) =&gt; {
+    console.error(err);
+  }).on(&#x27;data&#x27;, (chunk) =&gt; {
+    body.push(chunk);
+  }).on(&#x27;end&#x27;, () =&gt; {
+    body = Buffer.concat(body).toString();
+    // At this point, we have the headers, method, url and body, and can now
+    // do whatever we need to in order to respond to this request.
+  });
+}).listen(8080); // Activates this server, listening on port 8080.
+</code></pre>
+<p>如果我们运行这个示例代码，我们只能 <em>接收</em> 到请求但得不到 <em>回应</em>。实际上，如果你在浏览器内运行这个示例，你的请求只会超时，因为服务器那边根本没有返回给客户端任何东西。</p>
+<p>谈了那么久，我们都还没有说到 <code>response</code> 对象。它是一个 <a href="https://nodejs.org/api/http.html#http_class_http_serverresponse"><code>ServerResponse</code></a> 实例，而 ServerRespose 又是 <a href="https://nodejs.org/api/stream.html#stream_class_stream_writable"><code>WritableStream</code></a>。它包含了很多方法可以用以把数据返回给客户端。我们下面就将涉及到此议题。</p>
+<h2 id="http-状态码">HTTP 状态码<a id="header-http-状态码" class="anchor" href="#http-状态码" aria-labelledby="http-状态码"></a></h2>
+<p>如果你嫌麻烦不想设置它，返回客户端的默认状态码总是 200。当然，不是每个 HTTP 返回码必须都是 200，在某些情况下你一定希望返回一个不同的状态码，所以你应该设置 <code>statusCode</code> 属性。</p>
+<pre><code class="language-javascript">response.statusCode = 404; // Tell the client that the resource wasn&#x27;t found.
+</code></pre>
+<p>我们同样也有其它捷径去做这件事，后面我们会很快看到。</p>
+<h2 id="设置响应头">设置响应头<a id="header-设置响应头" class="anchor" href="#设置响应头" aria-labelledby="设置响应头"></a></h2>
+<p>响应头通过一个 <a href="https://nodejs.org/api/http.html#http_response_setheader_name_value"><code>setHeader</code></a> 的属性很方便的设置。</p>
+<pre><code class="language-javascript">response.setHeader(&#x27;Content-Type&#x27;, &#x27;application/json&#x27;);
+response.setHeader(&#x27;X-Powered-By&#x27;, &#x27;bacon&#x27;);
+</code></pre>
+<p>设置响应头时，它们的名字是大小写敏感的。如果你重复设置响应头，最后一次设置的值也就是系统得到的值。</p>
+<h2 id="显示发送头数据">显示发送头数据<a id="header-显示发送头数据" class="anchor" href="#显示发送头数据" aria-labelledby="显示发送头数据"></a></h2>
+<p>我们之前讨论的设置响应头以及状态码的方法建立在你使用“隐式设置”的方式，这意味着你在发送消息体之前依赖于 node 发送请求头。</p>
+<p>如果你愿意，你可以为返回流重写响应头。为做到这点，你可以使用 <a href="https://nodejs.org/api/http.html#http_response_writehead_statuscode_statusmessage_headers"><code>writeHead</code></a> 方法向消息流重写状态码和响应头。</p>
+<pre><code class="language-javascript">response.writeHead(200, {
+  &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
+  &#x27;X-Powered-By&#x27;: &#x27;bacon&#x27;
+});
+</code></pre>
+<p>一旦设置了响应头（无论是隐式还是显式设置），你已经为发送返回数据做好了准备。</p>
+<h2 id="发送返回体">发送返回体<a id="header-发送返回体" class="anchor" href="#发送返回体" aria-labelledby="发送返回体"></a></h2>
+<p>既然 <code>response</code> 对象是一个 <a href="https://nodejs.org/api/stream.html#stream_class_stream_writable"><code>WritableStream</code></a>，向客户端写入返回体只是一个普通的流方法的问题。</p>
+<pre><code class="language-javascript">response.write(&#x27;&lt;html&gt;&#x27;);
+response.write(&#x27;&lt;body&gt;&#x27;);
+response.write(&#x27;&lt;h1&gt;Hello, World!&lt;/h1&gt;&#x27;);
+response.write(&#x27;&lt;/body&gt;&#x27;);
+response.write(&#x27;&lt;/html&gt;&#x27;);
+response.end();
+</code></pre>
+<p>消息流上的 <code>end</code> 方法同时还可以带入一些可选数据作为流上最后需要发送的一些数据，所以我们可以简单地把以上的代码做如下形式的简化：</p>
+<pre><code class="language-javascript">response.end(&#x27;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Hello, World!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&#x27;);
+</code></pre>
+<div class="highlight-box">
+<p><strong>注意：</strong> 你只有在开始向返回体写数据 <em>之前</em> 设置状态和响应头，这点很重要。
+因为响应头信息总是在消息体前到达。</p>
+</div>
+<h2 id="另一件一笔带过关于错误的事">另一件一笔带过关于错误的事<a id="header-另一件一笔带过关于错误的事" class="anchor" href="#另一件一笔带过关于错误的事" aria-labelledby="另一件一笔带过关于错误的事"></a></h2>
+<p><code>response</code> 返回流同样也会触发 <code>&#x27;error&#x27;</code> 事件，某种程度上说你不得不自己去处理它。之前全部关于 <code>request</code> 消息流出错的处理方法在这里也同样适用。</p>
+<h2 id="把之前所学的全部整合到一起">把之前所学的全部整合到一起<a id="header-把之前所学的全部整合到一起" class="anchor" href="#把之前所学的全部整合到一起" aria-labelledby="把之前所学的全部整合到一起"></a></h2>
+<p>现在既然我们已经学了如何处理 HTTP 返回信息，现在让我们把这些零碎东西组合到一起。基于先前的示例代码，我们将作出一个服务端，使它可以将从用户接受到的全部信息返回给用户。我们将通过 <code>JSON.stringify</code> 对消息数据进行格式化。</p>
+<pre><code class="language-javascript">const http = require(&#x27;http&#x27;);
+
+http.createServer((request, response) =&gt; {
+  const { headers, method, url } = request;
+  let body = [];
+  request.on(&#x27;error&#x27;, (err) =&gt; {
+    console.error(err);
+  }).on(&#x27;data&#x27;, (chunk) =&gt; {
+    body.push(chunk);
+  }).on(&#x27;end&#x27;, () =&gt; {
+    body = Buffer.concat(body).toString();
+    // BEGINNING OF NEW STUFF
+
+    response.on(&#x27;error&#x27;, (err) =&gt; {
+      console.error(err);
+    });
+
+    response.statusCode = 200;
+    response.setHeader(&#x27;Content-Type&#x27;, &#x27;application/json&#x27;);
+    // Note: the 2 lines above could be replaced with this next one:
+    // response.writeHead(200, {&#x27;Content-Type&#x27;: &#x27;application/json&#x27;})
+
+    const responseBody = { headers, method, url, body };
+
+    response.write(JSON.stringify(responseBody));
+    response.end();
+    // Note: the 2 lines above could be replaced with this next one:
+    // response.end(JSON.stringify(responseBody))
+
+    // END OF NEW STUFF
+  });
+}).listen(8080);
+</code></pre>
+<h2 id="服务器响应的示例代码">服务器响应的示例代码<a id="header-服务器响应的示例代码" class="anchor" href="#服务器响应的示例代码" aria-labelledby="服务器响应的示例代码"></a></h2>
+<p>让我们简化之前的代码，做一个可以有响应的简单的服务端。它同样也可以把接受到的任何信息返回给客户端。我们所要做的就是从请求流中把请求数据取出，然后原样写回到返回流中即可。就如我们之前做的那么简单。</p>
+<pre><code class="language-javascript">const http = require(&#x27;http&#x27;);
+
+http.createServer((request, response) =&gt; {
+  let body = [];
+  request.on(&#x27;data&#x27;, (chunk) =&gt; {
+    body.push(chunk);
+  }).on(&#x27;end&#x27;, () =&gt; {
+    body = Buffer.concat(body).toString();
+    response.end(body);
+  });
+}).listen(8080);
+</code></pre>
+<p>现在让我们调整一下，我们只对以下条件应答：</p>
+<ul>
+<li>请求方法是 POST 方式。</li>
+<li>访问路径是 <code>/echo</code>。</li>
+</ul>
+<p>其它任何情况均返回 404。</p>
+<pre><code class="language-javascript">const http = require(&#x27;http&#x27;);
+
+http.createServer((request, response) =&gt; {
+  if (request.method === &#x27;POST&#x27; &amp;&amp; request.url === &#x27;/echo&#x27;) {
+    let body = [];
+    request.on(&#x27;data&#x27;, (chunk) =&gt; {
+      body.push(chunk);
+    }).on(&#x27;end&#x27;, () =&gt; {
+      body = Buffer.concat(body).toString();
+      response.end(body);
+    });
+  } else {
+    response.statusCode = 404;
+    response.end();
+  }
+}).listen(8080);
+</code></pre>
+<div class="highlight-box">
+<p><strong>注意：</strong> 为了检查请求路径，我们设计了一个路由格式。
+其它形式的路由 <code>switch</code>，简单的可以通过 <code>switch</code> 的形式检查，复杂的诸如 <a href="https://www.npmjs.com/package/express"><code>express</code></a> 框架，如果你正在寻找路由而不需要做其它事情，简单用 <a href="https://www.npmjs.com/package/router"><code>router</code></a>。</p>
+</div>
+<p>太棒了！现在我们进一步简化它。记住，<code>request</code> 是一个 <a href="https://nodejs.org/api/stream.html#stream_class_stream_readable"><code>ReadableStream</code></a>对象，<code>response</code>对象是一个 <a href="https://nodejs.org/api/stream.html#stream_class_stream_writable"><code>WritableStream</code></a>。那意味着我们可以使用 <a href="https://nodejs.org/api/stream.html#stream_readable_pipe_destination_options"><code>pipe</code></a>直接从一个流转到另外一个流。那的确是我们需要的：</p>
+<pre><code class="language-javascript">const http = require(&#x27;http&#x27;);
+
+http.createServer((request, response) =&gt; {
+  if (request.method === &#x27;POST&#x27; &amp;&amp; request.url === &#x27;/echo&#x27;) {
+    request.pipe(response);
+  } else {
+    response.statusCode = 404;
+    response.end();
+  }
+}).listen(8080);
+</code></pre>
+<p>就是这样！</p>
+<p>我们还尚未完全完成，如之前多次谈到，错误随时可能发生，所以我们需要处理它们。</p>
+<p>为了处理请求流上的错误，我们把错误记录到 <code>stderr</code> 对象中，然后回发一个 400 的代码表示 <code>错误请求</code>。在现实生活中，我们想检查分析错误，了解它们正确的状态码以及具体出错信息。具体可以参考 <a href="https://nodejs.org/api/errors.html"><code>Error</code> 文档信息</a></p>
+<p>对于返回，我们把错误日志记录到 <code>stderr</code> 中。</p>
+<pre><code class="language-javascript">const http = require(&#x27;http&#x27;);
+
+http.createServer((request, response) =&gt; {
+  request.on(&#x27;error&#x27;, (err) =&gt; {
+    console.error(err);
+    response.statusCode = 400;
+    response.end();
+  });
+  response.on(&#x27;error&#x27;, (err) =&gt; {
+    console.error(err);
+  });
+  if (request.method === &#x27;POST&#x27; &amp;&amp; request.url === &#x27;/echo&#x27;) {
+    request.pipe(response);
+  } else {
+    response.statusCode = 404;
+    response.end();
+  }
+}).listen(8080);
+</code></pre>
+<p>我们现在已经涉及到了大部分基本的 HTTP 请求知识，此时此刻，你应该已经具备了：</p>
+<ul>
+<li>实例化一个 HTTP 服务，它有一个处理请求的函数，并对某个特定端口进行监听。</li>
+<li>从 <code>request</code> 中获取请求头，访问路径，方法以及消息体。</li>
+<li>让路由决定依赖于访问路径，或者在 <code>request</code> 对象其它数据中。</li>
+<li>通过 <code>response</code> 对象发送响应头，HTTP 状态码以及消息体。</li>
+<li>通过 <code>request</code> 对象与 <code>response</code> 对象对接，传输数据。</li>
+<li>在 <code>request</code> 和 <code>response</code> 流中处理错误。</li>
+</ul>
+<p>从这些基础知识中，关于 Node.js 的 HTTP 服务一些实用案例已经逐步被构建起来，API 文档还提供了大量其它的说明，所以请详细阅读 <a href="https://nodejs.org/api/events.html"><code>EventEmitters</code></a>，<a href="https://nodejs.org/api/stream.html"><code>Streams</code></a> 以及 <a href="https://nodejs.org/api/http.html"><code>HTTP</code></a>。</p></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->回到页顶</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"zh-cn","localName":"简体中文","name":"Simplified Chinese","langDir":"ltr","dateFormat":"YYYY/MM/DD","hrefLang":"zh-Hans","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"回到页顶","components.header.links.home":"首页","components.header.links.about":"关于","components.header.links.download":"下载","components.header.links.docs":"文档","components.header.links.getInvolved":"加入我们","components.header.links.security":"安全","components.header.links.certification":"相关认证","components.header.links.blog":"新闻","components.navigation.about.links.governance":"管理规则","components.navigation.docs.links.es6":"ES6 及更高","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"指南","components.navigation.docs.links.dependencies":"依赖项","components.navigation.getInvolved.links.collabSummit":"协作者峰会","components.navigation.getInvolved.links.contribute":"贡献","components.navigation.getInvolved.links.codeOfConduct":"管理","components.downloadList.links.previousReleases":"以往的版本","components.downloadList.links.packageManager":"使用包管理器安装 Node.js","components.downloadList.links.shaSums":"Signed SHASUMS for release files","components.downloadList.links.shaSums.howToVerify":" (如何校验)","components.downloadList.links.allDownloads":"所有下载选项","components.downloadList.links.nightlyReleases":"每日构建","components.downloadList.links.unofficialBuilds":"非官方构建版","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"在 Linux 上，通过二进制文件安装 Node.js","components.downloadList.links.installingOnWsl":"在适用于 Linux 的 Windows 子系统（WSL）上安装 Node.js","components.downloadReleasesTable.changelog":"更新日志","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"文档","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"下一个 | ","components.pagination.previous":"以前","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/zh-cn/docs/guides/anatomy-of-an-http-transaction","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

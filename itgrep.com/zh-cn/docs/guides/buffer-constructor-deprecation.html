@@ -1,0 +1,164 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>请使用 Buffer.from()/Buffer.alloc() | Node.js</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="请使用 Buffer.from()/Buffer.alloc() | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="请使用 Buffer.from()/Buffer.alloc() | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/zh-cn/docs/guides/buffer-constructor-deprecation"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/zh-cn/docs/guides/buffer-constructor-deprecation-0f78a7c3192817fa.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NDMJQNDPS"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-6NDMJQNDPS");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7950559866369342" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/zh-cn"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/zh-cn">首页</a></li><li class=""><a href="/zh-cn/about">关于</a></li><li class=""><a href="/zh-cn/download">下载</a></li><li class="active"><a href="/zh-cn/docs">文档</a></li><li class=""><a href="/zh-cn/get-involved">加入我们</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">安全</a></li><li class=""><a href="https://openjsf.org/certification">相关认证</a></li><li class=""><a href="/zh-cn/blog">新闻</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/buffer-constructor-deprecation">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/buffer-constructor-deprecation">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/buffer-constructor-deprecation">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/buffer-constructor-deprecation">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/buffer-constructor-deprecation">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/buffer-constructor-deprecation">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/buffer-constructor-deprecation">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/buffer-constructor-deprecation">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/buffer-constructor-deprecation">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/buffer-constructor-deprecation">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/buffer-constructor-deprecation">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/buffer-constructor-deprecation">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/buffer-constructor-deprecation">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/buffer-constructor-deprecation">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/buffer-constructor-deprecation">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/buffer-constructor-deprecation">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/buffer-constructor-deprecation">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/buffer-constructor-deprecation">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/zh-cn/docs">文档</a></li><li class=""><a href="/zh-cn/docs/es6">ES6 及更高</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/zh-cn/docs/guides">指南</a></li><li class=""><a href="/zh-cn/docs/meta/topics/dependencies">依赖项</a></li></ul></nav><article dir="auto"><h1 id="请使用-,[object-object],/,[object-object]">请使用 <code>Buffer.from()</code>/<code>Buffer.alloc()</code><a id="header-请使用-,[object-object],/,[object-object]" class="anchor" href="#请使用-,[object-object],/,[object-object]" aria-labelledby="请使用-,[object-object],/,[object-object]"></a></h1>
+<h2 id="overview">概括<a id="header-overview" class="anchor" href="#overview" aria-labelledby="overview"></a></h2>
+<p>本教程将向你介绍如果迁移到安全的 <code>Buffer</code> 构造函数方法。此合并将消除以下已废除的警告：</p>
+<div class="highlight-box">
+<p>Buffer() 和 new Buffer() 构造函数对于有安全顾虑的人而言是不推荐使用的。请使用新的方法 Buffer.alloc()，Buffer.allocUnsafe() 或者是 Buffer.from() 构造函数。</p>
+</div>
+<ul>
+<li><a href="#variant-1">变化 1： 在 Node.js ≤ 4.4.x 和 5.0.0 — 5.9.x 版本中不支持</a> (<em>推荐</em>)</li>
+<li><a href="#variant-2">变化 2： 使用 polyfill 库</a></li>
+<li><a href="#variant-3">变化 3： 带安全守护的手动检测</a></li>
+</ul>
+<h3 id="在使用-grep-的代码中找出一些问题">在使用 <code>grep</code> 的代码中找出一些问题<a id="header-在使用-grep-的代码中找出一些问题" class="anchor" href="#在使用-grep-的代码中找出一些问题" aria-labelledby="在使用-grep-的代码中找出一些问题"></a></h3>
+<p>运行 <code>grep -nrE &#x27;[^a-zA-Z](Slow)?Buffer\s*\(&#x27; --exclude-dir node_modules</code>.</p>
+<p>此代码将从你的代码中找出潜在的不安全的代码（包括一些潜在地，没有考虑周到的异常）。</p>
+<h3 id="在使用-node-8-的代码中找出一些问题">在使用 <code>Node 8</code> 的代码中找出一些问题<a id="header-在使用-node-8-的代码中找出一些问题" class="anchor" href="#在使用-node-8-的代码中找出一些问题" aria-labelledby="在使用-node-8-的代码中找出一些问题"></a></h3>
+<p>如果你使用的 Node.js 版本大于等于 8.0.0，Node.js 提供了一些选项帮助你在代码中寻找相关问题：</p>
+<ul>
+<li><code>--trace-warnings</code> 通过 Node.js 向您展示堆栈信息跟踪，打印出此警告和其它警告信息。</li>
+<li><code>--trace-deprecation</code> 和上面差不多，不过只打印废弃警告。</li>
+<li><code>--pending-deprecation</code> 将对废弃警告给出更多的类型。尤其它会展示 <code>Buffer()</code> 的废弃警告，即便在 Node.js 8 也是如此。</li>
+</ul>
+<p>你可以使用环境变量设置这些开关：</p>
+<pre><code class="language-bash">$ export NODE_OPTIONS=&#x27;--trace-warnings --pending-deprecation&#x27;
+$ cat example.js
+&#x27;use strict&#x27;;
+const foo = new Buffer(&#x27;foo&#x27;);
+$ node example.js
+(node:7147) [DEP0005] DeprecationWarning: The Buffer() and new Buffer() constructors are not recommended for use due to security and usability concerns. Please use the new Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() construction methods instead.
+    at showFlaggedDeprecation (buffer.js:127:13)
+    at new Buffer (buffer.js:148:3)
+    at Object.&lt;anonymous&gt; (/path/to/example.js:2:13)
+    [... more stack trace lines ...]
+</code></pre>
+<h3 id="在使用-linter-的代码中找出一些问题">在使用 <code>linter</code> 的代码中找出一些问题<a id="header-在使用-linter-的代码中找出一些问题" class="anchor" href="#在使用-linter-的代码中找出一些问题" aria-labelledby="在使用-linter-的代码中找出一些问题"></a></h3>
+<p>ESLint 规则<a href="https://eslint.org/docs/rules/no-buffer-constructor">不使用缓存构造函数</a>或 <a href="https://github.com/mysticatea/eslint-plugin-node/blob/master/docs/rules/no-deprecated-api">node/ 未废除的 Api</a> 也会寻找到使用 <code>Buffer()</code> 废弃的函数。 这些规则预先已经包含了。</p>
+<p>不过这存在一个劣势，举个例子，当 <code>Buffer</code> 被 polyfill 重写的时候，它不保证一直<a href="https://github.com/chalker/safer-buffer#why-not-safe-buffer">正常工作</a>。所以推荐使用此方法和其它如上描述的方法在一起使用。</p>
+<h2 id="variant-1">变化 1： 在 Node.js ≤ 4.4.x 和 5.0.0 — 5.9.x 版本中不支持<a id="header-variant-1" class="anchor" href="#variant-1" aria-labelledby="variant-1"></a></h2>
+<p>这是现在的一个推荐的解决方案，暗示仅有极小的成本。</p>
+<p>Node.js 5.x 发行自 2016 年就不再支持，而 4.x 版本发行线支持到 2018 年 4 月就寿终正寝了（→ <a href="https://github.com/nodejs/Release#release-schedule">计划表</a>）。这意味着这些版本 <em>不会</em> 接受任何更新，即便有安全问题也不会被修复，所以如果可能，我们不应使用这些版本。</p>
+<p>在这种情况下，你应该把全部的 <code>new Buffer()</code> 或 <code>Buffer()</code> 更改为 <code>Buffer.alloc()</code> 或 <code>Buffer.from()</code>，规则如下：</p>
+<ul>
+<li>对于 <code>new Buffer(number)</code>, 请用 <code>Buffer.alloc(number)</code> 替换。</li>
+<li>对于 <code>new Buffer(string)</code> （或 <code>new Buffer(string, encoding)</code>），请用对应的 <code>Buffer.from(string)</code> （或 <code>Buffer.from(string, encoding)</code>）进行替换。</li>
+<li>对于其它情况（一般极为罕见）中使用了 <code>new Buffer(...arguments)</code> 的，请用 <code>Buffer.from(...arguments)</code> 进行替换。</li>
+</ul>
+<p>注意：<code>Buffer.alloc()</code> 在当前的 Node.js 版本上 <em>快于</em>
+<code>new Buffer(size).fill(0)</code>，后者是当你确认需要用 0 对整个缓存进行初始化。</p>
+<p>启用 ESLint 检查规则<a href="https://eslint.org/docs/rules/no-buffer-constructor">不使用缓存构造函数</a>或 <a href="https://github.com/mysticatea/eslint-plugin-node/blob/master/docs/rules/no-deprecated-api">node/ 未废除的 Api</a> 时，也会建议避免使用不安全的 <code>Buffer</code> 函数。</p>
+<p>同样我们还有 <a href="https://github.com/joyeecheung/node-dep-codemod#dep005">JSCodeshift codemod</a>，它可以把 <code>Buffer</code> 构造函数的地方自动替换成 <code>Buffer.alloc()</code> 或 <code>Buffer.from()</code>。注意目前它只会工作在参数是文本型，或者带有两个参数的构造函数的情况下。</p>
+<p><em>如果你目前支持那些旧版本的 Node.js，并且抛弃对它们的支持又不可能的情况下，或者你需要支持你包中的旧版本情况下，请考虑使用<a href="#variant-2">版本 2</a>，或者<a href="#variant-3">版本 3</a>。这样人们可以在使用这些旧版本情况下照样修复这些安全问题。那样的话，这些由不安全的 <code>Buffer</code> 所引发的问题会被你彻底根除，你的用户也不用在你运行 Node.js 10 的时候观察你的运行时废弃警告。</em></p>
+<h2 id="variant-2">变化 2： 使用替换库<a id="header-variant-2" class="anchor" href="#variant-2" aria-labelledby="variant-2"></a></h2>
+<p>存在着三种替换库：</p>
+<ul>
+<li>
+<p><strong><a href="https://www.npmjs.com/package/safer-buffer">更安全的缓存</a></strong> 是整个用来替换 <code>Buffer</code> 函数的方法。当你在使用 <code>new Buffer()</code> 的时候，将会 <em>抛出</em> 异常。
+和<a href="#%E7%89%88%E6%9C%AC-1">变化 1</a> 中一样，你会得到详细同样的步骤。不过请用 <code>const Buffer = require(&#x27;safer-buffer&#x27;).Buffer</code> 在你所有文件中对 <code>Buffer</code> 函数进行替换。</p>
+<p>请不要使用旧版本的 <code>new Buffer()</code> 函数，在添加上面的行的任何文件中，使用 <code>new Buffer()</code> 会 <em>抛出</em> 异常。</p>
+</li>
+<li>
+<p><strong><a href="https://www.npmjs.com/package/buffer-from">buffer-from</a> 或
+<a href="https://www.npmjs.com/package/buffer-alloc">buffer-alloc</a></strong> 都是
+<a href="https://ponyfill.com/">ponyfills</a> <code>Buffer</code> 可接受的方案。 你所要做的就是针对你自己的 API 添加所需的包。</p>
+<p>你需要用一个合适的名字为这些调入的模块重命名，例如 <code>const bufferFrom = require(&#x27;buffer-from&#x27;)</code>。并且使用它们取代你的 <code>new Buffer()</code>。例如 <code>new Buffer(&#x27;test&#x27;)</code> 变成了 <code>bufferFrom(&#x27;test&#x27;)</code>。</p>
+<p>这种方法的缺点是稍微改变代码以迁移它们（如您所希望的那样）。例如在不同的名称下使用 <code>Buffer.from()</code>。</p>
+</li>
+<li>
+<p><strong><a href="https://www.npmjs.com/package/safe-buffer">安全的缓存</a></strong> 同样也是替换整个 <code>Buffer</code> 的方案，但是用 <code>new Buffer()</code> 也可以像以前一样正常工作。</p>
+<p>欲达此目的而降阶到此，可以让你在代码中使用稍旧一些的 <code>new Buffer()</code> 函数，它会引发代码一些问题，并在 Node.js 10 （<a href="https://github.com/chalker/safer-buffer#why-not-safe-buffer">阅读更多详情</a>） 激发对于运行时废弃函数的警告检查。</p>
+</li>
+</ul>
+<p>注意，在任意一种情况下，手动移除你代码中所有关于 <code>Buffer</code> 的调用非常重要——仅在 <code>safe-buffer</code> 中抛出警告不解决问题，它只是为新的 API 提供了一种替换而已。我亲眼见过人们犯过这类错误。</p>
+<p>启用 ESLint 规则<a href="https://eslint.org/docs/rules/no-buffer-constructor">不使用缓存构造函数</a>
+或是 <a href="https://github.com/mysticatea/eslint-plugin-node/blob/master/docs/rules/no-deprecated-api">node/ 未废除的 Api</a> 是推荐的。</p>
+<p><em>如果你抛弃了对 Node.js 版本小于 4.5.0 的支持，请不要忘记把替代库也一起去掉。</em></p>
+<h2 id="variant-3">变化 3 — 带安全守护的手动检测<a id="header-variant-3" class="anchor" href="#variant-3" aria-labelledby="variant-3"></a></h2>
+<p>在某些情况下这对于你创建 <code>Buffer</code> 实例是有帮助的（例如：只需要一个实例的情况下）。或者你有你自己的包装围绕在它们身边。</p>
+<h3 id="buffer0"><code>Buffer(0)</code><a id="header-buffer0" class="anchor" href="#buffer0" aria-labelledby="buffer0"></a></h3>
+<p>创建空缓存这个特殊的例子可以用 <code>Buffer.concat([])</code> 来代替，对于 Node.js 0.8.x 版本而言返回同样的结果。</p>
+<h3 id="buffernotnumber"><code>Buffer(notNumber)</code><a id="header-buffernotnumber" class="anchor" href="#buffernotnumber" aria-labelledby="buffernotnumber"></a></h3>
+<p>Before:</p>
+<pre><code class="language-js">const buf = new Buffer(notNumber, encoding);
+</code></pre>
+<p>After:</p>
+<pre><code class="language-js">let buf;
+if (Buffer.from &amp;&amp; Buffer.from !== Uint8Array.from) {
+  buf = Buffer.from(notNumber, encoding);
+} else {
+  if (typeof notNumber === &#x27;number&#x27;) {
+    throw new Error(&#x27;The &quot;size&quot; argument must be not of type number.&#x27;);
+  }
+  buf = new Buffer(notNumber, encoding);
+}
+</code></pre>
+<p><code>encoding</code> 为可选参数。</p>
+<p>注意在 <code>new Buffer()</code> 前的 <code>typeof notNumber</code> 检测必不可少（对于 <code>notNumber</code> 参数不是硬编码的情况下），并且 <em>不会引发 <code>Buffer</code> 构造函数废弃的警报</em>——这就是 <em>为什么</em> 说 <code>Buffer</code> 构造函数被废弃的原因。缺少此类型检测的生态系统引发过不计其数的安全事故——如脏用户的某些输入，在 <code>Buffer(arg)</code> 可能会意外终止，这会导致从 DoS 攻击到从进程内存向攻击者泄露敏感信息范围内一系列问题。</p>
+<p>当 <code>notNumber</code> 被硬编码（如文本型 <code>&quot;abc&quot;</code> 或者 <code>[0,1,2]</code>）， <code>typeof</code> 类型检查可以被忽略。</p>
+<p>当然，注意使用 TypeScript 也不解决问题——用 <code>TypeScript</code> 写的库从 JS 方引用，或者用户的输入停在那边——它表现得就和原生态的 JS 一模一样，因为所有类型检查仅仅在翻译解析阶段，在 TS 编译成真实的 JS 代码时却不存在了。</p>
+<h3 id="buffernumber"><code>Buffer(number)</code><a id="header-buffernumber" class="anchor" href="#buffernumber" aria-labelledby="buffernumber"></a></h3>
+<p>对于 Node.js 0.10.x （和之后的版本）支持：</p>
+<pre><code class="language-js">let buf;
+if (Buffer.alloc) {
+  buf = Buffer.alloc(number);
+} else {
+  buf = new Buffer(number);
+  buf.fill(0);
+}
+</code></pre>
+<p>其余版本（Node.js ≥ 0.12.x）：</p>
+<pre><code class="language-js">const buf = Buffer.alloc ? Buffer.alloc(number) : new Buffer(number).fill(0);
+</code></pre>
+<h2 id="关于-bufferallocunsafe">关于 <code>Buffer.allocUnsafe()</code><a id="header-关于-bufferallocunsafe" class="anchor" href="#关于-bufferallocunsafe" aria-labelledby="关于-bufferallocunsafe"></a></h2>
+<p>使用 <code>Buffer.allocUnsafe()</code> 须格外谨慎几点：</p>
+<ul>
+<li>如果没有一个很好的理由，请不要使用它：<!-- -->
+<ul>
+<li>对于小缓存，你或许不想看到性能上的差别。实际上，用 <code>Buffer.alloc()</code> 甚至更快。</li>
+<li>如果你的代码不是在热代码路径中——你也不希望看到有差别，记住用零填充将把潜在的风险降到最低。</li>
+</ul>
+</li>
+<li>如果你使用它，请务必保证你从不会返回只填充了一部分的缓存，<!-- -->
+<ul>
+<li>如果你按顺序写入此缓存——总是截取此缓存到你写入缓存的实际长度。</li>
+</ul>
+</li>
+</ul>
+<p>处理与 <code>Buffer.allocUnsafe()</code> 相关的缓存错误可能会引发各种各样的问题，从你代码的不确定行为表现到敏感数据（如用户输入，密码，相关证书等）被泄露给远程的攻击者等。</p>
+<p><em>注意，当你不用 0 去填充缓存，此问题同样发生在 <code>new Buffer()</code> 上。这依赖于 Node.js 版本（缺少类型检查也会额外增加 DoS 攻击）。</em></p>
+<h2 id="faq">常见问题<a id="header-faq" class="anchor" href="#faq" aria-labelledby="faq"></a></h2>
+<h3 id="design-flaws"><code>Buffer</code> 构造函数有什么问题？<a id="header-design-flaws" class="anchor" href="#design-flaws" aria-labelledby="design-flaws"></a></h3>
+<p><code>Buffer</code> 构造函数可以用不同方式创建缓存：</p>
+<ul>
+<li><code>new Buffer(42)</code> 创建一个 42 个字节的 <code>缓存</code>。在 Node.js 8 之前，该缓存考虑性能，它包含 <em>随机内存</em>，而这可能包括任何数据，从编码的源码到密码，以及加密秘钥等。</li>
+<li><code>new Buffer(&#x27;abc&#x27;)</code> 创建一个 UTF-8 编码的字符串 <code>&#x27;abc&#x27;</code>。第二个参数可以指定用何种编码：举一个例子，<code>new Buffer(string, &#x27;base64&#x27;)</code> 可用于将 Base64 字符串转换为原始字符串表示的字节序列。</li>
+<li>除此之外，还有一些其它参数的组合。</li>
+</ul>
+<p>这意味着在代码中诸如 <code>var buffer = new Buffer(foo);</code>，当你不知道 <code>foo</code> 是什么类型，想要知道生成的缓存里边到底存了什么内容几乎是不可能的。</p>
+<p>有时，<code>foo</code> 的值来源于外部源头。举一个例子，以下函数作为服务器上的一个函数公开，把 UTF-8 的编码字符串转换成 Base64 形式：</p>
+<pre><code class="language-js">function stringToBase64(req, res) {
+  // The request body should have the format of `{ string: &#x27;foobar&#x27; }`.
+  const rawBytes = new Buffer(req.body.string);
+  const encoded = rawBytes.toString(&#x27;base64&#x27;);
+  res.end({ encoded });
+}
+</code></pre>
+<p>注意这个代码 <em>不会</em> 验证 <code>req.body.string</code> 的类型：</p>
+<ul>
+<li><code>req.body.string</code> 期望的类型是字符串型。如果是这种情况一切正常。</li>
+<li><code>req.body.string</code> 受客户端发送请求所控制。</li>
+<li>如果 <code>req.body.string</code> 是 <em>数字</em> <code>50</code>，<code>rawBytes</code> 将变成 <code>50</code> 个字节：<!-- -->
+<ul>
+<li>在 Node.js 8 之前，内容是未经初始化的。</li>
+<li>在 Node.js 8 之后，内容是 50 个 0。</li>
+</ul>
+</li>
+</ul>
+<p>因为缺少类型检查，攻击者可以别有用心地发送一个数字作为请求的一部分，借助它，他们可以：</p>
+<ul>
+<li>读取未初始化的内存数据。 这显然 <strong>会</strong> 导致密码、秘钥和其它敏感数据的泄露（信息泄露）。</li>
+<li>强迫程序开辟一个超大内存区域。举一个例子，当指定 <code>500000000</code> 作为输入数据时，每个请求将开辟 500MB 内存区。这不是会耗尽内存使得程序崩溃，就会导致明显的程序性能下降（服务拒绝攻击）。</li>
+</ul>
+<p>这些情况在现实的网络服务中都被认为是非常严重的安全问题。</p>
+<p>当使用 <code>Buffer.from(req.body.string)</code> 的时候，如果传入一个数字总是抛出异常，给程序提供了一个总是可以自我处理的机会。</p>
+<h3 id="ecosystem-usage"><code>Buffer()</code> 构造函数废弃有一阵了，它有问题吗？<a id="header-ecosystem-usage" class="anchor" href="#ecosystem-usage" aria-labelledby="ecosystem-usage"></a></h3>
+<p>检测 <code>npm</code> 生态系统的代码，表明 <code>Buffer()</code> 仍然广泛被使用。这包含新提交的代码，以及这类代码的使用仍然在 <em>增长中</em>。</p></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->回到页顶</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"zh-cn","localName":"简体中文","name":"Simplified Chinese","langDir":"ltr","dateFormat":"YYYY/MM/DD","hrefLang":"zh-Hans","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"回到页顶","components.header.links.home":"首页","components.header.links.about":"关于","components.header.links.download":"下载","components.header.links.docs":"文档","components.header.links.getInvolved":"加入我们","components.header.links.security":"安全","components.header.links.certification":"相关认证","components.header.links.blog":"新闻","components.navigation.about.links.governance":"管理规则","components.navigation.docs.links.es6":"ES6 及更高","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"指南","components.navigation.docs.links.dependencies":"依赖项","components.navigation.getInvolved.links.collabSummit":"协作者峰会","components.navigation.getInvolved.links.contribute":"贡献","components.navigation.getInvolved.links.codeOfConduct":"管理","components.downloadList.links.previousReleases":"以往的版本","components.downloadList.links.packageManager":"使用包管理器安装 Node.js","components.downloadList.links.shaSums":"Signed SHASUMS for release files","components.downloadList.links.shaSums.howToVerify":" (如何校验)","components.downloadList.links.allDownloads":"所有下载选项","components.downloadList.links.nightlyReleases":"每日构建","components.downloadList.links.unofficialBuilds":"非官方构建版","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"在 Linux 上，通过二进制文件安装 Node.js","components.downloadList.links.installingOnWsl":"在适用于 Linux 的 Windows 子系统（WSL）上安装 Node.js","components.downloadReleasesTable.changelog":"更新日志","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"文档","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"下一个 | ","components.pagination.previous":"以前","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/zh-cn/docs/guides/buffer-constructor-deprecation","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

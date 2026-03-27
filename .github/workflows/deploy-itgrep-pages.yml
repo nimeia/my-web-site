@@ -1,0 +1,21 @@
+name: Deploy itgrep.com
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "itgrep.com/**"
+      - "ads.txt/itgrep.com.txt"
+      - "scripts/prepare-cloudflare-static.mjs"
+      - ".github/workflows/_deploy-pages-site.yml"
+      - ".github/workflows/deploy-itgrep-pages.yml"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/_deploy-pages-site.yml
+    with:
+      site_dir: itgrep.com
+      pages_project_name: ${{ vars.CF_PAGES_PROJECT_ITGREP }}
+    secrets: inherit

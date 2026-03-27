@@ -1,0 +1,247 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Node.js アプリケーションの簡単なプロファイリング | Node.js node js 学习 中文网</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Node.js アプリケーションの簡単なプロファイリング | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Node.js アプリケーションの簡単なプロファイリング | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/ja/docs/guides/simple-profiling"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/ja/docs/guides/simple-profiling-b98840323d04cdf3.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-2WRNZHGVQT"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-2WRNZHGVQT");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8264273508355034" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/ja"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/ja">ホーム</a></li><li class=""><a href="/ja/about">Node.js とは</a></li><li class=""><a href="/ja/download">ダウンロード</a></li><li class="active"><a href="/ja/docs">ドキュメント</a></li><li class=""><a href="/ja/get-involved">参加する</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">セキュリティ</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class=""><a href="/ja/blog">ニュース</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/simple-profiling">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/simple-profiling">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/simple-profiling">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/simple-profiling">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/simple-profiling">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/simple-profiling">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/simple-profiling">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/simple-profiling">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/simple-profiling">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/simple-profiling">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/simple-profiling">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/simple-profiling">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/simple-profiling">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/simple-profiling">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/simple-profiling">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/simple-profiling">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/simple-profiling">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/simple-profiling">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/ja/docs">ドキュメント</a></li><li class=""><a href="/ja/docs/es6">ES6 について</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/ja/docs/guides">ガイド</a></li><li class=""><a href="/ja/docs/meta/topics/dependencies">依存関係</a></li></ul></nav><article dir="auto"><h1 id="node.js-アプリケーションの簡単なプロファイリング">Node.js アプリケーションの簡単なプロファイリング<a id="header-node.js-アプリケーションの簡単なプロファイリング" class="anchor" href="#node.js-アプリケーションの簡単なプロファイリング" aria-labelledby="node.js-アプリケーションの簡単なプロファイリング"></a></h1>
+<p>Node.js アプリケーションのプロファイリングに使用できるサードパーティ製ツールは多数ありますが、
+多くの場合、最も簡単な方法はプロファイラに組み込まれている Node.js を使用することです。
+組み込みプロファイラは、プログラムの実行中に定期的にスタックをサンプリングする
+<a href="https://v8.dev/docs/profile">V8 内部のプロファイラ</a> を使用します。
+これらのサンプルの結果と、jit コンパイルなどの重要な最適化イベントを
+一連のティックとして記録します。</p>
+<pre><code class="language-text">code-creation,LazyCompile,0,0x2d5000a337a0,396,&quot;bp native array.js:1153:16&quot;,0x289f644df68,~
+code-creation,LazyCompile,0,0x2d5000a33940,716,&quot;hasOwnProperty native v8natives.js:198:30&quot;,0x289f64438d0,~
+code-creation,LazyCompile,0,0x2d5000a33c20,284,&quot;ToName native runtime.js:549:16&quot;,0x289f643bb28,~
+code-creation,Stub,2,0x2d5000a33d40,182,&quot;DoubleToIStub&quot;
+code-creation,Stub,2,0x2d5000a33e00,507,&quot;NumberToStringStub&quot;
+</code></pre>
+<!-- -->
+<p>以前は、ティックを解釈するために V8 ソースコードが必要でした。
+幸いなことに、Node.js 4.4.0 以降、ソースとは別に V8 を構築することなく
+容易にこの情報を利用できるツールが導入されました。
+組み込みのプロファイラーがアプリケーションのパフォーマンスに関する
+洞察を提供するのに役立つ方法を見てみましょう。</p>
+<!-- -->
+<p>ティックプロファイラーの使い方を説明するために、
+簡単な Express アプリケーションを使います。
+アプリケーションには、システムに新しいユーザを追加する2つのハンドラがあります。</p>
+<pre><code class="language-javascript">app.get(&#x27;/newUser&#x27;, (req, res) =&gt; {
+  let username = req.query.username || &#x27;&#x27;;
+  const password = req.query.password || &#x27;&#x27;;
+
+  username = username.replace(/[!@#$%^&amp;*]/g, &#x27;&#x27;);
+
+  if (!username || !password || users.username) {
+    return res.sendStatus(400);
+  }
+
+  const salt = crypto.randomBytes(128).toString(&#x27;base64&#x27;);
+  const hash = crypto.pbkdf2Sync(password, salt, 10000, 512, &#x27;sha512&#x27;);
+
+  users[username] = { salt, hash };
+
+  res.sendStatus(200);
+});
+</code></pre>
+<!-- -->
+<p>ユーザ認証の試行を検証するためのものもあります。</p>
+<pre><code class="language-javascript">app.get(&#x27;/auth&#x27;, (req, res) =&gt; {
+  let username = req.query.username || &#x27;&#x27;;
+  const password = req.query.password || &#x27;&#x27;;
+
+  username = username.replace(/[!@#$%^&amp;*]/g, &#x27;&#x27;);
+
+  if (!username || !password || !users[username]) {
+    return res.sendStatus(400);
+  }
+
+  const { salt, hash } = users[username];
+  const encryptHash = crypto.pbkdf2Sync(password, salt, 10000, 512, &#x27;sha512&#x27;);
+
+  if (crypto.timingSafeEqual(hash, encryptHash)) {
+    res.sendStatus(200);
+  } else {
+    res.sendStatus(401);
+  }
+});
+</code></pre>
+<!-- -->
+<p><em>これらは、Node.js アプリケーションでユーザを認証する推奨のハンドラではなく、
+純粋に例を示す目的で使用されていることに注意してください。
+自身の暗号認証メカニズムを一般的に設計しようとしてはいけません。
+既存の実証済みの認証ソリューションを使用することをお勧めします。</em></p>
+<!-- -->
+<p>ここで、アプリケーションをデプロイし、ユーザがリクエストの待ち時間が長いことについて不満を言っているとします。
+内蔵のプロファイラーでアプリを簡単に実行できます。</p>
+<pre><code class="language-text">NODE_ENV=production node --prof app.js
+</code></pre>
+<!-- -->
+<p><code>ab</code> (ApacheBench) を使用してサーバに負荷をかけます。</p>
+<pre><code class="language-text">curl -X GET &quot;http://localhost:8080/newUser?username=matt&amp;password=password&quot;
+ab -k -c 20 -n 250 &quot;http://localhost:8080/auth?username=matt&amp;password=password&quot;
+</code></pre>
+<!-- -->
+<p>そして、次の ab 出力を取得します。</p>
+<pre><code class="language-text">Concurrency Level:      20
+Time taken for tests:   46.932 seconds
+Complete requests:      250
+Failed requests:        0
+Keep-Alive requests:    250
+Total transferred:      50250 bytes
+HTML transferred:       500 bytes
+Requests per second:    5.33 [#/sec] (mean)
+Time per request:       3754.556 [ms] (mean)
+Time per request:       187.728 [ms] (mean, across all concurrent requests)
+Transfer rate:          1.05 [Kbytes/sec] received
+
+...
+
+Percentage of the requests served within a certain time (ms)
+  50%   3755
+  66%   3804
+  75%   3818
+  80%   3825
+  90%   3845
+  95%   3858
+  98%   3874
+  99%   3875
+ 100%   4225 (longest request)
+</code></pre>
+<!-- -->
+<p>この出力から、1秒あたり約5つのリクエストを処理することに成功しているだけで、
+平均リクエストはラウンドトリップで4秒弱かかります。
+実際の例では、ユーザのリクエストに代わって
+多くの機能で多くの作業を行っている可能性があります。
+しかし簡単な例でさえ、正規表現のコンパイル、ランダムソルトの生成、ユーザパスワードからの一意のハッシュの生成、
+または Express フレームワーク自体の内部では、時間が無駄になる可能性があります。</p>
+<!-- -->
+<p><code>--prof</code> オプションを使用してアプリケーションを実行したため、
+ティックファイルはローカルで実行しているアプリケーションと同じディレクトリに生成されました。
+形式は <code>isolate-0xnnnnnnnnnnnn-v8.log</code> (<code>n</code> は数字) です。</p>
+<!-- -->
+<p>このファイルを理解するには、Node.js バイナリにバンドルされている tick プロセッサを使用する必要があります。
+プロセッサを実行するには <code>--prof-process</code> フラグを使用します。</p>
+<pre><code class="language-text">node --prof-process isolate-0xnnnnnnnnnnnn-v8.log &gt; processed.txt
+</code></pre>
+<!-- -->
+<p>お気に入りのテキストエディタで processed.txt を開くと、情報が何種類か表示されます。
+ファイルはセクションに分割されており、セクションは言語ごとに分割されています。
+まず、要約セクションを見ると、このようになっています：</p>
+<pre><code class="language-text"> [Summary]:
+   ticks  total  nonlib   name
+     79    0.2%    0.2%  JavaScript
+  36703   97.2%   99.2%  C++
+      7    0.0%    0.0%  GC
+    767    2.0%          Shared libraries
+    215    0.6%          Unaccounted
+</code></pre>
+<!-- -->
+<p>これは、収集されたすべてのサンプルの 97％ が C++ コードで発生しており、
+処理された出力の他のセクションを見るときは
+(JavaScript ではなく) C++ で行われている作業に最も注意する必要があることを示しています。
+これを念頭に置いて、次にどの C++ 関数が最も CPU 時間を消費しているかについての情報を含む
+[C++] セクションを見てみます。</p>
+<pre><code class="language-text"> [C++]:
+   ticks  total  nonlib   name
+  19557   51.8%   52.9%  node::crypto::PBKDF2(v8::FunctionCallbackInfo&lt;v8::Value&gt; const&amp;)
+   4510   11.9%   12.2%  _sha1_block_data_order
+   3165    8.4%    8.6%  _malloc_zone_malloc
+</code></pre>
+<!-- -->
+<p>上位 3 つのエントリが、プログラムで使用された CPU 時間の 72.1％ を占めていることがわかります。
+この出力から、すぐにユーザのパスワードからのハッシュ生成に対応する PBKDF2 と呼ばれる機能によって
+CPU 時間の少なくとも 51.8％ が占められていることが分かります。
+ただし、下位2つのエントリがどのように私たちのアプリケーションに組み込まれるのか
+(またはそうである場合は例のために別のふりをすることになる)、
+すぐには明らかにならないかもしれません。
+これらの関数間の関係をよりよく理解するために、
+次に各関数の主な呼び出し元に関する情報を提供する [Bottom up (heavy) profile] セクションを見ていきます。
+このセクションを調べると、次のことがわかります。</p>
+<pre><code class="language-text">   ticks parent  name
+  19557   51.8%  node::crypto::PBKDF2(v8::FunctionCallbackInfo&lt;v8::Value&gt; const&amp;)
+  19557  100.0%    v8::internal::Builtins::~Builtins()
+  19557  100.0%      LazyCompile: ~pbkdf2 crypto.js:557:16
+
+   4510   11.9%  _sha1_block_data_order
+   4510  100.0%    LazyCompile: *pbkdf2 crypto.js:557:16
+   4510  100.0%      LazyCompile: *exports.pbkdf2Sync crypto.js:552:30
+
+   3165    8.4%  _malloc_zone_malloc
+   3161   99.9%    LazyCompile: *pbkdf2 crypto.js:557:16
+   3161  100.0%      LazyCompile: *exports.pbkdf2Sync crypto.js:552:30
+</code></pre>
+<!-- -->
+<p>このセクションを解析することは、
+上の生のティックカウントよりも少し多くの作業を要します。
+上記の各「コールスタック」内で、親列のパーセントは、
+上の行の関数が現在の行の関数によって呼び出されたサンプルの割合を示しています。
+たとえば、_sha1_block_data_order の上の中央の &quot;call stack&quot; では、
+<code>_sha1_block_data_order</code> がサンプルの 11.9％ で発生していることがわかります。
+これは、上記の raw カウントからわかりました。
+ただし、ここでは、Node.js 暗号モジュール内の pbkdf2 関数によって常に呼び出されたこともわかります。
+同様に、<code>_malloc_zone_malloc</code> はほとんど同じ pbkdf2 関数によって呼び出されています。
+したがって、このビューの情報を使用して、次のことがわかります。
+<code>_sha1_block_data_order</code> と <code>_malloc_zone_malloc</code> の呼び出しは pbkdf2 関数に代わって行われたため、
+ユーザのパスワードからのハッシュ計算は、上記の 51.8％ だけでなく、
+上位 3 つのサンプル関数のすべての CPU 時間も占めています。</p>
+<!-- -->
+<p>この時点で、パスワードベースのハッシュ生成が最適化の対象になるはずです。
+幸い、<a href="https://nodesource.com/blog/why-asynchronous">非同期プログラミングの利点</a> を完全に内部化したので、
+ユーザのパスワードからハッシュを生成する作業は同期的に行われ、
+イベントループが抑制されていることがわかりました。
+これにより、ハッシュを計算している間に
+他の受信したリクエストを処理することができなくなります。</p>
+<!-- -->
+<p>この問題を解決するには、非同期バージョンの pbkdf2 関数を使用するように
+上記のハンドラを少し変更します。</p>
+<pre><code class="language-javascript">app.get(&#x27;/auth&#x27;, (req, res) =&gt; {
+  let username = req.query.username || &#x27;&#x27;;
+  const password = req.query.password || &#x27;&#x27;;
+
+  username = username.replace(/[!@#$%^&amp;*]/g, &#x27;&#x27;);
+
+  if (!username || !password || users[username]) {
+    return res.sendStatus(400);
+  }
+
+  crypto.pbkdf2(password, users[username].salt, 10000, 512, &#x27;sha512&#x27;, (err, hash) =&gt; {
+    if (users[username].hash.toString() === hash.toString()) {
+      res.sendStatus(200);
+    } else {
+      res.sendStatus(401);
+    }
+  });
+});
+</code></pre>
+<!-- -->
+<p>非同期バージョンのアプリを使って新しい上記の ab ベンチマークを実行すると、
+次のようになります。</p>
+<pre><code class="language-text">Concurrency Level:      20
+Time taken for tests:   12.846 seconds
+Complete requests:      250
+Failed requests:        0
+Keep-Alive requests:    250
+Total transferred:      50250 bytes
+HTML transferred:       500 bytes
+Requests per second:    19.46 [#/sec] (mean)
+Time per request:       1027.689 [ms] (mean)
+Time per request:       51.384 [ms] (mean, across all concurrent requests)
+Transfer rate:          3.82 [Kbytes/sec] received
+
+...
+
+Percentage of the requests served within a certain time (ms)
+  50%   1018
+  66%   1035
+  75%   1041
+  80%   1043
+  90%   1049
+  95%   1063
+  98%   1070
+  99%   1071
+ 100%   1079 (longest request)
+</code></pre>
+<!-- -->
+<p>やりました！ アプリは現在、毎秒約20リクエストを処理しています。
+これは同期ハッシュ生成の場合の約4倍です。
+さらに、平均待ち時間は4秒弱から1秒強に減少しています。</p>
+<!-- -->
+<p>うまくいけば、この (明らかに考案された) 例のパフォーマンス調査を通じて、
+V8 ティックプロセッサが Node.js アプリケーションのパフォーマンスの理解を深めるのに
+役立つ方法を見ることがあるでしょう。</p></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->上部へスクロールする</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"ja","localName":"日本語","name":"Japanese","langDir":"ltr","dateFormat":"YYYY.MM.DD","hrefLang":"ja","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"上部へスクロールする","components.header.links.home":"ホーム","components.header.links.about":"Node.js とは","components.header.links.download":"ダウンロード","components.header.links.docs":"ドキュメント","components.header.links.getInvolved":"参加する","components.header.links.security":"セキュリティ","components.header.links.certification":"Certification","components.header.links.blog":"ニュース","components.navigation.about.links.governance":"委員会","components.navigation.docs.links.es6":"ES6 について","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"ガイド","components.navigation.docs.links.dependencies":"依存関係","components.navigation.getInvolved.links.collabSummit":"Collab Summit","components.navigation.getInvolved.links.contribute":"貢献する","components.navigation.getInvolved.links.codeOfConduct":"行動規範","components.downloadList.links.previousReleases":"バージョンの一覧","components.downloadList.links.packageManager":"Iパッケージマネージャを使用したダウンロード","components.downloadList.links.shaSums":"リリースファイルのための SHASUM 署名","components.downloadList.links.shaSums.howToVerify":" (How to verify)","components.downloadList.links.allDownloads":"All download options","components.downloadList.links.nightlyReleases":"Nightly builds","components.downloadList.links.unofficialBuilds":"非公式のビルド版","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Installing Node.js via binary archive","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"変更履歴","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"ドキュメント","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"次 | ","components.pagination.previous":"前","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/ja/docs/guides/simple-profiling","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

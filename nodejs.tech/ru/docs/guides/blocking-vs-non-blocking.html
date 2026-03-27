@@ -1,0 +1,104 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Блокирующие и Неблокирующие Вызовы | Node.js node js 学习 中文网</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Блокирующие и Неблокирующие Вызовы | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Блокирующие и Неблокирующие Вызовы | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/ru/docs/guides/blocking-vs-non-blocking"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/ru/docs/guides/blocking-vs-non-blocking-034c788ae2b57883.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-2WRNZHGVQT"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-2WRNZHGVQT");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8264273508355034" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/ru"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/ru">Главная</a></li><li class=""><a href="/ru/about">О проекте</a></li><li class=""><a href="/ru/download">Загрузка</a></li><li class="active"><a href="/ru/docs">Документация</a></li><li class=""><a href="/ru/get-involved">Присоединиться</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">Безопасность</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class=""><a href="/ru/blog">Новости</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/blocking-vs-non-blocking">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/blocking-vs-non-blocking">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/blocking-vs-non-blocking">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/blocking-vs-non-blocking">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/blocking-vs-non-blocking">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/blocking-vs-non-blocking">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/blocking-vs-non-blocking">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/blocking-vs-non-blocking">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/blocking-vs-non-blocking">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/blocking-vs-non-blocking">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/blocking-vs-non-blocking">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/blocking-vs-non-blocking">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/blocking-vs-non-blocking">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/blocking-vs-non-blocking">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/blocking-vs-non-blocking">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/blocking-vs-non-blocking">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/blocking-vs-non-blocking">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/blocking-vs-non-blocking">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/ru/docs">Документация</a></li><li class=""><a href="/ru/docs/es6">ES6 и выше</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/ru/docs/guides">Руководства</a></li><li class=""><a href="/ru/docs/meta/topics/dependencies">Зависимости</a></li></ul></nav><article dir="auto"><h1 id="обзор-блокирующих-и-неблокирующих-вызовов">Обзор Блокирующих и Неблокирующих Вызовов<a id="header-обзор-блокирующих-и-неблокирующих-вызовов" class="anchor" href="#обзор-блокирующих-и-неблокирующих-вызовов" aria-labelledby="обзор-блокирующих-и-неблокирующих-вызовов"></a></h1>
+<p>Этот обзор рассматривает разницу между <strong>блокирующими</strong> и <strong>неблокирующими</strong>
+вызовами в Node.js. Он ссылается на цикл событий (event loop) и библиотеку libuv,
+однако предварительное знание этих тем не требуется. Предполагается, что
+читатели имеют базовое понимание JavaScript и паттерна обратных вызовов (callback)
+в Node.js.</p>
+<div class="highlight-box">
+<p>Обозначение &quot;I/O&quot; (Ввод/Вывод) в первую очередь ссылается на взаимодействие
+с системным диском и сетью при поддержке <a href="https://libuv.org/">libuv</a>.</p>
+</div>
+<h2 id="blocking">Блокирование<a id="header-blocking" class="anchor" href="#blocking" aria-labelledby="blocking"></a></h2>
+<p>О <strong>блокировании</strong> говорят, когда выполнение JS кода в Node.js
+приостановлено до тех пор, пока не завершится работа сторонней операции (например, чтение
+какого-нибудь файла). Так происходит потому, что цикл событий не может продолжить исполнение JavaScript,
+так как работает <strong>блокирующая</strong> операция.</p>
+<p>В Node.js медленно исполняемый JS код не принято называть <strong>блокирующим</strong>,
+если причиной тому высокая нагрузка кода на процессор, а не ожидание завершения
+сторонней операции. Синхронные методы в стандартной библиотеке Node.js,
+которые используют libuv — наиболее часто применяемые <strong>блокирующие</strong> операции.
+Нативные модули также могут иметь <strong>блокирующие</strong> методы.</p>
+<p>Все I/O методы в стандартной библиотеке Node.js предоставляют свои асинхронные версии,
+которые являются <strong>неблокирующими</strong> и принимают функции обратного вызова
+в качестве аргумента. Некоторые методы также имеют свои <strong>блокирующие</strong> аналоги.
+Названия таких методов заканчиваются на <code>Sync</code>.</p>
+<h2 id="comparing-code">Сравнение Кода<a id="header-comparing-code" class="anchor" href="#comparing-code" aria-labelledby="comparing-code"></a></h2>
+<p><strong>Блокирующие</strong> методы исполняются <strong>синхронно</strong>, а <strong>неблокирующие</strong> методы
+исполняются <strong>асинхронно</strong>.</p>
+<p>Возьмем модуль File System для примера. Вот пример <strong>синхронного</strong> чтения файла:</p>
+<pre><code class="language-js">const fs = require(&#x27;fs&#x27;);
+// исполнение кода заблокировано, пока файл не будет полностью считан
+const data = fs.readFileSync(&#x27;/file.md&#x27;);
+</code></pre>
+<p>А вот эквивалентный <strong>асинхронный</strong> пример:</p>
+<pre><code class="language-js">const fs = require(&#x27;fs&#x27;);
+fs.readFile(&#x27;/file.md&#x27;, (err, data) =&gt; {
+  if (err) throw err;
+});
+</code></pre>
+<p>Первый пример выглядит проще чем второй, но он имеет один недостаток: вторая строка
+<strong>блокирует</strong> исполнение любого нижеследующего кода, до тех пор, пока
+весь file.md не будет считан. Обратите внимание, если синхронная версия кода сгенерирует
+исключение, его нужно обработать, иначе процесс Node.js &quot;упадёт&quot;. В асинхронном варианте
+выбор — сгенерировать исключение или нет — оставлен на усмотрение программиста.</p>
+<p>Давайте немного расширим наш пример:</p>
+<pre><code class="language-js">const fs = require(&#x27;fs&#x27;);
+// исполнение кода заблокировано, пока файл не будет полностью считан
+const data = fs.readFileSync(&#x27;/file.md&#x27;);
+console.log(data);
+moreWork(); // функция будет исполнена, после console.log
+</code></pre>
+<p>А вот похожий, но не эквивалентный асинхронный пример:</p>
+<pre><code class="language-js">const fs = require(&#x27;fs&#x27;);
+fs.readFile(&#x27;/file.md&#x27;, (err, data) =&gt; {
+  if (err) throw err;
+  console.log(data);
+});
+moreWork(); // функция будет исполнена до console.log
+</code></pre>
+<p>В первом примере метод <code>console.log</code> будет вызван до срабатывания функции <code>moreWork()</code>.
+Во втором примере метод <code>fs.readFile()</code> является <strong>неблокирующим</strong>, поэтому исполнение
+JavaScript может продолжаться, не дожидаясь окончания его работы. Как следствие
+функция <code>moreWork()</code> сработает раньше <code>console.log</code>. Эта возможность — отсутствие необходимости
+дожидаться окончания чтения файла и других системных вызовов — ключевое
+инженерное решение, которое обеспечивает высокую пропускную способность Node.js.</p>
+<h2 id="concurrency-and-throughput">Конкурентность и Пропускная Способность<a id="header-concurrency-and-throughput" class="anchor" href="#concurrency-and-throughput" aria-labelledby="concurrency-and-throughput"></a></h2>
+<p>Исполнение JavaScript в Node.js является однопоточным. Поэтому, говоря о конкурентности
+(параллельности вычислений) в Node.js, подразумевают, что после того, как цикл событий обработал синхронный код,
+он способен обработать функции обратного вызова. Подобно сторонним операциям (таким как I/O),
+любой конкурентный код должен позволять циклу событий продолжать свою работу.</p>
+<p>В качестве примера возьмем запросы к веб-серверу. Допустим, обработка сервером одного запроса
+занимает 50мс. Из этих 50мс, 45мс уходит на операции чтения/записи в базу данных.
+С базой данных можно взаимодействовать и <strong>асинхронно</strong>. При таком подходе на каждый запрос
+к веб-серверу <strong>неблокирующая</strong> асинхронная операция высвободит 45мс для обработки других
+запросов, а это существенная разница.</p>
+<p>Обработка конкурентной (параллельной) работы при помощи цикла событий в Node.js
+отличается от подходов во многих других языках программирования, в которых могут
+создаваться дополнительные потоки.</p>
+<h2 id="dangers-of-mixing-blocking-and-non-blocking-code">Опасность смешивания Блокирующего и Неблокирующего Кода<a id="header-dangers-of-mixing-blocking-and-non-blocking-code" class="anchor" href="#dangers-of-mixing-blocking-and-non-blocking-code" aria-labelledby="dangers-of-mixing-blocking-and-non-blocking-code"></a></h2>
+<p>Существуют паттерны, которые следует избегать при работе с I/O. Взглянем на пример:</p>
+<pre><code class="language-js">const fs = require(&#x27;fs&#x27;);
+fs.readFile(&#x27;/file.md&#x27;, (err, data) =&gt; {
+  if (err) throw err;
+  console.log(data);
+});
+fs.unlinkSync(&#x27;/file.md&#x27;);
+</code></pre>
+<p>В вышеуказанном примере метод <code>fs.unlinkSync()</code> с высокой вероятностью будет исполнен до
+<code>fs.readFile()</code>. Это приведет к удалению файла до его прочтения. Лучше переписать
+этот код в <strong>неблокирующем</strong> виде, что гарантирует правильный порядок исполнения методов:</p>
+<pre><code class="language-js">const fs = require(&#x27;fs&#x27;);
+fs.readFile(&#x27;/file.md&#x27;, (readFileErr, data) =&gt; {
+  if (readFileErr) throw readFileErr;
+  console.log(data);
+  fs.unlink(&#x27;/file.md&#x27;, (unlinkErr) =&gt; {
+    if (unlinkErr) throw unlinkErr;
+  });
+});
+</code></pre>
+<p>В последнем примере <strong>неблокирующий</strong> вызов метода <code>fs.unlink()</code> расположен внутри функции обратного вызова
+<code>fs.readFile()</code>. Такой подход гарантирует правильную последовательность операций.</p>
+<h2 id="additional-resources">Дополнительные ресурсы<a id="header-additional-resources" class="anchor" href="#additional-resources" aria-labelledby="additional-resources"></a></h2>
+<ul>
+<li><a href="https://libuv.org/">libuv</a></li>
+</ul></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->Вверх</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"ru","localName":"Русский","name":"Russian","langDir":"ltr","dateFormat":"DD.MM.YYYY","hrefLang":"ru","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"Вверх","components.header.links.home":"Главная","components.header.links.about":"О проекте","components.header.links.download":"Загрузка","components.header.links.docs":"Документация","components.header.links.getInvolved":"Присоединиться","components.header.links.security":"Безопасность","components.header.links.certification":"Certification","components.header.links.blog":"Новости","components.navigation.about.links.governance":"Управление","components.navigation.docs.links.es6":"ES6 и выше","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"Руководства","components.navigation.docs.links.dependencies":"Зависимости","components.navigation.getInvolved.links.collabSummit":"Саммит сотрудников","components.navigation.getInvolved.links.contribute":"Участие","components.navigation.getInvolved.links.codeOfConduct":"Правила","components.downloadList.links.previousReleases":"Предыдущие релизы","components.downloadList.links.packageManager":"Установка Node.js с помощью пакетного менеджера","components.downloadList.links.shaSums":"Подписанные SHASUMS для файлов релиза","components.downloadList.links.shaSums.howToVerify":" (Как проверить)","components.downloadList.links.allDownloads":"Все варианты загрузки","components.downloadList.links.nightlyReleases":"Ночные сборки","components.downloadList.links.unofficialBuilds":"Неофициальные сборки","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Установка Node.js через бинарный архив в Linux","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"Список изменений","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"Документация","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"Следующий | ","components.pagination.previous":"Предыдущий","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/ru/docs/guides/blocking-vs-non-blocking","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

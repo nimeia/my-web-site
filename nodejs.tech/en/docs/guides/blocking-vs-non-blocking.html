@@ -1,0 +1,104 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Overview of Blocking vs Non-Blocking | Node.js node js 学习 中文网</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Overview of Blocking vs Non-Blocking | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Overview of Blocking vs Non-Blocking | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/en/docs/guides/blocking-vs-non-blocking"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/en/docs/guides/blocking-vs-non-blocking-4c89647f1efad234.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-2WRNZHGVQT"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-2WRNZHGVQT");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8264273508355034" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/en"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/en">Home</a></li><li class=""><a href="/en/about">About</a></li><li class=""><a href="/en/download">Downloads</a></li><li class="active"><a href="/en/docs">Docs</a></li><li class=""><a href="/en/get-involved">Get Involved</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">Security</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class=""><a href="/en/blog">News</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/blocking-vs-non-blocking">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/blocking-vs-non-blocking">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/blocking-vs-non-blocking">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/blocking-vs-non-blocking">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/blocking-vs-non-blocking">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/blocking-vs-non-blocking">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/blocking-vs-non-blocking">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/blocking-vs-non-blocking">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/blocking-vs-non-blocking">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/blocking-vs-non-blocking">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/blocking-vs-non-blocking">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/blocking-vs-non-blocking">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/blocking-vs-non-blocking">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/blocking-vs-non-blocking">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/blocking-vs-non-blocking">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/blocking-vs-non-blocking">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/blocking-vs-non-blocking">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/blocking-vs-non-blocking">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/en/docs">Docs</a></li><li class=""><a href="/en/docs/es6">ES6 and beyond</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/en/docs/guides">Guides</a></li><li class=""><a href="/en/docs/meta/topics/dependencies">Dependencies</a></li></ul></nav><article dir="auto"><h1 id="overview-of-blocking-vs-non-blocking">Overview of Blocking vs Non-Blocking<a id="header-overview-of-blocking-vs-non-blocking" class="anchor" href="#overview-of-blocking-vs-non-blocking" aria-labelledby="overview-of-blocking-vs-non-blocking"></a></h1>
+<p>This overview covers the difference between <strong>blocking</strong> and <strong>non-blocking</strong>
+calls in Node.js. This overview will refer to the event loop and libuv but no
+prior knowledge of those topics is required. Readers are assumed to have a
+basic understanding of the JavaScript language and Node.js callback pattern.</p>
+<div class="highlight-box">
+<p>&quot;I/O&quot; refers primarily to interaction with the system&#x27;s disk and
+network supported by <a href="https://libuv.org/">libuv</a>.</p>
+</div>
+<h2 id="blocking">Blocking<a id="header-blocking" class="anchor" href="#blocking" aria-labelledby="blocking"></a></h2>
+<p><strong>Blocking</strong> is when the execution of additional JavaScript in the Node.js
+process must wait until a non-JavaScript operation completes. This happens
+because the event loop is unable to continue running JavaScript while a
+<strong>blocking</strong> operation is occurring.</p>
+<p>In Node.js, JavaScript that exhibits poor performance due to being CPU intensive
+rather than waiting on a non-JavaScript operation, such as I/O, isn&#x27;t typically
+referred to as <strong>blocking</strong>. Synchronous methods in the Node.js standard library
+that use libuv are the most commonly used <strong>blocking</strong> operations. Native
+modules may also have <strong>blocking</strong> methods.</p>
+<p>All of the I/O methods in the Node.js standard library provide asynchronous
+versions, which are <strong>non-blocking</strong>, and accept callback functions. Some
+methods also have <strong>blocking</strong> counterparts, which have names that end with
+<code>Sync</code>.</p>
+<h2 id="comparing-code">Comparing Code<a id="header-comparing-code" class="anchor" href="#comparing-code" aria-labelledby="comparing-code"></a></h2>
+<p><strong>Blocking</strong> methods execute <strong>synchronously</strong> and <strong>non-blocking</strong> methods
+execute <strong>asynchronously</strong>.</p>
+<p>Using the File System module as an example, this is a <strong>synchronous</strong> file read:</p>
+<pre><code class="language-js">const fs = require(&quot;fs&quot;);
+const data = fs.readFileSync(&quot;/file.md&quot;); // blocks here until file is read
+</code></pre>
+<p>And here is an equivalent <strong>asynchronous</strong> example:</p>
+<pre><code class="language-js">const fs = require(&quot;fs&quot;);
+fs.readFile(&quot;/file.md&quot;, (err, data) =&gt; {
+  if (err) throw err;
+});
+</code></pre>
+<p>The first example appears simpler than the second but has the disadvantage of
+the second line <strong>blocking</strong> the execution of any additional JavaScript until
+the entire file is read. Note that in the synchronous version if an error is
+thrown it will need to be caught or the process will crash. In the asynchronous
+version, it is up to the author to decide whether an error should throw as
+shown.</p>
+<p>Let&#x27;s expand our example a little bit:</p>
+<pre><code class="language-js">const fs = require(&quot;fs&quot;);
+const data = fs.readFileSync(&quot;/file.md&quot;); // blocks here until file is read
+console.log(data);
+moreWork(); // will run after console.log
+</code></pre>
+<p>And here is a similar, but not equivalent asynchronous example:</p>
+<pre><code class="language-js">const fs = require(&quot;fs&quot;);
+fs.readFile(&quot;/file.md&quot;, (err, data) =&gt; {
+  if (err) throw err;
+  console.log(data);
+});
+moreWork(); // will run before console.log
+</code></pre>
+<p>In the first example above, <code>console.log</code> will be called before <code>moreWork()</code>. In
+the second example <code>fs.readFile()</code> is <strong>non-blocking</strong> so JavaScript execution
+can continue and <code>moreWork()</code> will be called first. The ability to run
+<code>moreWork()</code> without waiting for the file read to complete is a key design
+choice that allows for higher throughput.</p>
+<h2 id="concurrency-and-throughput">Concurrency and Throughput<a id="header-concurrency-and-throughput" class="anchor" href="#concurrency-and-throughput" aria-labelledby="concurrency-and-throughput"></a></h2>
+<p>JavaScript execution in Node.js is single threaded, so concurrency refers to the
+event loop&#x27;s capacity to execute JavaScript callback functions after completing
+other work. Any code that is expected to run in a concurrent manner must allow
+the event loop to continue running as non-JavaScript operations, like I/O, are
+occurring.</p>
+<p>As an example, let&#x27;s consider a case where each request to a web server takes
+50ms to complete and 45ms of that 50ms is database I/O that can be done
+asynchronously. Choosing <strong>non-blocking</strong> asynchronous operations frees up that
+45ms per request to handle other requests. This is a significant difference in
+capacity just by choosing to use <strong>non-blocking</strong> methods instead of
+<strong>blocking</strong> methods.</p>
+<p>The event loop is different than models in many other languages where additional
+threads may be created to handle concurrent work.</p>
+<h2 id="dangers-of-mixing-blocking-and-non-blocking-code">Dangers of Mixing Blocking and Non-Blocking Code<a id="header-dangers-of-mixing-blocking-and-non-blocking-code" class="anchor" href="#dangers-of-mixing-blocking-and-non-blocking-code" aria-labelledby="dangers-of-mixing-blocking-and-non-blocking-code"></a></h2>
+<p>There are some patterns that should be avoided when dealing with I/O. Let&#x27;s look
+at an example:</p>
+<pre><code class="language-js">const fs = require(&quot;fs&quot;);
+fs.readFile(&quot;/file.md&quot;, (err, data) =&gt; {
+  if (err) throw err;
+  console.log(data);
+});
+fs.unlinkSync(&quot;/file.md&quot;);
+</code></pre>
+<p>In the above example, <code>fs.unlinkSync()</code> is likely to be run before
+<code>fs.readFile()</code>, which would delete <code>file.md</code> before it is actually read. A
+better way to write this, which is completely <strong>non-blocking</strong> and guaranteed to
+execute in the correct order is:</p>
+<pre><code class="language-js">const fs = require(&quot;fs&quot;);
+fs.readFile(&quot;/file.md&quot;, (readFileErr, data) =&gt; {
+  if (readFileErr) throw readFileErr;
+  console.log(data);
+  fs.unlink(&quot;/file.md&quot;, (unlinkErr) =&gt; {
+    if (unlinkErr) throw unlinkErr;
+  });
+});
+</code></pre>
+<p>The above places a <strong>non-blocking</strong> call to <code>fs.unlink()</code> within the callback of
+<code>fs.readFile()</code> which guarantees the correct order of operations.</p>
+<h2 id="additional-resources">Additional Resources<a id="header-additional-resources" class="anchor" href="#additional-resources" aria-labelledby="additional-resources"></a></h2>
+<ul>
+<li><a href="https://libuv.org/">libuv</a></li>
+</ul></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->Scroll to top</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"en","localName":"English","name":"English","langDir":"ltr","dateFormat":"MM.DD.YYYY","hrefLang":"en-US","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"Scroll to top","components.header.links.home":"Home","components.header.links.about":"About","components.header.links.download":"Downloads","components.header.links.docs":"Docs","components.header.links.getInvolved":"Get Involved","components.header.links.security":"Security","components.header.links.certification":"Certification","components.header.links.blog":"News","components.navigation.about.links.governance":"Governance","components.navigation.docs.links.es6":"ES6 and beyond","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"Guides","components.navigation.docs.links.dependencies":"Dependencies","components.navigation.getInvolved.links.collabSummit":"Collab Summit","components.navigation.getInvolved.links.contribute":"Contribute","components.navigation.getInvolved.links.codeOfConduct":"Code of Conduct","components.downloadList.links.previousReleases":"Previous Releases","components.downloadList.links.packageManager":"Installing Node.js via package manager","components.downloadList.links.shaSums":"Signed SHASUMS for release files","components.downloadList.links.shaSums.howToVerify":" (How to verify)","components.downloadList.links.allDownloads":"All download options","components.downloadList.links.nightlyReleases":"Nightly builds","components.downloadList.links.unofficialBuilds":"Unofficial builds","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Installing Node.js via binary archive","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"Changelog","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"Docs","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"Newer | ","components.pagination.previous":"Older","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/en/docs/guides/blocking-vs-non-blocking","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

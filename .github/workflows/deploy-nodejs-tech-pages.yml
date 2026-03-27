@@ -1,0 +1,21 @@
+name: Deploy nodejs.tech
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "nodejs.tech/**"
+      - "ads.txt/nodejs.tech.txt"
+      - "scripts/prepare-cloudflare-static.mjs"
+      - ".github/workflows/_deploy-pages-site.yml"
+      - ".github/workflows/deploy-nodejs-tech-pages.yml"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/_deploy-pages-site.yml
+    with:
+      site_dir: nodejs.tech
+      pages_project_name: ${{ vars.CF_PAGES_PROJECT_NODEJS_TECH }}
+    secrets: inherit

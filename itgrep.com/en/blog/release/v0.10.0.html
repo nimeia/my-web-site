@@ -1,0 +1,329 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Node v0.10.0 (Stable) | Node.js</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Node v0.10.0 (Stable) | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Node v0.10.0 (Stable) | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/en/blog/release/v0.10.0"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/en/blog/release/v0.10.0-86c6a217d8d0f34b.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NDMJQNDPS"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-6NDMJQNDPS");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7950559866369342" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/en"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/en">Home</a></li><li class=""><a href="/en/about">About</a></li><li class=""><a href="/en/download">Downloads</a></li><li class=""><a href="/en/docs">Docs</a></li><li class=""><a href="/en/get-involved">Get Involved</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">Security</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class="active"><a href="/en/blog">News</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/blog/release/v0.10.0">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/blog/release/v0.10.0">Catalan</a></li><li><a data-lang="de" title="German" href="/de/blog/release/v0.10.0">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/blog/release/v0.10.0">English</a></li><li><a data-lang="es" title="Spanish" href="/es/blog/release/v0.10.0">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/blog/release/v0.10.0">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/blog/release/v0.10.0">Français</a></li><li><a data-lang="it" title="Italian" href="/it/blog/release/v0.10.0">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/blog/release/v0.10.0">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/blog/release/v0.10.0">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/blog/release/v0.10.0">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/blog/release/v0.10.0">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/blog/release/v0.10.0">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/blog/release/v0.10.0">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/blog/release/v0.10.0">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/blog/release/v0.10.0">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/blog/release/v0.10.0">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/blog/release/v0.10.0">繁體中文</a></li></ul></div></header><main id="main"><div class="container"><article dir="auto"><div class="blogpost-header"><h1>Node v0.10.0 (Stable)</h1><span class="blogpost-meta">By Isaac Z. Schlueter, <time dateTime="2013-03-12T00:00:00+0800">2013-03-12</time></span></div><p>I am pleased to announce a new stable version of Node.</p>
+<p>This branch brings significant improvements to many areas, with a
+focus on API polish, ease of use, and backwards compatibility.</p>
+<p>For a very brief overview of the relevant API changes since v0.8,
+please see <a href="https://github.com/joyent/node/wiki/Api-changes-between-v0.8-and-v0.10">the API changes wiki
+page</a>.</p>
+<h2 id="streams2">Streams2<a id="header-streams2" class="anchor" href="#streams2" aria-labelledby="streams2"></a></h2>
+<p>In a <a href="http://blog.nodejs.org/2012/12/20/streams2/">previous post</a>, we
+introduced the
+&quot;<a href="http://blog.nodejs.org/2012/12/20/streams2/">Streams2</a>&quot; API changes.
+If you haven&#x27;t reviewed the changes, please go read that now (at least
+the tl;dr section).</p>
+<p>The changes to the stream interface have been a long time in the
+making. Even from the earliest days of Node, we&#x27;ve all sort of known
+that this whole &quot;data events come right away&quot; and &quot;pause() is
+advisory&quot; stuff was unnecessarily awful. In v0.10, we finally bit the
+bullet and committed to making drastic changes in order to make these
+things better.</p>
+<p>More importantly, all streams in Node-core are built using the same
+set of easily-extended base classes, so their behavior is much more
+consistent, and it&#x27;s easier than ever to create streaming interfaces
+in your own userland programs.</p>
+<p>In fact, the Streams2 API was developed while using it for modules in
+the npm registry. At the time of this writing, <a href="https://www.npmjs.com/browse/depended/readable-stream">37 published Node
+modules</a> already
+are using the
+<a href="https://www.npmjs.com/package/readable-stream">readable-stream</a> library
+as a dependency. The readable-stream npm package allows you to use
+the new Stream interface in your legacy v0.8 codebase.</p>
+<h2 id="domains-and-error-handling">Domains and Error Handling<a id="header-domains-and-error-handling" class="anchor" href="#domains-and-error-handling" aria-labelledby="domains-and-error-handling"></a></h2>
+<p>The <code>domain</code> module has been elevated from &quot;Experimental&quot; to
+&quot;Unstable&quot; status. It&#x27;s been given more of a first-class treatment
+internally, making it easier to handle some of the edge cases that we
+found using Domains for error handling in v0.8. Specifically, domain
+error handler no longer relies on <code>process.on(&#x27;uncaughtException&#x27;)</code>
+being raised, and the C++ code in Node is domain-aware.</p>
+<p>If you&#x27;re not already using Domains to catch errors in your programs,
+and you&#x27;ve found yourself wishing that you could get better debugging
+information when errors are thrown (especially in the midst of lots of
+requests and asynchronous calls), then definitely check it out.</p>
+<h2 id="faster-processnexttick">Faster process.nextTick<a id="header-faster-processnexttick" class="anchor" href="#faster-processnexttick" aria-labelledby="faster-processnexttick"></a></h2>
+<p>In v0.8 (and before), the <code>process.nextTick()</code> function scheduled its
+callback using a spinner on the event loop. This <em>usually</em> caused the
+callback to be fired before any other I/O. However, it was not
+guaranteed.</p>
+<p>As a result, a lot of programs (including some parts of Node&#x27;s
+internals) began using <code>process.nextTick</code> as a &quot;do later, but before
+any actual I/O is performed&quot; interface. Since it usually works that
+way, it seemed fine.</p>
+<p>However, under load, it&#x27;s possible for a server to have a lot of I/O
+scheduled, to the point where the <code>nextTick</code> gets preempted for
+something else. This led to some odd errors and race conditions,
+which could not be fixed without changing the semantics of nextTick.</p>
+<p>So, that&#x27;s what we did. In v0.10, <code>nextTick</code> handlers are run right
+after each call from C++ into JavaScript. That means that, if your
+JavaScript code calls <code>process.nextTick</code>, then the callback will fire
+as soon as the code runs to completion, but <em>before</em> going back to
+the event loop. The race is over, and all is good.</p>
+<p>However, there are programs out in the wild that use recursive calls
+to <code>process.nextTick</code> to avoid pre-empting the I/O event loop for
+long-running jobs. In order to avoid breaking horribly right away,
+Node will now print a deprecation warning, and ask you to use
+<code>setImmediate</code> for these kinds of tasks instead.</p>
+<h2 id="latency-and-idle-garbage-collection">Latency and Idle Garbage Collection<a id="header-latency-and-idle-garbage-collection" class="anchor" href="#latency-and-idle-garbage-collection" aria-labelledby="latency-and-idle-garbage-collection"></a></h2>
+<p>One of the toughest things to get right in a garbage collected
+language is garbage collection. In order to try to avoid excessive
+memory usage, Node used to try to tell V8 to collect some garbage
+whenever the event loop was idle.</p>
+<p>However, knowing exactly when to do this is extremely difficult.
+There are different degrees of &quot;idleness&quot;, and if you get it wrong,
+you can easily end up spending massive amounts of time collecting
+garbage when you&#x27;d least expect. In practice, disabling the
+<code>IdleNotification</code> call yields better performance without any
+excessive memory usage, because V8 is pretty good at knowing when it&#x27;s
+the best time to run GC.</p>
+<p>So, in v0.10, we just ripped that feature out. (According to another
+point of view, we fixed the bug that it was ever there in the first
+place.)  As a result, latency is much more predictable and stable.
+You won&#x27;t see a difference in the benchmarks as a result of this, but
+you&#x27;ll probably find that your app&#x27;s response times are more reliable.</p>
+<h2 id="performance-and-benchmarks">Performance and Benchmarks<a id="header-performance-and-benchmarks" class="anchor" href="#performance-and-benchmarks" aria-labelledby="performance-and-benchmarks"></a></h2>
+<p>When the Streams2 feature first landed in master, it disrupted a lot
+of things. We focused first on correctness rather than speed, and as
+a result of that, we got a correct implementation that was
+significantly slower.</p>
+<p>We have a consistent rule in Node, that it cannot be allowed to get
+slower for our main use cases. It took a lot of work, but over the
+last few months, we&#x27;ve managed to get v0.10 to an appropriate level of
+performance, without sacrificing the API goals that we had in mind.</p>
+<p>Benchmarks are complicated beasts. Until this release, we&#x27;ve gotten
+by with a pretty ad-hoc approach to running benchmarks. However, as
+we started actually having to track down regressions, the need for a
+more comprehensive approach was obvious.</p>
+<p>Work is underway to figure out the optimum way to get statistically
+significant benchmark results in an automated way. As it is, we&#x27;re
+still seeing significant jitter in some of the data, so take the red
+and green colors with a grain of salt.</p>
+<p>The benchmarks below were run on an Apple 13-inch, Late 2011 MacBook
+Pro with a 2.8 GHz Intel Core i7 processor, 8GB of 1333MHz DDR3 RAM,
+running OS X Lion 10.7.5 (11G63b). The numbers are slightly different
+on Linux and SmartOS, but the conclusions are the same. The <a href="https://nodejs.org/benchmarks-v0.10-vs-v0.8/">raw data
+is available</a>, as well.</p>
+<h2 id="benchmarks-http">Benchmarks: http<a id="header-benchmarks-http" class="anchor" href="#benchmarks-http" aria-labelledby="benchmarks-http"></a></h2>
+<p>Node is for websites, and websites run over HTTP, so this is the one
+that people usually care the most about:</p>
+<!-- -->
+<p>What we see here is that, overall, HTTP is faster. It&#x27;s just slightly
+slower (1-5%) when sending extremely large string messages (ie
+<code>type=bytes</code> rather than <code>type=buffer</code>). But otherwise, things are
+about the same, or slightly faster.</p>
+<h2 id="benchmarks-fs">Benchmarks: fs<a id="header-benchmarks-fs" class="anchor" href="#benchmarks-fs" aria-labelledby="benchmarks-fs"></a></h2>
+<p>The fs.ReadStream throughput is massively improved, and less affected
+by the chunk size argument:</p>
+<!-- -->
+<p>The fs.WriteStream throughput increases considerably, for most
+workloads. As the size of the chunk goes up, the speed is limited by
+the underlying system and the cost of string conversion, so v0.8 and
+v0.10 converge. But for smaller chunk sizes (like you&#x27;d be more
+likely to see in real applications), v0.10 is a significant
+improvement.</p>
+<!-- -->
+<h2 id="benchmark-tls">Benchmark: tls<a id="header-benchmark-tls" class="anchor" href="#benchmark-tls" aria-labelledby="benchmark-tls"></a></h2>
+<p>We switched to a newer version of OpenSSL, and the CryptoStream
+implementation was significantly changed to support the Stream2
+interface.</p>
+<p>The throughput of TLS connections is massively improved:</p>
+<!-- -->
+<p>However, the speed at which we can make connections is somewhat
+reduced:</p>
+<!-- -->
+<p>At this point, it seems like the connection speed is related to the
+new version of OpenSSL, but we&#x27;ll be tracking that further.</p>
+<p>TLS still has more room for improvement, but this throughput increase
+is a huge step.</p>
+<h2 id="benchmark-net">Benchmark: net<a id="header-benchmark-net" class="anchor" href="#benchmark-net" aria-labelledby="benchmark-net"></a></h2>
+<p>The net throughput tests tell an interesting story. When sending
+ascii messages, they&#x27;re much faster.</p>
+<!-- -->
+<p>When sending Buffer messages, they&#x27;re just slightly slower. (This
+difference is less than the typical variability of the test, but they
+were run 20 times and outliers were factored out for this post.)</p>
+<!-- -->
+<p>When sending utf-8 messages, they&#x27;re a bit slower than that:</p>
+<!-- -->
+<p>You might suspect that this is a result of the new Streams
+implementation. However, running the same benchmarks without using
+any of the code in Node&#x27;s <code>lib/</code> folder, just calling into the C++
+bindings directly, yields consistently similar results.</p>
+<p>This slight regression comes along with significant improvements in
+everything that sits on <em>top</em> of TCP (that is, TLS and HTTP).</p>
+<p>Keep an eye out for more work in this area. Fast is never fast
+enough!</p>
+<h2 id="continuous-integration">Continuous Integration<a id="header-continuous-integration" class="anchor" href="#continuous-integration" aria-labelledby="continuous-integration"></a></h2>
+<p>To support a higher degree of stability, and hopefully catch issues
+sooner, we have a Jenkins instance running every commit through the
+test suite, on each operating system we support. You can watch the
+action at <a href="http://jenkins.nodejs.org/">the Node Jenkins web portal</a>.</p>
+<p>Coming soon, we&#x27;ll have automatically generated nightly builds every
+day, and eventually, the entire release process will be automated.</p>
+<p>While we&#x27;re pretty rigorous about running tests and benchmarks, it&#x27;s
+easy for things to slip by, and our ad-hoc methods are not cutting it
+any longer. This promises a much lower incidence of the sort of
+regressions that delayed the release of v0.10 for several months.</p>
+<h2 id="growing-out">Growing Out<a id="header-growing-out" class="anchor" href="#growing-out" aria-labelledby="growing-out"></a></h2>
+<p>A year ago, we said that the innovation in the Node universe would be
+happening in userland modules. Now, we&#x27;ve finally taken that to its
+logical conclusion, and moved our iteration on <strong>core</strong> modules into
+userland as well. Things like <code>readable-stream</code> and <code>tlsnappy</code> allow
+us to get much more user-testing, experimentation, and contributions
+to a feature.</p>
+<p>The userland module can live on as a compatibility layer so that
+libraries can use the new features, even if they need to support older
+versions of Node. This is a remarkably effective way to do node-core
+development. Future developments will continue to be iterated in
+userland modules.</p>
+<p></p>
+<h2 id="growing-up">Growing Up<a id="header-growing-up" class="anchor" href="#growing-up" aria-labelledby="growing-up"></a></h2>
+<p>The question comes up pretty often whether Node is &quot;ready for prime
+time&quot; yet. I usually answer that it depends on your requirements for
+&quot;prime time&quot;, but Node has been powering some high profile sites, and
+the options for &quot;real&quot; companies using Node for The Business are
+better than ever.</p>
+<p>It would be out of scope to try to provide an exhaustive list of all
+the companies using Node, and all of the options for support and
+training. However, here are a few resources that are quickly
+expanding to fill the &quot;Enterprise Node&quot; space.</p>
+<p>For those looking for commercial support,
+<a href="http://strongloop.com/">StrongLoop</a> (Ben Noordhuis &amp; Bert Belder&#x27;s
+company) has released a distribution containing node v0.10 that they
+will support on Windows, Mac, Red Hat/Fedora, Debian/Ubuntu and
+multiple cloud platforms. You can <a href="http://strongloop.com/products#downloads">download their Node distribution
+here</a>.</p>
+<p><a href="http://thenodefirm.com">The Node Firm</a> is a worldwide network of key
+Node contributors and community members that help organizations
+succeed with Node. Through corporate training, consulting,
+architectural guidance, and <a href="http://thenodefirm.com/nodejs-consulting-subscriptions">ongoing consulting
+subscriptions</a>,
+they have helped Skype, Qualcomm, and others quickly and effectively
+embrace Node.</p>
+<p>Node would not be what it is without <a href="https://www.npmjs.com/">npm</a>, and
+npm would not be what it is without the registry of published modules.
+However, relying on the public registry is problematic for many
+enterprise use-cases. <a href="https://www.irisnpm.com/">Iris npm</a> is a fully
+managed private npm registry, from <a href="http://www.iriscouch.com">Iris
+Couch</a>, the team that runs the public npm
+registry in production.</p>
+<p><a href="http://joyent.com">Joyent</a>, the company you probably know as the
+custodian of the Node project, provides high performance cloud
+infrastructure specializing in real-time web and mobile applications.
+Joyent uses Node extensively throughout their stack, and provides
+impressive <a href="http://dtrace.org/blogs/dap/2012/05/31/debugging-node-js-in-production-fluent-slides/">post-mortem debugging and real-time performance analysis
+tools</a>
+for Node.js applications. They are also my employer, so I&#x27;d probably
+have to get a &quot;real&quot; job if they weren&#x27;t sponsoring Node :)</p>
+<h2 id="next-up-v012">Next Up: v0.12<a id="header-next-up-v012" class="anchor" href="#next-up-v012" aria-labelledby="next-up-v012"></a></h2>
+<p>The focus of Node v0.12 will be to make HTTP better. Node&#x27;s current
+HTTP implementation is pretty good, and clearly sufficient to do a lot
+of interesting things with. However:</p>
+<ol>
+<li>The codebase is a mess. We share a lot of code between the Client
+and Server implementations, but do so in a way that makes it
+unnecessarily painful to read the code or fix bugs. It will be
+split up so that client and server are clearly separated, and have
+cleaner interfaces.</li>
+<li>The socket pooling behavior is confusing and weird. We will be
+adding configurable socket pooling as a standalone utility. This
+will allow us to implement KeepAlive behavior in a more reasonable
+manner, as well as providing something that you can use in your own
+programs.</li>
+</ol>
+<p>There is some experimentation going on in the
+<a href="https://github.com/indutny/tlsnappy">tlsnappy</a> module, which may make
+its way back into the core TLS implementation and speed things up
+considerably.</p>
+<h2 id="10">1.0<a id="header-10" class="anchor" href="#10" aria-labelledby="10"></a></h2>
+<p>After 0.12, the next major stable release will be 1.0. At that point,
+very little will change in terms of the day-to-day operation of the
+project, but it will mark a significant milestone in terms of our
+stability and willingness to add new features. However, we&#x27;ve already
+gotten strict about maintaining backwards compatibility, so this won&#x27;t
+really be so much of a shift.</p>
+<p>New versions will still come out, especially to pull in new versions
+of our dependencies, and bugs will continue to be fixed. There&#x27;s been
+talk of pinning our release cycles to V8, and automating the release
+process in some interesting ways.</p>
+<p>The goal of Node has always been to eventually be &quot;finished&quot; with the
+core program. Of course, that&#x27;s a rather lofty goal, perhaps even
+impossible. But as we take Node to more places, and use it in more
+ways, we&#x27;re getting closer to the day when the relevant innovation
+happens outside of the core Node program.</p>
+<p>Stability in the platform enables growth on top of it.</p>
+<p>And now, the traditional release notes:</p>
+<h2 id="20130311-version-0100-stable">2013.03.11, Version 0.10.0 (Stable)<a id="header-20130311-version-0100-stable" class="anchor" href="#20130311-version-0100-stable" aria-labelledby="20130311-version-0100-stable"></a></h2>
+<ul>
+<li>
+<p>npm: Upgrade to 1.2.14</p>
+</li>
+<li>
+<p>core: Append filename properly in dlopen on windows (isaacs)</p>
+</li>
+<li>
+<p>zlib: Manage flush flags appropriately (isaacs)</p>
+</li>
+<li>
+<p>domains: Handle errors thrown in nested error handlers (isaacs)</p>
+</li>
+<li>
+<p>buffer: Strip high bits when converting to ascii (Ben Noordhuis)</p>
+</li>
+<li>
+<p>win/msi: Enable modify and repair (Bert Belder)</p>
+</li>
+<li>
+<p>win/msi: Add feature selection for various Node parts (Bert Belder)</p>
+</li>
+<li>
+<p>win/msi: use consistent registry key paths (Bert Belder)</p>
+</li>
+<li>
+<p>child_process: support sending dgram socket (Andreas Madsen)</p>
+</li>
+<li>
+<p>fs: Raise EISDIR on Windows when calling fs.read/write on a dir (isaacs)</p>
+</li>
+<li>
+<p>unix: fix strict aliasing warnings, macro-ify functions (Ben Noordhuis)</p>
+</li>
+<li>
+<p>unix: honor UV_THREADPOOL_SIZE environment var (Ben Noordhuis)</p>
+</li>
+<li>
+<p>win/tty: fix typo in color attributes enumeration (Bert Belder)</p>
+</li>
+<li>
+<p>win/tty: don&#x27;t touch insert mode or quick edit mode (Bert Belder)</p>
+</li>
+</ul>
+<p>Source Code: <a href="https://nodejs.org/dist/v0.10.0/node-v0.10.0.tar.gz">https://nodejs.org/dist/v0.10.0/node-v0.10.0.tar.gz</a></p>
+<p>Macintosh Installer (Universal): <a href="https://nodejs.org/dist/v0.10.0/node-v0.10.0.pkg">https://nodejs.org/dist/v0.10.0/node-v0.10.0.pkg</a></p>
+<p>Windows Installer: <a href="https://nodejs.org/dist/v0.10.0/node-v0.10.0-x86.msi">https://nodejs.org/dist/v0.10.0/node-v0.10.0-x86.msi</a></p>
+<p>Windows x64 Installer: <a href="https://nodejs.org/dist/v0.10.0/x64/node-v0.10.0-x64.msi">https://nodejs.org/dist/v0.10.0/x64/node-v0.10.0-x64.msi</a></p>
+<p>Windows x64 Files: <a href="https://nodejs.org/dist/v0.10.0/x64/">https://nodejs.org/dist/v0.10.0/x64/</a></p>
+<p>Linux 32-bit Binary: <a href="https://nodejs.org/dist/v0.10.0/node-v0.10.0-linux-x86.tar.gz">https://nodejs.org/dist/v0.10.0/node-v0.10.0-linux-x86.tar.gz</a></p>
+<p>Linux 64-bit Binary: <a href="https://nodejs.org/dist/v0.10.0/node-v0.10.0-linux-x64.tar.gz">https://nodejs.org/dist/v0.10.0/node-v0.10.0-linux-x64.tar.gz</a></p>
+<p>Solaris 32-bit Binary: <a href="https://nodejs.org/dist/v0.10.0/node-v0.10.0-sunos-x86.tar.gz">https://nodejs.org/dist/v0.10.0/node-v0.10.0-sunos-x86.tar.gz</a></p>
+<p>Solaris 64-bit Binary: <a href="https://nodejs.org/dist/v0.10.0/node-v0.10.0-sunos-x64.tar.gz">https://nodejs.org/dist/v0.10.0/node-v0.10.0-sunos-x64.tar.gz</a></p>
+<p>Other release files: <a href="https://nodejs.org/dist/v0.10.0/">https://nodejs.org/dist/v0.10.0/</a></p>
+<p>Website: <a href="https://nodejs.org/docs/v0.10.0/">https://nodejs.org/docs/v0.10.0/</a></p>
+<p>Documentation: <a href="https://nodejs.org/docs/v0.10.0/api/">https://nodejs.org/docs/v0.10.0/api/</a></p>
+<p>Shasums:</p>
+<pre><code class="language-text">b9e9bca99cdb5563cad3d3f04baa262e317b827c  node-v0.10.0-darwin-x64.tar.gz
+0227c9bc3df5b62267b9d4e3b0a92b3a70732229  node-v0.10.0-darwin-x86.tar.gz
+9f5f7350d6f889ea8e794516ecfea651e8e53d24  node-v0.10.0-linux-x64.tar.gz
+cc5f1cd6a2f2530bc400e761144bbaf8fcb66cc4  node-v0.10.0-linux-x86.tar.gz
+42c14b7eab398976b1ac0a8e6e96989059616af5  node-v0.10.0-sunos-x64.tar.gz
+ddcadbac66d1acea48aa6c5462d0a0d7308ea823  node-v0.10.0-sunos-x86.tar.gz
+70eacf2cca7abec79fac4ca502e8d99590a2108a  node-v0.10.0-x86.msi
+c48c269b9b0f0a95e6e9234d4597d1c8a1c45c5a  node-v0.10.0.pkg
+7321266347dc1c47ed2186e7d61752795ce8a0ef  node-v0.10.0.tar.gz
+f8c6f55469551243ea461f023cc57c024f57fef2  node.exe
+253ae79e411fcfddcf28861559ececb4b335db64  node.exp
+acb8febb5ea714c065f201ced5423b0838fdf1b6  node.lib
+0fdad1400036dd26d720070f783d3beeb3bb9c0a  node.pdb
+abcaf8ef606655a05e73ee5d06715ffd022aad22  x64/node-v0.10.0-x64.msi
+e5d0c235629b26430b6e07c07ee2c7dcda82f35e  x64/node.exe
+43b3fb3a6aaf6a04f578ee607a9455c1e23acf08  x64/node.exp
+87dd6eb6c8127a1af0dcca639961441fc303d75a  x64/node.lib
+50aca715777fa42b854e6cfc56b6199a54aabd3c  x64/node.pdb
+</code></pre></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->Scroll to top</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"en","localName":"English","name":"English","langDir":"ltr","dateFormat":"MM.DD.YYYY","hrefLang":"en-US","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"Scroll to top","components.header.links.home":"Home","components.header.links.about":"About","components.header.links.download":"Downloads","components.header.links.docs":"Docs","components.header.links.getInvolved":"Get Involved","components.header.links.security":"Security","components.header.links.certification":"Certification","components.header.links.blog":"News","components.navigation.about.links.governance":"Governance","components.navigation.docs.links.es6":"ES6 and beyond","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"Guides","components.navigation.docs.links.dependencies":"Dependencies","components.navigation.getInvolved.links.collabSummit":"Collab Summit","components.navigation.getInvolved.links.contribute":"Contribute","components.navigation.getInvolved.links.codeOfConduct":"Code of Conduct","components.downloadList.links.previousReleases":"Previous Releases","components.downloadList.links.packageManager":"Installing Node.js via package manager","components.downloadList.links.shaSums":"Signed SHASUMS for release files","components.downloadList.links.shaSums.howToVerify":" (How to verify)","components.downloadList.links.allDownloads":"All download options","components.downloadList.links.nightlyReleases":"Nightly builds","components.downloadList.links.unofficialBuilds":"Unofficial builds","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Installing Node.js via binary archive","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"Changelog","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"Docs","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"Newer | ","components.pagination.previous":"Older","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}}},"__N_SSG":true},"page":"/en/blog/release/v0.10.0","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

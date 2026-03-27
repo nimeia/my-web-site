@@ -1,0 +1,358 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Node.js Security Best Practices | Node.js node js 学习 中文网</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Node.js Security Best Practices | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Node.js Security Best Practices | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/en/docs/guides/security"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/en/docs/guides/security-de699e6719e7a1cc.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-2WRNZHGVQT"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-2WRNZHGVQT");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8264273508355034" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/en"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/en">Home</a></li><li class=""><a href="/en/about">About</a></li><li class=""><a href="/en/download">Downloads</a></li><li class="active"><a href="/en/docs">Docs</a></li><li class=""><a href="/en/get-involved">Get Involved</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">Security</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class=""><a href="/en/blog">News</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/security">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/security">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/security">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/security">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/security">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/security">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/security">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/security">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/security">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/security">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/security">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/security">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/security">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/security">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/security">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/security">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/security">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/security">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/en/docs">Docs</a></li><li class=""><a href="/en/docs/es6">ES6 and beyond</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/en/docs/guides">Guides</a></li><li class=""><a href="/en/docs/meta/topics/dependencies">Dependencies</a></li></ul></nav><article dir="auto"><h1 id="node.js-security-best-practices">Node.js Security Best Practices<a id="header-node.js-security-best-practices" class="anchor" href="#node.js-security-best-practices" aria-labelledby="node.js-security-best-practices"></a></h1>
+<h2 id="intent">Intent<a id="header-intent" class="anchor" href="#intent" aria-labelledby="intent"></a></h2>
+<p>This document intends to extend the current <a href="https://github.com/nodejs/node/blob/main/SECURITY.md#the-nodejs-threat-model">threat model</a> and provide extensive
+guidelines on how to secure a Node.js application.</p>
+<h2 id="document-content">Document Content<a id="header-document-content" class="anchor" href="#document-content" aria-labelledby="document-content"></a></h2>
+<ul>
+<li>Best practices: A simplified condensed way to see the best practices. We can
+use <a href="https://github.com/nodejs/security-wg/issues/488">this issue</a> or <a href="https://github.com/goldbergyoni/nodebestpractices">this guideline</a>
+as the starting point. It is important to note that this document is specific
+to Node.js, if you are looking for something broad, consider
+<a href="https://github.com/ossf/wg-best-practices-os-developers">OSSF Best Practices</a>.</li>
+<li>Attacks explained: illustrate and document in plain English with some code
+example (if possible) the attacks that we are mentioning in the threat model.</li>
+<li>Third-Party Libraries: define threats
+(typosquatting attacks, malicious packages...) and best practices regarding
+node modules dependencies, etc...</li>
+</ul>
+<h2 id="threat-list">Threat List<a id="header-threat-list" class="anchor" href="#threat-list" aria-labelledby="threat-list"></a></h2>
+<h3 id="denial-of-service-of-http-server-cwe-400">Denial of Service of HTTP server (CWE-400)<a id="header-denial-of-service-of-http-server-cwe-400" class="anchor" href="#denial-of-service-of-http-server-cwe-400" aria-labelledby="denial-of-service-of-http-server-cwe-400"></a></h3>
+<p>This is an attack where the application becomes unavailable for the purpose it
+was designed due to the way it processes incoming HTTP requests. These requests
+need not be deliberately crafted by a malicious actor: a misconfigured or buggy
+client can also send a pattern of requests to the server that result in a denial
+of service.</p>
+<p>HTTP requests are received by the Node.js HTTP server and handed over to the
+application code via the registered request handler. The server does not parse
+the content of the request body. Therefore any DoS caused by the contents of the
+body after they are handed over to the request handler is not a vulnerability in
+Node.js itself, since it&#x27;s the responsibility of the application code to handle
+it correctly.</p>
+<p>Ensure that the WebServer handle socket errors properly, for instance, when a
+server is created without a error handling, it will be vulnerable to DoS</p>
+<pre><code class="language-js">const net = require(&#x27;net&#x27;);
+
+const server = net.createServer(function(socket) {
+  // socket.on(&#x27;error&#x27;, console.error) // this prevents the server to crash
+  socket.write(&#x27;Echo server\r\n&#x27;);
+  socket.pipe(socket);
+});
+
+server.listen(5000, &#x27;0.0.0.0&#x27;);
+</code></pre>
+<p>If a <em>bad request</em> is performed the server could crash.</p>
+<p>An example of a DoS attack that is not caused by the request&#x27;s contents is
+<a href="https://en.wikipedia.org/wiki/Slowloris_(computer_security)">Slowloris</a>. In this attack, HTTP requests are sent slowly and fragmented,
+one fragment at a time. Until the full request is delivered, the server will
+keep resources dedicated to the ongoing request. If enough of these requests
+are sent at the same time, the amount of concurrent connections will soon reach
+its maximum resulting in a denial of service. This is how the attack depends
+not on the request&#x27;s contents, but on the timing and pattern of the requests
+being sent to the server.</p>
+<p><strong>Mitigations</strong></p>
+<ul>
+<li>Use a reverse proxy to receive and forward requests to the Node.js application.
+Reverse proxies can provide caching, load balancing, IP blacklisting, etc. which
+reduce the probability of a DoS attack being effective.</li>
+<li>Correctly configure the server timeouts, so that connections that are idle or
+where requests are arriving too slowly can be dropped. See the different timeouts
+in <a href="https://nodejs.org/api/http.html#class-httpserver"><code>http.Server</code></a>, particularly <code>headersTimeout</code>, <code>requestTimeout</code>, <code>timeout</code>,
+and <code>keepAliveTimeout</code>.</li>
+<li>Limit the number of open sockets per host and in total. See the <a href="https://nodejs.org/api/http.html">http docs</a>,
+particularly <code>agent.maxSockets</code>, <code>agent.maxTotalSockets</code>, <code>agent.maxFreeSockets</code>
+and <code>server.maxRequestsPerSocket</code>.</li>
+</ul>
+<h3 id="dns-rebinding-cwe-346">DNS Rebinding (CWE-346)<a id="header-dns-rebinding-cwe-346" class="anchor" href="#dns-rebinding-cwe-346" aria-labelledby="dns-rebinding-cwe-346"></a></h3>
+<p>This is an attack that can target Node.js applications being run with the
+debugging inspector enabled using the <a href="https://nodejs.org/en/docs/guides/debugging-getting-started/">--inspect switch</a>.</p>
+<p>Since websites opened in a web browser can make WebSocket and HTTP requests,
+they can target the debugging inspector running locally.
+This is usually prevented by the <a href="https://nodejs.org/en/docs/guides/debugging-getting-started/">same-origin policy</a> implemented by modern
+browsers, which forbids scripts from reaching resources from different origins
+(meaning a malicious website cannot read data requested from a local IP address).</p>
+<p>However, through DNS rebinding, an attacker can temporarily control the origin
+for their requests so that they seem to originate from a local IP address.
+This is done by controlling both a website and the DNS server used to resolve
+its IP address. See <a href="https://en.wikipedia.org/wiki/DNS_rebinding">DNS Rebinding wiki</a> for more details.</p>
+<p><strong>Mitigations</strong></p>
+<ul>
+<li>Disable inspector on <em>SIGUSR1</em> signal by attaching a <code>process.on(‘SIGUSR1’, …)</code>
+listener to it.</li>
+<li>Do not run the inspector protocol in production.</li>
+</ul>
+<h3 id="exposure-of-sensitive-information-to-an-unauthorized-actor-cwe-552">Exposure of Sensitive Information to an Unauthorized Actor (CWE-552)<a id="header-exposure-of-sensitive-information-to-an-unauthorized-actor-cwe-552" class="anchor" href="#exposure-of-sensitive-information-to-an-unauthorized-actor-cwe-552" aria-labelledby="exposure-of-sensitive-information-to-an-unauthorized-actor-cwe-552"></a></h3>
+<p>All the files and folders included in the current directory are pushed to the
+npm registry during the package publication.</p>
+<p>There are some mechanism to control this behavior by defining a blocklist with
+<code>.npmignore</code> and <code>.gitignore</code> or by defining an allowlist in the <code>package.json</code></p>
+<p><strong>Mitigations</strong></p>
+<ul>
+<li>Using <code>npm publish --dry-run</code> list all the files to publish. Ensure to review the
+content before publishing the package.</li>
+<li>It’s also important to create and maintain ignore files such as <code>.gitignore</code> and
+<code>.npmignore</code>.
+Throughout these files, you can specify which files/folders should not be published.
+The <a href="https://docs.npmjs.com/cli/v8/configuring-npm/package-json#files">files property</a> in <code>package.json</code> allows the inverse operation
+-- allowed list.</li>
+<li>In case of an exposure, make sure to <a href="https://docs.npmjs.com/unpublishing-packages-from-the-registry">unpublish the package</a>.</li>
+</ul>
+<h3 id="http-request-smuggling-cwe-444">HTTP Request Smuggling (CWE-444)<a id="header-http-request-smuggling-cwe-444" class="anchor" href="#http-request-smuggling-cwe-444" aria-labelledby="http-request-smuggling-cwe-444"></a></h3>
+<p>This is an attack that involves two HTTP servers (usually a proxy and a Node.js
+application). A client sends an HTTP request that goes first through the
+front-end server (the proxy) and then is redirected to the back-end server (the application).
+When the front-end and back-end interpret ambiguous HTTP requests differently,
+there is potential for an attacker to send a malicious message that won&#x27;t be
+seen by the front-end but will be seen by the back-end, effectively &quot;smuggling&quot;
+it past the proxy server.</p>
+<p>See the <a href="https://cwe.mitre.org/data/definitions/444.html">CWE-444</a> for a more detailed description and examples.</p>
+<p>Due to the fact that this attack depends on Node.js interpreting HTTP requests
+differently from an (arbitrary) HTTP server, a successful attack can be due to
+a vulnerability in Node.js, the front-end server, or both.
+If the way the request is interpreted by Node.js is consistent with the
+HTTP specification (see <a href="https://datatracker.ietf.org/doc/html/rfc7230#section-3">RFC7230</a>), then it is not considered a vulnerability
+in Node.js.</p>
+<p><strong>Mitigations</strong></p>
+<ul>
+<li>Do not use the <code>insecureHTTPParser</code> option when creating a HTTP Server.</li>
+<li>Configure the front-end server to normalize ambiguous requests.</li>
+<li>Continuously monitor for new HTTP request smuggling vulnerabilities in both
+Node.js and the front-end server of choice.</li>
+<li>Use HTTP/2 end to end and disable HTTP downgrading if possible.</li>
+</ul>
+<h3 id="information-exposure-through-timing-attacks-cwe-208">Information Exposure through Timing Attacks (CWE-208)<a id="header-information-exposure-through-timing-attacks-cwe-208" class="anchor" href="#information-exposure-through-timing-attacks-cwe-208" aria-labelledby="information-exposure-through-timing-attacks-cwe-208"></a></h3>
+<p>This is an attack that allows the attacker to learn potentially sensitive information by, for example, measuring how long
+it takes for the application to respond to a request. This attack is not specific to Node.js and can target almost all runtimes.</p>
+<p>The attack is possible whenever the application uses a secret in a timing-sensitive operation (e.g., branch). Consider handling authentication in typical application. Here, a basic authentication method includes email and password as credentials.
+User information is retrieved from the input user has supplied from ideally a
+DBMS.
+Upon retrieving user information, the password is compared within the user
+information retrieved from the database. Using the built-in string comparison takes a longer
+time for the same length values.
+This comparison, when run for an acceptable amount unwillingly increases the
+response time of the request. By comparing the request response times, an
+attacker can guess the length and the value of the password in large quantity
+of requests.</p>
+<p><strong>Mitigations</strong></p>
+<ul>
+<li>
+<p>The crypto API exposes a function <code>timingSafeEqual</code> to compare actual and
+expected sensitive values using a constant-time algorithm.</p>
+</li>
+<li>
+<p>For password comparison, you can use the <a href="https://nodejs.org/api/crypto.html#cryptoscryptpassword-salt-keylen-options-callback">scrypt</a> available also on the
+native crypto module.</p>
+</li>
+<li>
+<p>More generally, avoid using secrets in variable-time operations. This includes branching on secrets and, when the attacker could be co-located on the same infrastructure (e.g., same cloud machine), using a secret as an index into memory. Writing constant-time code in JavaScript is hard (partly because of the JIT). For crypto applications, use the built-in crypto APIs or WebAssembly (for algorithms not implemented in natively).</p>
+</li>
+</ul>
+<h3 id="malicious-third-party-modules-cwe-1357">Malicious Third-Party Modules (CWE-1357)<a id="header-malicious-third-party-modules-cwe-1357" class="anchor" href="#malicious-third-party-modules-cwe-1357" aria-labelledby="malicious-third-party-modules-cwe-1357"></a></h3>
+<p>Currently, in Node.js, any package can access powerful resources such as
+network access.
+Furthermore, because they also have access to the file system, they can send
+any data to anywhere.</p>
+<p>All code running into a node process has the ability to load and run additional
+arbitrary code by using <code>eval()</code>(or its equivalents).
+All code with file system write access may achieve the same thing by writing to
+new or existing files which are loaded.</p>
+<p>Node.js has an experimental<a href="#experimental-features-in-production">¹</a>
+<a href="https://nodejs.org/api/permissions.html#policies">policy mechanism</a> to declare the loaded resource as untrusted or trusted.
+However, this policy is not enabled by default.
+Be sure to pin dependency versions and run automatic checks for vulnerabilities
+using common workflows or npm scripts.
+Before installing a package make sure that this package is maintained and
+includes all the content you expected in.
+Be careful, the Github source code is not always the same as the published one,
+validate it in the <em>node_modules</em>.</p>
+<h4 id="supply-chain-attacks">Supply chain attacks<a id="header-supply-chain-attacks" class="anchor" href="#supply-chain-attacks" aria-labelledby="supply-chain-attacks"></a></h4>
+<p>A supply chain attack on a Node.js application happens when one of its
+dependencies (either direct or transitive) is compromised.
+This can happen either due to the application being too lax on the specification
+of the dependencies (allowing for unwanted updates) and/or common typos in the
+specification (vulnerable to <a href="https://en.wikipedia.org/wiki/Typosquatting">typosquatting</a>).</p>
+<p>An attacker that takes control of an upstream package can publish a new version
+with malicious code in it. If a Node.js application depends on that package
+without being strict on which version is safe to use, the package can be
+automatically updated to the latest malicious version, compromising the application.</p>
+<p>Dependencies specified in the <code>package.json</code> file can have an exact version number
+or a range. However, when pinning a dependency to an exact version, its
+transitive dependencies are not themselves pinned.
+This still leaves the application vulnerable to unwanted/unexpected updates.</p>
+<p>Possible vector attacks:</p>
+<ul>
+<li>Typosquatting attacks</li>
+<li>Lockfile poisoning</li>
+<li>Compromised maintainers</li>
+<li>Malicious Packages</li>
+<li>Dependency Confusions</li>
+</ul>
+<p><strong>Mitigations</strong></p>
+<ul>
+<li>Prevent npm from executing arbitrary scripts with <code>--ignore-scripts</code>
+<ul>
+<li>Additionally, you can disable it globally with <code>npm config set ignore-scripts true</code></li>
+</ul>
+</li>
+<li>Pin dependency versions to a specific immutable version,
+not a version that is a range or from a mutable source.</li>
+<li>Use lockfiles, which pin every dependency (direct and transitive).<!-- -->
+<ul>
+<li>Use <a href="https://blog.ulisesgascon.com/lockfile-posioned">Mitigations for lockfile poisoning</a>.</li>
+</ul>
+</li>
+<li>Automate checks for new vulnerabilities using CI, with tools like [<code>npm-audit</code>][].<!-- -->
+<ul>
+<li>Tools such as <a href="https://socket.dev/"><code>Socket</code></a> can be used to analyze packages with static analysis
+to find risky behaviors such as network or filesystem access.</li>
+</ul>
+</li>
+<li>Use <a href="https://docs.npmjs.com/cli/v8/commands/npm-ci"><code>npm ci</code></a> instead of <code>npm install</code>.
+This enforces the lockfile so that inconsistencies between it and the
+<em>package.json</em> file cause an error (instead of silently ignoring the lockfile
+in favor of <em>package.json</em>).</li>
+<li>Carefully check the <em>package.json</em> file for errors/typos in the names of the
+dependencies.</li>
+</ul>
+<h3 id="memory-access-violation-cwe-284">Memory Access Violation (CWE-284)<a id="header-memory-access-violation-cwe-284" class="anchor" href="#memory-access-violation-cwe-284" aria-labelledby="memory-access-violation-cwe-284"></a></h3>
+<p>Memory-based or heap-based attacks depends on a combination of memory management
+errors and an exploitable memory allocator.
+Like all runtimes, Node.js is vulnerable to these attacks if your projects runs
+on a shared machine.
+Using a secure heap is useful for preventing sensitive information from leaking
+due to pointer overruns and underruns.</p>
+<p>Unfortunately, secure heap is not available on Windows.
+More information can be found on Node.js <a href="https://nodejs.org/dist/latest-v18.x/docs/api/cli.html#--secure-heapn">secure-heap documentation</a>.</p>
+<p><strong>Mitigations</strong></p>
+<ul>
+<li>Use <code>--secure-heap=n</code> depending on your application where <em>n</em> is the allocated
+maximum byte size.</li>
+<li>Do not run your production app in a shared machine.</li>
+</ul>
+<h3 id="monkey-patching-cwe-349">Monkey Patching (CWE-349)<a id="header-monkey-patching-cwe-349" class="anchor" href="#monkey-patching-cwe-349" aria-labelledby="monkey-patching-cwe-349"></a></h3>
+<p>Monkey patching refers to the modification of properties in runtime aiming to
+change the existing behavior. Example:</p>
+<pre><code class="language-js">// eslint-disable-next-line no-extend-native
+Array.prototype.push = function (item) {
+  // overriding the global [].push
+};
+</code></pre>
+<p><strong>Mitigations</strong></p>
+<p>The <code>--frozen-intrinsics</code> flag enables experimental<a href="#experimental-features-in-production">¹</a>
+frozen intrinsics, which means all the built-in JavaScript objects and functions
+are recursively frozen.
+Therefore, the following snippet <strong>will not</strong> override the default behavior of
+<code>Array.prototype.push</code></p>
+<pre><code class="language-js">// eslint-disable-next-line no-extend-native
+Array.prototype.push = function (item) {
+  // overriding the global [].push
+};
+
+// Uncaught:
+// TypeError &lt;Object &lt;Object &lt;[Object: null prototype] {}&gt;&gt;&gt;:
+// Cannot assign to read only property &#x27;push&#x27; of object &#x27;&#x27;
+</code></pre>
+<p>However, it’s important to mention you can still define new globals and replace
+existing globals using <code>globalThis</code></p>
+<pre><code class="language-console">&gt; globalThis.foo = 3; foo; // you can still define new globals
+3
+&gt; globalThis.Array = 4; Array; // However, you can also replace existing globals
+4
+</code></pre>
+<p>Therefore, <code>Object.freeze(globalThis)</code> can be used to guarantee no globals will
+be replaced.</p>
+<h3 id="prototype-pollution-attacks-cwe-1321">Prototype Pollution Attacks (CWE-1321)<a id="header-prototype-pollution-attacks-cwe-1321" class="anchor" href="#prototype-pollution-attacks-cwe-1321" aria-labelledby="prototype-pollution-attacks-cwe-1321"></a></h3>
+<p>Prototype pollution refers to the possibility to modify or inject properties
+into Javascript language items by abusing the usage of <em>_proto_</em>,
+<em>constructor</em>, <em>prototype</em>, and other properties inherited from built-in
+prototypes.</p>
+<!-- -->
+<pre><code class="language-js">const a = {&quot;a&quot;: 1, &quot;b&quot;: 2};
+const data = JSON.parse(&#x27;{&quot;__proto__&quot;: { &quot;polluted&quot;: true}}&#x27;);
+
+const c = Object.assign({}, a, data);
+console.log(c.polluted); // true
+
+// Potential DoS
+const data2 = JSON.parse(&#x27;{&quot;__proto__&quot;: null}&#x27;);
+const d = Object.assign(a, data2);
+d.hasOwnProperty(&#x27;b&#x27;); // Uncaught TypeError: d.hasOwnProperty is not a function
+</code></pre>
+<p>This is a potential vulnerability inherited from the JavaScript
+language.</p>
+<p><strong>Examples</strong>:</p>
+<ul>
+<li><a href="https://www.cvedetails.com/cve/CVE-2022-21824/">CVE-2022-21824</a> (Node.js)</li>
+<li><a href="https://www.cvedetails.com/cve/CVE-2018-3721/">CVE-2018-3721</a> (3rd Party library: Lodash)</li>
+</ul>
+<p><strong>Mitigations</strong></p>
+<ul>
+<li>Avoid <a href="https://gist.github.com/DaniAkash/b3d7159fddcff0a9ee035bd10e34b277#file-unsafe-merge-js">insecure recursive merges</a>, see <a href="https://www.cve.org/CVERecord?id=CVE-2018-16487">CVE-2018-16487</a>.</li>
+<li>Implement JSON Schema validations for external/untrusted requests.</li>
+<li>Create Objects without prototype by using <code>Object.create(null)</code>.</li>
+<li>Freezing the prototype: <code>Object.freeze(MyObject.prototype)</code>.</li>
+<li>Disable the <code>Object.prototype.__proto__</code> property using <code>--disable-proto</code> flag.</li>
+<li>Check that the property exists directly on the object, not from the prototype
+using <code>Object.hasOwn(obj, keyFromObj)</code>.</li>
+<li>Avoid using methods from <code>Object.prototype</code>.</li>
+</ul>
+<h3 id="uncontrolled-search-path-element-cwe-427">Uncontrolled Search Path Element (CWE-427)<a id="header-uncontrolled-search-path-element-cwe-427" class="anchor" href="#uncontrolled-search-path-element-cwe-427" aria-labelledby="uncontrolled-search-path-element-cwe-427"></a></h3>
+<p>Node.js loads modules following the <a href="https://nodejs.org/api/modules.html#modules_all_together">Module Resolution Algorithm</a>.
+Therefore, it assumes the directory in which a module is requested
+(require) is trusted.</p>
+<p>By that, it means the following application behavior is expected.
+Assuming the following directory structure:</p>
+<ul>
+<li><em>app/</em>
+<ul>
+<li><em>server.js</em></li>
+<li><em>auth.js</em></li>
+<li><em>auth</em></li>
+</ul>
+</li>
+</ul>
+<p>If server.js uses <code>require(&#x27;./auth&#x27;)</code> it will follow the module resolution
+algorithm and load <em>auth</em> instead of <em>auth.js</em>.</p>
+<p><strong>Mitigations</strong></p>
+<p>Using the experimental<a href="#experimental-features-in-production">¹</a>
+<a href="https://nodejs.org/api/permissions.html#integrity-checks">policy mechanism with integrity checking</a> can avoid the above threat.
+For the directory described above, one can use the following <code>policy.json</code></p>
+<pre><code class="language-json">{
+  &quot;resources&quot;: {
+    &quot;./app/auth.js&quot;: {
+      &quot;integrity&quot;: &quot;sha256-iuGZ6SFVFpMuHUcJciQTIKpIyaQVigMZlvg9Lx66HV8=&quot;
+    },
+    &quot;./app/server.js&quot;: {
+      &quot;dependencies&quot;: {
+        &quot;./auth&quot; : &quot;./app/auth.js&quot;
+      },
+      &quot;integrity&quot;: &quot;sha256-NPtLCQ0ntPPWgfVEgX46ryTNpdvTWdQPoZO3kHo0bKI=&quot;
+    }
+  }
+}
+</code></pre>
+<p>Therefore, when requiring the <em>auth</em> module, the system will validate the
+integrity and throw an error if doesn’t match the expected one.</p>
+<pre><code class="language-console">» node --experimental-policy=policy.json app/server.js
+node:internal/policy/sri:65
+      throw new ERR_SRI_PARSE(str, str[prevIndex], prevIndex);
+      ^
+
+SyntaxError [ERR_SRI_PARSE]: Subresource Integrity string &quot;sha256-iuGZ6SFVFpMuHUcJciQTIKpIyaQVigMZlvg9Lx66HV8=%&quot; had an unexpected &quot;%&quot; at position 51
+    at new NodeError (node:internal/errors:393:5)
+    at Object.parse (node:internal/policy/sri:65:13)
+    at processEntry (node:internal/policy/manifest:581:38)
+    at Manifest.assertIntegrity (node:internal/policy/manifest:588:32)
+    at Module._compile (node:internal/modules/cjs/loader:1119:21)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1213:10)
+    at Module.load (node:internal/modules/cjs/loader:1037:32)
+    at Module._load (node:internal/modules/cjs/loader:878:12)
+    at Module.require (node:internal/modules/cjs/loader:1061:19)
+    at require (node:internal/modules/cjs/helpers:99:18) {
+  code: &#x27;ERR_SRI_PARSE&#x27;
+}
+</code></pre>
+<p>Note, it&#x27;s always recommended the use of <code>--policy-integrity</code> to avoid policy mutations.</p>
+<h2 id="experimental-features-in-production">Experimental Features in Production<a id="header-experimental-features-in-production" class="anchor" href="#experimental-features-in-production" aria-labelledby="experimental-features-in-production"></a></h2>
+<p>The use of experimental features in production isn&#x27;t recommended.
+Experimental features can suffer breaking changes if needed, and their
+functionality isn&#x27;t securely stable. Although, feedback is highly appreciated.</p></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->Scroll to top</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"en","localName":"English","name":"English","langDir":"ltr","dateFormat":"MM.DD.YYYY","hrefLang":"en-US","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"Scroll to top","components.header.links.home":"Home","components.header.links.about":"About","components.header.links.download":"Downloads","components.header.links.docs":"Docs","components.header.links.getInvolved":"Get Involved","components.header.links.security":"Security","components.header.links.certification":"Certification","components.header.links.blog":"News","components.navigation.about.links.governance":"Governance","components.navigation.docs.links.es6":"ES6 and beyond","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"Guides","components.navigation.docs.links.dependencies":"Dependencies","components.navigation.getInvolved.links.collabSummit":"Collab Summit","components.navigation.getInvolved.links.contribute":"Contribute","components.navigation.getInvolved.links.codeOfConduct":"Code of Conduct","components.downloadList.links.previousReleases":"Previous Releases","components.downloadList.links.packageManager":"Installing Node.js via package manager","components.downloadList.links.shaSums":"Signed SHASUMS for release files","components.downloadList.links.shaSums.howToVerify":" (How to verify)","components.downloadList.links.allDownloads":"All download options","components.downloadList.links.nightlyReleases":"Nightly builds","components.downloadList.links.unofficialBuilds":"Unofficial builds","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Installing Node.js via binary archive","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"Changelog","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"Docs","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"Newer | ","components.pagination.previous":"Older","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/en/docs/guides/security","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

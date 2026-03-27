@@ -1,0 +1,292 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>التركيبة البنيوية لمُعَامَلَة HTTP | Node.js node js 学习 中文网</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="التركيبة البنيوية لمُعَامَلَة HTTP | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="التركيبة البنيوية لمُعَامَلَة HTTP | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/ar/docs/guides/anatomy-of-an-http-transaction"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/ar/docs/guides/anatomy-of-an-http-transaction-80ec61896ee65035.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-2WRNZHGVQT"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-2WRNZHGVQT");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8264273508355034" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/ar"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/ar">الرئيسية</a></li><li class=""><a href="/ar/about">عن الموقع</a></li><li class=""><a href="/ar/download">تنزيلات</a></li><li class="active"><a href="/ar/docs">التوثيق</a></li><li class=""><a href="/ar/get-involved">إنضم إلينا</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">أمن</a></li><li class=""><a href="https://openjsf.org/certification">شهادة</a></li><li class=""><a href="/ar/blog">المدونة</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/anatomy-of-an-http-transaction">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/anatomy-of-an-http-transaction">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/anatomy-of-an-http-transaction">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/anatomy-of-an-http-transaction">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/anatomy-of-an-http-transaction">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/anatomy-of-an-http-transaction">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/anatomy-of-an-http-transaction">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/anatomy-of-an-http-transaction">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/anatomy-of-an-http-transaction">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/anatomy-of-an-http-transaction">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/anatomy-of-an-http-transaction">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/anatomy-of-an-http-transaction">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/anatomy-of-an-http-transaction">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/anatomy-of-an-http-transaction">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/anatomy-of-an-http-transaction">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/anatomy-of-an-http-transaction">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/anatomy-of-an-http-transaction">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/anatomy-of-an-http-transaction">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/ar/docs">التوثيق</a></li><li class=""><a href="/ar/docs/es6">ES6 وما بعدها</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/ar/docs/guides">إرشادات</a></li><li class=""><a href="/ar/docs/meta/topics/dependencies">تبعيات</a></li></ul></nav><article dir="auto"><h1 id="التركيبة-البنيوية-لمُعَامَلَة-http">التركيبة البنيوية لمُعَامَلَة HTTP<a id="header-التركيبة-البنيوية-لمُعَامَلَة-http" class="anchor" href="#التركيبة-البنيوية-لمُعَامَلَة-http" aria-labelledby="التركيبة-البنيوية-لمُعَامَلَة-http"></a></h1>
+<p>الغاية من هذا الدليل هو مَنَح معارف قوية لعمل Node.js في معالجة HTTP. لنفرض أنك تعرف
+بشكل عام كيف تعمل طلبات HTTP بغض النظر عن اللغة أو بيئة البرمجة وسنفرض أيضا على دِرَايَة
+بقليلا من Node.js <a href="https://nodejs.org/api/events.html"><code>EventEmitters</code></a> و <a href="https://nodejs.org/api/stream.html"><code>Streams</code></a>. إذا لم تكن فِعْلاً على دِرَايَة بهم وإنه
+الجَدِير قيام بقراءة سريعة من خلال توثيقات واجهة برمجة التطبيقات (API) لكل منهم.</p>
+<h2 id="إنشاء-الخادم">إنشاء الخادم<a id="header-إنشاء-الخادم" class="anchor" href="#إنشاء-الخادم" aria-labelledby="إنشاء-الخادم"></a></h2>
+<p>أي تطبيق خادم الويب node وفي نقطة ما لإنشاء كائن خادم الويب، يتم ذلك
+بإستعمال <a href="https://nodejs.org/api/http.html#http_http_createserver_requestlistener"><code>createServer</code></a>.</p>
+<pre><code class="language-javascript">const http = require(&#x27;http&#x27;);
+
+const server = http.createServer((request, response) =&gt; {
+  // السحر يحدث هنا!
+});
+</code></pre>
+<p>هذه الدالة تمرر داخل <a href="https://nodejs.org/api/http.html#http_http_createserver_requestlistener"><code>createServer</code></a> وهذا يدعى واحدة لكل طلب HTTP وهذا ما يجعله
+مُقَابِلَ هذا الخادم ولذا يدعى معالج الطالب، في الحقيقة كائن الخادم <a href="https://nodejs.org/api/http.html#http_class_http_server"><code>Server</code></a> مرجع
+بواسطة <a href="https://nodejs.org/api/http.html#http_http_createserver_requestlistener"><code>createServer</code></a> هو مُصدِر الحدث <a href="https://nodejs.org/api/events.html#events_class_eventemitter"><code>EventEmitter</code></a> و ما لدينا هنا فقط إختزال
+لإنشاء كائن الخادم <code>server</code> وبعدها إضافة المستمع لاحقا.</p>
+<pre><code class="language-javascript">const server = http.createServer();
+server.on(&#x27;request&#x27;, (request, response) =&gt; {
+  // نفس النوع من السحر يحدث هنا!
+});
+</code></pre>
+<p>عندما طلب HTTP يضرب الخادم، node يستدعي دالة معالجة الطالب مع القليل من الكائنات
+المتاحة لتعامل مع المُدَاوَلَةٌ الطلب <code>request</code> و الجواب <code>response</code>، سوف نجلبهم قَرِيباً.</p>
+<p>في التقدم الفعلي لطلب الخادم، طريقة الإستماع <a href="https://nodejs.org/api/http.html#http_server_listen_port_hostname_backlog_callback"><code>listen</code></a> تحتاج لإستدعاء كائن الخادم
+<code>server</code> في أغلب الحالات، كل ماتحتاج لتمريره للمستمع <code>listen</code> هو رقم المنفذ &quot;port&quot; الذي
+تريد الخادم الإستماع إليه، يوجد بعض الخيارات الاخرى أيضا لذا راجع المرجع <a href="https://nodejs.org/api/http.html">API reference</a>.</p>
+<h2 id="طريقة-method-و-رابط-url-و-رؤوس-headers">طريقة &#x27;Method&#x27; و رابط &#x27;URL&#x27; و رؤوس &#x27;Headers&#x27;<a id="header-طريقة-method-و-رابط-url-و-رؤوس-headers" class="anchor" href="#طريقة-method-و-رابط-url-و-رؤوس-headers" aria-labelledby="طريقة-method-و-رابط-url-و-رؤوس-headers"></a></h2>
+<p>عند معالجة الطلب أول حاجَة ربما تود القيام بها هي تفقد الطرق و الرابط URL، لذا
+هذه الإجراءات المُلاَئِمة يمكن إتخاذها. Node جعل هذه متعبة نسبيا بوضع خَواصُّ المعالجة داخل
+كائن الطلب <code>request</code>.</p>
+<pre><code class="language-javascript">const { method, url } = request;
+</code></pre>
+<div class="highlight-box">
+<p><strong>ملاحظة:</strong> كائن الطلب <code>request</code> هو مثيل لرسالة القادمة <a href="https://nodejs.org/api/http.html#http_class_http_incomingmessage"><code>IncomingMessage</code></a>.</p>
+</div>
+<p>الطريقة <code>method</code> هنا ستكون دائما HTTP method/verb عاديا و <code>url</code> هو الرابط بدون خادم و
+البروتوكول أو المنفذ. لرابط نموذجي هذا يعني أن كل شئ بعد و مُتَضَمّن الخط مائلة للأمام &quot;/&quot; الثالث.</p>
+<p>الرؤوس هي أيضا ليست بعيدة جدا، هم يملكون كائن في الطلب <code>request</code> يدعى الرؤوس <code>headers</code>.</p>
+<pre><code class="language-javascript">const { headers } = request;
+const userAgent = headers[&#x27;user-agent&#x27;];
+</code></pre>
+<p>من المهم أن نذكر هنا أن جميع الرؤوس تًظهر الأحرف الصغيرة فقط وبِغَضّ النّظَرِ عن كيف ما
+أرسلها العميل. هذا يسهل عملية تحليل الرؤوس لأي غرض محتمل.</p>
+<p>إذا تم تكرار بعض الرؤوس وبعدها هذه القيم إعادة الكتابة عليها أو سلاسل مَوْصُولة بفاصلة
+إسْتِنَاداً إلى الرأس، في بعض الحالات يمكن أن يكون مشكل لذا الروؤس الخام <a href="https://nodejs.org/api/http.html#http_message_rawheaders"><code>rawHeaders</code></a>
+هي أيضا متاحة.</p>
+<h2 id="طلب-الجسم-request-body">طلب الجسم (Request Body)<a id="header-طلب-الجسم-request-body" class="anchor" href="#طلب-الجسم-request-body" aria-labelledby="طلب-الجسم-request-body"></a></h2>
+<p>عند تلقي طلب من <code>POST</code> أو <code>PUT</code>، جسم الطلب ربما يكون مهماً لتطبيقك.
+للحصول على بيانات الجسم هو يَتَضَمّن أكثر من الوصول لطلبات الروؤس،
+كائن الـ<code>request</code> تمرر داخل أدوات المعالجة لواجهة الـ<a href="https://nodejs.org/api/stream.html#stream_class_stream_readable"><code>ReadableStream</code></a>.
+هذا التدفق يمكن الإستماع له أو نقله كأي تدفق أخر. يمكنك أخذ البيانات مباشرة
+من التدفق عن طريق الإستماع إلى أحداث التدفقات <code>&#x27;data&#x27;</code> و <code>&#x27;end&#x27;</code>.</p>
+<p>الأجزاء الباعثة في كل <code>&#x27;data&#x27;</code> والحدث هو <a href="https://nodejs.org/api/buffer.html"><code>Buffer</code></a>. إذا كنت تعرف أنها
+ستكون سِلْسِلَة من البيانات، أفضل شئ تفعله هو تجميع البيانات في مصفوفة
+وبعدها في <code>&#x27;end&#x27;</code>، الرصفهم وتحويلهم إلى نصوص.</p>
+<pre><code class="language-javascript">let body = [];
+request.on(&#x27;data&#x27;, (chunk) =&gt; {
+  body.push(chunk);
+}).on(&#x27;end&#x27;, () =&gt; {
+  body = Buffer.concat(body).toString();
+  // في هذه النقطة، `body` عنده كامل طلب الجسم مخزن فيه على شكل سلسلة نصية
+});
+</code></pre>
+<div class="highlight-box">
+<p><strong>ملاحظة:</strong> قد يبدو هذا صبيانيا ومملا، وفي كثير من الحالات هو كذلك و لحسن الحظ
+هناك وحدات مثل <a href="https://www.npmjs.com/package/concat-stream"><code>concat-stream</code></a> و <a href="https://www.npmjs.com/package/body"><code>body</code></a> في <a href="https://www.npmjs.com"><code>npm</code></a> والتي يمكن أن تساعد
+في إخفاء بعضاً من هذا المنطق. من المهم أن تفهم جيدا ماذا يحدث قبل الخوض في هذا
+الطريق ولهذا السبب أنت هنا!</p>
+</div>
+<h2 id="حاجَة-سريعة-حول-الأخطاء">حاجَة سريعة حول الأخطاء<a id="header-حاجَة-سريعة-حول-الأخطاء" class="anchor" href="#حاجَة-سريعة-حول-الأخطاء" aria-labelledby="حاجَة-سريعة-حول-الأخطاء"></a></h2>
+<p>بِما أَنَّ كائن <code>request</code> هو <a href="https://nodejs.org/api/stream.html#stream_class_stream_readable"><code>ReadableStream</code></a> إنه أيضًا <a href="https://nodejs.org/api/events.html#events_class_eventemitter"><code>EventEmitter</code></a>
+و يتصرف كما أن خطأً قد حدث.</p>
+<p>أي خطأ في تدفق <code>request</code> يقدم نفسه ببعث لحدث <code>&#x27;error&#x27;</code> في التدفق. <strong>إذا لم يكن
+لديك مستمع لهذا الحدث، فالخطأ س<em>يلقي</em>، والتي سيحبط برنامج Node.js الخاص بك.</strong>
+ولذا يجب عليك إضافة مستمع لـ<code>&#x27;error&#x27;</code> على طلب تدفقاتك، حتى وإن سجلته فقط و
+أكملت في طريقك.(ولو أنه من الأفضل لإرسال مشابه لخطأ جواب HTTP. المزيد على ذلك لاحقًا.)</p>
+<pre><code class="language-javascript">request.on(&#x27;error&#x27;, (err) =&gt; {
+  // هذا يطبع رسالة الخطأ و أثره مكدس في `stderr`.
+  console.error(err.stack);
+});
+</code></pre>
+<p>هنالك طرق أخرى لمعالجة الأخطاء <a href="https://nodejs.org/api/errors.html">handling these errors</a> مثل بعض ملخصات و
+الأدوات لكن كن دائمًا على دراية بأن الأخطاء يمكن أن تحدث وستحدث و ستقوم
+بالتعامل معهم.</p>
+<h2 id="على-ماذا-حصلت-لِحَدّ-الآن">على ماذا حصلت لِحَدّ الآن<a id="header-على-ماذا-حصلت-لِحَدّ-الآن" class="anchor" href="#على-ماذا-حصلت-لِحَدّ-الآن" aria-labelledby="على-ماذا-حصلت-لِحَدّ-الآن"></a></h2>
+<p>في هذه النقطة لقد غطينا إنشاء خادم و إنْتِزاع الطرق و الروابط الروؤس و الجسم من
+الطلبات. عندما نضع كل ذلك معا رُبّمَا ستظهر كما هذه:</p>
+<pre><code class="language-javascript">const http = require(&#x27;http&#x27;);
+
+http.createServer((request, response) =&gt; {
+  const { headers, method, url } = request;
+  let body = [];
+  request.on(&#x27;error&#x27;, (err) =&gt; {
+    console.error(err);
+  }).on(&#x27;data&#x27;, (chunk) =&gt; {
+    body.push(chunk);
+  }).on(&#x27;end&#x27;, () =&gt; {
+    body = Buffer.concat(body).toString();
+    // في هذه النقطة، لدينا الرؤوس و الطريقة و الرابط و الجسم ويمكن الآن
+    // القيام بما نحتاج إليه في أمر للجواب لهذا الطلب
+  });
+}).listen(8080); // تنشيط الخادم و الاستماع على منفذ 8080.
+</code></pre>
+<p>إذا شغلنا هذا المثال سنكون قادرين على <em>تلقي</em> الطلبات، لكن لا <em>نرد</em> عليهم،
+في حَقِيقَةِ الأمْر إذا عَرَض هذا في المتصفح، طلبك سيكون خارج المهلة ولاشئ يعاد
+.إرساله للعميل</p>
+<p>حتى الآن نحن لم نلمس كائن الجواب <code>response</code> كلياً. أَيّما في ما ذاك لـ<a href="https://nodejs.org/api/http.html#http_class_http_serverresponse"><code>ServerResponse</code></a>
+و مِمّ هو <a href="https://nodejs.org/api/stream.html#stream_class_stream_writable"><code>WritableStream</code></a>. أنه يحتوي على العديد من الطرق المفيدة لإرسال البيانات
+الراجعة لعميل و سنقوم بتغطية ذلك لاحقا.</p>
+<h2 id="رمز-الحالة-http">رمز الحالة HTTP<a id="header-رمز-الحالة-http" class="anchor" href="#رمز-الحالة-http" aria-labelledby="رمز-الحالة-http"></a></h2>
+<p>إذا كنت لا تُبالي في إعداده، رمز الحالة لـHTTP سيكون دائما في الروؤس 200،
+طبعاً ليس في كل جواب يعلمك به و في بعض النقاط حتما ستريد إرسال رمز حالة
+مختلف، للقيام بهذا يمكنك تعيين خاصية <code>statusCode</code>.</p>
+<pre><code class="language-javascript">response.statusCode = 404; // أخبر العميل أنه لم يتم العثور على المصدر.
+</code></pre>
+<p>هناك بعض الاختصارات الأخرى لهذا ، كما سنرى قريبًا.</p>
+<h2 id="إعداد-جواب-رؤوس">إعداد جواب رؤوس<a id="header-إعداد-جواب-رؤوس" class="anchor" href="#إعداد-جواب-رؤوس" aria-labelledby="إعداد-جواب-رؤوس"></a></h2>
+<p>يتم تعيين الرؤوس من خلال طريقة مناسبة تسمى <a href="https://nodejs.org/api/http.html#http_response_setheader_name_value"><code>setHeader</code></a>.</p>
+<pre><code class="language-javascript">response.setHeader(&#x27;Content-Type&#x27;, &#x27;application/json&#x27;);
+response.setHeader(&#x27;X-Powered-By&#x27;, &#x27;bacon&#x27;);
+</code></pre>
+<p>عند ضبط الرؤوس على الجواب، في الحالة التي تكون غير مدرك لأسمائهم.
+إذا عينت الروؤس بشكل متكرر القيمة الأخيرة التي هي القيمة التي ترسل.</p>
+<h2 id="مُرفق-إرسال-بيانات-الرأس">مُرفق إرسال بيانات الرأس<a id="header-مُرفق-إرسال-بيانات-الرأس" class="anchor" href="#مُرفق-إرسال-بيانات-الرأس" aria-labelledby="مُرفق-إرسال-بيانات-الرأس"></a></h2>
+<p>الطرق لضبط الروؤس و رمز الحالة والتي سبق أن تناقشنا بإعتبرك أنك تستخدم &quot;الروؤس المضمنة&quot;
+&quot;implicit headers&quot;. هذا يعني أنك مُعْتَمِد على node للإرسال الروؤس لك في الوقت الحالي قبل البدء
+في إرسال بيانات الجسم.</p>
+<p>إذا أردت يمكنك <em>تصريح</em> بكتابة الروؤس لتدفق الجواب، للقيام بهذا يوجد طريقة تدعى <a href="https://nodejs.org/api/http.html#http_response_writehead_statuscode_statusmessage_headers"><code>writeHead</code></a>
+التي تكتب رمز الحالة و الروؤس إلى التدفق.</p>
+<pre><code class="language-javascript">response.writeHead(200, {
+  &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
+  &#x27;X-Powered-By&#x27;: &#x27;bacon&#x27;
+});
+</code></pre>
+<p>بمجرد تعيينك الروؤس (سواء ضمنيًا أو صريحًا)، أنت مستعد للبدء في إرسال بيانات الجواب.</p>
+<h2 id="إرسال-جواب-الجسم">إرسال جواب الجسم<a id="header-إرسال-جواب-الجسم" class="anchor" href="#إرسال-جواب-الجسم" aria-labelledby="إرسال-جواب-الجسم"></a></h2>
+<p>بِما أَنَّ كائن الجواب <code>response</code> هو تدفق قابل للكتابة <a href="https://nodejs.org/api/stream.html#stream_class_stream_writable"><code>WritableStream</code></a>، كتابة جسم الجواب
+خارجيا للعميل هي فقط مَسْألَة للإستخدام طرق التدفق الإعتيادية.</p>
+<pre><code class="language-javascript">response.write(&#x27;&lt;html&gt;&#x27;);
+response.write(&#x27;&lt;body&gt;&#x27;);
+response.write(&#x27;&lt;h1&gt;Hello, World!&lt;/h1&gt;&#x27;);
+response.write(&#x27;&lt;/body&gt;&#x27;);
+response.write(&#x27;&lt;/html&gt;&#x27;);
+response.end();
+</code></pre>
+<p>دالة النهاية <code>end</code> في التدفقات يمكن ان تأخذ في بعض البيانات الإختيارية لإرسالها
+كأخر حرف من البيانات في التدفقات لذا يمكن تبسيطها في المثال الأعلى.</p>
+<pre><code class="language-javascript">response.end(&#x27;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Hello, World!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&#x27;);
+</code></pre>
+<div class="highlight-box">
+<p><strong>ملاحظة:</strong> من المهم تعيين الحالة و الروؤس <em>قبل</em> البدء بكتابة أقسام من البيانات
+للجسم وهذا يبدو منطقيا. منذ متى تأتي النص قبل الرؤوس في جوابات HTTP.</p>
+</div>
+<h2 id="حاجَة-أخرى-سريعة-حول-الأخطاء">حاجَة أخرى سريعة حول الأخطاء<a id="header-حاجَة-أخرى-سريعة-حول-الأخطاء" class="anchor" href="#حاجَة-أخرى-سريعة-حول-الأخطاء" aria-labelledby="حاجَة-أخرى-سريعة-حول-الأخطاء"></a></h2>
+<p>تدفق الجواب <code>response</code> يمكن أن يبعث حالة الأخطاء <code>&#x27;error&#x27;</code> و بعض النقاط ستتعامل معه أيضا.
+جميع النصائح لتدفق أخطاء الطلب <code>request</code> لاتزال تطبق هنا.</p>
+<h2 id="لنضعهم-جميعا-مع-بعض">لنضعهم جميعا مع بعض<a id="header-لنضعهم-جميعا-مع-بعض" class="anchor" href="#لنضعهم-جميعا-مع-بعض" aria-labelledby="لنضعهم-جميعا-مع-بعض"></a></h2>
+<p>الآن بعد أن تعلمنا عن عمل جوابات HTTP، لنقم بوضعهم كلهم معاً.
+بناء على المثال السابق سنقوم بإنشاء خادم يعيد إرسال جميع البيانات التي إرسلها
+إلينا من قِبل المستخدم وسنقوم بتنسيق البيانات على شكل JSON بإستعمال <code>JSON.stringify</code>.</p>
+<pre><code class="language-javascript">const http = require(&#x27;http&#x27;);
+
+http.createServer((request, response) =&gt; {
+  const { headers, method, url } = request;
+  let body = [];
+  request.on(&#x27;error&#x27;, (err) =&gt; {
+    console.error(err);
+  }).on(&#x27;data&#x27;, (chunk) =&gt; {
+    body.push(chunk);
+  }).on(&#x27;end&#x27;, () =&gt; {
+    body = Buffer.concat(body).toString();
+    // بداية الاشياء الجديدة
+
+    response.on(&#x27;error&#x27;, (err) =&gt; {
+      console.error(err);
+    });
+
+    response.statusCode = 200;
+    response.setHeader(&#x27;Content-Type&#x27;, &#x27;application/json&#x27;);
+    // ملاحظة: السطرين في الأعلى يمكن إستبداله بالسطر التالي.
+    // response.writeHead(200, {&#x27;Content-Type&#x27;: &#x27;application/json&#x27;})
+
+    const responseBody = { headers, method, url, body };
+
+    response.write(JSON.stringify(responseBody));
+    response.end();
+    // ملاحظة: السطرين في الأعلى يمكن إستبداله بالسطر التالي.
+    // response.end(JSON.stringify(responseBody))
+
+    // نهاية الاشياء الجديدة
+  });
+}).listen(8080);
+</code></pre>
+<h2 id="مثال-لتردد-خادم">مثال لتردد خادم<a id="header-مثال-لتردد-خادم" class="anchor" href="#مثال-لتردد-خادم" aria-labelledby="مثال-لتردد-خادم"></a></h2>
+<p>لنسهل المثال السابق لإنشاء خادم ترددي بسيط، أَيّ يرسل مهما كانت البيانات فقط والتي أستلمت
+من توا من الجواب. كل ما نريد فعله هو أخذ طلب التدفق و كتابة البيانات في جواب التدفق وهو
+مماثل ما فعلنا في السابق.</p>
+<pre><code class="language-javascript">const http = require(&#x27;http&#x27;);
+
+http.createServer((request, response) =&gt; {
+  let body = [];
+  request.on(&#x27;data&#x27;, (chunk) =&gt; {
+    body.push(chunk);
+  }).on(&#x27;end&#x27;, () =&gt; {
+    body = Buffer.concat(body).toString();
+    response.end(body);
+  });
+}).listen(8080);
+</code></pre>
+<p>الآن لنقم تطويع هذه، نريد إرسال فقط تردد وفقا لشروط لمتبعة:</p>
+<ul>
+<li>طريقة الطلب هي POST.</li>
+<li>الرابط &#x27;URL&#x27; هو <code>/echo</code></li>
+</ul>
+<p>في حالة أخرى نحن نريد تبسيط الرد مع 404.</p>
+<pre><code class="language-javascript">const http = require(&#x27;http&#x27;);
+
+http.createServer((request, response) =&gt; {
+  if (request.method === &#x27;POST&#x27; &amp;&amp; request.url === &#x27;/echo&#x27;) {
+    let body = [];
+    request.on(&#x27;data&#x27;, (chunk) =&gt; {
+      body.push(chunk);
+    }).on(&#x27;end&#x27;, () =&gt; {
+      body = Buffer.concat(body).toString();
+      response.end(body);
+    });
+  } else {
+    response.statusCode = 404;
+    response.end();
+  }
+}).listen(8080);
+</code></pre>
+<div class="highlight-box">
+<p><strong>ملاحظة:</strong> عند التحقق من الرابط URL بهذه الطريقة، نحن نقوم بشكل من التوجيه &quot;routing&quot;.
+ويوجد أشكال أخرى للتوجيه بسيطة مثل دالة <code>بَدَّالَةٌ</code> <code>switch</code> أو معقدة كما في أدوات مثل
+<a href="https://www.npmjs.com/package/express"><code>express</code></a>. إذا كنت نبحث على شئ يقوم بالتوجيه ولاشئ أخر جرب <a href="https://www.npmjs.com/package/router"><code>router</code></a>.</p>
+</div>
+<p>رائع! الآن نستقر على تبسيط هذا وتذكر كائنات الطلب <code>request</code> هي تدقف قابل للقراءة
+<a href="https://nodejs.org/api/stream.html#stream_class_stream_readable"><code>ReadableStream</code></a> و كائنات الجواب <code>response</code> هي تدفق قابل للكتابة <a href="https://nodejs.org/api/stream.html#stream_class_stream_writable"><code>WritableStream</code></a>.
+وهذا يعني أنه يمكننا إستخدام <a href="https://nodejs.org/api/stream.html#stream_readable_pipe_destination_options"><code>pipe</code></a> لتوجيه البيانات من واحدة لأخرى. وهذا تماما مانريده
+من خادم إرتدادي!</p>
+<pre><code class="language-javascript">const http = require(&#x27;http&#x27;);
+
+http.createServer((request, response) =&gt; {
+  if (request.method === &#x27;POST&#x27; &amp;&amp; request.url === &#x27;/echo&#x27;) {
+    request.pipe(response);
+  } else {
+    response.statusCode = 404;
+    response.end();
+  }
+}).listen(8080);
+</code></pre>
+<p>أجل التدفقات!</p>
+<p>نحن لم ننتهي بعد على الرغم كما ذكرنا في عدة مرات في هذا الدليل، الأخطاء واردة
+و نحتاج التعامل معها.</p>
+<p>لتعامل مع الأخطاء في طلب التدقف، وكذا مخرج الخطأ في <code>stderr</code> و إرسال رمز الحالة 404
+تدل على أن طلب سيء <code>Bad Request</code> ليس كما التطبيق في الحقيقي على أية حال، نود تفحص
+الخطأ لمعرفة ماهو رمز الحالة الصحيح وما ستكون الرسالة كالعادة في الأخطاء،يجب عليك مراجعة
+توثيقة <code>الخطأ</code> <a href="https://nodejs.org/api/errors.html"><code>Error</code> documentation</a>.</p>
+<p>في الجواب، سنسجل الخطأ فقط في<code>stderr</code>.</p>
+<pre><code class="language-javascript">const http = require(&#x27;http&#x27;);
+
+http.createServer((request, response) =&gt; {
+  request.on(&#x27;error&#x27;, (err) =&gt; {
+    console.error(err);
+    response.statusCode = 400;
+    response.end();
+  });
+  response.on(&#x27;error&#x27;, (err) =&gt; {
+    console.error(err);
+  });
+  if (request.method === &#x27;POST&#x27; &amp;&amp; request.url === &#x27;/echo&#x27;) {
+    request.pipe(response);
+  } else {
+    response.statusCode = 404;
+    response.end();
+  }
+}).listen(8080);
+</code></pre>
+<p>لقد قمنا الآن بتغطية أغلب الأساسيات مُعَالَجَة طالبات HTTP وفي هذه المرحلة من المفترض
+تقدر على:</p>
+<p>تجسيد HTTP مع دالة معالجة الطلب و لإستماع للمنفذ.
+الحصول على الرؤوس و الرابط &#x27;URL&#x27; و طرق و بيانات الجسم من كائنات <code>request</code>.
+صنع قرارات التوجيه إستنادا إلى الرابط و / أو بيانات أخرى في كائنات <code>request</code>.
+إرسال الرؤوس و رموز حالات HTTP و بيانات الجسم بواسطة كائنات <code>request</code>.
+نقل البيانات من كائنات <code>request</code> وإلى كائنات <code>response</code>.
+تعامل مع أخطاء التدفق في حالتي تدقفات <code>request</code> و <code>response</code>.
+من هذه الأساسيات، خوادم Node.js HTTP في العديد من حالات نَوْعِيّة يمكن إنشاؤه. يوجد
+الكثير مثل هذه الأشياء مزودة بـAPIs لذا تأكد من قرأة التوثيقات الAPI منها
+<a href="https://nodejs.org/api/events.html"><code>EventEmitters</code></a> و <a href="https://nodejs.org/api/stream.html"><code>Streams</code></a> و <a href="https://nodejs.org/api/http.html"><code>HTTP</code></a>.</p></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->إنتقل إلى الأعلى</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"ar","localName":"العربية","name":"Arabic","langDir":"rtl","dateFormat":"YYYY.MM.DD","hrefLang":"ar","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"إنتقل إلى الأعلى","components.header.links.home":"الرئيسية","components.header.links.about":"عن الموقع","components.header.links.download":"تنزيلات","components.header.links.docs":"التوثيق","components.header.links.getInvolved":"إنضم إلينا","components.header.links.security":"أمن","components.header.links.certification":"شهادة","components.header.links.blog":"المدونة","components.navigation.about.links.governance":"الحوكمة","components.navigation.docs.links.es6":"ES6 وما بعدها","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"إرشادات","components.navigation.docs.links.dependencies":"تبعيات","components.navigation.getInvolved.links.collabSummit":"القمة التعاونية","components.navigation.getInvolved.links.contribute":"مساهمة","components.navigation.getInvolved.links.codeOfConduct":"القواعد السلوكية","components.downloadList.links.previousReleases":"الاصدارات السابقة","components.downloadList.links.packageManager":"تحميل Node.js عن طريق نظام إدارة الحزم الافتراضي","components.downloadList.links.shaSums":"وثائق الاصدارات مختومة SHASUMS","components.downloadList.links.shaSums.howToVerify":" (كيفية التحقق)","components.downloadList.links.allDownloads":"تحميل جميع النسخ","components.downloadList.links.nightlyReleases":"إصدارات ليلية","components.downloadList.links.unofficialBuilds":"بُنْيَات غير رسمية","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"تثبيت Node.js باستعمال أرشيف ثنائي على لينكس","components.downloadList.links.installingOnWsl":"التثبيت على ويندوز في النظام الفرعي لينكس (WSL)","components.downloadReleasesTable.changelog":"سجل التغييرات","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"التوثيق","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"التالي | ","components.pagination.previous":"السابق","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/ar/docs/guides/anatomy-of-an-http-transaction","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

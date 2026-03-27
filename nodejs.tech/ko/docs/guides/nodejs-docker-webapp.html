@@ -1,0 +1,198 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Node.js 웹 앱의 도커라이징 | Node.js node js 学习 中文网</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Node.js 웹 앱의 도커라이징 | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Node.js 웹 앱의 도커라이징 | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/ko/docs/guides/nodejs-docker-webapp"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/ko/docs/guides/nodejs-docker-webapp-3d105d7b265f3639.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-2WRNZHGVQT"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-2WRNZHGVQT");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8264273508355034" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/ko"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/ko">홈</a></li><li class=""><a href="/ko/about">About</a></li><li class=""><a href="/ko/download">다운로드</a></li><li class="active"><a href="/ko/docs">문서</a></li><li class=""><a href="/ko/get-involved">참여하기</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">보안</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class=""><a href="/ko/blog">뉴스</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/nodejs-docker-webapp">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/nodejs-docker-webapp">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/nodejs-docker-webapp">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/nodejs-docker-webapp">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/nodejs-docker-webapp">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/nodejs-docker-webapp">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/nodejs-docker-webapp">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/nodejs-docker-webapp">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/nodejs-docker-webapp">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/nodejs-docker-webapp">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/nodejs-docker-webapp">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/nodejs-docker-webapp">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/nodejs-docker-webapp">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/nodejs-docker-webapp">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/nodejs-docker-webapp">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/nodejs-docker-webapp">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/nodejs-docker-webapp">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/nodejs-docker-webapp">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/ko/docs">문서</a></li><li class=""><a href="/ko/docs/es6">ES6와 그 이후</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/ko/docs/guides">안내</a></li><li class=""><a href="/ko/docs/meta/topics/dependencies">의존성</a></li></ul></nav><article dir="auto"><h1 id="node.js-웹-앱의-도커라이징">Node.js 웹 앱의 도커라이징<a id="header-node.js-웹-앱의-도커라이징" class="anchor" href="#node.js-웹-앱의-도커라이징" aria-labelledby="node.js-웹-앱의-도커라이징"></a></h1>
+<p>이 예제에서는 Node.js 애플리케이션을 Docker 컨테이너에 넣는 방법을 보여줍니다. 이 가이드는
+개발 목적이지 프로덕션 배포용이 <em>아닙니다</em>.
+<a href="https://docs.docker.com/engine/installation/">Docker가 설치</a>되어 있고
+Node.js 애플리케이션의 구조에 대한 기본적인 지식이 있어야 합니다.</p>
+<p>먼저 간단한 Node.js 웹 애플리케이션을 만든 후에 이 애플리케이션을 위한 Docker 이미지를
+만들어서 컨테이너로 실행할 것입니다.</p>
+<p>Docker를 사용하면 애플리케이션과 모든 의존성을 소프트웨어 개발에서 컨테이너라고 부르는 표준화된
+단위로 패키징할 수 있습니다. 컨테이너는 리눅스 운영체제의 간단 버전입니다.
+이미지는 컨테이너에 로드하는 소프트웨어를 말합니다.</p>
+<!-- -->
+<h2 id="nodejs-앱-생성">Node.js 앱 생성<a id="header-nodejs-앱-생성" class="anchor" href="#nodejs-앱-생성" aria-labelledby="nodejs-앱-생성"></a></h2>
+<p>우선, 모든 파일을 넣은 새로운 디렉터리를 만들겠습니다. 이 디렉터리 안에 애플리케이션과 의존성을
+알려주는 <code>package.json</code> 파일을 생성하겠습니다.</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;docker_web_app&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;Node.js on Docker&quot;,
+  &quot;author&quot;: &quot;First Last &lt;first.last@example.com&gt;&quot;,
+  &quot;main&quot;: &quot;server.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;start&quot;: &quot;node server.js&quot;
+  },
+  &quot;dependencies&quot;: {
+    &quot;express&quot;: &quot;^4.16.1&quot;
+  }
+}
+</code></pre>
+<!-- -->
+<p><code>package.json</code> 파일을 만든 후, <code>npm install</code>을 실행하세요. 버전 5 이상의 <code>npm</code>을
+사용한다면, Docker 이미지에 복사할 <code>package-lock.json</code> 파일을 <code>npm</code>에서 생성할 것입니다.</p>
+<p>이제 <a href="https://expressjs.com/">Express.js</a> 프레임워크로 웹앱을 정의하는 <code>server.js</code>를 만들겠습니다.</p>
+<pre><code class="language-javascript">&#x27;use strict&#x27;;
+
+const express = require(&#x27;express&#x27;);
+
+// 상수
+const PORT = 8080;
+const HOST = &#x27;0.0.0.0&#x27;;
+
+// 앱
+const app = express();
+app.get(&#x27;/&#x27;, (req, res) =&gt; {
+  res.send(&#x27;Hello World&#x27;);
+});
+
+app.listen(PORT, HOST, () =&gt; {
+  console.log(`Running on http://${HOST}:${PORT}`);
+});
+</code></pre>
+<p>다음 단계에서 공식 Docker 이미지를 사용해서 Docker 컨테이너 안에서 이 앱을 실행하는 방법을
+살펴보겠습니다. 먼저 앱의 Docker 이미지를 만들어야 합니다.</p>
+<!-- -->
+<h2 id="dockerfile-생성">Dockerfile 생성<a id="header-dockerfile-생성" class="anchor" href="#dockerfile-생성" aria-labelledby="dockerfile-생성"></a></h2>
+<p><code>Dockerfile</code>이라는 빈 파일을 생성합니다.</p>
+<pre><code class="language-markup">touch Dockerfile
+</code></pre>
+<p>선호하는 텍스트 에디터로 <code>Dockerfile</code>을 엽니다.</p>
+<p>가장 먼저 해야 할 것은 어떤 이미지를 사용해서 빌드할 것인지를 정의하는 것입니다. 여기서는
+<a href="https://hub.docker.com/">Docker Hub</a>에 있는
+<code>node</code>의 최신 LTS(장기 지원) 버전인 <code>16</code>을 사용할 것입니다.</p>
+<pre><code class="language-docker">FROM node:16
+</code></pre>
+<!-- -->
+<p>다음으로 이미지 안에 애플리케이션 코드를 넣기 위해 디렉터리를 생성할 것입니다.
+이 디렉터리가 애플리케이션의 작업 디렉터리가 됩니다.</p>
+<pre><code class="language-docker"># 앱 디렉터리 생성
+WORKDIR /usr/src/app
+</code></pre>
+<p>이 이미지에는 이미 Node.js와 NPM이 설치되어 있으므로 <code>npm</code> 바이너리로
+앱의 의존성을 설치하기만 하면 됩니다. 버전 4 이하의 <code>npm</code>은 <code>package-lock.json</code>
+파일을 생성하지 <em>않을</em> 것입니다.</p>
+<pre><code class="language-docker"># 앱 의존성 설치
+# 가능한 경우(npm@5+) package.json과 package-lock.json을 모두 복사하기 위해
+# 와일드카드를 사용
+COPY package*.json ./
+
+RUN npm install
+# 프로덕션을 위한 코드를 빌드하는 경우
+# RUN npm ci --only=production
+</code></pre>
+<!-- -->
+<p>작업 디렉터리 전체가 아닌 <code>package.json</code> 파일만을 복사하고 있는데, 이는 캐시된
+Docker 레이어의 장점을 활용하기 위함입니다. bitJudo가 이에 대해
+<a href="http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/">여기</a>에
+잘 설명해 두었습니다. 추가로, 주석에 언급된 <code>npm ci</code> 커맨드는 프로덕션 환경을
+위한 더 빠르고, 신뢰할 수 있고, 재현 가능한 빌드를 제공합니다. 이에 대해
+<a href="https://blog.npmjs.org/post/171556855892/introducing-npm-ci-for-faster-more-reliable">여기</a>에서
+자세히 알아볼 수 있습니다.</p>
+<p>Docker 이미지 안에 앱의 소스코드를 넣기 위해 <code>COPY</code> 지시어를 사용합니다.</p>
+<pre><code class="language-docker"># 앱 소스 추가
+COPY . .
+</code></pre>
+<p>앱이 <code>8080</code>포트에 바인딩 되어 있으므로 <code>EXPOSE</code> 지시어를 사용해서 <code>docker</code> 데몬에 매핑합니다.</p>
+<pre><code class="language-docker">EXPOSE 8080
+</code></pre>
+<!-- -->
+<p>마지막으로 런타임을 정의하는 <code>CMD</code>로 앱을 실행하는 중요 명령어를 정의해야 합니다.
+여기서는 서버를 구동하도록 <code>node server.js</code>을 실행하는 기본 <code>npm start</code>을 사용할 것입니다.</p>
+<pre><code class="language-docker">CMD [ &quot;node&quot;, &quot;server.js&quot; ]
+</code></pre>
+<p><code>Dockerfile</code>은 다음과 같아야 합니다.</p>
+<pre><code class="language-docker">FROM node:16
+
+# 앱 디렉터리 생성
+WORKDIR /usr/src/app
+
+# 앱 의존성 설치
+# 가능한 경우(npm@5+) package.json과 package-lock.json을 모두 복사하기 위해
+# 와일드카드를 사용
+COPY package*.json ./
+
+RUN npm install
+# 프로덕션을 위한 코드를 빌드하는 경우
+# RUN npm ci --only=production
+
+# 앱 소스 추가
+COPY . .
+
+EXPOSE 8080
+CMD [ &quot;node&quot;, &quot;server.js&quot; ]
+</code></pre>
+<!-- -->
+<h2 id="dockerignore-파일">.dockerignore 파일<a id="header-dockerignore-파일" class="anchor" href="#dockerignore-파일" aria-labelledby="dockerignore-파일"></a></h2>
+<p><code>Dockerfile</code>과 같은 디렉터리에 <code>.dockerignore</code> 파일을 다음 내용으로 만드세요.</p>
+<pre><code class="language-text">node_modules
+npm-debug.log
+</code></pre>
+<p>이는 Docker 이미지에 로컬 모듈과 디버깅 로그를 복사하는 것을 막아서 이미지 내에서
+설치한 모듈을 덮어쓰지 않게 합니다.</p>
+<!-- -->
+<h2 id="이미지-빌드">이미지 빌드<a id="header-이미지-빌드" class="anchor" href="#이미지-빌드" aria-labelledby="이미지-빌드"></a></h2>
+<p>작성한 <code>Dockerfile</code>이 있는 디렉터리로 가서 Docker 이미지를 빌드하는 다음 명령어를 실행하세요.
+<code>-t</code> 플래그로 이미지에 태그를 추가할 수 있어 나중에 <code>docker images</code> 명령어로
+쉽게 찾을 수 있습니다.</p>
+<pre><code class="language-bash">docker build . -t &lt;your username&gt;/node-web-app
+</code></pre>
+<p>Docker가 당신이 빌드한 이미지를 보여줄 것입니다.</p>
+<pre><code class="language-bash">$ docker images
+
+# 예시
+REPOSITORY                      TAG        ID              CREATED
+node                            16         1934b0b038d1    5 days ago
+&lt;your username&gt;/node-web-app    latest     d64d3505b0d2    1 minute ago
+</code></pre>
+<!-- -->
+<h2 id="이미지-실행">이미지 실행<a id="header-이미지-실행" class="anchor" href="#이미지-실행" aria-labelledby="이미지-실행"></a></h2>
+<p><code>-d</code>로 이미지를 실행하면 분리 모드로 컨테이너를 실행해서 백그라운드에서 컨테이너가 돌아가도록 합니다.
+<code>-p</code> 플래그는 공개 포트를 컨테이너 내의 비공개 포트로 리다이렉트합니다. 앞에서 만든 이미지를 실행하세요.</p>
+<pre><code class="language-bash">docker run -p 49160:8080 -d &lt;your username&gt;/node-web-app
+</code></pre>
+<p>앱의 로그를 출력하세요.</p>
+<pre><code class="language-bash"># 컨테이너 아이디를 확인합니다
+$ docker ps
+
+# 앱 로그를 출력합니다
+$ docker logs &lt;container id&gt;
+
+# 예시
+Running on http://localhost:8080
+</code></pre>
+<p>컨테이너 안에 들어가 봐야 한다면 <code>exec</code> 명령어를 사용할 수 있습니다.</p>
+<pre><code class="language-bash"># 컨테이너에 들어갑니다
+$ docker exec -it &lt;container id&gt; /bin/bash
+</code></pre>
+<!-- -->
+<h2 id="테스트">테스트<a id="header-테스트" class="anchor" href="#테스트" aria-labelledby="테스트"></a></h2>
+<p>앱을 테스트하려면 Docker 매핑된 앱 포트를 확인합니다.</p>
+<pre><code class="language-bash">$ docker ps
+
+# 예시
+ID            IMAGE                                COMMAND    ...   PORTS
+ecce33b30ebf  &lt;your username&gt;/node-web-app:latest  npm start  ...   49160-&gt;8080
+</code></pre>
+<p>위 예시에서 Docker가 컨테이너 내의 <code>8080</code> 포트를 머신의 <code>49160</code> 포트로 매핑했습니다.</p>
+<p>이제 <code>curl</code>로 앱을 호출할 수 있습니다.(필요하다면 <code>sudo apt-get install curl</code>로 설치하세요.)</p>
+<pre><code class="language-bash">$ curl -i localhost:49160
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: text/html; charset=utf-8
+Content-Length: 12
+ETag: W/&quot;c-M6tWOb/Y57lesdjQuHeB1P/qTV0&quot;
+Date: Mon, 13 Nov 2017 20:53:59 GMT
+Connection: keep-alive
+
+Hello world
+</code></pre>
+<!-- -->
+<p>간단한 Node.js 애플리케이션을 Docker로 실행하는데 이 튜토리얼이 도움되었길 바랍니다.</p>
+<p>다음 링크에서 Docker와 Docker에서의 Node.js에 대한 정보를 더 자세히 볼 수 있습니다.</p>
+<ul>
+<li><a href="https://hub.docker.com/_/node/">공식 Node.js Docker 이미지</a></li>
+<li><a href="https://github.com/nodejs/docker-node/blob/master/docs/BestPractices">Node.js Docker 사용사례 문서</a></li>
+<li><a href="https://docs.docker.com/">공식 Docker 문서</a></li>
+<li><a href="https://stackoverflow.com/questions/tagged/docker">Stack Overflow에 Docker 태그로 올라온 질문</a></li>
+<li><a href="https://reddit.com/r/docker">Docker 레딧</a></li>
+</ul></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->맨 위로</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"ko","localName":"한국어","name":"Korean","langDir":"ltr","dateFormat":"YYYY.MM.DD","hrefLang":"ko","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"맨 위로","components.header.links.home":"홈","components.header.links.about":"About","components.header.links.download":"다운로드","components.header.links.docs":"문서","components.header.links.getInvolved":"참여하기","components.header.links.security":"보안","components.header.links.certification":"Certification","components.header.links.blog":"뉴스","components.navigation.about.links.governance":"거버넌스","components.navigation.docs.links.es6":"ES6와 그 이후","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"안내","components.navigation.docs.links.dependencies":"의존성","components.navigation.getInvolved.links.collabSummit":"협업자 서밋","components.navigation.getInvolved.links.contribute":"기여하기","components.navigation.getInvolved.links.codeOfConduct":"행동강령","components.downloadList.links.previousReleases":"이전 릴리스","components.downloadList.links.packageManager":"패키지 관리자를 통한 Node.js 설치","components.downloadList.links.shaSums":"릴리스 파일에 서명된 SHASUMS","components.downloadList.links.shaSums.howToVerify":" (검증 방법)","components.downloadList.links.allDownloads":"모든 다운로드 보기","components.downloadList.links.nightlyReleases":"나이틀리 빌드","components.downloadList.links.unofficialBuilds":"비공식 빌드","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Linux에서 바이너리 아카이브를 통해 Node.js 설치하기","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"변경사항","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"문서","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"다음 | ","components.pagination.previous":"이전","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/ko/docs/guides/nodejs-docker-webapp","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

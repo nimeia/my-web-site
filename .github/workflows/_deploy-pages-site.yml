@@ -1,0 +1,66 @@
+name: Reusable Pages Deploy
+
+on:
+  workflow_call:
+    inputs:
+      site_dir:
+        description: Static site directory to prepare and deploy
+        required: true
+        type: string
+      pages_project_name:
+        description: Cloudflare Pages project name
+        required: true
+        type: string
+    secrets:
+      CLOUDFLARE_API_TOKEN:
+        required: true
+      CLOUDFLARE_ACCOUNT_ID:
+        required: true
+
+jobs:
+  deploy:
+    name: Deploy ${{ inputs.site_dir }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    concurrency:
+      group: pages-${{ inputs.site_dir }}-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate Cloudflare Pages project name
+        run: |
+          if [ -z "${{ inputs.pages_project_name }}" ]; then
+            echo "pages_project_name is required."
+            exit 1
+          fi
+
+      - name: Prepare static assets
+        run: node ./scripts/prepare-cloudflare-static.mjs "${{ inputs.site_dir }}"
+
+      - name: Deploy to Cloudflare Pages
+        id: deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          command: >-
+            pages deploy ${{ inputs.site_dir }}
+            --project-name=${{ inputs.pages_project_name }}
+
+      - name: Print deployment URLs
+        env:
+          DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
+          DEPLOYMENT_ALIAS_URL: ${{ steps.deploy.outputs.pages-deployment-alias-url }}
+        run: |
+          echo "deployment-url=${DEPLOYMENT_URL}"
+          echo "pages-deployment-alias-url=${DEPLOYMENT_ALIAS_URL}"

@@ -1,0 +1,21 @@
+name: Deploy traefik.tech
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "traefik.tech/**"
+      - "ads.txt/traefik.tech.txt"
+      - "scripts/prepare-cloudflare-static.mjs"
+      - ".github/workflows/_deploy-pages-site.yml"
+      - ".github/workflows/deploy-traefik-tech-pages.yml"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/_deploy-pages-site.yml
+    with:
+      site_dir: traefik.tech
+      pages_project_name: ${{ vars.CF_PAGES_PROJECT_TRAEFIK_TECH }}
+    secrets: inherit

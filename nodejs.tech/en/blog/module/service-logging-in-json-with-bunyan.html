@@ -1,0 +1,254 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Service logging in JSON with Bunyan | Node.js node js 学习 中文网</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Service logging in JSON with Bunyan | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Service logging in JSON with Bunyan | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/en/blog/module/service-logging-in-json-with-bunyan"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/en/blog/module/service-logging-in-json-with-bunyan-115e95aa5835825f.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-2WRNZHGVQT"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-2WRNZHGVQT");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8264273508355034" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/en"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/en">Home</a></li><li class=""><a href="/en/about">About</a></li><li class=""><a href="/en/download">Downloads</a></li><li class=""><a href="/en/docs">Docs</a></li><li class=""><a href="/en/get-involved">Get Involved</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">Security</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class="active"><a href="/en/blog">News</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/blog/module/service-logging-in-json-with-bunyan">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/blog/module/service-logging-in-json-with-bunyan">Catalan</a></li><li><a data-lang="de" title="German" href="/de/blog/module/service-logging-in-json-with-bunyan">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/blog/module/service-logging-in-json-with-bunyan">English</a></li><li><a data-lang="es" title="Spanish" href="/es/blog/module/service-logging-in-json-with-bunyan">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/blog/module/service-logging-in-json-with-bunyan">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/blog/module/service-logging-in-json-with-bunyan">Français</a></li><li><a data-lang="it" title="Italian" href="/it/blog/module/service-logging-in-json-with-bunyan">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/blog/module/service-logging-in-json-with-bunyan">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/blog/module/service-logging-in-json-with-bunyan">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/blog/module/service-logging-in-json-with-bunyan">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/blog/module/service-logging-in-json-with-bunyan">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/blog/module/service-logging-in-json-with-bunyan">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/blog/module/service-logging-in-json-with-bunyan">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/blog/module/service-logging-in-json-with-bunyan">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/blog/module/service-logging-in-json-with-bunyan">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/blog/module/service-logging-in-json-with-bunyan">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/blog/module/service-logging-in-json-with-bunyan">繁體中文</a></li></ul></div></header><main id="main"><div class="container"><article dir="auto"><div class="blogpost-header"><h1>Service logging in JSON with Bunyan</h1><span class="blogpost-meta">By trentmick, <time dateTime="2012-03-29T03:25:26+0800">2012-03-29</time></span></div><p>Service logs are gold, if you can mine them. We scan them for occasional debugging. Perhaps we grep them looking for errors or warnings, or setup an occasional nagios log regex monitor. If that. This is a waste of the best channel for data about a service.</p>
+<p><a href="https://www.youtube.com/watch?v=01-2pNCZiNk">&quot;Log. (Huh) What is it good for. Absolutely ...&quot;</a></p>
+<ul>
+<li>debugging</li>
+<li>monitors tools that alert operators</li>
+<li>non real-time analysis (business or operational analysis)</li>
+<li>historical analysis</li>
+</ul>
+<p>These are what logs are good for. The current state of logging is barely adequate for the first of these. Doing reliable analysis, and even monitoring, of varied <a href="http://journal.paul.querna.org/articles/2011/12/26/log-for-machines-in-json/">&quot;printf-style&quot; logs</a> is a grueling or hacky task that most either don&#x27;t bother with, fallback to paying someone else to do (viz. Splunk&#x27;s great successes), or, for web sites, punt and use the plethora of JavaScript-based web analytics tools.</p>
+<p>Let&#x27;s log in JSON. Let&#x27;s format log records with a filter <em>outside</em> the app. Let&#x27;s put more info in log records by not shoehorning into a printf-message. Debuggability can be improved. Monitoring and analysis can <em>definitely</em> be improved. Let&#x27;s <em>not</em> write another regex-based parser, and use the time we&#x27;ve saved writing tools to collate logs from multiple nodes and services, to query structured logs (from all services, not just web servers), etc.</p>
+<p>At <a href="http://joyent.com">Joyent</a> we use Node.js for running many core services -- loosely coupled through HTTP REST APIs and/or AMQP. In this post I&#x27;ll draw on experiences from my work on Joyent&#x27;s <a href="http://www.joyent.com/products/smartdatacenter/">SmartDataCenter product</a> and observations of <a href="http://www.joyentcloud.com/">Joyent Cloud</a> operations to suggest some improvements to service logging. I&#x27;ll show the (open source) <strong>Bunyan logging library and tool</strong> that we&#x27;re developing to improve the logging toolchain.</p>
+<h2 id="current-state-of-log-formatting">Current State of Log Formatting<a id="header-current-state-of-log-formatting" class="anchor" href="#current-state-of-log-formatting" aria-labelledby="current-state-of-log-formatting"></a></h2>
+<pre><code class="language-text"># apache access log
+10.0.1.22 - - [15/Oct/2010:11:46:46 -0700] &quot;GET /favicon.ico HTTP/1.1&quot; 404 209
+fe80::6233:4bff:fe29:3173 - - [15/Oct/2010:11:46:58 -0700] &quot;GET / HTTP/1.1&quot; 200 44
+
+# apache error log
+[Fri Oct 15 11:46:46 2010] [error] [client 10.0.1.22] File does not exist: /Library/WebServer/Documents/favicon.ico
+[Fri Oct 15 11:46:58 2010] [error] [client fe80::6233:4bff:fe29:3173] File does not exist: /Library/WebServer/Documents/favicon.ico
+
+# Mac /var/log/secure.log
+Oct 14 09:20:56 banana loginwindow[41]: in pam_sm_authenticate(): Failed to determine Kerberos principal name.
+Oct 14 12:32:20 banana com.apple.SecurityServer[25]: UID 501 authenticated as user trentm (UID 501) for right &#x27;system.privilege.admin&#x27;
+
+# an internal joyent agent log
+[2012-02-07 00:37:11.898] [INFO] AMQPAgent - Publishing success.
+[2012-02-07 00:37:11.910] [DEBUG] AMQPAgent - { req_id: &#x27;8afb8d99-df8e-4724-8535-3d52adaebf25&#x27;,
+  timestamp: &#x27;2012-02-07T00:37:11.898Z&#x27;,
+
+# typical expressjs log output
+[Mon, 21 Nov 2011 20:52:11 GMT] 200 GET /foo (1ms)
+Blah, some other unstructured output to from a console.log call.
+</code></pre>
+<p>What&#x27;re we doing here? Five logs at random. Five different date formats. As <a href="http://journal.paul.querna.org/articles/2011/12/26/log-for-machines-in-json/">Paul Querna points out</a> we haven&#x27;t improved log parsability in 20 years. Parsability is enemy number one. You can&#x27;t use your logs until you can parse the records, and faced with the above the inevitable solution is a one-off regular expression.</p>
+<p>The current state of the art is various <a href="http://search.cpan.org/~akira/Apache-ParseLog-1.02/ParseLog.pm">parsing libs</a>, <a href="http://www.webalizer.org/">analysis</a> <a href="http://awstats.sourceforge.net/">tools</a> and homebrew scripts ranging from grep to Perl, whose scope is limited to a few niches log formats.</p>
+<h2 id="json-for-logs">JSON for Logs<a id="header-json-for-logs" class="anchor" href="#json-for-logs" aria-labelledby="json-for-logs"></a></h2>
+<p><code>JSON.parse()</code> solves all that. Let&#x27;s log in JSON. But it means a change in thinking: <strong>The first-level audience for log files shouldn&#x27;t be a person, but a machine.</strong></p>
+<p>That is not said lightly. The &quot;Unix Way&quot; of small focused tools lightly coupled with text output is important. JSON is less &quot;text-y&quot; than, e.g., Apache common log format. JSON makes <code>grep</code> and <code>awk</code> awkward. Using <code>less</code> directly on a log is handy.</p>
+<p>But not handy enough. That <a href="http://bit.ly/wTPlN3">80&#x27;s pastel jumpsuit awkwardness</a> you&#x27;re feeling isn&#x27;t the JSON, it&#x27;s your tools. Time to find a <code>json</code> tool -- <a href="https://github.com/trentm/json">json</a> is one, <code>bunyan</code> described below is another one. Time to learn your JSON library instead of your regex library: <a href="https://developer.mozilla.org/en/JSON">JavaScript</a>, <a href="http://docs.python.org/library/json.html">Python</a>, <a href="http://flori.github.com/json/">Ruby</a>, <a href="http://json.org/java/">Java</a>, <a href="http://search.cpan.org/~makamaka/JSON-2.53/lib/JSON.pm">Perl</a>.</p>
+<p>Time to burn your log4j Layout classes and move formatting to the tools side. Creating a log message with semantic information and throwing that away to make a string is silly. The win at being able to trivially parse log records is huge. The possibilities at being able to add ad hoc structured information to individual log records is interesting: think program state metrics, think feeding to Splunk, or loggly, think easy audit logs.</p>
+<h2 id="introducing-bunyan">Introducing Bunyan<a id="header-introducing-bunyan" class="anchor" href="#introducing-bunyan" aria-labelledby="introducing-bunyan"></a></h2>
+<p><a href="https://github.com/trentm/node-bunyan">Bunyan</a> is <strong>a Node.js module for logging in JSON</strong> and <strong>a <code>bunyan</code> CLI tool</strong> to view those logs.</p>
+<p>Logging with Bunyan basically looks like this:</p>
+<pre><code class="language-text">$ cat hi.js
+var Logger = require(&#x27;bunyan&#x27;);
+var log = new Logger({name: &#x27;hello&#x27; /*, ... */});
+log.info(&quot;hi %s&quot;, &quot;paul&quot;);
+</code></pre>
+<p>And you&#x27;ll get a log record like this:</p>
+<pre><code class="language-text">$ node hi.js
+{&quot;name&quot;:&quot;hello&quot;,&quot;hostname&quot;:&quot;banana.local&quot;,&quot;pid&quot;:40026,&quot;level&quot;:30,&quot;msg&quot;:&quot;hi paul&quot;,&quot;time&quot;:&quot;2012-03-28T17:25:37.050Z&quot;,&quot;v&quot;:0}
+</code></pre>
+<p>Pipe that through the <code>bunyan</code> tool that is part of the &quot;node-bunyan&quot; install to get more readable output:</p>
+<pre><code class="language-text">$ node hi.js | ./node_modules/.bin/bunyan       # formatted text output
+[2012-02-07T18:50:18.003Z]  INFO: hello/40026 on banana.local: hi paul
+
+$ node hi.js | ./node_modules/.bin/bunyan -j    # indented JSON output
+{
+  &quot;name&quot;: &quot;hello&quot;,
+  &quot;hostname&quot;: &quot;banana.local&quot;,
+  &quot;pid&quot;: 40087,
+  &quot;level&quot;: 30,
+  &quot;msg&quot;: &quot;hi paul&quot;,
+  &quot;time&quot;: &quot;2012-03-28T17:26:38.431Z&quot;,
+  &quot;v&quot;: 0
+}
+</code></pre>
+<p>Bunyan is log4j-like: create a Logger with a name, call <code>log.info(...)</code>, etc. However it has no intention of reproducing much of the functionality of log4j. IMO, much of that is overkill for the types of services you&#x27;ll tend to be writing with Node.js.</p>
+<h2 id="longer-bunyan-example">Longer Bunyan Example<a id="header-longer-bunyan-example" class="anchor" href="#longer-bunyan-example" aria-labelledby="longer-bunyan-example"></a></h2>
+<p>Let&#x27;s walk through a bigger example to show some interesting things in Bunyan. We&#x27;ll create a very small &quot;Hello API&quot; server using the excellent <a href="https://github.com/mcavage/node-restify">restify</a> library -- which we used heavily here at <a href="http://joyent.com">Joyent</a>. (Bunyan doesn&#x27;t require restify at all, you can easily use Bunyan with <a href="http://expressjs.com/">Express</a> or whatever.)</p>
+<p><em>You can follow along in <a href="https://github.com/trentm/hello-json-logging">https://github.com/trentm/hello-json-logging</a> if you like. Note that I&#x27;m using the current HEAD of the bunyan and restify trees here, so details might change a bit. Prerequisite: a node 0.6.x installation.</em></p>
+<pre><code class="language-text">git clone https://github.com/trentm/hello-json-logging.git
+cd hello-json-logging
+make
+</code></pre>
+<h3 id="bunyan-logger">Bunyan Logger<a id="header-bunyan-logger" class="anchor" href="#bunyan-logger" aria-labelledby="bunyan-logger"></a></h3>
+<p>Our <a href="https://github.com/trentm/hello-json-logging/blob/master/server.js">server</a> first creates a Bunyan logger:</p>
+<pre><code class="language-javascript">var Logger = require(&#x27;bunyan&#x27;);
+var log = new Logger({
+  name: &#x27;helloapi&#x27;,
+  streams: [
+    {
+      stream: process.stdout,
+      level: &#x27;debug&#x27;
+    },
+    {
+      path: &#x27;hello.log&#x27;,
+      level: &#x27;trace&#x27;
+    }
+  ],
+  serializers: {
+    req: Logger.stdSerializers.req,
+    res: restify.bunyan.serializers.response,
+  },
+});
+</code></pre>
+<p>Every Bunyan logger must have a <strong>name</strong>. Unlike log4j, this is not a hierarchical dotted namespace. It is just a name field for the log records.</p>
+<p>Every Bunyan logger has one or more <strong>streams</strong>, to which log records are written. Here we&#x27;ve defined two: logging at DEBUG level and above is written to stdout, and logging at TRACE and above is appended to &#x27;hello.log&#x27;.</p>
+<p>Bunyan has the concept of <strong>serializers</strong>: a registry of functions that know how to convert a JavaScript object for a certain log record field to a nice JSON representation for logging. For example, here we register the <code>Logger.stdSerializers.req</code> function to convert HTTP Request objects (using the field name &quot;req&quot;) to JSON. More on serializers later.</p>
+<h3 id="restify-server">Restify Server<a id="header-restify-server" class="anchor" href="#restify-server" aria-labelledby="restify-server"></a></h3>
+<p>Restify 1.x and above has bunyan support baked in. You pass in your Bunyan logger like this:</p>
+<pre><code class="language-javascript">var server = restify.createServer({
+  name: &#x27;Hello API&#x27;,
+  log: log   // Pass our logger to restify.
+});
+</code></pre>
+<p>Our simple API will have a single <code>GET /hello?name=NAME</code> endpoint:</p>
+<pre><code class="language-javascript">server.get({path: &#x27;/hello&#x27;, name: &#x27;SayHello&#x27;}, function(req, res, next) {
+  var caller = req.params.name || &#x27;caller&#x27;;
+  req.log.debug(&#x27;caller is &quot;%s&quot;&#x27;, caller);
+  res.send({&quot;hello&quot;: caller});
+  return next();
+});
+</code></pre>
+<p>If we run that, <code>node server.js</code>, and call the endpoint, we get the expected restify response:</p>
+<pre><code class="language-text">$ curl -iSs http://0.0.0.0:8080/hello?name=paul
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Headers: Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version
+Access-Control-Expose-Headers: X-Api-Version, X-Request-Id, X-Response-Time
+Server: Hello API
+X-Request-Id: f6aaf942-c60d-4c72-8ddd-bada459db5e3
+Access-Control-Allow-Methods: GET
+Connection: close
+Content-Length: 16
+Content-MD5: Xmn3QcFXaIaKw9RPUARGBA==
+Content-Type: application/json
+Date: Tue, 07 Feb 2012 19:12:35 GMT
+X-Response-Time: 4
+
+{&quot;hello&quot;:&quot;paul&quot;}
+</code></pre>
+<h3 id="setup-server-logging">Setup Server Logging<a id="header-setup-server-logging" class="anchor" href="#setup-server-logging" aria-labelledby="setup-server-logging"></a></h3>
+<p>Let&#x27;s add two things to our server. First, we&#x27;ll use the <code>server.pre</code> to hook into restify&#x27;s request handling before routing where we&#x27;ll <strong>log the request</strong>.</p>
+<pre><code class="language-javascript">server.pre(function (request, response, next) {
+  request.log.info({req: request}, &#x27;start&#x27;);        // (1)
+  return next();
+});
+</code></pre>
+<p>This is the first time we&#x27;ve seen this <code>log.info</code> style with an object as the first argument. Bunyan logging methods (<code>log.trace</code>, <code>log.debug</code>, ...) all support an optional <strong>first object argument with extra log record fields</strong>:</p>
+<pre><code class="language-javascript">log.info(&lt;object&gt; fields, &lt;string&gt; msg, ...)
+</code></pre>
+<p>Here we pass in the restify Request object, <code>req</code>. The &quot;req&quot; serializer we registered above will come into play here, but bear with me.</p>
+<p>Remember that we already had this debug log statement in our endpoint handler:</p>
+<pre><code class="language-javascript">req.log.debug(&#x27;caller is &quot;%s&quot;&#x27;, caller);            // (2)
+</code></pre>
+<p>Second, use the restify server <code>after</code> event to <strong>log the response</strong>:</p>
+<pre><code class="language-javascript">server.on(&#x27;after&#x27;, function (req, res, route) {
+  req.log.info({res: res}, &quot;finished&quot;);             // (3)
+});
+</code></pre>
+<h3 id="log-output">Log Output<a id="header-log-output" class="anchor" href="#log-output" aria-labelledby="log-output"></a></h3>
+<p>Now lets see what log output we get when somebody hits our API&#x27;s endpoint:</p>
+<pre><code class="language-text">$ curl -iSs http://0.0.0.0:8080/hello?name=paul
+HTTP/1.1 200 OK
+...
+X-Request-Id: 9496dfdd-4ec7-4b59-aae7-3fed57aed5ba
+...
+
+{&quot;hello&quot;:&quot;paul&quot;}
+</code></pre>
+<p>Here is the server log:</p>
+<pre><code class="language-text">[trentm@banana:~/tm/hello-json-logging]$ node server.js
+... intro &quot;listening at&quot; log message elided ...
+{&quot;name&quot;:&quot;helloapi&quot;,&quot;hostname&quot;:&quot;banana.local&quot;,&quot;pid&quot;:40341,&quot;level&quot;:30,&quot;req&quot;:{&quot;method&quot;:&quot;GET&quot;,&quot;url&quot;:&quot;/hello?name=paul&quot;,&quot;headers&quot;:{&quot;user-agent&quot;:&quot;curl/7.19.7 (universal-apple-darwin10.0) libcurl/7.19.7 OpenSSL/0.9.8r zlib/1.2.3&quot;,&quot;host&quot;:&quot;0.0.0.0:8080&quot;,&quot;accept&quot;:&quot;*/*&quot;},&quot;remoteAddress&quot;:&quot;127.0.0.1&quot;,&quot;remotePort&quot;:59831},&quot;msg&quot;:&quot;start&quot;,&quot;time&quot;:&quot;2012-03-28T17:37:29.506Z&quot;,&quot;v&quot;:0}
+{&quot;name&quot;:&quot;helloapi&quot;,&quot;hostname&quot;:&quot;banana.local&quot;,&quot;pid&quot;:40341,&quot;route&quot;:&quot;SayHello&quot;,&quot;req_id&quot;:&quot;9496dfdd-4ec7-4b59-aae7-3fed57aed5ba&quot;,&quot;level&quot;:20,&quot;msg&quot;:&quot;caller is \&quot;paul\&quot;&quot;,&quot;time&quot;:&quot;2012-03-28T17:37:29.507Z&quot;,&quot;v&quot;:0}
+{&quot;name&quot;:&quot;helloapi&quot;,&quot;hostname&quot;:&quot;banana.local&quot;,&quot;pid&quot;:40341,&quot;route&quot;:&quot;SayHello&quot;,&quot;req_id&quot;:&quot;9496dfdd-4ec7-4b59-aae7-3fed57aed5ba&quot;,&quot;level&quot;:30,&quot;res&quot;:{&quot;statusCode&quot;:200,&quot;headers&quot;:{&quot;access-control-allow-origin&quot;:&quot;*&quot;,&quot;access-control-allow-headers&quot;:&quot;Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version&quot;,&quot;access-control-expose-headers&quot;:&quot;X-Api-Version, X-Request-Id, X-Response-Time&quot;,&quot;server&quot;:&quot;Hello API&quot;,&quot;x-request-id&quot;:&quot;9496dfdd-4ec7-4b59-aae7-3fed57aed5ba&quot;,&quot;access-control-allow-methods&quot;:&quot;GET&quot;,&quot;connection&quot;:&quot;close&quot;,&quot;content-length&quot;:16,&quot;content-md5&quot;:&quot;Xmn3QcFXaIaKw9RPUARGBA==&quot;,&quot;content-type&quot;:&quot;application/json&quot;,&quot;date&quot;:&quot;Wed, 28 Mar 2012 17:37:29 GMT&quot;,&quot;x-response-time&quot;:3}},&quot;msg&quot;:&quot;finished&quot;,&quot;time&quot;:&quot;2012-03-28T17:37:29.510Z&quot;,&quot;v&quot;:0}
+</code></pre>
+<p>Lets look at each in turn to see what is interesting -- pretty-printed with <code>node server.js | ./node_modules/.bin/bunyan -j</code>:</p>
+<pre><code class="language-javascript">{                                                   // (1)
+  &quot;name&quot;: &quot;helloapi&quot;,
+  &quot;hostname&quot;: &quot;banana.local&quot;,
+  &quot;pid&quot;: 40442,
+  &quot;level&quot;: 30,
+  &quot;req&quot;: {
+    &quot;method&quot;: &quot;GET&quot;,
+    &quot;url&quot;: &quot;/hello?name=paul&quot;,
+    &quot;headers&quot;: {
+      &quot;user-agent&quot;: &quot;curl/7.19.7 (universal-apple-darwin10.0) libcurl/7.19.7 OpenSSL/0.9.8r zlib/1.2.3&quot;,
+      &quot;host&quot;: &quot;0.0.0.0:8080&quot;,
+      &quot;accept&quot;: &quot;*/*&quot;
+    },
+    &quot;remoteAddress&quot;: &quot;127.0.0.1&quot;,
+    &quot;remotePort&quot;: 59834
+  },
+  &quot;msg&quot;: &quot;start&quot;,
+  &quot;time&quot;: &quot;2012-03-28T17:39:44.880Z&quot;,
+  &quot;v&quot;: 0
+}
+</code></pre>
+<p>Here we logged the incoming request with <code>request.log.info({req: request}, &#x27;start&#x27;)</code>. The use of the &quot;req&quot; field triggers the <a href="https://github.com/trentm/node-bunyan/blob/master/lib/bunyan.js#L857-870">&quot;req&quot; serializer</a> <a href="https://github.com/trentm/hello-json-logging/blob/master/server.js#L24">registered at Logger creation</a>.</p>
+<p>Next the <code>req.log.debug</code> in our handler:</p>
+<pre><code class="language-javascript">{                                                   // (2)
+  &quot;name&quot;: &quot;helloapi&quot;,
+  &quot;hostname&quot;: &quot;banana.local&quot;,
+  &quot;pid&quot;: 40442,
+  &quot;route&quot;: &quot;SayHello&quot;,
+  &quot;req_id&quot;: &quot;9496dfdd-4ec7-4b59-aae7-3fed57aed5ba&quot;,
+  &quot;level&quot;: 20,
+  &quot;msg&quot;: &quot;caller is \&quot;paul\&quot;&quot;,
+  &quot;time&quot;: &quot;2012-03-28T17:39:44.883Z&quot;,
+  &quot;v&quot;: 0
+}
+</code></pre>
+<p>and the log of response in the &quot;after&quot; event:</p>
+<pre><code class="language-javascript">{                                                   // (3)
+  &quot;name&quot;: &quot;helloapi&quot;,
+  &quot;hostname&quot;: &quot;banana.local&quot;,
+  &quot;pid&quot;: 40442,
+  &quot;route&quot;: &quot;SayHello&quot;,
+  &quot;req_id&quot;: &quot;9496dfdd-4ec7-4b59-aae7-3fed57aed5ba&quot;,
+  &quot;level&quot;: 30,
+  &quot;res&quot;: {
+    &quot;statusCode&quot;: 200,
+    &quot;headers&quot;: {
+      &quot;access-control-allow-origin&quot;: &quot;*&quot;,
+      &quot;access-control-allow-headers&quot;: &quot;Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version&quot;,
+      &quot;access-control-expose-headers&quot;: &quot;X-Api-Version, X-Request-Id, X-Response-Time&quot;,
+      &quot;server&quot;: &quot;Hello API&quot;,
+      &quot;x-request-id&quot;: &quot;9496dfdd-4ec7-4b59-aae7-3fed57aed5ba&quot;,
+      &quot;access-control-allow-methods&quot;: &quot;GET&quot;,
+      &quot;connection&quot;: &quot;close&quot;,
+      &quot;content-length&quot;: 16,
+      &quot;content-md5&quot;: &quot;Xmn3QcFXaIaKw9RPUARGBA==&quot;,
+      &quot;content-type&quot;: &quot;application/json&quot;,
+      &quot;date&quot;: &quot;Wed, 28 Mar 2012 17:39:44 GMT&quot;,
+      &quot;x-response-time&quot;: 5
+    }
+  },
+  &quot;msg&quot;: &quot;finished&quot;,
+  &quot;time&quot;: &quot;2012-03-28T17:39:44.886Z&quot;,
+  &quot;v&quot;: 0
+}
+</code></pre>
+<p>Two useful details of note here:</p>
+<ol>
+<li>
+<p>The last two log messages include <strong>a &quot;req_id&quot; field</strong> (added to the <code>req.log</code> logger by restify). Note that this is the same UUID as the &quot;X-Request-Id&quot; header in the <code>curl</code> response. This means that if you use <code>req.log</code> for logging in your API handlers you will get an easy way to collate all logging for particular requests.</p>
+<p>If your&#x27;s is an SOA system with many services, a best practice is to carry that X-Request-Id/req_id through your system to enable collating handling of a single top-level request.</p>
+</li>
+<li>
+<p>The last two log messages include <strong>a &quot;route&quot; field</strong>. This tells you to which handler restify routed the request. While possibly useful for debugging, this can be very helpful for log-based monitoring of endpoints on a server.</p>
+</li>
+</ol>
+<p>Recall that we also setup all logging to go the &quot;hello.log&quot; file. This was set at the TRACE level. Restify will log more detail of its operation at the trace level. See <a href="https://gist.github.com/1761772">my &quot;hello.log&quot;</a> for an example. The <code>bunyan</code> tool does a decent job of <a href="https://gist.github.com/1761772#file_2.+cat+hello.log+pipe+bunyan">nicely formatting</a> multiline messages and &quot;req&quot;/&quot;res&quot; keys (with color, not shown in the gist).</p>
+<p><em>This</em> is logging you can use effectively.</p>
+<h2 id="other-tools">Other Tools<a id="header-other-tools" class="anchor" href="#other-tools" aria-labelledby="other-tools"></a></h2>
+<p>Bunyan is just one of many options for logging in Node.js-land. Others (that I know of) supporting JSON logging are <a href="https://github.com/flatiron/winston#readme">winston</a> and <a href="https://github.com/pquerna/node-logmagic/">logmagic</a>. Paul Querna has <a href="http://journal.paul.querna.org/articles/2011/12/26/log-for-machines-in-json/">an excellent post on using JSON for logging</a>, which shows logmagic usage and also touches on topics like the GELF logging format, log transporting, indexing and searching.</p>
+<h2 id="final-thoughts">Final Thoughts<a id="header-final-thoughts" class="anchor" href="#final-thoughts" aria-labelledby="final-thoughts"></a></h2>
+<p>Parsing challenges won&#x27;t ever completely go away, but it can for your logs if you use JSON. Collating log records across logs from multiple nodes is facilitated by a common &quot;time&quot; field. Correlating logging across multiple services is enabled by carrying a common &quot;req_id&quot; (or equivalent) through all such logs.</p>
+<p>Separate log files for a single service is an anti-pattern. The typical Apache example of separate access and error logs is legacy, not an example to follow. A JSON log provides the structure necessary for tooling to easily filter for log records of a particular type.</p>
+<p>JSON logs bring possibilities. Feeding to tools like Splunk becomes easy. Ad hoc fields allow for a lightly spec&#x27;d comm channel from apps to other services: records with a &quot;metric&quot; could feed to <a href="http://codeascraft.etsy.com/2011/02/15/measure-anything-measure-everything/">statsd</a>, records with a &quot;loggly: true&quot; could feed to loggly.com.</p>
+<p>Here I&#x27;ve described a very simple example of restify and bunyan usage for Node.js-based API services with easy JSON logging. Restify provides a powerful framework for robust API services. Bunyan provides a light API for nice JSON logging and the beginnings of tooling to help consume Bunyan JSON logs.</p>
+<p><strong>Update (29-Mar-2012):</strong> Fix styles somewhat for RSS readers.</p></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->Scroll to top</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"en","localName":"English","name":"English","langDir":"ltr","dateFormat":"MM.DD.YYYY","hrefLang":"en-US","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"Scroll to top","components.header.links.home":"Home","components.header.links.about":"About","components.header.links.download":"Downloads","components.header.links.docs":"Docs","components.header.links.getInvolved":"Get Involved","components.header.links.security":"Security","components.header.links.certification":"Certification","components.header.links.blog":"News","components.navigation.about.links.governance":"Governance","components.navigation.docs.links.es6":"ES6 and beyond","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"Guides","components.navigation.docs.links.dependencies":"Dependencies","components.navigation.getInvolved.links.collabSummit":"Collab Summit","components.navigation.getInvolved.links.contribute":"Contribute","components.navigation.getInvolved.links.codeOfConduct":"Code of Conduct","components.downloadList.links.previousReleases":"Previous Releases","components.downloadList.links.packageManager":"Installing Node.js via package manager","components.downloadList.links.shaSums":"Signed SHASUMS for release files","components.downloadList.links.shaSums.howToVerify":" (How to verify)","components.downloadList.links.allDownloads":"All download options","components.downloadList.links.nightlyReleases":"Nightly builds","components.downloadList.links.unofficialBuilds":"Unofficial builds","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Installing Node.js via binary archive","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"Changelog","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"Docs","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"Newer | ","components.pagination.previous":"Older","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}}},"__N_SSG":true},"page":"/en/blog/module/service-logging-in-json-with-bunyan","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

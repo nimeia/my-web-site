@@ -1,0 +1,721 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>A New Streaming API for Node v0.10 | Node.js node js 学习 中文网</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="A New Streaming API for Node v0.10 | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="A New Streaming API for Node v0.10 | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/en/blog/feature/streams2"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/en/blog/feature/streams2-621103189a06a1a9.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-2WRNZHGVQT"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-2WRNZHGVQT");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8264273508355034" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/en"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/en">Home</a></li><li class=""><a href="/en/about">About</a></li><li class=""><a href="/en/download">Downloads</a></li><li class=""><a href="/en/docs">Docs</a></li><li class=""><a href="/en/get-involved">Get Involved</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">Security</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class="active"><a href="/en/blog">News</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/blog/feature/streams2">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/blog/feature/streams2">Catalan</a></li><li><a data-lang="de" title="German" href="/de/blog/feature/streams2">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/blog/feature/streams2">English</a></li><li><a data-lang="es" title="Spanish" href="/es/blog/feature/streams2">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/blog/feature/streams2">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/blog/feature/streams2">Français</a></li><li><a data-lang="it" title="Italian" href="/it/blog/feature/streams2">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/blog/feature/streams2">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/blog/feature/streams2">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/blog/feature/streams2">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/blog/feature/streams2">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/blog/feature/streams2">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/blog/feature/streams2">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/blog/feature/streams2">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/blog/feature/streams2">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/blog/feature/streams2">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/blog/feature/streams2">繁體中文</a></li></ul></div></header><main id="main"><div class="container"><article dir="auto"><div class="blogpost-header"><h1>A New Streaming API for Node v0.10</h1><span class="blogpost-meta">By Isaac Z. Schlueter, <time dateTime="2012-12-21T08:45:13+0800">2012-12-21</time></span></div><p><strong>tl;dr</strong></p>
+<ul>
+<li>Node streams are great, except for all the ways in which they&#x27;re
+terrible.</li>
+<li>A new Stream implementation is coming in 0.10, that has gotten the
+nickname &quot;streams2&quot;.</li>
+<li>Readable streams have a <code>read()</code> method that returns a buffer or
+null. (More documentation included below.)</li>
+<li><code>&#x27;data&#x27;</code> events, <code>pause()</code>, and <code>resume()</code> will still work as before
+(except that they&#x27;ll actually work how you&#x27;d expect).</li>
+<li>Old programs will <strong>almost always</strong> work without modification, but
+streams start out in a paused state, and need to be read from to be
+consumed.</li>
+<li><strong>WARNING</strong>: If you never add a <code>&#x27;data&#x27;</code> event handler, or call
+<code>resume()</code>, then it&#x27;ll sit in a paused state forever and never
+emit <code>&#x27;end&#x27;</code>.</li>
+</ul>
+<hr/>
+<p>Throughout the life of Node, we&#x27;ve been gradually iterating on the
+ideal event-based API for handling data. Over time, this developed
+into the &quot;Stream&quot; interface that you see throughout Node&#x27;s core
+modules and many of the modules in npm.</p>
+<p>Consistent interfaces increase the portability and reliability of our
+programs and libraries. Overall, the move from domain-specific events
+and methods towards a unified stream interface was a huge win.
+However, there are still several problems with Node&#x27;s streams as of
+v0.8. In a nutshell:</p>
+<ol>
+<li>The <code>pause()</code> method doesn&#x27;t pause. It is advisory-only. In
+Node&#x27;s implementation, this makes things much simpler, but it&#x27;s
+confusing to users, and doesn&#x27;t do what it looks like it does.</li>
+<li><code>&#x27;data&#x27;</code> events come right away (whether you&#x27;re ready or not).
+This makes it unreasonably difficult to do common tasks like load a
+user&#x27;s session before deciding how to handle their request.</li>
+<li>There is no way to consume a specific number of bytes, and then
+leave the rest for some other part of the program to deal with.</li>
+<li>It&#x27;s unreasonably difficult to implement streams and get all the
+intricacies of pause, resume, write-buffering, and data events
+correct. The lack of shared classes mean that we all have to solve
+the same problems repeatedly, making similar mistakes and similar
+bugs.</li>
+</ol>
+<p>Common simple tasks should be easy, or we aren&#x27;t doing our job.
+People often say that Node is better than most other platforms at this
+stuff, but in my opinion, that is less of a compliment and more of an
+indictment of the current state of software. Being better than the
+next guy isn&#x27;t enough; we have to be the best imaginable. While they
+were a big step in the right direction, the Streams in Node up until
+now leave a lot wanting.</p>
+<p>So, just fix it, right?</p>
+<p>Well, we are sitting on the results of several years of explosive
+growth in the Node community, so any changes have to be made very
+carefully. If we break all the Node programs in 0.10, then no one
+will ever want to upgrade to 0.10, and it&#x27;s all pointless. We had
+this conversation around 0.4, then again around 0.6, then again around
+0.8. Every time, the conclusion has been &quot;Too much work, too hard to
+make backwards-compatible&quot;, and we always had more pressing problems
+to solve.</p>
+<p>In 0.10, we cannot put it off any longer. We&#x27;ve bitten the bullet and
+are making a significant change to the Stream implementation. You may
+have seen conversations on twitter or IRC or the mailing list about
+&quot;streams2&quot;. I also gave <a href="https://dl.dropbox.com/u/3685/presentations/streams2/streams2-ko.pdf">a talk in
+November</a>
+about this subject. A lot of node module authors have been involved
+with the development of streams2 (and of course the node core team).</p>
+<h2 id="streams2">streams2<a id="header-streams2" class="anchor" href="#streams2" aria-labelledby="streams2"></a></h2>
+<p>The feature is described pretty thoroughly in the documentation, so
+I&#x27;m including it below. Please read it, especially the section on
+&quot;compatibility&quot;. There&#x27;s a caveat there that is unfortunately
+unavoidable, but hopefully enough of an edge case that it&#x27;s easily
+worked around.</p>
+<p>The first preview release with this change will be 0.9.4. I highly
+recommend trying this release and providing feedback before it lands
+in a stable version.</p>
+<p>As of writing this post, there are some known performance regressions,
+especially in the http module. We are fanatical about maintaining
+performance in Node.js, so of course this will have to be fixed before
+the v0.10 stable release. (Watch for a future blog post on the tools
+and techniques that have been useful in tracking down these issues.)</p>
+<p>There may be minor changes as necessary to fix bugs and improve
+performance, but the API at this point should be considered feature
+complete. It correctly does all the things we need it to do, it just
+doesn&#x27;t do them quite well enough yet. As always, be wary of running
+unstable releases in production, of course, but I encourage you to try
+it out and see what you think. Especially, if you have tests that you
+can run on your modules and libraries, that would be extremely useful
+feedback.</p>
+<hr/>
+<h1 id="stream">Stream<a id="header-stream" class="anchor" href="#stream" aria-labelledby="stream"></a></h1>
+<div class="highlight-box">
+<p>Stability: 2 - Unstable</p>
+</div>
+<p>A stream is an abstract interface implemented by various objects in
+Node. For example a request to an HTTP server is a stream, as is
+stdout. Streams are readable, writable, or both. All streams are
+instances of <a href="https://nodejs.org/api/events.html#events_class_eventemitter">EventEmitter</a></p>
+<p>You can load the Stream base classes by doing <code>require(&#x27;stream&#x27;)</code>.
+There are base classes provided for Readable streams, Writable
+streams, Duplex streams, and Transform streams.</p>
+<h2 id="compatibility">Compatibility<a id="header-compatibility" class="anchor" href="#compatibility" aria-labelledby="compatibility"></a></h2>
+<p>In earlier versions of Node, the Readable stream interface was
+simpler, but also less powerful and less useful.</p>
+<ul>
+<li>Rather than waiting for you to call the <code>read()</code> method, <code>&#x27;data&#x27;</code>
+events would start emitting immediately. If you needed to do some
+I/O to decide how to handle data, then you had to store the chunks
+in some kind of buffer so that they would not be lost.</li>
+<li>The <code>pause()</code> method was advisory, rather than guaranteed. This
+meant that you still had to be prepared to receive <code>&#x27;data&#x27;</code> events
+even when the stream was in a paused state.</li>
+</ul>
+<p>In Node v0.10, the Readable class described below was added. For
+backwards compatibility with older Node programs, Readable streams
+switch into &quot;old mode&quot; when a <code>&#x27;data&#x27;</code> event handler is added, or when
+the <code>pause()</code> or <code>resume()</code> methods are called. The effect is that,
+even if you are not using the new <code>read()</code> method and <code>&#x27;readable&#x27;</code>
+event, you no longer have to worry about losing <code>&#x27;data&#x27;</code> chunks.</p>
+<p>Most programs will continue to function normally. However, this
+introduces an edge case in the following conditions:</p>
+<ul>
+<li>No <code>&#x27;data&#x27;</code> event handler is added.</li>
+<li>The <code>pause()</code> and <code>resume()</code> methods are never called.</li>
+</ul>
+<p>For example, consider the following code:</p>
+<pre><code class="language-javascript">// WARNING! BROKEN!
+net.createServer(function(socket) {
+
+  // we add an &#x27;end&#x27; method, but never consume the data
+  socket.on(&#x27;end&#x27;, function() {
+    // It will never get here.
+    socket.end(&#x27;I got your message (but didnt read it)\n&#x27;);
+  });
+
+}).listen(1337);
+</code></pre>
+<p>In versions of node prior to v0.10, the incoming message data would be
+simply discarded. However, in Node v0.10 and beyond, the socket will
+remain paused forever.</p>
+<p>The workaround in this situation is to call the <code>resume()</code> method to
+trigger &quot;old mode&quot; behavior:</p>
+<pre><code class="language-javascript">// Workaround
+net.createServer(function(socket) {
+
+  socket.on(&#x27;end&#x27;, function() {
+    socket.end(&#x27;I got your message (but didnt read it)\n&#x27;);
+  });
+
+  // start the flow of data, discarding it.
+  socket.resume();
+
+}).listen(1337);
+</code></pre>
+<p>In addition to new Readable streams switching into old-mode, pre-v0.10
+style streams can be wrapped in a Readable class using the <code>wrap()</code>
+method.</p>
+<h2 id="class-streamreadable">Class: stream.Readable<a id="header-class-streamreadable" class="anchor" href="#class-streamreadable" aria-labelledby="class-streamreadable"></a></h2>
+<!-- -->
+<p>A <code>Readable Stream</code> has the following methods, members, and events.</p>
+<p>Note that <code>stream.Readable</code> is an abstract class designed to be
+extended with an underlying implementation of the <code>_read(size)</code>
+method. (See below.)</p>
+<h3 id="new-streamreadableoptions">new stream.Readable([options])<a id="header-new-streamreadableoptions" class="anchor" href="#new-streamreadableoptions" aria-labelledby="new-streamreadableoptions"></a></h3>
+<ul>
+<li><code>options</code> {Object}<!-- -->
+<ul>
+<li><code>highWaterMark</code> {Number} The maximum number of bytes to store in
+the internal buffer before ceasing to read from the underlying
+resource. Default=16kb</li>
+<li><code>encoding</code> {String} If specified, then buffers will be decoded to
+strings using the specified encoding. Default=null</li>
+<li><code>objectMode</code> {Boolean} Whether this stream should behave
+as a stream of objects. Meaning that stream.read(n) returns
+a single value instead of a Buffer of size n</li>
+</ul>
+</li>
+</ul>
+<p>In classes that extend the Readable class, make sure to call the
+constructor so that the buffering settings can be properly
+initialized.</p>
+<h3 id="readable_readsize">readable._read(size)<a id="header-readable_readsize" class="anchor" href="#readable_readsize" aria-labelledby="readable_readsize"></a></h3>
+<ul>
+<li><code>size</code> {Number} Number of bytes to read asynchronously</li>
+</ul>
+<p>Note: <strong>This function should NOT be called directly.</strong> It should be
+implemented by child classes, and called by the internal Readable
+class methods only.</p>
+<p>All Readable stream implementations must provide a <code>_read</code> method
+to fetch data from the underlying resource.</p>
+<p>This method is prefixed with an underscore because it is internal to
+the class that defines it, and should not be called directly by user
+programs. However, you <strong>are</strong> expected to override this method in
+your own extension classes.</p>
+<p>When data is available, put it into the read queue by calling
+<code>readable.push(chunk)</code>. If <code>push</code> returns false, then you should stop
+reading. When <code>_read</code> is called again, you should start pushing more
+data.</p>
+<p>The <code>size</code> argument is advisory. Implementations where a &quot;read&quot; is a
+single call that returns data can use this to know how much data to
+fetch. Implementations where that is not relevant, such as TCP or
+TLS, may ignore this argument, and simply provide data whenever it
+becomes available. There is no need, for example to &quot;wait&quot; until
+<code>size</code> bytes are available before calling <code>stream.push(chunk)</code>.</p>
+<h3 id="readablepushchunk">readable.push(chunk)<a id="header-readablepushchunk" class="anchor" href="#readablepushchunk" aria-labelledby="readablepushchunk"></a></h3>
+<ul>
+<li><code>chunk</code> {Buffer | null | String} Chunk of data to push into the read queue</li>
+<li>return {Boolean} Whether or not more pushes should be performed</li>
+</ul>
+<p>Note: <strong>This function should be called by Readable implementors, NOT
+by consumers of Readable subclasses.</strong> The <code>_read()</code> function will not
+be called again until at least one <code>push(chunk)</code> call is made. If no
+data is available, then you MAY call <code>push(&#x27;&#x27;)</code> (an empty string) to
+allow a future <code>_read</code> call, without adding any data to the queue.</p>
+<p>The <code>Readable</code> class works by putting data into a read queue to be
+pulled out later by calling the <code>read()</code> method when the <code>&#x27;readable&#x27;</code>
+event fires.</p>
+<p>The <code>push()</code> method will explicitly insert some data into the read
+queue. If it is called with <code>null</code> then it will signal the end of the
+data.</p>
+<p>In some cases, you may be wrapping a lower-level source which has some
+sort of pause/resume mechanism, and a data callback. In those cases,
+you could wrap the low-level source object by doing something like
+this:</p>
+<pre><code class="language-javascript">// source is an object with readStop() and readStart() methods,
+// and an `ondata` member that gets called when it has data, and
+// an `onend` member that gets called when the data is over.
+
+var stream = new Readable();
+
+source.ondata = function(chunk) {
+  // if push() returns false, then we need to stop reading from source
+  if (!stream.push(chunk))
+    source.readStop();
+};
+
+source.onend = function() {
+  stream.push(null);
+};
+
+// _read will be called when the stream wants to pull more data in
+// the advisory size argument is ignored in this case.
+stream._read = function(n) {
+  source.readStart();
+};
+</code></pre>
+<h3 id="readableunshiftchunk">readable.unshift(chunk)<a id="header-readableunshiftchunk" class="anchor" href="#readableunshiftchunk" aria-labelledby="readableunshiftchunk"></a></h3>
+<ul>
+<li><code>chunk</code> {Buffer | null | String} Chunk of data to unshift onto the read queue</li>
+<li>return {Boolean} Whether or not more pushes should be performed</li>
+</ul>
+<p>This is the corollary of <code>readable.push(chunk)</code>. Rather than putting
+the data at the <em>end</em> of the read queue, it puts it at the <em>front</em> of
+the read queue.</p>
+<p>This is useful in certain use-cases where a stream is being consumed
+by a parser, which needs to &quot;un-consume&quot; some data that it has
+optimistically pulled out of the source.</p>
+<pre><code class="language-javascript">// A parser for a simple data protocol.
+// The &quot;header&quot; is a JSON object, followed by 2 \n characters, and
+// then a message body.
+//
+// Note: This can be done more simply as a Transform stream. See below.
+
+function SimpleProtocol(source, options) {
+  if (!(this instanceof SimpleProtocol))
+    return new SimpleProtocol(options);
+
+  Readable.call(this, options);
+  this._inBody = false;
+  this._sawFirstCr = false;
+
+  // source is a readable stream, such as a socket or file
+  this._source = source;
+
+  var self = this;
+  source.on(&#x27;end&#x27;, function() {
+    self.push(null);
+  });
+
+  // give it a kick whenever the source is readable
+  // read(0) will not consume any bytes
+  source.on(&#x27;readable&#x27;, function() {
+    self.read(0);
+  });
+
+  this._rawHeader = [];
+  this.header = null;
+}
+
+SimpleProtocol.prototype = Object.create(
+  Readable.prototype, { constructor: { value: SimpleProtocol }});
+
+SimpleProtocol.prototype._read = function(n) {
+  if (!this._inBody) {
+    var chunk = this._source.read();
+
+    // if the source doesn&#x27;t have data, we don&#x27;t have data yet.
+    if (chunk === null)
+      return this.push(&#x27;&#x27;);
+
+    // check if the chunk has a \n\n
+    var split = -1;
+    for (var i = 0; i &lt; chunk.length; i++) {
+      if (chunk[i] === 10) { // &#x27;\n&#x27;
+        if (this._sawFirstCr) {
+          split = i;
+          break;
+        } else {
+          this._sawFirstCr = true;
+        }
+      } else {
+        this._sawFirstCr = false;
+      }
+    }
+
+    if (split === -1) {
+      // still waiting for the \n\n
+      // stash the chunk, and try again.
+      this._rawHeader.push(chunk);
+      this.push(&#x27;&#x27;);
+    } else {
+      this._inBody = true;
+      var h = chunk.slice(0, split);
+      this._rawHeader.push(h);
+      var header = Buffer.concat(this._rawHeader).toString();
+      try {
+        this.header = JSON.parse(header);
+      } catch (er) {
+        this.emit(&#x27;error&#x27;, new Error(&#x27;invalid simple protocol data&#x27;));
+        return;
+      }
+      // now, because we got some extra data, unshift the rest
+      // back into the read queue so that our consumer will see it.
+      var b = chunk.slice(split);
+      this.unshift(b);
+
+      // and let them know that we are done parsing the header.
+      this.emit(&#x27;header&#x27;, this.header);
+    }
+  } else {
+    // from there on, just provide the data to our consumer.
+    // careful not to push(null), since that would indicate EOF.
+    var chunk = this._source.read();
+    if (chunk) this.push(chunk);
+  }
+};
+
+// Usage:
+var parser = new SimpleProtocol(source);
+// Now parser is a readable stream that will emit &#x27;header&#x27;
+// with the parsed header data.
+</code></pre>
+<h3 id="readablewrapstream">readable.wrap(stream)<a id="header-readablewrapstream" class="anchor" href="#readablewrapstream" aria-labelledby="readablewrapstream"></a></h3>
+<ul>
+<li><code>stream</code> {Stream} An &quot;old style&quot; readable stream</li>
+</ul>
+<p>If you are using an older Node library that emits <code>&#x27;data&#x27;</code> events and
+has a <code>pause()</code> method that is advisory only, then you can use the
+<code>wrap()</code> method to create a Readable stream that uses the old stream
+as its data source.</p>
+<p>For example:</p>
+<pre><code class="language-javascript">var OldReader = require(&#x27;./old-api-module.js&#x27;).OldReader;
+var oreader = new OldReader;
+var Readable = require(&#x27;stream&#x27;).Readable;
+var myReader = new Readable().wrap(oreader);
+
+myReader.on(&#x27;readable&#x27;, function() {
+  myReader.read(); // etc.
+});
+</code></pre>
+<h3 id="event-readable">Event: &#x27;readable&#x27;<a id="header-event-readable" class="anchor" href="#event-readable" aria-labelledby="event-readable"></a></h3>
+<p>When there is data ready to be consumed, this event will fire.</p>
+<p>When this event emits, call the <code>read()</code> method to consume the data.</p>
+<h3 id="event-end">Event: &#x27;end&#x27;<a id="header-event-end" class="anchor" href="#event-end" aria-labelledby="event-end"></a></h3>
+<p>Emitted when the stream has received an EOF (FIN in TCP terminology).
+Indicates that no more <code>&#x27;data&#x27;</code> events will happen. If the stream is
+also writable, it may be possible to continue writing.</p>
+<h3 id="event-data">Event: &#x27;data&#x27;<a id="header-event-data" class="anchor" href="#event-data" aria-labelledby="event-data"></a></h3>
+<p>The <code>&#x27;data&#x27;</code> event emits either a <code>Buffer</code> (by default) or a string if
+<code>setEncoding()</code> was used.</p>
+<p>Note that adding a <code>&#x27;data&#x27;</code> event listener will switch the Readable
+stream into &quot;old mode&quot;, where data is emitted as soon as it is
+available, rather than waiting for you to call <code>read()</code> to consume it.</p>
+<h3 id="event-error">Event: &#x27;error&#x27;<a id="header-event-error" class="anchor" href="#event-error" aria-labelledby="event-error"></a></h3>
+<p>Emitted if there was an error receiving data.</p>
+<h3 id="event-close">Event: &#x27;close&#x27;<a id="header-event-close" class="anchor" href="#event-close" aria-labelledby="event-close"></a></h3>
+<p>Emitted when the underlying resource (for example, the backing file
+descriptor) has been closed. Not all streams will emit this.</p>
+<h3 id="readablesetencodingencoding">readable.setEncoding(encoding)<a id="header-readablesetencodingencoding" class="anchor" href="#readablesetencodingencoding" aria-labelledby="readablesetencodingencoding"></a></h3>
+<p>Makes the <code>&#x27;data&#x27;</code> event emit a string instead of a <code>Buffer</code>. <code>encoding</code>
+can be <code>&#x27;utf8&#x27;</code>, <code>&#x27;utf16le&#x27;</code> (<code>&#x27;ucs2&#x27;</code>), <code>&#x27;ascii&#x27;</code>, or <code>&#x27;hex&#x27;</code>.</p>
+<p>The encoding can also be set by specifying an <code>encoding</code> field to the
+constructor.</p>
+<h3 id="readablereadsize">readable.read([size])<a id="header-readablereadsize" class="anchor" href="#readablereadsize" aria-labelledby="readablereadsize"></a></h3>
+<ul>
+<li><code>size</code> {Number | null} Optional number of bytes to read.</li>
+<li>Return: {Buffer | String | null}</li>
+</ul>
+<p>Note: <strong>This function SHOULD be called by Readable stream users.</strong></p>
+<p>Call this method to consume data once the <code>&#x27;readable&#x27;</code> event is
+emitted.</p>
+<p>The <code>size</code> argument will set a minimum number of bytes that you are
+interested in. If not set, then the entire content of the internal
+buffer is returned.</p>
+<p>If there is no data to consume, or if there are fewer bytes in the
+internal buffer than the <code>size</code> argument, then <code>null</code> is returned, and
+a future <code>&#x27;readable&#x27;</code> event will be emitted when more is available.</p>
+<p>Calling <code>stream.read(0)</code> will always return <code>null</code>, and will trigger a
+refresh of the internal buffer, but otherwise be a no-op.</p>
+<h3 id="readablepipedestination-options">readable.pipe(destination, [options])<a id="header-readablepipedestination-options" class="anchor" href="#readablepipedestination-options" aria-labelledby="readablepipedestination-options"></a></h3>
+<ul>
+<li><code>destination</code> {Writable Stream}</li>
+<li><code>options</code> {Object} Optional<!-- -->
+<ul>
+<li><code>end</code> {Boolean} Default=true</li>
+</ul>
+</li>
+</ul>
+<p>Connects this readable stream to <code>destination</code> WriteStream. Incoming
+data on this stream gets written to <code>destination</code>. Properly manages
+back-pressure so that a slow destination will not be overwhelmed by a
+fast readable stream.</p>
+<p>This function returns the <code>destination</code> stream.</p>
+<p>For example, emulating the Unix <code>cat</code> command:</p>
+<pre><code class="language-javascript">process.stdin.pipe(process.stdout);
+</code></pre>
+<p>By default <code>end()</code> is called on the destination when the source stream
+emits <code>end</code>, so that <code>destination</code> is no longer writable. Pass <code>{ end: false }</code> as <code>options</code> to keep the destination stream open.</p>
+<p>This keeps <code>writer</code> open so that &quot;Goodbye&quot; can be written at the
+end.</p>
+<pre><code class="language-javascript">reader.pipe(writer, { end: false });
+reader.on(&quot;end&quot;, function() {
+  writer.end(&quot;Goodbye\n&quot;);
+});
+</code></pre>
+<p>Note that <code>process.stderr</code> and <code>process.stdout</code> are never closed until
+the process exits, regardless of the specified options.</p>
+<h3 id="readableunpipedestination">readable.unpipe([destination])<a id="header-readableunpipedestination" class="anchor" href="#readableunpipedestination" aria-labelledby="readableunpipedestination"></a></h3>
+<ul>
+<li><code>destination</code> {Writable Stream} Optional</li>
+</ul>
+<p>Undo a previously established <code>pipe()</code>. If no destination is
+provided, then all previously established pipes are removed.</p>
+<h3 id="readablepause">readable.pause()<a id="header-readablepause" class="anchor" href="#readablepause" aria-labelledby="readablepause"></a></h3>
+<p>Switches the readable stream into &quot;old mode&quot;, where data is emitted
+using a <code>&#x27;data&#x27;</code> event rather than being buffered for consumption via
+the <code>read()</code> method.</p>
+<p>Ceases the flow of data. No <code>&#x27;data&#x27;</code> events are emitted while the
+stream is in a paused state.</p>
+<h3 id="readableresume">readable.resume()<a id="header-readableresume" class="anchor" href="#readableresume" aria-labelledby="readableresume"></a></h3>
+<p>Switches the readable stream into &quot;old mode&quot;, where data is emitted
+using a <code>&#x27;data&#x27;</code> event rather than being buffered for consumption via
+the <code>read()</code> method.</p>
+<p>Resumes the incoming <code>&#x27;data&#x27;</code> events after a <code>pause()</code>.</p>
+<h2 id="class-streamwritable">Class: stream.Writable<a id="header-class-streamwritable" class="anchor" href="#class-streamwritable" aria-labelledby="class-streamwritable"></a></h2>
+<!-- -->
+<p>A <code>Writable</code> Stream has the following methods, members, and events.</p>
+<p>Note that <code>stream.Writable</code> is an abstract class designed to be
+extended with an underlying implementation of the
+<code>_write(chunk, encoding, cb)</code> method. (See below.)</p>
+<h3 id="new-streamwritableoptions">new stream.Writable([options])<a id="header-new-streamwritableoptions" class="anchor" href="#new-streamwritableoptions" aria-labelledby="new-streamwritableoptions"></a></h3>
+<ul>
+<li><code>options</code> {Object}<!-- -->
+<ul>
+<li><code>highWaterMark</code> {Number} Buffer level when <code>write()</code> starts
+returning false. Default=16kb</li>
+<li><code>decodeStrings</code> {Boolean} Whether or not to decode strings into
+Buffers before passing them to <code>_write()</code>. Default=true</li>
+</ul>
+</li>
+</ul>
+<p>In classes that extend the Writable class, make sure to call the
+constructor so that the buffering settings can be properly
+initialized.</p>
+<h3 id="writable_writechunk-encoding-callback">writable._write(chunk, encoding, callback)<a id="header-writable_writechunk-encoding-callback" class="anchor" href="#writable_writechunk-encoding-callback" aria-labelledby="writable_writechunk-encoding-callback"></a></h3>
+<ul>
+<li><code>chunk</code> {Buffer | String} The chunk to be written. Will always
+be a buffer unless the <code>decodeStrings</code> option was set to <code>false</code>.</li>
+<li><code>encoding</code> {String} If the chunk is a string, then this is the
+encoding type. Ignore chunk is a buffer. Note that chunk will
+<strong>always</strong> be a buffer unless the <code>decodeStrings</code> option is
+explicitly set to <code>false</code>.</li>
+<li><code>callback</code> {Function} Call this function (optionally with an error
+argument) when you are done processing the supplied chunk.</li>
+</ul>
+<p>All Writable stream implementations must provide a <code>_write</code> method to
+send data to the underlying resource.</p>
+<p>Note: <strong>This function MUST NOT be called directly.</strong> It should be
+implemented by child classes, and called by the internal Writable
+class methods only.</p>
+<p>Call the callback using the standard <code>callback(error)</code> pattern to
+signal that the write completed successfully or with an error.</p>
+<p>If the <code>decodeStrings</code> flag is set in the constructor options, then
+<code>chunk</code> may be a string rather than a Buffer, and <code>encoding</code> will
+indicate the sort of string that it is. This is to support
+implementations that have an optimized handling for certain string
+data encodings. If you do not explicitly set the <code>decodeStrings</code>
+option to <code>false</code>, then you can safely ignore the <code>encoding</code> argument,
+and assume that <code>chunk</code> will always be a Buffer.</p>
+<p>This method is prefixed with an underscore because it is internal to
+the class that defines it, and should not be called directly by user
+programs. However, you <strong>are</strong> expected to override this method in
+your own extension classes.</p>
+<h3 id="writablewritechunk-encoding-callback">writable.write(chunk, [encoding], [callback])<a id="header-writablewritechunk-encoding-callback" class="anchor" href="#writablewritechunk-encoding-callback" aria-labelledby="writablewritechunk-encoding-callback"></a></h3>
+<ul>
+<li><code>chunk</code> {Buffer | String} Data to be written</li>
+<li><code>encoding</code> {String} Optional. If <code>chunk</code> is a string, then encoding
+defaults to <code>&#x27;utf8&#x27;</code></li>
+<li><code>callback</code> {Function} Optional. Called when this chunk is
+successfully written.</li>
+<li>Returns {Boolean}</li>
+</ul>
+<p>Writes <code>chunk</code> to the stream. Returns <code>true</code> if the data has been
+flushed to the underlying resource. Returns <code>false</code> to indicate that
+the buffer is full, and the data will be sent out in the future. The
+<code>&#x27;drain&#x27;</code> event will indicate when the buffer is empty again.</p>
+<p>The specifics of when <code>write()</code> will return false, is determined by
+the <code>highWaterMark</code> option provided to the constructor.</p>
+<h3 id="writableendchunk-encoding-callback">writable.end([chunk], [encoding], [callback])<a id="header-writableendchunk-encoding-callback" class="anchor" href="#writableendchunk-encoding-callback" aria-labelledby="writableendchunk-encoding-callback"></a></h3>
+<ul>
+<li><code>chunk</code> {Buffer | String} Optional final data to be written</li>
+<li><code>encoding</code> {String} Optional. If <code>chunk</code> is a string, then encoding
+defaults to <code>&#x27;utf8&#x27;</code></li>
+<li><code>callback</code> {Function} Optional. Called when the final chunk is
+successfully written.</li>
+</ul>
+<p>Call this method to signal the end of the data being written to the
+stream.</p>
+<h3 id="event-drain">Event: &#x27;drain&#x27;<a id="header-event-drain" class="anchor" href="#event-drain" aria-labelledby="event-drain"></a></h3>
+<p>Emitted when the stream&#x27;s write queue empties and it&#x27;s safe to write
+without buffering again. Listen for it when <code>stream.write()</code> returns
+<code>false</code>.</p>
+<h3 id="event-close-1">Event: &#x27;close&#x27;<a id="header-event-close-1" class="anchor" href="#event-close-1" aria-labelledby="event-close-1"></a></h3>
+<p>Emitted when the underlying resource (for example, the backing file
+descriptor) has been closed. Not all streams will emit this.</p>
+<h3 id="event-finish">Event: &#x27;finish&#x27;<a id="header-event-finish" class="anchor" href="#event-finish" aria-labelledby="event-finish"></a></h3>
+<p>When <code>end()</code> is called and there are no more chunks to write, this
+event is emitted.</p>
+<h3 id="event-pipe">Event: &#x27;pipe&#x27;<a id="header-event-pipe" class="anchor" href="#event-pipe" aria-labelledby="event-pipe"></a></h3>
+<ul>
+<li><code>source</code> {Readable Stream}</li>
+</ul>
+<p>Emitted when the stream is passed to a readable stream&#x27;s pipe method.</p>
+<h3 id="event-unpipe">Event &#x27;unpipe&#x27;<a id="header-event-unpipe" class="anchor" href="#event-unpipe" aria-labelledby="event-unpipe"></a></h3>
+<ul>
+<li><code>source</code> {Readable Stream}</li>
+</ul>
+<p>Emitted when a previously established <code>pipe()</code> is removed using the
+source Readable stream&#x27;s <code>unpipe()</code> method.</p>
+<h2 id="class-streamduplex">Class: stream.Duplex<a id="header-class-streamduplex" class="anchor" href="#class-streamduplex" aria-labelledby="class-streamduplex"></a></h2>
+<!-- -->
+<p>A &quot;duplex&quot; stream is one that is both Readable and Writable, such as a
+TCP socket connection.</p>
+<p>Note that <code>stream.Duplex</code> is an abstract class designed to be
+extended with an underlying implementation of the <code>_read(size)</code>
+and <code>_write(chunk, encoding, callback)</code> methods as you would with a Readable or
+Writable stream class.</p>
+<p>Since JavaScript doesn&#x27;t have multiple prototypal inheritance, this
+class prototypally inherits from Readable, and then parasitically from
+Writable. It is thus up to the user to implement both the lowlevel
+<code>_read(n)</code> method as well as the lowlevel <code>_write(chunk, encoding, cb)</code> method
+on extension duplex classes.</p>
+<h3 id="new-streamduplexoptions">new stream.Duplex(options)<a id="header-new-streamduplexoptions" class="anchor" href="#new-streamduplexoptions" aria-labelledby="new-streamduplexoptions"></a></h3>
+<ul>
+<li><code>options</code> {Object} Passed to both Writable and Readable
+constructors. Also has the following fields:<!-- -->
+<ul>
+<li><code>allowHalfOpen</code> {Boolean} Default=true. If set to <code>false</code>, then
+the stream will automatically end the readable side when the
+writable side ends and vice versa.</li>
+</ul>
+</li>
+</ul>
+<p>In classes that extend the Duplex class, make sure to call the
+constructor so that the buffering settings can be properly
+initialized.</p>
+<h2 id="class-streamtransform">Class: stream.Transform<a id="header-class-streamtransform" class="anchor" href="#class-streamtransform" aria-labelledby="class-streamtransform"></a></h2>
+<p>A &quot;transform&quot; stream is a duplex stream where the output is causally
+connected in some way to the input, such as a zlib stream or a crypto
+stream.</p>
+<p>There is no requirement that the output be the same size as the input,
+the same number of chunks, or arrive at the same time. For example, a
+Hash stream will only ever have a single chunk of output which is
+provided when the input is ended. A zlib stream will either produce
+much smaller or much larger than its input.</p>
+<p>Rather than implement the <code>_read()</code> and <code>_write()</code> methods, Transform
+classes must implement the <code>_transform()</code> method, and may optionally
+also implement the <code>_flush()</code> method. (See below.)</p>
+<h3 id="new-streamtransformoptions">new stream.Transform([options])<a id="header-new-streamtransformoptions" class="anchor" href="#new-streamtransformoptions" aria-labelledby="new-streamtransformoptions"></a></h3>
+<ul>
+<li><code>options</code> {Object} Passed to both Writable and Readable
+constructors.</li>
+</ul>
+<p>In classes that extend the Transform class, make sure to call the
+constructor so that the buffering settings can be properly
+initialized.</p>
+<h3 id="transform_transformchunk-encoding-callback">transform._transform(chunk, encoding, callback)<a id="header-transform_transformchunk-encoding-callback" class="anchor" href="#transform_transformchunk-encoding-callback" aria-labelledby="transform_transformchunk-encoding-callback"></a></h3>
+<ul>
+<li><code>chunk</code> {Buffer | String} The chunk to be transformed. Will always
+be a buffer unless the <code>decodeStrings</code> option was set to <code>false</code>.</li>
+<li><code>encoding</code> {String} If the chunk is a string, then this is the
+encoding type. (Ignore if <code>decodeStrings</code> chunk is a buffer.)</li>
+<li><code>callback</code> {Function} Call this function (optionally with an error
+argument) when you are done processing the supplied chunk.</li>
+</ul>
+<p>Note: <strong>This function MUST NOT be called directly.</strong> It should be
+implemented by child classes, and called by the internal Transform
+class methods only.</p>
+<p>All Transform stream implementations must provide a <code>_transform</code>
+method to accept input and produce output.</p>
+<p><code>_transform</code> should do whatever has to be done in this specific
+Transform class, to handle the bytes being written, and pass them off
+to the readable portion of the interface. Do asynchronous I/O,
+process things, and so on.</p>
+<p>Call <code>transform.push(outputChunk)</code> 0 or more times to generate output
+from this input chunk, depending on how much data you want to output
+as a result of this chunk.</p>
+<p>Call the callback function only when the current chunk is completely
+consumed. Note that there may or may not be output as a result of any
+particular input chunk.</p>
+<p>This method is prefixed with an underscore because it is internal to
+the class that defines it, and should not be called directly by user
+programs. However, you <strong>are</strong> expected to override this method in
+your own extension classes.</p>
+<h3 id="transform_flushcallback">transform._flush(callback)<a id="header-transform_flushcallback" class="anchor" href="#transform_flushcallback" aria-labelledby="transform_flushcallback"></a></h3>
+<ul>
+<li><code>callback</code> {Function} Call this function (optionally with an error
+argument) when you are done flushing any remaining data.</li>
+</ul>
+<p>Note: <strong>This function MUST NOT be called directly.</strong> It MAY be implemented
+by child classes, and if so, will be called by the internal Transform
+class methods only.</p>
+<p>In some cases, your transform operation may need to emit a bit more
+data at the end of the stream. For example, a <code>Zlib</code> compression
+stream will store up some internal state so that it can optimally
+compress the output. At the end, however, it needs to do the best it
+can with what is left, so that the data will be complete.</p>
+<p>In those cases, you can implement a <code>_flush</code> method, which will be
+called at the very end, after all the written data is consumed, but
+before emitting <code>end</code> to signal the end of the readable side. Just
+like with <code>_transform</code>, call <code>transform.push(chunk)</code> zero or more
+times, as appropriate, and call <code>callback</code> when the flush operation is
+complete.</p>
+<p>This method is prefixed with an underscore because it is internal to
+the class that defines it, and should not be called directly by user
+programs. However, you <strong>are</strong> expected to override this method in
+your own extension classes.</p>
+<h3 id="example-simpleprotocol-parser">Example: <code>SimpleProtocol</code> parser<a id="header-example-simpleprotocol-parser" class="anchor" href="#example-simpleprotocol-parser" aria-labelledby="example-simpleprotocol-parser"></a></h3>
+<p>The example above of a simple protocol parser can be implemented much
+more simply by using the higher level <code>Transform</code> stream class.</p>
+<p>In this example, rather than providing the input as an argument, it
+would be piped into the parser, which is a more idiomatic Node stream
+approach.</p>
+<pre><code class="language-javascript">function SimpleProtocol(options) {
+  if (!(this instanceof SimpleProtocol))
+    return new SimpleProtocol(options);
+
+  Transform.call(this, options);
+  this._inBody = false;
+  this._sawFirstCr = false;
+  this._rawHeader = [];
+  this.header = null;
+}
+
+SimpleProtocol.prototype = Object.create(
+  Transform.prototype, { constructor: { value: SimpleProtocol }});
+
+SimpleProtocol.prototype._transform = function(chunk, encoding, done) {
+  if (!this._inBody) {
+    // check if the chunk has a \n\n
+    var split = -1;
+    for (var i = 0; i &lt; chunk.length; i++) {
+      if (chunk[i] === 10) { // &#x27;\n&#x27;
+        if (this._sawFirstCr) {
+          split = i;
+          break;
+        } else {
+          this._sawFirstCr = true;
+        }
+      } else {
+        this._sawFirstCr = false;
+      }
+    }
+
+    if (split === -1) {
+      // still waiting for the \n\n
+      // stash the chunk, and try again.
+      this._rawHeader.push(chunk);
+    } else {
+      this._inBody = true;
+      var h = chunk.slice(0, split);
+      this._rawHeader.push(h);
+      var header = Buffer.concat(this._rawHeader).toString();
+      try {
+        this.header = JSON.parse(header);
+      } catch (er) {
+        this.emit(&#x27;error&#x27;, new Error(&#x27;invalid simple protocol data&#x27;));
+        return;
+      }
+      // and let them know that we are done parsing the header.
+      this.emit(&#x27;header&#x27;, this.header);
+
+      // now, because we got some extra data, emit this first.
+      this.push(b);
+    }
+  } else {
+    // from there on, just provide the data to our consumer as-is.
+    this.push(b);
+  }
+  done();
+};
+
+var parser = new SimpleProtocol();
+source.pipe(parser)
+
+// Now parser is a readable stream that will emit &#x27;header&#x27;
+// with the parsed header data.
+</code></pre>
+<h2 id="class-streampassthrough">Class: stream.PassThrough<a id="header-class-streampassthrough" class="anchor" href="#class-streampassthrough" aria-labelledby="class-streampassthrough"></a></h2>
+<p>This is a trivial implementation of a <code>Transform</code> stream that simply
+passes the input bytes across to the output. Its purpose is mainly
+for examples and testing, but there are occasionally use cases where
+it can come in handy.</p></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->Scroll to top</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"en","localName":"English","name":"English","langDir":"ltr","dateFormat":"MM.DD.YYYY","hrefLang":"en-US","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"Scroll to top","components.header.links.home":"Home","components.header.links.about":"About","components.header.links.download":"Downloads","components.header.links.docs":"Docs","components.header.links.getInvolved":"Get Involved","components.header.links.security":"Security","components.header.links.certification":"Certification","components.header.links.blog":"News","components.navigation.about.links.governance":"Governance","components.navigation.docs.links.es6":"ES6 and beyond","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"Guides","components.navigation.docs.links.dependencies":"Dependencies","components.navigation.getInvolved.links.collabSummit":"Collab Summit","components.navigation.getInvolved.links.contribute":"Contribute","components.navigation.getInvolved.links.codeOfConduct":"Code of Conduct","components.downloadList.links.previousReleases":"Previous Releases","components.downloadList.links.packageManager":"Installing Node.js via package manager","components.downloadList.links.shaSums":"Signed SHASUMS for release files","components.downloadList.links.shaSums.howToVerify":" (How to verify)","components.downloadList.links.allDownloads":"All download options","components.downloadList.links.nightlyReleases":"Nightly builds","components.downloadList.links.unofficialBuilds":"Unofficial builds","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Installing Node.js via binary archive","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"Changelog","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"Docs","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"Newer | ","components.pagination.previous":"Older","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}}},"__N_SSG":true},"page":"/en/blog/feature/streams2","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

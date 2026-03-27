@@ -1,0 +1,300 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Node.js 中处理安全性问题的最佳实践做法 | Node.js node js 学习 中文网</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Node.js 中处理安全性问题的最佳实践做法 | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Node.js 中处理安全性问题的最佳实践做法 | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/zh-cn/docs/guides/security"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/zh-cn/docs/guides/security-4348f45e722fbc9f.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-2WRNZHGVQT"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-2WRNZHGVQT");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8264273508355034" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/zh-cn"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/zh-cn">首页</a></li><li class=""><a href="/zh-cn/about">关于</a></li><li class=""><a href="/zh-cn/download">下载</a></li><li class="active"><a href="/zh-cn/docs">文档</a></li><li class=""><a href="/zh-cn/get-involved">加入我们</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">安全</a></li><li class=""><a href="https://openjsf.org/certification">相关认证</a></li><li class=""><a href="/zh-cn/blog">新闻</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/security">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/security">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/security">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/security">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/security">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/security">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/security">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/security">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/security">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/security">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/security">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/security">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/security">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/security">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/security">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/security">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/security">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/security">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/zh-cn/docs">文档</a></li><li class=""><a href="/zh-cn/docs/es6">ES6 及更高</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/zh-cn/docs/guides">指南</a></li><li class=""><a href="/zh-cn/docs/meta/topics/dependencies">依赖项</a></li></ul></nav><article dir="auto"><h1 id="node.js-中处理安全性问题的最佳实践">Node.js 中处理安全性问题的最佳实践<a id="header-node.js-中处理安全性问题的最佳实践" class="anchor" href="#node.js-中处理安全性问题的最佳实践" aria-labelledby="node.js-中处理安全性问题的最佳实践"></a></h1>
+<h2 id="本文目的">本文目的<a id="header-本文目的" class="anchor" href="#本文目的" aria-labelledby="本文目的"></a></h2>
+<p>本文旨在对目前既有的<a href="https://github.com/nodejs/node/blob/main/SECURITY.md#the-nodejs-threat-model">威胁示例</a>进行扩展，并且提供一些扩展的例子教导如何
+让你的 Node.js 应用安全性得到保障。</p>
+<h2 id="本文内容">本文内容<a id="header-本文内容" class="anchor" href="#本文内容" aria-labelledby="本文内容"></a></h2>
+<ul>
+<li>最佳实践做法：这是一个针对 Node.js 应用的安全性问题的最佳实践做法的精简压缩版。
+我们可以使用<a href="https://github.com/nodejs/security-wg/issues/488">安全指南讨论议题</a>或者是<a href="https://github.com/goldbergyoni/nodebestpractices">nodejs 使用指南</a>
+作为我们的开始。值得注意的是：本文特定针对的是 Node.js，如果你正在寻找其它更通用的教程，
+可以参考<a href="https://github.com/ossf/wg-best-practices-os-developers">OSSF 最佳实践做法</a>。</li>
+<li>安全性攻击解释：用最通俗易懂的语言，根据需要配上一些代码，来解释在我们在威胁示例
+中提到的攻击方式。</li>
+<li>第三方库中的潜在攻击方式（诸如“误植”式攻击，含有恶意代码的包库……），以及关于 node
+模块依赖等问题的一系列最佳实践。</li>
+</ul>
+<h2 id="威胁列表">威胁列表<a id="header-威胁列表" class="anchor" href="#威胁列表" aria-labelledby="威胁列表"></a></h2>
+<h3 id="http-拒绝服务式攻击cwe-400">HTTP 拒绝服务式攻击（CWE-400）<a id="header-http-拒绝服务式攻击cwe-400" class="anchor" href="#http-拒绝服务式攻击cwe-400" aria-labelledby="http-拒绝服务式攻击cwe-400"></a></h3>
+<p>这种攻击会导致应用程序变得无法响应请求而拒绝服务，其攻击原理是依据处理 HTTP 请求的方式
+导致的。这些攻击性请求并非一定是经过精心策划，甚至连一台错误配置，又或者有缺陷的客户端也
+会发送大量请求到服务端，导致拒绝式服务。</p>
+<p>HTTP 请求通过 Node.js 的 HTTP 服务器得以接受，并传递给已注册的相关程序代码进行处理。
+因为服务本身并不解析请求数据的实际内容，因此对于任何一个试图通过文本内容发起 HTTP 拒绝
+服务式攻击，接受这些请求的处理模块本身并不存在缺陷，因为这是处理模块中代码的职责，它应该
+准确地处理这些问题。</p>
+<p>请务必确保服务器能够处理服务端的错误，否则服务器在处理请求时发生了错误，恰好
+又没有处理异常的相关代码，那么就可能存在拒绝服务式攻击的潜在威胁。</p>
+<pre><code class="language-js">const net = require(&#x27;net&#x27;);
+
+const server = net.createServer(function(socket) {
+  // socket.on(&#x27;error&#x27;, console.error) // this prevents the server to crash
+  socket.write(&#x27;Echo server\r\n&#x27;);
+  socket.pipe(socket);
+});
+
+server.listen(5000, &#x27;0.0.0.0&#x27;);
+</code></pre>
+<p>此处如果接受一个 <em>非法请求</em> ，服务器就可能崩溃了。</p>
+<p>另一个案例 <a href="https://en.wikipedia.org/wiki/Slowloris_(computer_security)">Slowloris</a> 并非是通过请求的内容发动拒绝式服务攻击。
+在这个攻击中，HTTP请求发送既慢又散，每次就发送一点点内容，这样就会导致服务器为等待完整
+的请求不得不一直保留大量的资源。设想一下：如果这种请求足够的多，连接数很快会达到最大值，
+然后就发生拒绝式服务的问题。这就是不通过发送文本的内容，而是借助消耗时间，以及发送大量
+碎片化请求的方式进行攻击的。</p>
+<p><strong>缓解措施</strong></p>
+<ul>
+<li>使用一个反向代理来接受、转发 Node.js 应用程序请求，反向代理可以提供诸如缓存、负载均衡、
+IP 黑名单等方式尽可能减少服务式拒绝攻击发生的可能性。</li>
+<li>正确地配置服务器超时时间（timeout），这样凡是龟速响应请求以及一直原地不动的连接请求就会
+被直接抛弃。请了解超时配置的区别，并查看 <a href="https://nodejs.org/api/http.html#class-httpserver"><code>http.Server</code></a> 部分，尤其是 <code>headersTimeout</code>，
+<code>requestTimeout</code>, <code>timeout</code> 和 <code>keepAliveTimeout</code>。</li>
+<li>在每台主机上限制开放端口的总数。请查看 <a href="https://nodejs.org/api/http.html">http 文档</a>，尤其是 <code>agent.maxSockets</code>，
+<code>agent.maxTotalSockets</code>，<code>agent.maxFreeSockets</code> 和 <code>server.maxRequestsPerSocket</code>。</li>
+</ul>
+<h3 id="dns-重绑定cwe-346">DNS 重绑定（CWE-346）<a id="header-dns-重绑定cwe-346" class="anchor" href="#dns-重绑定cwe-346" aria-labelledby="dns-重绑定cwe-346"></a></h3>
+<p>这种攻击方式针对正在运行中的，并且使用 <a href="https://nodejs.org/en/docs/guides/debugging-getting-started/">--inspect switch</a> 参数开启了调试观察器
+的 Node.js 应用程序。</p>
+<p>在一个网页浏览器里边可以发起 WebSocket 和 HTTP 两种请求方式，他们可以对本地的调试
+观察器同时作用。通常而言，这是被主流浏览器的<a href="https://nodejs.org/en/docs/guides/debugging-getting-started/">同源协议</a>所禁止，它不允许执行来自不同
+的源的脚本（这也同时意味着一个恶意的网站不能读取来自本地 IP 地址的内容）。</p>
+<p>然而通过 DNS 重绑定的方法攻击者可以为了他们的恶意请求而临时控制发送源，使得请求看上去
+就像是从本地发出的一样。这种方法通过同时控制网站以及处理 IP 地址的 DNS 服务器来实现。
+请查看 <a href="https://en.wikipedia.org/wiki/DNS_rebinding">DNS 重绑定维基百科</a>了解更多细节。</p>
+<p><strong>缓解措施</strong></p>
+<ul>
+<li>通过挂上 <code>process.on(‘SIGUSR1’, …)</code> 的监听器方式禁止调试观察器 <em>SIGUSR1</em> 的信号。</li>
+<li>不要在生产环境中使用调试观察器。</li>
+</ul>
+<h3 id="向不明身份者暴露敏感信息cwe-552">向不明身份者暴露敏感信息（CWE-552）<a id="header-向不明身份者暴露敏感信息cwe-552" class="anchor" href="#向不明身份者暴露敏感信息cwe-552" aria-labelledby="向不明身份者暴露敏感信息cwe-552"></a></h3>
+<p>在当前目录下所有的文件、文件夹都会通过打包发布的方式推送致 npm 的注册服务器上。
+有一些机制可以避免这种行为：诸如通过定义 <code>.npmignore</code> 和 <code>.gitignore</code>，或者
+在 <code>package.json</code> 中定义白名单列表。</p>
+<p><strong>缓解措施</strong></p>
+<ul>
+<li>使用 <code>npm publish --dry-run</code> 开列所有将要被发布的文件，并在发布前请确保这些
+文件都被审核过是可以发布的。</li>
+<li>创建和维护诸如 <code>.gitignore</code> 和 <code>.npmignore</code> 之类的文件，避免发布不必要的文件。
+在这些文件中你可以指定哪些文件（文件夹）不应该被发布。<code>package.json</code> 中的<a href="https://docs.npmjs.com/cli/v8/configuring-npm/package-json#files">文件属性</a>
+允许你进行反操作（哪些文件是可以发布的）。</li>
+<li>万一发布了不应该发布的内容，请参考 <a href="https://docs.npmjs.com/unpublishing-packages-from-the-registry">如何撤消已有的发布</a> 撤消你的发布。</li>
+</ul>
+<h3 id="http-请求夹带私货cwe-444">HTTP 请求夹带私货（CWE-444）<a id="header-http-请求夹带私货cwe-444" class="anchor" href="#http-请求夹带私货cwe-444" aria-labelledby="http-请求夹带私货cwe-444"></a></h3>
+<p>这种攻击方式涉及到两个 HTTP 服务端（通常一个是代理，一个是 Node.js 应用）。客户端
+发送一个 HTTP 请求首先到代理服务器，代理服务器将请求转发到后台服务（也就是 Node.js 应用）。
+当前端和后端对于这个请求的解析产生歧义时，攻击者就可能发送一个恶意信息，并且该信息不会被
+前端所发现，却会被后台所处理。这就是有效的“夹带私货”式透过代理服务器发动攻击。</p>
+<p>预知详情，请查看 <a href="https://cwe.mitre.org/data/definitions/444.html">CWE-444</a> 中相关信息和例子。</p>
+<p>基于这样一个事实：即攻击依赖于 Node.js 解析 HTTP 请求的方式与任何一个 HTTP 前端服务器
+所不同，那么该 Node.js 存在可能被攻击的缺陷，这可以是前端，也可能前后端都存在。
+如果 Node.js 解析请求的方式与 HTTP 特性文档中描述的一致（具体参考 <a href="https://datatracker.ietf.org/doc/html/rfc7230#section-3">RFC7230</a>），那么
+这个 Node.js 应用就不会被认为是存在缺陷的。</p>
+<p><strong>缓解措施</strong></p>
+<ul>
+<li>当创建一个 HTTP 服务时，请不要使用 <code>insecureHTTPParser</code> 选项</li>
+<li>前端做适当的配置，使得带有歧义的请求能够正常化</li>
+<li>对 HTTP 发出的新“私货”请求请持续在 Node.js 端以及前端都保持留意</li>
+<li>使用第二代的 HTTP 协议（HTTP/2），并不允许降级</li>
+</ul>
+<h3 id="根据耗时的多少猜测敏感信息导致信息暴露cwe-208">根据耗时的多少猜测敏感信息导致信息暴露（CWE-208）<a id="header-根据耗时的多少猜测敏感信息导致信息暴露cwe-208" class="anchor" href="#根据耗时的多少猜测敏感信息导致信息暴露cwe-208" aria-labelledby="根据耗时的多少猜测敏感信息导致信息暴露cwe-208"></a></h3>
+<p>该攻击方式是攻击者根据发起请求后服务器需要多久才给出一个回复所用的耗时，不知不觉地猜测出一些敏感的信息。
+该攻击方式不仅是针对 Node.js，几乎所有的应用都会受到这种攻击方式的影响。</p>
+<p>该攻击方式容易发生在一个需要一定时间进行某保护性的操作中（例如）。
+设想一下我们是如何处理身份验证的：身份验证最基础 的方法便是“电子邮件”+“密码”的组合。
+系统从用户的输入得到了登陆信息，再从数据库里边得到已有信息。在从客户输入那边获取信息之时，
+程序将把用户输入的密码与数据库中的密码进行比对。使用系统内置的字符串比较，
+对于一定程度相同的字符串是需要消耗一定时间的。在不断地反复比较，
+直到达到一定的次数和响应时间之后，通过比较响应请求时间，攻击者就可能猜测出密码的长度，
+甚至是密码内容。</p>
+<p><strong>缓解措施</strong></p>
+<ul>
+<li>
+<p>请使用 <code>timingSafeEqual</code> 函数来比较敏感信息的内容，因为它的耗时是一个固定值。</p>
+</li>
+<li>
+<p>在进行密码比较的过程中，请使用 <a href="https://nodejs.org/api/crypto.html#cryptoscryptpassword-salt-keylen-options-callback">scrypt</a>。</p>
+</li>
+<li>
+<p>更一般地说，我们应当避免在可变时间操作中使用保护性措施。
+这包括分支保护，以及当攻击者可能位于同一基础架构（例如，同一台云计算机）上时，
+使用保护性措施作为内存索引。在 JavaScript 中写入固定耗时的代码极其困难（部分因为 JIT 的缘故）。
+对于那些加密的应用而言，使用内置的加密 API 函数或者是 WebAssembly 为好
+（因为 WebAssembly 的算法并非本地实现）。</p>
+</li>
+</ul>
+<h3 id="含有恶意攻击的第三方库-cwe-1357">含有恶意攻击的第三方库 （CWE-1357）<a id="header-含有恶意攻击的第三方库-cwe-1357" class="anchor" href="#含有恶意攻击的第三方库-cwe-1357" aria-labelledby="含有恶意攻击的第三方库-cwe-1357"></a></h3>
+<p>目前为止，Node.js 中任何一个包都有强大的能力去访问其它资源：例如网络资源等。
+更进一步地说，Node.js 中的包可以访问本地文件系统，并且把数据发送到任何地方。</p>
+<p>在 node 里可以通过 <code>eval()</code> （或者其它类似的方式）加载、运行任何代码。
+所有与文件系统相关，拥有写权限的代码也能通过写入一个新文件，或者已有文件，当他们
+被加载执行时就能达到一样的目的。</p>
+<p>Node.js 携带一个尝鲜版本的<a href="#experimental-features-in-production">¹</a>
+<a href="https://nodejs.org/api/permissions.html#policies">规则机制</a>来声明所加载的资源是否是可被新信任的。请务必确定所有的依赖包版本号，
+以及借助公共工作流或 npm 的脚本来自动检测这些包里可能潜在的缺陷。
+在安装依赖包时，请务必确认这些包都是被正常维护的，并包含你预期的内容。
+请务必小心！GitHub 的源代码不总是和发布版本保持一致，请在 <em>node_modules</em> 里仔细验证。</p>
+<h4 id="供应链式攻击">供应链式攻击<a id="header-供应链式攻击" class="anchor" href="#供应链式攻击" aria-labelledby="供应链式攻击"></a></h4>
+<p>Node.js 中 “供应链式攻击”通常发生在某个（些）依赖（无论是直接依赖还是间接依赖）
+已经被攻陷的情况下。究其原因便是这类应用的特定依赖审核太过于松散（甚至允许根本不需要的更新进入），
+或者是常规的拼写错误导致的误认（请参考 <a href="https://en.wikipedia.org/wiki/Typosquatting">typosquatting</a>）。</p>
+<p>一个控制上游更新端的攻击者完全可以发布一个新的，携带恶意代码的更新包。如果 Node.js
+应用没经过检验或者不确定哪个包是安全的，那么这个包就有潜在更新成为携带恶意代码的包的可能性，
+随之攻陷你的系统。</p>
+<p>在 <code>package.json</code> 中定义的所有依赖都有精确的版本号，亦或是某个特定范围。你即使对某个
+包指定了一个精确的版本号，这个包所依赖的其它包不一定是固定的。这将仍然导致应用缺陷或者
+不安全、不期望的包更新。</p>
+<p>可能存在的媒介攻击：</p>
+<ul>
+<li>“误植”域名</li>
+<li>篡改 Lockfile</li>
+<li>受到侵害的维护者</li>
+<li>恶意第三方的包（类库）</li>
+<li>依赖混淆</li>
+</ul>
+<p><strong>缓解措施</strong></p>
+<ul>
+<li>使用 npm 的指令 <code>--ignore-scripts</code> 来禁止外部脚本运行<!-- -->
+<ul>
+<li>另外，你也可以直接使用 <code>npm config set ignore-scripts true</code> 方式禁止脚本运行</li>
+</ul>
+</li>
+<li>给第三方包指定精确的版本，勿指定一个宽泛的版本范围，或者是不确定可变的更新源</li>
+<li>使用 lockfiles，固定每一个依赖包（无论直接引用或是间接的）<!-- -->
+<ul>
+<li>参考 <a href="https://blog.ulisesgascon.com/lockfile-posioned">对 lockfile 恶意篡改的缓解措施</a> 部分</li>
+</ul>
+</li>
+<li>使用 CI 自动检测可能存在的缺陷，可以借助 [<code>npm-audit</code>][]<!-- -->
+<ul>
+<li>诸如 <a href="https://socket.dev/"><code>Socket</code></a> 的工具也可使用，他可以静态分析依赖包，
+并且找出网络或文件系统方面的潜在风险性行为。</li>
+</ul>
+</li>
+<li>使用 <a href="https://docs.npmjs.com/cli/v8/commands/npm-ci"><code>npm ci</code></a> 而不是 <code>npm install</code>
+此命令强制比对 lockfile 里的版本号，如果和 <em>package.json</em> 中的依赖发生冲突，
+直接抛出异常而不是默默地忽略，迁就 <em>package.json</em> 的定义</li>
+<li>小心检查 <em>package.json</em> 文件里的每个依赖包的名称，切勿拼错</li>
+</ul>
+<h3 id="非法内存访问cwe-284">非法内存访问（CWE-284）<a id="header-非法内存访问cwe-284" class="anchor" href="#非法内存访问cwe-284" aria-labelledby="非法内存访问cwe-284"></a></h3>
+<p>基于内存或者基于堆栈的攻击都依赖于内存管理错误，或者内存分配泄露。</p>
+<p>正如其它程序一样，如果你的 Node.js 程序运行在共享机上，是有可能存在被攻击的。</p>
+<p>使用安全性高的堆栈确实有助于此问题的解决，防止从带有缺陷的超载或空载机器中泄露敏感信息。</p>
+<p>不幸的是安全堆栈并不适合于 Windows 操作系统。预知详情请看<a href="https://nodejs.org/dist/latest-v18.x/docs/api/cli.html#--secure-heapn">安全堆栈文档</a>。</p>
+<p><strong>缓解措施</strong></p>
+<ul>
+<li>使用<code>--secure-heap=n</code> 限定内存大小，“n”就是最大的字节大小。</li>
+<li>不要在共享机上运行正式版程序。</li>
+</ul>
+<h3 id="鱼目混珠cwe-349">鱼目混珠（CWE-349）<a id="header-鱼目混珠cwe-349" class="anchor" href="#鱼目混珠cwe-349" aria-labelledby="鱼目混珠cwe-349"></a></h3>
+<p>“鱼目混珠”（猴子补丁）指在运行时通过修改属性达到篡改原有行为的操作。举个例子：</p>
+<pre><code class="language-js">// eslint-disable-next-line no-extend-native
+Array.prototype.push = function (item) {
+  // overriding the global [].push
+};
+</code></pre>
+<p><strong>缓解措施</strong></p>
+<p>借助尝鲜版的 <code>--frozen-intrinsics</code> 符号<a href="#experimental-features-in-production">¹</a>
+来冻结内置对象的原型，这意味着所有的 JavaScript 对象以及其内部的一切函数等均不再可变。
+有鉴于此，以下的脚本<strong>将不会</strong>覆盖原有的 <code>Array.prototype.push</code> 代码：</p>
+<pre><code class="language-js">// eslint-disable-next-line no-extend-native
+Array.prototype.push = function (item) {
+  // overriding the global [].push
+};
+
+// Uncaught:
+// TypeError &lt;Object &lt;Object &lt;[Object: null prototype] {}&gt;&gt;&gt;:
+// Cannot assign to read only property &#x27;push&#x27; of object &#x27;&#x27;
+</code></pre>
+<p>诚然如此，但你目前仍然可以使用 <code>globalThis</code> 来定义新的，以及替换已有的全局变量。</p>
+<pre><code class="language-console">&gt; globalThis.foo = 3; foo; // you can still define new globals
+3
+&gt; globalThis.Array = 4; Array; // However, you can also replace existing globals
+4
+</code></pre>
+<p>至此，<code>Object.freeze(globalThis)</code> 可以派上用场，以确保你无法更改任何全局性变量。</p>
+<h3 id="原型污染cwe-1321">原型污染（CWE-1321）<a id="header-原型污染cwe-1321" class="anchor" href="#原型污染cwe-1321" aria-labelledby="原型污染cwe-1321"></a></h3>
+<p>原型污染指滥用 <em>_proto_</em>、_constructor_或 <em>prototype</em>，以及从内置方法中继承等方式
+在 Javascript 内恶意篡改、注入一些东西。</p>
+<!-- -->
+<pre><code class="language-js">const a = {&quot;a&quot;: 1, &quot;b&quot;: 2};
+const data = JSON.parse(&#x27;{&quot;__proto__&quot;: { &quot;polluted&quot;: true}}&#x27;);
+
+const c = Object.assign({}, a, data);
+console.log(c.polluted); // true
+
+// Potential DoS
+const data2 = JSON.parse(&#x27;{&quot;__proto__&quot;: null}&#x27;);
+const d = Object.assign(a, data2);
+d.hasOwnProperty(&#x27;b&#x27;); // Uncaught TypeError: d.hasOwnProperty is not a function
+</code></pre>
+<p>上面的 JavaScript 代码就暗含存在的隐患。</p>
+<p><strong>例子</strong>:</p>
+<ul>
+<li><a href="https://www.cvedetails.com/cve/CVE-2022-21824/">CVE-2022-21824</a> (Node.js)</li>
+<li><a href="https://www.cvedetails.com/cve/CVE-2018-3721/">CVE-2018-3721</a> (3rd Party library: Lodash)</li>
+</ul>
+<p><strong>缓解措施</strong></p>
+<ul>
+<li>避免 <a href="https://gist.github.com/DaniAkash/b3d7159fddcff0a9ee035bd10e34b277#file-unsafe-merge-js">不安全的递归式合并</a>，参考 <a href="https://www.cve.org/CVERecord?id=CVE-2018-16487">CVE-2018-16487</a></li>
+<li>对于外部以及不信任的对象，请使用 JSON 骨架（JSON Schema）来验证</li>
+<li>使用 <code>Object.create(null)</code> 创建无原型（prototype）的对象</li>
+<li>冻结对象原型： <code>Object.freeze(MyObject.prototype)</code></li>
+<li>使用 <code>--disable-proto</code> 禁止 <code>Object.prototype.__proto__</code> 属性</li>
+<li>请检查对象上是否存在着特定属性，而不是使用 <code>Object.hasOwn(obj, keyFromObj)</code> 方法来检测</li>
+<li>勿直接使用 <code>Object.prototype</code> 里边的方法</li>
+</ul>
+<h3 id="不可控的搜索路径对象cwe-427">不可控的搜索路径对象（CWE-427）<a id="header-不可控的搜索路径对象cwe-427" class="anchor" href="#不可控的搜索路径对象cwe-427" aria-labelledby="不可控的搜索路径对象cwe-427"></a></h3>
+<p>Node.js 根据<a href="https://nodejs.org/api/modules.html#modules_all_together">模块路径算法</a>来加载模块，因此我们假定说模块中的某个文件夹
+是可信的。</p>
+<p>基于此，这意味着以下的操作是符合预期的，让我们假设存在着以下的目录结构：</p>
+<ul>
+<li><em>app/</em>
+<ul>
+<li><em>server.js</em></li>
+<li><em>auth.js</em></li>
+<li><em>auth</em></li>
+</ul>
+</li>
+</ul>
+<p>如果服务端调用 <code>require(&#x27;./auth&#x27;)</code>，结果加载 <em>auth</em> 并非 <em>auth.js</em></p>
+<p><strong>缓解措施</strong></p>
+<p>借助<a href="#experimental-features-in-production">¹</a>
+<a href="https://nodejs.org/api/permissions.html#integrity-checks">完整检查路径的规则机制</a> 可避免此类问题。
+对于上述的路径，可以使用诸如下面的 <code>policy.json</code>：</p>
+<pre><code class="language-json">{
+  &quot;resources&quot;: {
+    &quot;./app/auth.js&quot;: {
+      &quot;integrity&quot;: &quot;sha256-iuGZ6SFVFpMuHUcJciQTIKpIyaQVigMZlvg9Lx66HV8=&quot;
+    },
+    &quot;./app/server.js&quot;: {
+      &quot;dependencies&quot;: {
+        &quot;./auth&quot; : &quot;./app/auth.js&quot;
+      },
+      &quot;integrity&quot;: &quot;sha256-NPtLCQ0ntPPWgfVEgX46ryTNpdvTWdQPoZO3kHo0bKI=&quot;
+    }
+  }
+}
+</code></pre>
+<p>自然而言，当调用 <em>auth</em> 模块的时候，系统会验证路径完整性，如果发现无法找到
+正确的匹配项，直接抛出异常：</p>
+<pre><code class="language-console">» node --experimental-policy=policy.json app/server.js
+node:internal/policy/sri:65
+      throw new ERR_SRI_PARSE(str, str[prevIndex], prevIndex);
+      ^
+
+SyntaxError [ERR_SRI_PARSE]: Subresource Integrity string &quot;sha256-iuGZ6SFVFpMuHUcJciQTIKpIyaQVigMZlvg9Lx66HV8=%&quot; had an unexpected &quot;%&quot; at position 51
+    at new NodeError (node:internal/errors:393:5)
+    at Object.parse (node:internal/policy/sri:65:13)
+    at processEntry (node:internal/policy/manifest:581:38)
+    at Manifest.assertIntegrity (node:internal/policy/manifest:588:32)
+    at Module._compile (node:internal/modules/cjs/loader:1119:21)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1213:10)
+    at Module.load (node:internal/modules/cjs/loader:1037:32)
+    at Module._load (node:internal/modules/cjs/loader:878:12)
+    at Module.require (node:internal/modules/cjs/loader:1061:19)
+    at require (node:internal/modules/cjs/helpers:99:18) {
+  code: &#x27;ERR_SRI_PARSE&#x27;
+}
+</code></pre>
+<p>请注意，我们总是推荐你使用 <code>--policy-integrity</code> 以避免路径发生变化时遇到问题。</p>
+<h2 id="experimental-features-in-production">生产环境中使用尝鲜版功能<a id="header-experimental-features-in-production" class="anchor" href="#experimental-features-in-production" aria-labelledby="experimental-features-in-production"></a></h2>
+<p>在生产环境中直接使用尝鲜版功能绝不推荐！因为尝鲜功能有可能随时发生重大
+变更，而且他们实际的功能不一定稳定。虽然如此，我们还是非常乐于接受用户的反馈。</p></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->回到页顶</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"zh-cn","localName":"简体中文","name":"Simplified Chinese","langDir":"ltr","dateFormat":"YYYY/MM/DD","hrefLang":"zh-Hans","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"回到页顶","components.header.links.home":"首页","components.header.links.about":"关于","components.header.links.download":"下载","components.header.links.docs":"文档","components.header.links.getInvolved":"加入我们","components.header.links.security":"安全","components.header.links.certification":"相关认证","components.header.links.blog":"新闻","components.navigation.about.links.governance":"管理规则","components.navigation.docs.links.es6":"ES6 及更高","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"指南","components.navigation.docs.links.dependencies":"依赖项","components.navigation.getInvolved.links.collabSummit":"协作者峰会","components.navigation.getInvolved.links.contribute":"贡献","components.navigation.getInvolved.links.codeOfConduct":"管理","components.downloadList.links.previousReleases":"以往的版本","components.downloadList.links.packageManager":"使用包管理器安装 Node.js","components.downloadList.links.shaSums":"Signed SHASUMS for release files","components.downloadList.links.shaSums.howToVerify":" (如何校验)","components.downloadList.links.allDownloads":"所有下载选项","components.downloadList.links.nightlyReleases":"每日构建","components.downloadList.links.unofficialBuilds":"非官方构建版","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"在 Linux 上，通过二进制文件安装 Node.js","components.downloadList.links.installingOnWsl":"在适用于 Linux 的 Windows 子系统（WSL）上安装 Node.js","components.downloadReleasesTable.changelog":"更新日志","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"文档","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"下一个 | ","components.pagination.previous":"以前","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/zh-cn/docs/guides/security","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

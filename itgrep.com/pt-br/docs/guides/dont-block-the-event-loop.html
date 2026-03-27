@@ -1,0 +1,398 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Não bloqueie o Event Loop (ou a Worker Pool) | Node.js</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Não bloqueie o Event Loop (ou a Worker Pool) | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Não bloqueie o Event Loop (ou a Worker Pool) | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/pt-br/docs/guides/dont-block-the-event-loop"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/pt-br/docs/guides/dont-block-the-event-loop-f10726723f96052d.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NDMJQNDPS"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-6NDMJQNDPS");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7950559866369342" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/pt-br"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/pt-br">Início</a></li><li class=""><a href="/pt-br/about">Sobre</a></li><li class=""><a href="/pt-br/download">Download</a></li><li class="active"><a href="/pt-br/docs">Documentação</a></li><li class=""><a href="/pt-br/get-involved">Participe</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">Segurança</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class=""><a href="/pt-br/blog">Novidades</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/dont-block-the-event-loop">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/dont-block-the-event-loop">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/dont-block-the-event-loop">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/dont-block-the-event-loop">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/dont-block-the-event-loop">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/dont-block-the-event-loop">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/dont-block-the-event-loop">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/dont-block-the-event-loop">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/dont-block-the-event-loop">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/dont-block-the-event-loop">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/dont-block-the-event-loop">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/dont-block-the-event-loop">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/dont-block-the-event-loop">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/dont-block-the-event-loop">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/dont-block-the-event-loop">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/dont-block-the-event-loop">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/dont-block-the-event-loop">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/dont-block-the-event-loop">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/pt-br/docs">Documentação</a></li><li class=""><a href="/pt-br/docs/es6">ES6 e além</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/pt-br/docs/guides">Guias</a></li><li class=""><a href="/pt-br/docs/meta/topics/dependencies">Dependências</a></li></ul></nav><article dir="auto"><h1 id="não-bloqueie-o-event-loop-(ou-a-worker-pool)">Não bloqueie o Event Loop (ou a Worker Pool)<a id="header-não-bloqueie-o-event-loop-(ou-a-worker-pool)" class="anchor" href="#não-bloqueie-o-event-loop-(ou-a-worker-pool)" aria-labelledby="não-bloqueie-o-event-loop-(ou-a-worker-pool)"></a></h1>
+<h2 id="você-deve-ler-esse-guia">Você deve ler esse guia?<a id="header-você-deve-ler-esse-guia" class="anchor" href="#você-deve-ler-esse-guia" aria-labelledby="você-deve-ler-esse-guia"></a></h2>
+<p>Se você está escrevendo algo mais complicado que um breve script de linha de comando, ler este guia ajudará você a escrever aplicativos de maior desempenho e mais seguros.</p>
+<p>Este documento foi escrito com servidores Node em mente, mas os conceitos são aplicados para aplicações Node complexas também.
+Onde detalhes específicos do sistema operacional variam, este documento é centrado no Linux.</p>
+<h2 id="resumo">Resumo<a id="header-resumo" class="anchor" href="#resumo" aria-labelledby="resumo"></a></h2>
+<p>O Node.js executa código JavaScript no Event Loop (inicialização e callbacks), e oferece uma Worker Pool para manipular tarefas custosas como I/O de arquivo.
+Node escala bem, as vezes mais do que abordagens pesadas como Apache.
+O segredo da escalabilidade do Node é que ele usa um pequeno número de threads para manipular muitos clientes.
+Se o Node pode trabalhar com menos threads, ele poderá gastar mais tempo do seu sistema e memória trabalhando nos clientes em vez de desperdiçar recursos de espaço e tempo para as threads (memória e mudança de contexto).
+Mas pelo fato do Node ter poucas threads, você precisa estruturar sua aplicação para usá-las com sabedoria.</p>
+<p>Aqui está um princípio básico para manter o servidor Node rápido: <em>Node é rápido quando o trabalho associado a cada cliente em um determinado momento é &quot;pequeno&quot;</em>.</p>
+<p>Isso se aplica a callbacks no Event Loop e tarefas na Worker Pool.</p>
+<h2 id="por-que-eu-devo-evitar-bloquear-o-event-loop-e-a-worker-pool">Por que eu devo evitar bloquear o Event Loop e a Worker Pool?<a id="header-por-que-eu-devo-evitar-bloquear-o-event-loop-e-a-worker-pool" class="anchor" href="#por-que-eu-devo-evitar-bloquear-o-event-loop-e-a-worker-pool" aria-labelledby="por-que-eu-devo-evitar-bloquear-o-event-loop-e-a-worker-pool"></a></h2>
+<p>O Node usa um pequeno número de threads para manipular muitos clientes.
+No Node existem dois tipos de threads: um Event Loop (também conhecido como main loop, main thread, event thread, etc.), e uma pool de <code>k</code> Workers em uma Worker Pool (também conhecido como threadpool)</p>
+<p>Se uma thread está levando muito tempo para excutar um callback (Event Loop) ou uma tarefa (Worker), nós a chamamos de &quot;bloqueada&quot;.
+Enquanto uma thread está bloqueada trabalhando para um cliente, ela não pode lidar com requisições de outros clientes.
+Isso fornece duas motivações para não bloquear o Event Loop nem a Worker Pool:</p>
+<ol>
+<li>Performance: Se você executar regularmente atividades pesadas em qualquer tipo de thread, o <em>throughput</em> (requisições por segundo) do seu servidor sofrerá.</li>
+<li>Segurança: Se for possível que para determinadas entradas uma de suas threads seja bloqueada, um cliente malicioso pode enviar esse &quot;evil input&quot;, para fazer suas threads bloquearem, e mantê-las trabalhando para outros clientes. Isso seria um ataque de <a href="https://en.wikipedia.org/wiki/Denial-of-service_attack">Negação de Serviço</a></li>
+</ol>
+<h2 id="uma-rápida-revisão-do-node">Uma rápida revisão do Node<a id="header-uma-rápida-revisão-do-node" class="anchor" href="#uma-rápida-revisão-do-node" aria-labelledby="uma-rápida-revisão-do-node"></a></h2>
+<p>O Node usa a Arquitetura Orientada a Eventos: ele tem um Event Loop para orquestração e uma Worker Pool para tarefas custosas.</p>
+<h3 id="que-código-é-executado-no-event-loop">Que código é executado no Event Loop?<a id="header-que-código-é-executado-no-event-loop" class="anchor" href="#que-código-é-executado-no-event-loop" aria-labelledby="que-código-é-executado-no-event-loop"></a></h3>
+<p>Quando elas começam, aplicações Node primeiro concluem uma fase de inicialização, fazendo &quot;<code>require</code>&#x27;ing&quot; de módulos e registrando callbacks para eventos.
+As Aplicações Node entram no Event Loop, respondendo requisições recebidas do cliente para executar o callback apropriado.
+Esse callback executa de forma síncrona, e pode registrar requisições assíncronas para continuar o processamento após a conclusão.</p>
+<p>Os callbacks para essas requisições assíncronas também serão executadas no Event Loop.</p>
+<p>O Event Loop também atenderá às requisições assíncronas não-bloqueantes feitas por seus callbacks, por exemplo, I/O de rede.</p>
+<p>Em resumo, o Event Loop executa os callbacks JavaScript registrados por eventos, e também é responsável atender requisições assíncronas não-bloqueantes, como I/O de rede.</p>
+<h3 id="que-código-é-executado-na-worker-pool">Que código é executado na Worker Pool?<a id="header-que-código-é-executado-na-worker-pool" class="anchor" href="#que-código-é-executado-na-worker-pool" aria-labelledby="que-código-é-executado-na-worker-pool"></a></h3>
+<p>A Worker Pool do Node é implementado na libuv (<a href="http://docs.libuv.org/en/v1.x/threadpool.html">docs</a>), que expõe uma API geral para envio de tarefas.</p>
+<p>O Node usa a Worker Pool para lidar com tarefas &quot;custosas&quot;.
+Isso inclui I/O para quais um sistem operacional não fornece uma versão não-bloqueante, bem como tarefas particularmente intensivas em CPU.</p>
+<p>Estas são os módulos de APIs do Node que fazem uso dessa Worker Pool:</p>
+<ol>
+<li>I/O intensivo<!-- -->
+<ol>
+<li><a href="https://nodejs.org/api/dns.html">DNS</a>: <code>dns.lookup()</code>, <code>dns.lookupService()</code>.</li>
+<li><a href="https://nodejs.org/api/fs.html#fs_threadpool_usage">Sistema de arquivo</a>: Todas APIs do sistema de arquivo exceto <code>fs.FSWatcher()</code> e aquelas que são explicitamente síncronas usam a threadpool da libuv.</li>
+</ol>
+</li>
+<li>CPU intensivo<!-- -->
+<ol>
+<li><a href="https://nodejs.org/api/crypto.html">Crypto</a>: <code>crypto.pbkdf2()</code>, <code>crypto.scrypt()</code>, <code>crypto.randomBytes()</code>, <code>crypto.randomFill()</code>, <code>crypto.generateKeyPair()</code>.</li>
+<li><a href="https://nodejs.org/api/zlib.html#zlib_threadpool_usage">Zlib</a>: Todas APIs do zlib exceto aquelas que são explicitamente síncronas usam a threadpool da libuv.</li>
+</ol>
+</li>
+</ol>
+<p>Em muitas aplicações Node, essas APIs são as únicas fontes de tarefas para a Worker Pool. Aplicações e módulos que usam um <a href="https://nodejs.org/api/addons.html">C++ add-on</a> podem enviar tarefas para a Worker Pool.</p>
+<p>Para cobrir todos os aspectos, observamos que quando você chama uma dessas APIs a partir de um callback no Event Loop, o Event Loop paga alguns custos menores de configuração, pois entra nas ligações do Node C++ para essa API e envia uma tarefa para ao Worker Pool.
+Esses custos são insignificantes em comparação ao custo total da tarefa, e é por isso que o Event Loop está sendo menos usado.
+Ao enviar uma dessas tarefas para a Worker Pool, o Node fornece um ponteiro para a função C++ correspondente nas ligações Node C++.</p>
+<h3 id="como-o-node-decide-qual-código-executar-a-seguir">Como o Node decide qual código executar a seguir?<a id="header-como-o-node-decide-qual-código-executar-a-seguir" class="anchor" href="#como-o-node-decide-qual-código-executar-a-seguir" aria-labelledby="como-o-node-decide-qual-código-executar-a-seguir"></a></h3>
+<p>De forma abstrata, o Event Loop e a Worker Pool mantêm filas para eventos e tarefas pendentes, respectivamente.</p>
+<p>Na verdade, o Event Loop não mantém realmente uma fila.
+Em vez disso, ele possui uma coleção de descritores de arquivos que solicita ao sistema operacional para monitorar, usando um mecanismo como <a href="http://man7.org/linux/man-pages/man7/epoll.7.html">epoll</a> (Linux), <a href="https://developer.apple.com/library/content/documentation/Darwin/Conceptual/FSEvents_ProgGuide/KernelQueues/KernelQueues.html">kqueue</a> (OSX), event ports (Solaris), ou <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa365198.aspx">IOCP</a> (Windows).
+Esses descritores de arquivos correspondem aos sockets de rede, aos arquivos que estão sendo monitorados e assim por diante.
+Quando o sistema operacional diz que um desses descritores de arquivos está pronto, o Evente Loop o converte para o evento apropriado e chama os callbacks associados com esse evento.
+Você pode aprender mais sobre esse processo <a href="https://www.youtube.com/watch?v=P9csgxBgaZ8">aqui</a>.</p>
+<p>Por outro lado, a Worker Pool usa uma fila real cujas entradas são tarefas a serem processadas.
+Um Worker abre uma tarefa nesse fila e trabalha nela, e quando concluída, o Worker gera um evento &quot;Pelo menos uma tarefa está concluída&quot; para o Event Loop.</p>
+<h3 id="o-que-isso-significa-para-o-design-da-aplicação">O que isso significa para o design da aplicação?<a id="header-o-que-isso-significa-para-o-design-da-aplicação" class="anchor" href="#o-que-isso-significa-para-o-design-da-aplicação" aria-labelledby="o-que-isso-significa-para-o-design-da-aplicação"></a></h3>
+<p>Em um sistema uma-thread-por-cliente tipo Apache, cada cliente pendente recebe sua própria thread.
+Se uma thread que manipula um cliente bloqueado, o sistema operacional irá interropé-lo e dará a vez para outro cliente.
+O sistema operacional garante, assim, que os clientes que exigem uma pequena quantidade de trabalho não sejam prejudicados por clientes que exigem mais trabalho.</p>
+<p>Como o Node lida com muitos clientes com poucas threads, se uma thread bloqueia o processamento da requisição de um cliente, as requisições pendentes do cliente podem não ter uma volta até que a thread conclua seu callback ou tarefa.
+<em>O tratamento justo dos clientes é, portanto, de responsabilidade de sua applicação</em>.
+Isso significa que você não deve fazer muito trabalho para nenhum cliente em uma única tarefa ou callback.</p>
+<p>Isso faz parte do motivo pelo qual o Node escalar bem, mas também significa que você é responsável por garantir um scheduling justo.
+As próximas seções falam sobre como garantir um agendamento justo para o Loop de Eventos e para a Worker Pool.</p>
+<h2 id="não-bloqueia-o-event-loop">Não bloqueia o Event Loop<a id="header-não-bloqueia-o-event-loop" class="anchor" href="#não-bloqueia-o-event-loop" aria-labelledby="não-bloqueia-o-event-loop"></a></h2>
+<p>O Event Loop percebe cada nova conexão do cliente e orquestra a geração de uma resposta.
+Todas as solicitações recebidas e respostas enviadas passam pelo Event Loop.
+Isso significa que, se o Event Loop passar muito tempo em algum ponto, todos os clientes atuais e novos não serão atendidos.</p>
+<p>Você nunca deve bloquear o Event Loop.
+Em outras palavras, cada um de seus callbacks JavaScript devem ser concluídos rapidamente.
+Isto, obviamente, também se aplica aos seus <code>wait</code>&#x27;s , seus <code>Promise.then</code>&#x27;s, e assim por diante.</p>
+<p>Uma boa maneira de garantir isso é estudar sobre a <a href="https://en.wikipedia.org/wiki/Time_complexity">&quot;complexidade computacional&quot;</a> de seus callbacks.
+Se o seu callback executar um número constante de etapas, independentemente de seus argumentos, você sempre dará a cada cliente pendente uma chance justa.
+Se seu callback executa um número considerável de etapas, dependendo de seus argumentos, pense em quanto tempo os argumentos podem demorar.</p>
+<p>Exemplo 1: Um callback em tempo constante.</p>
+<pre><code class="language-javascript">app.get(&#x27;/constant-time&#x27;, (req, res) =&gt; {
+  res.sendStatus(200);
+});
+</code></pre>
+<p>Exemplo 2: Um callback <code>O(n)</code>. Este callback será executado rapidamente para pequenos <code>n</code> e mais lentamente para grandes <code>n</code>.</p>
+<pre><code class="language-javascript">app.get(&#x27;/countToN&#x27;, (req, res) =&gt; {
+  let n = req.query.n;
+
+  // n iterations before giving someone else a turn
+  for (let i = 0; i &lt; n; i++) {
+    console.log(`Iter ${i}`);
+  }
+
+  res.sendStatus(200);
+});
+</code></pre>
+<p>Exemplo 3: Um callback <code>O(n^2)</code>. Este callback ainda será executado rapidamente para pequenos <code>n</code>, mas para grandes <code>n</code>, será executado muito mais lentamente que o exemplo anterior <code>O(n)</code>.</p>
+<pre><code class="language-javascript">app.get(&#x27;/countToN2&#x27;, (req, res) =&gt; {
+  let n = req.query.n;
+
+  // n^2 iterations before giving someone else a turn
+  for (let i = 0; i &lt; n; i++) {
+    for (let j = 0; j &lt; n; j++) {
+      console.log(`Iter ${i}.${j}`);
+    }
+  }
+
+  res.sendStatus(200);
+});
+</code></pre>
+<h3 id="quão-cuidadoso-você-deve-ser">Quão cuidadoso você deve ser?<a id="header-quão-cuidadoso-você-deve-ser" class="anchor" href="#quão-cuidadoso-você-deve-ser" aria-labelledby="quão-cuidadoso-você-deve-ser"></a></h3>
+<p>O Node usa a engine V8 do Google para JavaScript, o que é bastante rápido para muitas operações comuns.
+Exceções a esta regra são regexps e operações JSON, discutidas abaixo.</p>
+<p>No entanto, para tarefas complexas, considere limitar a entrada e rejeitar entradas muito longas.
+Dessa forma, mesmo que seu callback tenha grande complexidade, limitando a entrada, você garante que o callback não pode demorar mais do que o pior caso na entrada aceitável mais longa.
+Você pode avaliar o pior caso desse callback e determinar se o tempo de execução é aceitável no seu contexto.</p>
+<h3 id="bloqueando-o-event-loop-redos">Bloqueando o Event Loop: REDOS<a id="header-bloqueando-o-event-loop-redos" class="anchor" href="#bloqueando-o-event-loop-redos" aria-labelledby="bloqueando-o-event-loop-redos"></a></h3>
+<p>Uma maneira comum de bloquear desastrosamente o Event Loop é usar uma <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">expressão regular</a> &quot;vulnerável&quot;.</p>
+<h4 id="evitando-expressões-regulares-vulneráveis">Evitando expressões regulares vulneráveis<a id="header-evitando-expressões-regulares-vulneráveis" class="anchor" href="#evitando-expressões-regulares-vulneráveis" aria-labelledby="evitando-expressões-regulares-vulneráveis"></a></h4>
+<p>Uma expressão regular (regexp) corresponde a uma sequência de entrada diante de um padrão.
+Geralmente pensamos em uma combinação regexp exigindo uma única passagem pela string de entrada --- tempo <code>O(n)</code> em que <code>n</code> é o comprimento da string de entrada.
+Em muitos casos, basta uma única passegem.
+Infelizmente, em alguns casos, a correspondência regexp pode exigir um número exponencial de viagens pela string de entrada ---  tempo <code>O(2^n)</code>.
+Um número exponencial de viagens significa que, se o mecanismo exigir <code>x</code> viagens para determinar uma correspondência, serão necessárias <code>2*x</code> viagens se adicionarmos apenas mais um caractere à string de entrada.
+Como o número de viagens está linearmente relacionado ao tempo necessário, o efeito dessa avaliação será bloquear o Event Loop.</p>
+<p>Uma <em>expressão regular vulnerável</em> é aquela em que seu mecanismo de expressão regular pode levar um tempo exponencial, expondo você a <a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">REDOS</a> no &quot;evil input&quot;.
+Se o seu padrão de expressão regular é vulnerável (ou seja, o mecanismo regexp pode levar um tempo exponencial) é realmente uma pergunta difícil de responder e varia dependendo de você estar usando Perl, Python, Ruby, Java, JavaScript, etc., mas aqui estão algumas regras práticas que se aplicam a todas essas linguagens:</p>
+<ol>
+<li>Evite quantificadores aninhados como <code>(a+)*</code>. O mecanismo regexp do Node pode lidar com alguns deles rapidamente, mas outros são vulneráveis.</li>
+<li>Evite OR&#x27;s com cláusulas sobrepostas, como <code>(a|a)*</code>. Novamente, esses nem sempre são rápidos.</li>
+<li>Evite usar referências anteriores, como <code>(a.*) \1</code>. Nenhum mecanismo regexp pode garantir a avaliação em tempo linear.</li>
+<li>Se você estiver fazendo uma correspondência simples de string, use <code>indexOf</code> ou o equivalente local. Será mais barato e nunca levará mais que <code>O(n)</code>.</li>
+</ol>
+<p>Se você não tiver certeza se sua expressão regular é vulnerável, lembre-se de que o Node geralmente não tem problemas para relatar uma <em>correspondência</em>, mesmo para uma regexp vulnerável e uma longa string de entrada.
+O comportamento exponencial é acionado quando há uma incompatibilidade, mas o Node não pode ter certeza até que tente muitos caminhos pela string de entrada.</p>
+<h4 id="um-exemplo-de-redos">Um exemplo de REDOS<a id="header-um-exemplo-de-redos" class="anchor" href="#um-exemplo-de-redos" aria-labelledby="um-exemplo-de-redos"></a></h4>
+<p>Aqui está um exemplo de regexp vulnerável, expondo seu servidor ao REDOS:</p>
+<pre><code class="language-javascript">app.get(&#x27;/redos-me&#x27;, (req, res) =&gt; {
+  let filePath = req.query.filePath;
+
+  // REDOS
+  if (fileName.match(/(\/.+)+$/)) {
+    console.log(&#x27;valid path&#x27;);
+  }
+  else {
+    console.log(&#x27;invalid path&#x27;);
+  }
+
+  res.sendStatus(200);
+});
+</code></pre>
+<p>O regexp vulnerável neste exemplo é uma maneira (ruim!) de verificar um caminho válido no Linux.
+Corresponde as strings que são uma sequência de nomes delimitados por &quot;/&quot;, como &quot;/a/b/c&quot;.
+Isso é perigoso porque viola a regra 1: possui um quantificador duplamente aninhado.</p>
+<p>Se um cliente consulta com filePath <code>///.../\n</code> (100 /&#x27;s seguidos por um caractere de quebra de linha que o &quot;.&quot; da regexp não corresponda), o Event Loop levará efetivamente para sempre, bloqueando o Event Loop.
+O ataque REDOS deste cliente faz com que todos os outros clientes não tenham sua vez até que a correspondência de regexp termine.</p>
+<p>Por esse motivo, você deve desconfiar do uso de expressões regulares complexas para validar a entrada do usuário.</p>
+<h4 id="recursos-anti-redos">Recursos anti-REDOS<a id="header-recursos-anti-redos" class="anchor" href="#recursos-anti-redos" aria-labelledby="recursos-anti-redos"></a></h4>
+<p>Existem algumas ferramentas para verificar a segurança de seus regexps, como</p>
+<ul>
+<li><a href="https://github.com/davisjam/safe-regex">safe-regex</a></li>
+<li><a href="https://github.com/superhuman/rxxr2">rxxr2</a>.</li>
+</ul>
+<p>No entanto, nenhum deles capturará todos os regexps vulneráveis.</p>
+<p>Outra abordagem é usar um mecanismo diferente de regexp.
+Você pode usar o módulo<a href="https://github.com/uhop/node-re2">node-re2</a>, que usa o mecanismo de regexp rápido <a href="https://github.com/google/re2">RE2</a> do Google .
+Mas esteja avisado, o RE2 não é 100% compatível com os regexps do Node, portanto, verifique as regressões se você trocar para o módulo node-re2 para manipular seus regexps.
+E regexps particularmente complicados não são suportados pelo node-re2.</p>
+<p>Se você estiver tentando corresponder a algo &quot;óbvio&quot;, como uma URL ou um caminho de arquivo, encontre um exemplo em uma <a href="http://www.regexlib.com">biblioteca regexp</a> ou use um módulo npm, por exemplo <a href="https://www.npmjs.com/package/ip-regex">ip-regex</a>.</p>
+<h3 id="bloqueando-o-event-loop-módulos-principais-do-node">Bloqueando o Event Loop: módulos principais do Node<a id="header-bloqueando-o-event-loop-módulos-principais-do-node" class="anchor" href="#bloqueando-o-event-loop-módulos-principais-do-node" aria-labelledby="bloqueando-o-event-loop-módulos-principais-do-node"></a></h3>
+<p>Vários módulos principais do Node têm APIs síncronas custosas, incluindo:</p>
+<ul>
+<li><a href="https://nodejs.org/api/crypto.html">Encryption</a></li>
+<li><a href="https://nodejs.org/api/zlib.html">Compression</a></li>
+<li><a href="https://nodejs.org/api/fs.html">File system</a></li>
+<li><a href="https://nodejs.org/api/child_process.html">Child process</a></li>
+</ul>
+<p>Essas APIs são custosas, porque envolvem computação significativa (criptografia, compactação), exigem I/O (I/O de arquivo) ou potencialmente ambas (child process). Essas APIs destinam-se à conveniência de script, mas não para uso no contexto de servidor. Se você executá-los no Event Loop, eles levarão muito mais tempo para serem concluídos do que uma instrução JavaScript típica, bloqueando o Event Loop.</p>
+<p>Em um servidor, <em>você não deve usar as seguintes APIs síncronas desses módulos</em>:</p>
+<ul>
+<li>Criptografia:<!-- -->
+<ul>
+<li><code>crypto.randomBytes</code> (versão síncrona)</li>
+<li><code>crypto.randomFillSync</code></li>
+<li><code>crypto.pbkdf2Sync</code></li>
+<li>Você também deve ter cuidado ao fornecer uma entrada grande para as rotinas de criptografia e descriptografia.</li>
+</ul>
+</li>
+<li>Compression:</li>
+<li>Compressão:<!-- -->
+<ul>
+<li><code>zlib.inflateSync</code></li>
+<li><code>zlib.deflateSync</code></li>
+</ul>
+</li>
+<li>Sistema de arquivo:<!-- -->
+<ul>
+<li>Não use as APIs do sistema de arquivos síncronas. Por exemplo, se o arquivo que você acessar estiver em um <a href="https://en.wikipedia.org/wiki/Clustered_file_system#Distributed_file_systems">sistema de arquivos distribuído</a> como <a href="https://en.wikipedia.org/wiki/Network_File_System">NFS</a>, os tempos de acesso podem variar bastante.</li>
+</ul>
+</li>
+<li>Child process:<!-- -->
+<ul>
+<li><code>child_process.spawnSync</code></li>
+<li><code>child_process.execSync</code></li>
+<li><code>child_process.execFileSync</code></li>
+</ul>
+</li>
+</ul>
+<p>Esta lista está razoavelmente completa a partir do Node v9.</p>
+<h3 id="bloqueando-o-event-loop-json-dos">Bloqueando o Event Loop: JSON DOS<a id="header-bloqueando-o-event-loop-json-dos" class="anchor" href="#bloqueando-o-event-loop-json-dos" aria-labelledby="bloqueando-o-event-loop-json-dos"></a></h3>
+<p><code>JSON.parse</code> e <code>JSON.stringify</code> são outras operações potencialmente custosas.
+Embora estes sejam <code>O(n)</code> no comprimento da entrada, para grandes <code>n</code> eles podem demorar surpreendentemente.</p>
+<p>Se o servidor manipular objetos JSON, principalmente os de um cliente, você deve ter cuidado com o tamanho dos objetos ou strings com as quais trabalha no Event Loop.</p>
+<p>Exemplo: bloqueio de JSON. Criamos um objeto <code>obj</code> de tamanho 2^21 e <code>JSON.stringify</code>, rodamos <code>indexOf</code> na string e, em seguida, JSON.parse. A string <code>JSON.stringify</code>&#x27;d tem 50 MB. Demora 0,7 segundos para trasformar em string o objeto, 0,03 segundos para indexOf na string de 50 MB e 1,3 segundos para converter a string.</p>
+<pre><code class="language-javascript">var obj = { a: 1 };
+var niter = 20;
+
+var before, str, pos, res, took;
+
+for (var i = 0; i &lt; niter; i++) {
+  obj = { obj1: obj, obj2: obj }; // Doubles in size each iter
+}
+
+before = process.hrtime();
+str = JSON.stringify(obj);
+took = process.hrtime(before);
+console.log(&#x27;JSON.stringify took &#x27; + took);
+
+before = process.hrtime();
+pos = str.indexOf(&#x27;nomatch&#x27;);
+took = process.hrtime(before);
+console.log(&#x27;Pure indexof took &#x27; + took);
+
+before = process.hrtime();
+res = JSON.parse(str);
+took = process.hrtime(before);
+console.log(&#x27;JSON.parse took &#x27; + took);
+</code></pre>
+<p>Existem módulos npm que oferecem APIs JSON assíncronas. Veja alguns exemplo:</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/JSONStream">JSONStream</a>, que possui APIs de stream.</li>
+<li><a href="https://www.npmjs.com/package/bfj">Big-Friendly JSON</a>, que possui APIs de stream e versões assíncronas das APIs JSON padrão usando o paradigma de particionamento no Event Loop descrito abaixo.</li>
+</ul>
+<h3 id="cálculos-complexos-sem-bloquear-o-event-loop">Cálculos complexos sem bloquear o Event Loop<a id="header-cálculos-complexos-sem-bloquear-o-event-loop" class="anchor" href="#cálculos-complexos-sem-bloquear-o-event-loop" aria-labelledby="cálculos-complexos-sem-bloquear-o-event-loop"></a></h3>
+<p>Suponha que você queira fazer cálculos complexos em JavaScript sem bloquear o Event Loop.
+Você tem duas opções: particionamento ou descarregamento.</p>
+<h4 id="particionamento">Particionamento<a id="header-particionamento" class="anchor" href="#particionamento" aria-labelledby="particionamento"></a></h4>
+<p>Você pode <em>particionar</em> seus cálculos para que cada um seja executado no Event Loop, mas produz regularmente (alterna) outros eventos pendentes.
+Em JavaScript, é fácil salvar o estado de uma tarefa em andamento em um closure, como mostra o exemplo 2 abaixo.</p>
+<p>Para um exemplo simples, suponha que você queira calcular a média dos números <code>1</code> até <code>n</code>.</p>
+<p>Exemplo 1: Média não particionada, custos <code>O(n)</code></p>
+<pre><code class="language-javascript">for (let i = 0; i &lt; n; i++)
+  sum += i;
+let avg = sum / n;
+console.log(&#x27;avg: &#x27; + avg);
+</code></pre>
+<p>Exemplo 2: Média particionada, cada uma das etapas assíncronas <code>n</code> custa <code>O(1)</code>.</p>
+<pre><code class="language-javascript">function asyncAvg(n, avgCB) {
+  // Save ongoing sum in JS closure.
+  var sum = 0;
+  function help(i, cb) {
+    sum += i;
+    if (i == n) {
+      cb(sum);
+      return;
+    }
+
+    // &quot;Asynchronous recursion&quot;.
+    // Schedule next operation asynchronously.
+    setImmediate(help.bind(null, i+1, cb));
+  }
+
+  // Start the helper, with CB to call avgCB.
+  help(1, function(sum){
+      var avg = sum/n;
+      avgCB(avg);
+  });
+}
+
+asyncAvg(n, function(avg){
+  console.log(&#x27;avg of 1-n: &#x27; + avg);
+});
+</code></pre>
+<p>Você pode aplicar esse princípio a iterações de array e assim por diante.</p>
+<h4 id="offloading">Offloading<a id="header-offloading" class="anchor" href="#offloading" aria-labelledby="offloading"></a></h4>
+<p>Se você precisar fazer algo mais complexo, o particionamento não é uma boa opção.
+Isso ocorre porque o particionamento usa apenas o Event Loop e você não se beneficiará de vários núcleos quase certamente disponíveis em sua máquina.
+<em>Lembre-se, o Event Loop deve orquestrar requisições de clientes, não atendê-las.</em>
+Para uma tarefa complicada, mova o trabalho do Event Loop para uma Worker Pool.</p>
+<h5 id="como-fazer-offload">Como fazer offload<a id="header-como-fazer-offload" class="anchor" href="#como-fazer-offload" aria-labelledby="como-fazer-offload"></a></h5>
+<p>Você tem duas opções para uma Work Pool de destino no qual descarregar o trabalho.</p>
+<ol>
+<li>Você pode usar a Worker Pool built-in do Node desenvolvendo um <a href="https://nodejs.org/api/addons.html">addon C++</a>. Nas versões mais antigas do Node, crie seu complemento C++ usando <a href="https://github.com/nodejs/nan">NAN</a> e nas versões mais recentes use <a href="https://nodejs.org/api/n-api.html">N-API</a>. <a href="https://www.npmjs.com/package/webworker-threads">node-webworker-threads</a> oferece uma maneira JavaScript-only para acessar a Worker Pool do Node.</li>
+<li>Você pode criar e gerenciar sua própria Worker Pool dedicada à computação, em vez da Worker Pool de I/O do Node. As maneiras mais simples de fazer isso são usando <a href="https://nodejs.org/api/child_process.html">Child Process</a> ou <a href="https://nodejs.org/api/cluster.html">Cluster</a>.</li>
+</ol>
+<p>Você <em>não</em> deve simplesmente criar um <a href="https://nodejs.org/api/child_process.html">Child Process</a> para cada cliente.
+Você pode receber requisições de clientes mais rapidamente do que criar e gerenciar children, e seu servidor pode se tornar um <a href="https://en.wikipedia.org/wiki/Fork_bomb">fork pump</a>.</p>
+<h5 id="desvantagem-do-offloading">Desvantagem do offloading<a id="header-desvantagem-do-offloading" class="anchor" href="#desvantagem-do-offloading" aria-labelledby="desvantagem-do-offloading"></a></h5>
+<p>A desvantagem da abordagem de offloading é que ela incorre em custos indiretos na forma de <em>custos de comunicação</em>.
+Somente o Event Loop tem permissão para ver o &quot;namespace&quot; (estado JavaScript) do sua aplicação.
+De um Worker, você não pode manipular um objeto JavaScript no namespace do Event Loop.
+Em vez disso, você deve serializar e desserializar todos os objetos que deseja compartilhar.
+Em seguida, o Worker pode operar em sua própria cópia desses objetos e retornar o objeto modificado (ou um &quot;patch&quot;) ao Event Loop.</p>
+<p>Para questões de serialização, consulte a seção JSON DOS.</p>
+<h5 id="algumas-sugestões-para-offloading">Algumas sugestões para offloading<a id="header-algumas-sugestões-para-offloading" class="anchor" href="#algumas-sugestões-para-offloading" aria-labelledby="algumas-sugestões-para-offloading"></a></h5>
+<p>Você pode fazer uma distinção entre tarefas intensivas em CPU e I/O, porque elas possuem características marcadamente diferentes.</p>
+<p>Uma tarefa com uso intenso de CPU só progride quando seu Worker está agendado e o Worker deve ser agendado em um dos <a href="https://nodejs.org/api/os.html#os_os_cpus">núcleos lógicos</a> da sua máquina .
+Se você tiver 4 núcleos lógicos e 5 Workers, um deles não poderá progredir.
+Como resultado, você está pagando custos indiretos (memória e custos de agendamento) por este Worker e não recebe retorno por isso.</p>
+<p>As tarefas intensivas de I/O envolvem a consulta de um provedor de serviços externo (DNS, sistema de arquivos etc.) e a espera de sua resposta.
+Enquanto um Worker com uma tarefa intensiva de I/O está aguardando sua resposta, ele não tem mais nada a fazer e pode ser descontinuado pelo sistema operacional, dando a outro Worker a chance de enviar sua requisição.
+Portanto, <em>as tarefas intensivas em I/O farão progressos mesmo enquanto a thread associada não estiver em execução</em>.
+Os provedores de serviços externos, como bancos de dados e sistemas de arquivos, foram altamente otimizados para lidar com muitas requisições pendentes simultaneamente.
+Por exemplo, um sistema de arquivos examinará um grande conjunto de requisições de gravação e leitura pendentes para mesclar atualizações conflitantes e recuperar arquivos em uma ordem ideal (por exemplo, consulte <a href="http://researcher.ibm.com/researcher/files/il-AVISHAY/01-block_io-v1.3.pdf">estes slides</a>).</p>
+<p>Se você confiar em apenas uma Worker Pool, por exemplo, a Worker Pool do Node, as diferentes características do trabalho vinculado à CPU e vinculado à I/O podem prejudicar o desempenho da aplicação.</p>
+<p>Por esse motivo, convém manter uma Computation Worker Pool separada.</p>
+<h4 id="offloading-concluções">Offloading: concluções<a id="header-offloading-concluções" class="anchor" href="#offloading-concluções" aria-labelledby="offloading-concluções"></a></h4>
+<p>Para tarefas simples, como iterar sobre os elementos de um array arbitrariamente longa, o particionamento pode ser uma boa opção.
+Se o seu cálculo for mais complexo, o offloading é uma abordagem melhor: os custos de comunicação, ou seja, a sobrecarga de passagem de objetos serializados entre o Event Loop e a Worker Pool, são compensados pelo benefício do uso de múltiplos núcleos.</p>
+<p>No entanto, se o seu servidor depende muito de cálculos complexos, você deve pensar se o Node é realmente boa escolha. O Node é excelente para trabalhos ligados a I/O, mas para cálculos custosos, pode não ser a melhor opção.</p>
+<p>Se você adotar a abordagem de offloading, consulte a seção sobre não bloquear a Worker Pool.</p>
+<h2 id="não-bloqueie-o-worker-pool">Não bloqueie o Worker Pool<a id="header-não-bloqueie-o-worker-pool" class="anchor" href="#não-bloqueie-o-worker-pool" aria-labelledby="não-bloqueie-o-worker-pool"></a></h2>
+<p>O Node possui uma Worker Pool composto por Workers <code>k</code>.
+Se você estiver usando o paradigma de Offloading discutido acima, poderá ter uma Computational Worker Pool separado, ao qual os mesmos princípios se aplicam.
+Em qualquer um dos casos, vamos supor que <code>k</code> seja muito menor do que o número de clientes que você pode estar lidando simultaneamente.
+Isso está de acordo com a filosofia &quot;uma thread para muitos clientes&quot; do Node, o segredo de sua escalabilidade.</p>
+<p>Conforme discutido acima, cada Worker conclui sua Task atual antes de prosseguir para a próxima na fila da Worker Pool.</p>
+<p>Agora, haverá variação no custo das Tasks necessárias para lidar com as requisições dos seus clientes.
+Algumas Tasks podem ser concluídas rapidamente (por exemplo, lendo arquivos curtos ou em cache ou produzindo um pequeno número de bytes aleatórios) e outras demoram mais (por exemplo, lendo arquivos maiores ou não em cache ou gerando mais bytes aleatórios).
+Seu objetivo deve ser <em>minimizar a variação nos tempos de Task</em> e você deve usar <em>Particionamento de Task</em> para fazer isso.</p>
+<h3 id="minimizando-a-variação-no-tempo-das-tasks">Minimizando a variação no tempo das Tasks<a id="header-minimizando-a-variação-no-tempo-das-tasks" class="anchor" href="#minimizando-a-variação-no-tempo-das-tasks" aria-labelledby="minimizando-a-variação-no-tempo-das-tasks"></a></h3>
+<p>Se a Task atual de um Worker for muito mais custosa que outras Tasks, não estará disponível para trabalhar em outras Tasks pendentes.
+Em outras palavras, <em>cada Task relativamente longa diminui efetivamente o tamanho do Worker Pool até que alguma seja concluída</em>.
+Isso é indesejável porque, até certo ponto, quanto mais Workers na Worker Pool, maior a taxa de transferência da Worker Pool(tarefas/segundo) e, portanto, maior a taxa de transferência do servidor (requisição do cliente/segundo).
+Um cliente com uma Task relativamente custosa diminuirá a taxa de transferência do Worker Pool, diminuindo a taxa de transferência do servidor.</p>
+<p>Para evitar isso, tente minimizar a variação no comprimento das Tasks enviadas ao Worker Pool.
+Embora seja apropriado tratar os sistemas externos acessados por suas requisições de I/O (DB, FS, etc.) como caixas-pretas, você deve estar ciente do custo relativo dessas requisições de I/O, e evite enviar requisições que você espera que sejam particularmente longas.</p>
+<p>Dois exemplos devem ilustrar a possível variação nos tempos das tarefas.</p>
+<h4 id="exemplo-de-variação-leituras-no-sistema-de-arquivos-de-longa-execução">Exemplo de variação: leituras no sistema de arquivos de longa execução<a id="header-exemplo-de-variação-leituras-no-sistema-de-arquivos-de-longa-execução" class="anchor" href="#exemplo-de-variação-leituras-no-sistema-de-arquivos-de-longa-execução" aria-labelledby="exemplo-de-variação-leituras-no-sistema-de-arquivos-de-longa-execução"></a></h4>
+<p>Suponha que seu servidor precise ler arquivos para lidar com algumas requisições do cliente.
+Após consultar as APIs de <a href="https://nodejs.org/api/fs.html">File system</a> do Node, você optou por usar o <code>fs.readFile()</code> para simplificar.
+No entanto, <code>fs.readFile()</code> é (<a href="https://github.com/nodejs/node/pull/17054">atualmente</a>) não particionado: ele envia uma única Task <code>fs.read()</code> abrangendo todo o arquivo.
+Se você ler arquivos mais curtos para alguns usuários e arquivos mais longos para outros, <code>fs.readFile()</code> poderá introduzir variações significativas no tamanho das Tasks, em detrimento da taxa de transferência da Worker Pool.</p>
+<p>Para o pior cenário, suponha que um atacante possa convencer seu servidor para ler um arquivo <em>arbitrário</em> (esta é uma <a href="https://www.owasp.org/index.php/Path_Traversal">directory traversal vulnerability</a>).
+Se o seu servidor estiver executando o Linux, o atacante poderá nomear um arquivo extremamente lento: <a href="http://man7.org/linux/man-pages/man4/random.4.html"><code>/dev/random</code></a>.
+Para todos os propósitos práticos, <code>/dev/random</code> é infinitamente lento, e todo Worker solicitado a ler em <code>/dev/random</code> nunca terminará essa tarefa.
+Um atacante envia requisições <code>k</code>, uma para cada Work, e nenhuma outra requisição de cliente que use a Worker Pool fará progresso.</p>
+<h4 id="exemplo-de-variação-operações-de-criptografia-de-longa-execução">Exemplo de variação: operações de criptografia de longa execução<a id="header-exemplo-de-variação-operações-de-criptografia-de-longa-execução" class="anchor" href="#exemplo-de-variação-operações-de-criptografia-de-longa-execução" aria-labelledby="exemplo-de-variação-operações-de-criptografia-de-longa-execução"></a></h4>
+<p>Suponha que seu servidor gere bytes aleatórios criptograficamente seguros usando <a href="https://nodejs.org/api/crypto.html#crypto_crypto_randombytes_size_callback"><code>crypto.randomBytes()</code></a>.
+O <code>crypto.randomBytes()</code> não é particionado: ele cria uma única Task <code>randomBytes()</code> para gerar quantos bytes você solicitou.
+Se você criar menos bytes para alguns usuários e mais bytes para outros, <code>crypto.randomBytes()</code> é outra fonte de variação no tamanho das Tasks.</p>
+<h3 id="particionamento-de-task">Particionamento de Task<a id="header-particionamento-de-task" class="anchor" href="#particionamento-de-task" aria-labelledby="particionamento-de-task"></a></h3>
+<p>Tasks com custos variáveis de tempo podem prejudicar a taxa de transferência da Worker Pool.
+Para minimizar a variação no tempo das Tasks, na medida do possível, você deve <em>particionar</em> cada Task em sub-Tasks com custo comparável.
+Quando cada sub-Task for concluída, ela deverá enviar a próxima sub-Task e, quando a sub-Task final for concluída, deverá notificar o remetente.</p>
+<p>Para continuar o exemplo de <code>fs.readFile()</code>, você deve usar <code>fs.read()</code> (particionamento manual) ou <code>ReadStream</code> (particionado automaticamente).</p>
+<p>O mesmo princípio se aplica às tarefas ligadas à CPU; o exemplo <code>asyncAvg</code> pode ser inadequado para o Event Loop, mas é adequado para a Worker Pool.</p>
+<p>Quando você particiona uma Task em sub-Tasks, as Tasks mais curtas se expandam para um pequeno número de sub-Tasks, e as Tasks mais longas se expandem para um número maior de sub-Tasks.
+Entre cada sub-Task de uma Task mais longa, o Worker ao qual foi designado pode trabalhar em uma sub-Task de outra Task mais curta, melhorando assim o rendimento geral da Task da Worker Pool.</p>
+<p>Observe que o número de sub-Tasks concluídas não é uma métrica útil para a taxa de transferência da Worker Pool.
+Em vez disso, preocupe-se com o número de <em>Tasks</em> concluídas.</p>
+<h3 id="evitando-o-particionamento-de-tasks">Evitando o particionamento de Tasks<a id="header-evitando-o-particionamento-de-tasks" class="anchor" href="#evitando-o-particionamento-de-tasks" aria-labelledby="evitando-o-particionamento-de-tasks"></a></h3>
+<p>Lembre-se de que o objetivo do particionamento de Tasks é minimizar a variação no tempo das Tasks.
+Se você conseguir distinguir entre Tasks mais curtas e Tasks mais longas (por exemplo, somar um array versus ordenar um array), poderá criar uma Worker Pool para cada classe de Task.
+O roteamento de Tasks mais curtas e tarefas mais longas para separar na Worker Pool é outra maneira de minimizar a variação do tempo da Task.</p>
+<p>Em favor dessa abordagem, o particionamento de Tasks incorre em sobrecarga (os custos de criação de uma representação de Task da Worker Pool e de manipulação de fila da Worker Pool) e evitar o particionamento economiza os custos de passagens adicionais na Worker Pool.
+Também evita que você cometa erros ao particionar suas Tasks.</p>
+<p>A desvantagem dessa abordagem é que os Workers em todas essas Worker Pools sofrerão sobrecarga de espaço e tempo e competirão entre si pelo tempo de CPU.
+Lembre-se de que cada Task vinculada à CPU só progride enquanto está agendada.
+Como resultado, você só deve considerar essa abordagem após uma análise cuidadosa.</p>
+<h3 id="worker-pool-conclusões">Worker Pool: conclusões<a id="header-worker-pool-conclusões" class="anchor" href="#worker-pool-conclusões" aria-labelledby="worker-pool-conclusões"></a></h3>
+<p>Se você usa apenas a Worker Pool do Node ou mantém Worker Pools separadas, você deve otimizar a taxa de transferência de Task dos seus Pool(s).</p>
+<p>Para fazer isso, minimize a variação nos tempos da Task usando o particionamento de Tasks.</p>
+<h2 id="os-riscos-dos-módulos-npm">Os riscos dos módulos npm<a id="header-os-riscos-dos-módulos-npm" class="anchor" href="#os-riscos-dos-módulos-npm" aria-labelledby="os-riscos-dos-módulos-npm"></a></h2>
+<p>Enquanto os módulos principais do Node oferecem blocos de construção para uma ampla variedade de aplicações, às vezes é necessário algo mais. Os desenvolvedores de Node se beneficiam enormemente do <a href="https://www.npmjs.com/">ecosistema npm</a>, com centenas de milhares de módulos oferecendo funcionalidade para acelerar seu processo de desenvolvimento.</p>
+<p>Lembre-se, no entanto, que a maioria desses módulos é escrita por desenvolvedores de terceiros e geralmente é liberada com apenas com o minímo necessário para funcionar. Um desenvolvedor que usa um módulo npm deve se preocupar com duas coisas, embora este último seja frequentemente esquecido.</p>
+<ol>
+<li>Honra suas APIs?</li>
+<li>Suas APIs podem bloquear o Event Loop ou um Worker?</li>
+</ol>
+<p>Muitos módulos não fazem nenhum esforço para indicar o custo de suas APIs, em detrimento da comunidade.</p>
+<p>Para APIs simples, você pode estimar seus custo; o custo da manipulação de string não é difícil de entender.
+Mas, em muitos casos, não está claro quanto uma API pode custar.</p>
+<p><em>Se você está chamando uma API que pode fazer algo pesado, verifique o custo. Peça aos desenvolvedores para documentá-lo ou examine você mesmo o código-fonte (e envie um PR documentando o custo).</em></p>
+<p>Lembre-se, mesmo que a API seja assíncrona, você não sabe quanto tempo ela passará em um Worker ou no Event Loop em cada uma de suas partições.
+Por exemplo, suponha que no exemplo <code>asyncAvg</code> dado acima, cada chamada para a função auxiliar somasse <em>metade</em> dos números em vez de um deles.
+Então essa função ainda seria assíncrona, mas o custo de cada partição seria <code>O(n)</code>, não <code>O(1)</code>, tornando muito menos seguro o uso de valores arbitrários de <code>n</code>.</p>
+<h2 id="conclusão">Conclusão<a id="header-conclusão" class="anchor" href="#conclusão" aria-labelledby="conclusão"></a></h2>
+<p>O Node possui dois tipos de threads: um Event Loop e <code>k</code> Workers.
+O Event Loop é responsável por callbacks JavaScript e I/O não bloqueante, e um Worker executa tarefas correspondentes ao código C++ que conclui uma requisição assíncrona, incluindo o bloqueio de I/O e usos intensivos da CPU.
+Ambos os tipos de threads funcionam em não mais de uma atividade por vez.
+Se qualquer callback ou tarefa demorar muito, a thread em execução será <em>bloqueada</em>.
+Se o sua aplicacão efetuar callbacks ou tarefas bloqueantes, isso pode levar a uma taxa de transferência degradada (clientes/segundo) na melhor das hipóteses, e na negação de serviço completa na pior das hipóteses.</p>
+<p>Para escrever um servidor web com alta taxa de transferência, mais à prova de DoS, você deve garantir que nas entradas benignas e maliciosas, nem o Event Loop nem os Workers sejam bloqueados.</p></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->Retorne ao começo</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"pt-br","localName":"Português do Brasil","name":"Brazilian Portuguese","langDir":"ltr","dateFormat":"DD.MM.YYYY","hrefLang":"","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"Retorne ao começo","components.header.links.home":"Início","components.header.links.about":"Sobre","components.header.links.download":"Download","components.header.links.docs":"Documentação","components.header.links.getInvolved":"Participe","components.header.links.security":"Segurança","components.header.links.certification":"Certification","components.header.links.blog":"Novidades","components.navigation.about.links.governance":"Governança do Projeto","components.navigation.docs.links.es6":"ES6 e além","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"Guias","components.navigation.docs.links.dependencies":"Dependências","components.navigation.getInvolved.links.collabSummit":"Collab Summit","components.navigation.getInvolved.links.contribute":"Contribua","components.navigation.getInvolved.links.codeOfConduct":"Código de Conduta","components.downloadList.links.previousReleases":"Versões Anteriores","components.downloadList.links.packageManager":"Instale Node.js usando gerenciador de pacotes.","components.downloadList.links.shaSums":"SHASUMS assinados para arquivos de versões","components.downloadList.links.shaSums.howToVerify":" (Como verificar)","components.downloadList.links.allDownloads":"Todas as opções de download","components.downloadList.links.nightlyReleases":"Versões Nightly","components.downloadList.links.unofficialBuilds":"Unofficial builds","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Instalando Node.js via arquivo binário.","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"Changelog","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"Documentação","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"Próximo | ","components.pagination.previous":"Anterior","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/pt-br/docs/guides/dont-block-the-event-loop","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

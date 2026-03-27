@@ -1,0 +1,133 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Node.js의 Timers | Node.js node js 学习 中文网</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Node.js의 Timers | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Node.js의 Timers | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/ko/docs/guides/timers-in-node"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/ko/docs/guides/timers-in-node-a0ce5bf88d8325db.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-2WRNZHGVQT"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-2WRNZHGVQT");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8264273508355034" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/ko"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/ko">홈</a></li><li class=""><a href="/ko/about">About</a></li><li class=""><a href="/ko/download">다운로드</a></li><li class="active"><a href="/ko/docs">문서</a></li><li class=""><a href="/ko/get-involved">참여하기</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">보안</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class=""><a href="/ko/blog">뉴스</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/timers-in-node">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/timers-in-node">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/timers-in-node">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/timers-in-node">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/timers-in-node">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/timers-in-node">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/timers-in-node">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/timers-in-node">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/timers-in-node">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/timers-in-node">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/timers-in-node">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/timers-in-node">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/timers-in-node">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/timers-in-node">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/timers-in-node">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/timers-in-node">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/timers-in-node">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/timers-in-node">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/ko/docs">문서</a></li><li class=""><a href="/ko/docs/es6">ES6와 그 이후</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/ko/docs/guides">안내</a></li><li class=""><a href="/ko/docs/meta/topics/dependencies">의존성</a></li></ul></nav><article dir="auto"><h1 id="node.js의-timers">Node.js의 Timers<a id="header-node.js의-timers" class="anchor" href="#node.js의-timers" aria-labelledby="node.js의-timers"></a></h1>
+<p>Node.js의 Timers 모듈에는 일정 시간 후에 코드를 실행하는 함수가 있습니다. Timers의 모든 메서드는
+브라우저 JavaScript API를 에뮬레이트하기 위해 전역으로 사용할 수 있으므로 <code>require()</code>로 임포트할
+필요가 없습니다. 타이머 함수가 언제 실행될지 완전히 이해하려면 Node.js
+<a href="/en/docs/guides/event-loop-timers-and-nexttick/">Event Loop</a>를 읽어보는 게 좋습니다.</p>
+<!-- -->
+<h2 id="nodejs-시간-연속체-제어하기">Node.js 시간 연속체 제어하기<a id="header-nodejs-시간-연속체-제어하기" class="anchor" href="#nodejs-시간-연속체-제어하기" aria-labelledby="nodejs-시간-연속체-제어하기"></a></h2>
+<p>Node.js API는 현시점 이후 어떤 순간에 코드를 실행하도록 스케줄링하는 여러 가지 방법을 제공합니다.
+아래의 함수는 대부분 브라우저에서 사용할 수 있으므로 아마 익숙할 테지만 Node.js는 실제로 이러한
+메서드의 Node.js 구현체를 제공합니다. Timers는 시스템과 매우 밀접하게 통합되어 있고 API가
+브라우저 API를 미러링하고 있음에도 구현에서는 약간의 차이점이 있습니다.</p>
+<!-- -->
+<h3 id="지정한-시기에-실행--settimeout">&quot;지정한 시기에&quot; 실행 ~ <em><code>setTimeout()</code></em><a id="header-지정한-시기에-실행--settimeout" class="anchor" href="#지정한-시기에-실행--settimeout" aria-labelledby="지정한-시기에-실행--settimeout"></a></h3>
+<p><code>setTimeout()</code>은 지정한 밀리 초 이후 코드 실행을 스케줄링하는 데 사용할 수 있습니다. 이 함수는
+브라우저 JavaScript API의
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout"><code>window.setTimeout()</code></a>과
+비슷하지만, 코드의 문자열을 실행하려고 전달할 수 없습니다.</p>
+<p><code>setTimeout()</code>은 첫 인자로 실행할 함수를 받고 두 번째 인자로 지연시킬 밀리 초를 숫자로 받습니다.
+부가적인 인자를 더 전달할 수도 있는데 이는 함수로 전달될 것입니다. 다음은 그 예제입니다.</p>
+<pre><code class="language-js">function myFunc(arg) {
+  console.log(`arg was =&gt; ${arg}`);
+}
+
+setTimeout(myFunc, 1500, &#x27;funky&#x27;);
+</code></pre>
+<!-- -->
+<p>위 함수 <code>myFunc()</code>는 <code>setTimeout()</code> 호출로 인해 약 1500밀리 초(1.5초) 정도에
+실행될 것입니다.</p>
+<p>설정한 타임아웃 간격은 <em>정확한</em> 밀리 초 후 실행되도록 할 수 없습니다. 이벤트 루프를 블로킹하거나
+보유하고 있는 다른 실행 코드가 타임아웃의 실행을 다시 뒤로 밀기 때문입니다. 선언된 타임아웃 간격보다
+<em>더 빨리</em> 실행되지는 않는다는 <em>것만</em> 보장합니다.</p>
+<p><code>setTimeout()</code>은 설정한 타임아웃을 참조하는 <code>Timeout</code> 객체를 반환합니다. 여기서 반환된 객체로
+실행 동작을 변경할 수도 있고(아래 <code>unref()</code>를 보세요.) 타임아웃을
+취소할 수 있습니다.(아래 <code>clearTimeout()</code>을 보세요.)</p>
+<!-- -->
+<h3 id="바로-다음에-실행--setimmediate">&quot;바로 다음에&quot; 실행 ~ <em><code>setImmediate()</code></em><a id="header-바로-다음에-실행--setimmediate" class="anchor" href="#바로-다음에-실행--setimmediate" aria-labelledby="바로-다음에-실행--setimmediate"></a></h3>
+<p><code>setImmediate()</code>는 현재 이벤트 루프 주기 끝에 코드를 실행합니다. 이 코드는 현재 이벤트 루프의
+모든 I/O 작업 후 다음 이벤트 루프에 스케줄링 된 모든 타이머 이전에 실행됩니다. 이 코드 실행은
+<code>setImmediate()</code> 함수 호출 뒤에 오는 모든 코드는 <code>setImmediate()</code> 함수 인자 이전에 실행된다는
+의미로 &quot;바로 다음에&quot; 실행한다고 생각할 수 있습니다.</p>
+<p><code>setImmediate()</code>의 첫 인자는 실행할 함수입니다. 그 뒤의 인자는 실행될 때 함수로 전달됩니다.
+다음은 그 예제입니다.</p>
+<pre><code class="language-js">console.log(&#x27;before immediate&#x27;);
+
+setImmediate((arg) =&gt; {
+  console.log(`executing immediate: ${arg}`);
+}, &#x27;so immediate&#x27;);
+
+console.log(&#x27;after immediate&#x27;);
+</code></pre>
+<!-- -->
+<p><code>setImmediate()</code>에 전달한 위 함수는 실행할 수 있는 코드를 모두 실행한 후에 실행하고 콘솔 출력은 다음과 같을 것입니다.</p>
+<pre><code class="language-text">before immediate
+after immediate
+executing immediate: so immediate
+</code></pre>
+<p><code>setImmediate()</code>는 바로 스케줄링 된 것을 취소할 수 있는 <code>Immediate</code> 객체를
+반환합니다.(아래 <code>clearImmediate()</code>를 보세요)</p>
+<p>Note: <code>setImmediate()</code>를 <code>process.nextTick()</code>와 혼동하지 마세요. 서로 다른 몇 가지 점이
+있습니다. 첫째로 <code>process.nextTick()</code>은 모든 스케줄링된 I/O 이전뿐만 아니라 설정한 모든
+<code>Immediate</code> <em>이전에</em> 실행될 것입니다. 두 번째로 <code>process.nextTick()</code>은 취소할 수 없으므로
+일단 <code>process.nextTick()</code>으로 코드를 실행하도록 스케줄링하면 일반 함수처럼 실행을 멈출 수 없습니다.
+<code>process.nextTick()</code>의 동작을 더 이해하려면
+<a href="/en/docs/guides/event-loop-timers-and-nexttick/#process-nexttick">이 가이드 문서</a>를
+참고하세요.</p>
+<!-- -->
+<h3 id="무한루프-실행--setinterval">&quot;무한루프&quot; 실행 ~ <em><code>setInterval()</code></em><a id="header-무한루프-실행--setinterval" class="anchor" href="#무한루프-실행--setinterval" aria-labelledby="무한루프-실행--setinterval"></a></h3>
+<p>여러 번 실행해야 하는 코드 블록이 있다면 <code>setInterval()</code>을 사용할 수 있습니다.
+<code>setInterval()</code>은 두 번째 인자로 지정한 밀리 초 단위의 지연시간으로 무한대로 실행할 함수를
+인자로 받습니다. <code>setTimeout()</code>처럼 지연시간 다음에 부가적인 인자를 지정할 수 있고 이는 함수 호출에
+전달될 것입니다. 또한 <code>setTimeout()</code>처럼 작업이 이벤트 루프에서 진행 중일 수 있으므로 지연시간이
+보장되지 않습니다. 그러므로 대략적인 지연시간으로 생각해야 합니다. 아래 예시를 보겠습니다.</p>
+<pre><code class="language-js">function intervalFunc() {
+  console.log(&#x27;Cant stop me now!&#x27;);
+}
+
+setInterval(intervalFunc, 1500);
+</code></pre>
+<p>위 예제에서 <code>intervalFunc()</code>는 중단하기 전까지는(아래 참고) 1500밀리 초(1.5초)마다 실행될 것입니다.</p>
+<p><code>setTimeout()</code>처럼 <code>setInterval()</code>도 설정한 인터벌을 참조하고 수정하는 데 사용할 수 있는
+<code>Timeout</code> 객체를 반환합니다.</p>
+<!-- -->
+<h2 id="취소하기">취소하기<a id="header-취소하기" class="anchor" href="#취소하기" aria-labelledby="취소하기"></a></h2>
+<p><code>Timeout</code>이나 <code>Immediate</code> 객체를 취소하고 싶다면 어떻게 해야 할까요? <code>setTimeout()</code>,
+<code>setImmediate()</code>, <code>setInterval()</code>은 설정한 <code>Timeout</code>이나 <code>Immediate</code> 객체를 참조하는
+타이머 객체를 반환합니다. 각각의 <code>clear</code> 함수에 이 객체들을 전달해서 해당 객체의 실행을 완전히
+중단할 수 있습니다. 각각의 함수는 <code>clearTimeout()</code>, <code>clearImmediate()</code>,
+<code>clearInterval()</code>입니다. 각 예제는 아래에 나와 있습니다.</p>
+<pre><code class="language-js">const timeoutObj = setTimeout(() =&gt; {
+  console.log(&#x27;timeout beyond time&#x27;);
+}, 1500);
+
+const immediateObj = setImmediate(() =&gt; {
+  console.log(&#x27;immediately executing immediate&#x27;);
+});
+
+const intervalObj = setInterval(() =&gt; {
+  console.log(&#x27;interviewing the interval&#x27;);
+}, 500);
+
+clearTimeout(timeoutObj);
+clearImmediate(immediateObj);
+clearInterval(intervalObj);
+</code></pre>
+<!-- -->
+<h2 id="타임아웃-감춰두기">타임아웃 감춰두기<a id="header-타임아웃-감춰두기" class="anchor" href="#타임아웃-감춰두기" aria-labelledby="타임아웃-감춰두기"></a></h2>
+<p>여기서 <code>Timeout</code> 객체는 <code>setTimeout</code>과 <code>setInterval</code>이 반환했다는 점을 기억하길 바랍니다.
+<code>Timeout</code> 객체는 <code>Timeout</code>의 동작을 강화하는 두 가지 함수 <code>unref()</code>와 <code>ref()</code>를 제공합니다.
+<code>set</code> 함수로 스케줄링 된 <code>Timeout</code> 객체가 있다면 이 객체에서 <code>unref()</code>를 호출할 수 있습니다.
+이는 동작을 다소 변경하는데 <em>실행할 코드가 이것밖에 남지 않았다면</em> <code>Timeout</code> 객체를 호출하지 않습니다.
+<code>Timeout</code> 객체는 프로세스를 유지하지 않고 실행을 기다립니다.</p>
+<p>비슷하게 <code>unref()</code>가 호출된 <code>Timeout</code> 객체에서 <code>ref()</code>를 호출하면 이 동작을 제거해서
+실행을 보장할 수 있습니다. 하지만 성능 문제로 초기 동작을 <em>완전히 똑같이</em> 복구하는 것은 아닙니다.
+아래의 예제를 보겠습니다.</p>
+<pre><code class="language-js">const timerObj = setTimeout(() =&gt; {
+  console.log(&#x27;will i run?&#x27;);
+});
+
+// 이 부분만 있다면 이 타임아웃이 프로그램을 종료되지 않게 하고 있으므로
+// 위 타임아웃이 실행되지 않도록 합니다.
+timerObj.unref();
+
+// immediate 안에서 ref()를 실행해서 다시 실행상태로 만들 수 있습니다
+setImmediate(() =&gt; {
+  timerObj.ref();
+});
+</code></pre>
+<!-- -->
+<h2 id="이벤트-루프-더-알아보기">이벤트 루프 더 알아보기<a id="header-이벤트-루프-더-알아보기" class="anchor" href="#이벤트-루프-더-알아보기" aria-labelledby="이벤트-루프-더-알아보기"></a></h2>
+<p>이벤트 루프와 타이머에는 이 문서에서 다룬 것 이상의 많은 내용이 있습니다. Node.js 이벤트 루프의
+내부 구조와 실행할 때 타이머가 동작하는 방식을 알고 싶다면
+<a href="/en/docs/guides/event-loop-timers-and-nexttick/">Node.js 이벤트 루프, 타이머, process.nextTick()</a>
+문서를 참고하세요.</p></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->맨 위로</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"ko","localName":"한국어","name":"Korean","langDir":"ltr","dateFormat":"YYYY.MM.DD","hrefLang":"ko","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"맨 위로","components.header.links.home":"홈","components.header.links.about":"About","components.header.links.download":"다운로드","components.header.links.docs":"문서","components.header.links.getInvolved":"참여하기","components.header.links.security":"보안","components.header.links.certification":"Certification","components.header.links.blog":"뉴스","components.navigation.about.links.governance":"거버넌스","components.navigation.docs.links.es6":"ES6와 그 이후","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"안내","components.navigation.docs.links.dependencies":"의존성","components.navigation.getInvolved.links.collabSummit":"협업자 서밋","components.navigation.getInvolved.links.contribute":"기여하기","components.navigation.getInvolved.links.codeOfConduct":"행동강령","components.downloadList.links.previousReleases":"이전 릴리스","components.downloadList.links.packageManager":"패키지 관리자를 통한 Node.js 설치","components.downloadList.links.shaSums":"릴리스 파일에 서명된 SHASUMS","components.downloadList.links.shaSums.howToVerify":" (검증 방법)","components.downloadList.links.allDownloads":"모든 다운로드 보기","components.downloadList.links.nightlyReleases":"나이틀리 빌드","components.downloadList.links.unofficialBuilds":"비공식 빌드","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Linux에서 바이너리 아카이브를 통해 Node.js 설치하기","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"변경사항","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"문서","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"다음 | ","components.pagination.previous":"이전","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/ko/docs/guides/timers-in-node","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

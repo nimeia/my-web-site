@@ -1,0 +1,209 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Dockerizing a Node.js web app | Node.js node js 学习 中文网</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Dockerizing a Node.js web app | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Dockerizing a Node.js web app | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/en/docs/guides/nodejs-docker-webapp"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/en/docs/guides/nodejs-docker-webapp-17d9d26d4f2011d2.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-2WRNZHGVQT"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-2WRNZHGVQT");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8264273508355034" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/en"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/en">Home</a></li><li class=""><a href="/en/about">About</a></li><li class=""><a href="/en/download">Downloads</a></li><li class="active"><a href="/en/docs">Docs</a></li><li class=""><a href="/en/get-involved">Get Involved</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">Security</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class=""><a href="/en/blog">News</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/nodejs-docker-webapp">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/nodejs-docker-webapp">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/nodejs-docker-webapp">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/nodejs-docker-webapp">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/nodejs-docker-webapp">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/nodejs-docker-webapp">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/nodejs-docker-webapp">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/nodejs-docker-webapp">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/nodejs-docker-webapp">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/nodejs-docker-webapp">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/nodejs-docker-webapp">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/nodejs-docker-webapp">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/nodejs-docker-webapp">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/nodejs-docker-webapp">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/nodejs-docker-webapp">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/nodejs-docker-webapp">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/nodejs-docker-webapp">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/nodejs-docker-webapp">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/en/docs">Docs</a></li><li class=""><a href="/en/docs/es6">ES6 and beyond</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/en/docs/guides">Guides</a></li><li class=""><a href="/en/docs/meta/topics/dependencies">Dependencies</a></li></ul></nav><article dir="auto"><h1 id="dockerizing-a-node.js-web-app">Dockerizing a Node.js web app<a id="header-dockerizing-a-node.js-web-app" class="anchor" href="#dockerizing-a-node.js-web-app" aria-labelledby="dockerizing-a-node.js-web-app"></a></h1>
+<p>The goal of this example is to show you how to get a Node.js application into a
+Docker container. The guide is intended for development, and <em>not</em> for a
+production deployment. The guide also assumes you have a working <a href="https://docs.docker.com/engine/installation/">Docker
+installation</a> and a basic
+understanding of how a Node.js application is structured.</p>
+<p>In the first part of this guide we will create a simple web application in
+Node.js, then we will build a Docker image for that application, and lastly we
+will instantiate a container from that image.</p>
+<p>Docker allows you to package an application with its environment and all of its dependencies into a
+&quot;box&quot;, called a container. Usually, a container consists of an application running in a stripped-to-basics version of a Linux operating system. An image is the blueprint for a container, a container is a running instance of an image.</p>
+<h2 id="create-the-nodejs-app">Create the Node.js app<a id="header-create-the-nodejs-app" class="anchor" href="#create-the-nodejs-app" aria-labelledby="create-the-nodejs-app"></a></h2>
+<p>First, create a new directory where all the files would live. In this directory
+create a <code>package.json</code> file that describes your app and its dependencies:</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;docker_web_app&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;Node.js on Docker&quot;,
+  &quot;author&quot;: &quot;First Last &lt;first.last@example.com&gt;&quot;,
+  &quot;main&quot;: &quot;server.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;start&quot;: &quot;node server.js&quot;
+  },
+  &quot;dependencies&quot;: {
+    &quot;express&quot;: &quot;^4.16.1&quot;
+  }
+}
+</code></pre>
+<p>With your new <code>package.json</code> file, run <code>npm install</code>. If you are using <code>npm</code>
+version 5 or later, this will generate a <code>package-lock.json</code> file which will be copied
+to your Docker image.</p>
+<p>Then, create a <code>server.js</code> file that defines a web app using the
+<a href="https://expressjs.com/">Express.js</a> framework:</p>
+<pre><code class="language-javascript">&#x27;use strict&#x27;;
+
+const express = require(&#x27;express&#x27;);
+
+// Constants
+const PORT = 8080;
+const HOST = &#x27;0.0.0.0&#x27;;
+
+// App
+const app = express();
+app.get(&#x27;/&#x27;, (req, res) =&gt; {
+  res.send(&#x27;Hello World&#x27;);
+});
+
+app.listen(PORT, HOST, () =&gt; {
+  console.log(`Running on http://${HOST}:${PORT}`);
+});
+</code></pre>
+<p>In the next steps, we&#x27;ll look at how you can run this app inside a Docker
+container using the official Docker image. First, you&#x27;ll need to build a Docker
+image of your app.</p>
+<h2 id="creating-a-dockerfile">Creating a Dockerfile<a id="header-creating-a-dockerfile" class="anchor" href="#creating-a-dockerfile" aria-labelledby="creating-a-dockerfile"></a></h2>
+<p>Create an empty file called <code>Dockerfile</code>:</p>
+<pre><code class="language-markup">touch Dockerfile
+</code></pre>
+<p>Open the <code>Dockerfile</code> in your favorite text editor</p>
+<p>The first thing we need to do is define from what image we want to build from.
+Here we will use the latest LTS (long term support) version <code>16</code> of <code>node</code>
+available from the <a href="https://hub.docker.com/_/node">Docker Hub</a>:</p>
+<pre><code class="language-docker">FROM node:16
+</code></pre>
+<p>Next we create a directory to hold the application code inside the image, this
+will be the working directory for your application:</p>
+<pre><code class="language-docker"># Create app directory
+WORKDIR /usr/src/app
+</code></pre>
+<p>This image comes with Node.js and NPM already installed so the next thing we
+need to do is to install your app dependencies using the <code>npm</code> binary. Please
+note that if you are using <code>npm</code> version 4 or earlier a <code>package-lock.json</code>
+file will <em>not</em> be generated.</p>
+<pre><code class="language-docker"># Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
+
+RUN npm install
+# If you are building your code for production
+# RUN npm ci --only=production
+</code></pre>
+<p>Note that, rather than copying the entire working directory, we are only copying
+the <code>package.json</code> file. This allows us to take advantage of cached Docker
+layers. bitJudo has a good explanation of this
+<a href="http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/">here</a>.
+Furthermore, the <code>npm ci</code> command, specified in the comments, helps provide faster, reliable, reproducible builds for production environments.
+You can read more about this <a href="https://blog.npmjs.org/post/171556855892/introducing-npm-ci-for-faster-more-reliable">here</a>.</p>
+<p>To bundle your app&#x27;s source code inside the Docker image, use the <code>COPY</code>
+instruction:</p>
+<pre><code class="language-docker"># Bundle app source
+COPY . .
+</code></pre>
+<p>Your app binds to port <code>8080</code> so you&#x27;ll use the <code>EXPOSE</code> instruction to have it
+mapped by the <code>docker</code> daemon:</p>
+<pre><code class="language-docker">EXPOSE 8080
+</code></pre>
+<p>Last but not least, define the command to run your app using <code>CMD</code> which defines
+your runtime. Here we will use <code>node server.js</code> to start your server:</p>
+<pre><code class="language-docker">CMD [ &quot;node&quot;, &quot;server.js&quot; ]
+</code></pre>
+<p>Your <code>Dockerfile</code> should now look like this:</p>
+<pre><code class="language-docker">FROM node:16
+
+# Create app directory
+WORKDIR /usr/src/app
+
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
+
+RUN npm install
+# If you are building your code for production
+# RUN npm ci --only=production
+
+# Bundle app source
+COPY . .
+
+EXPOSE 8080
+CMD [ &quot;node&quot;, &quot;server.js&quot; ]
+</code></pre>
+<h2 id="dockerignore-file">.dockerignore file<a id="header-dockerignore-file" class="anchor" href="#dockerignore-file" aria-labelledby="dockerignore-file"></a></h2>
+<p>Create a <code>.dockerignore</code> file in the same directory as your <code>Dockerfile</code>
+with following content:</p>
+<pre><code class="language-text">node_modules
+npm-debug.log
+</code></pre>
+<p>This will prevent your local modules and debug logs from being copied onto your
+Docker image and possibly overwriting modules installed within your image.</p>
+<h2 id="building-your-image">Building your image<a id="header-building-your-image" class="anchor" href="#building-your-image" aria-labelledby="building-your-image"></a></h2>
+<p>Go to the directory that has your <code>Dockerfile</code> and run the following command to
+build the Docker image. The <code>-t</code> flag lets you tag your image so it&#x27;s easier to
+find later using the <code>docker images</code> command:</p>
+<pre><code class="language-bash">docker build . -t &lt;your username&gt;/node-web-app
+</code></pre>
+<p>Your image will now be listed by Docker:</p>
+<pre><code class="language-bash">$ docker images
+
+# Example
+REPOSITORY                      TAG        ID              CREATED
+node                            16         3b66eb585643    5 days ago
+&lt;your username&gt;/node-web-app    latest     d64d3505b0d2    1 minute ago
+</code></pre>
+<h2 id="run-the-image">Run the image<a id="header-run-the-image" class="anchor" href="#run-the-image" aria-labelledby="run-the-image"></a></h2>
+<p>Running your image with <code>-d</code> runs the container in detached mode, leaving the
+container running in the background. The <code>-p</code> flag redirects a public port to a
+private port inside the container. Run the image you previously built:</p>
+<pre><code class="language-bash">docker run -p 49160:8080 -d &lt;your username&gt;/node-web-app
+</code></pre>
+<p>Print the output of your app:</p>
+<pre><code class="language-bash"># Get container ID
+$ docker ps
+
+# Print app output
+$ docker logs &lt;container id&gt;
+
+# Example
+Running on http://localhost:8080
+</code></pre>
+<p>If you need to go inside the container you can use the <code>exec</code> command:</p>
+<pre><code class="language-bash"># Enter the container
+$ docker exec -it &lt;container id&gt; /bin/bash
+</code></pre>
+<h2 id="test">Test<a id="header-test" class="anchor" href="#test" aria-labelledby="test"></a></h2>
+<p>To test your app, get the port of your app that Docker mapped:</p>
+<pre><code class="language-bash">$ docker ps
+
+# Example
+ID            IMAGE                                COMMAND    ...   PORTS
+ecce33b30ebf  &lt;your username&gt;/node-web-app:latest  npm start  ...   49160-&gt;8080
+</code></pre>
+<p>In the example above, Docker mapped the <code>8080</code> port inside of the container to
+the port <code>49160</code> on your machine.</p>
+<p>Now you can call your app using <code>curl</code> (install if needed via: <code>sudo apt-get install curl</code>):</p>
+<pre><code class="language-bash">$ curl -i localhost:49160
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: text/html; charset=utf-8
+Content-Length: 12
+ETag: W/&quot;c-M6tWOb/Y57lesdjQuHeB1P/qTV0&quot;
+Date: Mon, 13 Nov 2017 20:53:59 GMT
+Connection: keep-alive
+
+Hello world
+</code></pre>
+<h2 id="shut-down-the-image">Shut down the image<a id="header-shut-down-the-image" class="anchor" href="#shut-down-the-image" aria-labelledby="shut-down-the-image"></a></h2>
+<p>In order to shut down the app we started, we run the <code>kill</code> command. This uses
+the container&#x27;s ID, which in this example was <code>ecce33b30ebf</code>.</p>
+<pre><code class="language-bash"># Kill our running container
+$ docker kill &lt;container id&gt;
+&lt;container id&gt;
+
+# Confirm that the app has stopped
+$ curl -i localhost:49160
+curl: (7) Failed to connect to localhost port 49160: Connection refused
+</code></pre>
+<p>We hope this tutorial helped you get up and running a simple Node.js application
+on Docker.</p>
+<p>You can find more information about Docker and Node.js on Docker in the
+following places:</p>
+<ul>
+<li><a href="https://hub.docker.com/_/node/">Official Node.js Docker Image</a></li>
+<li><a href="https://github.com/nodejs/docker-node/blob/master/docs/BestPractices">Node.js Docker Best Practices Guide</a></li>
+<li><a href="https://docs.docker.com/get-started/nodejs/build-images/">Official Docker documentation</a></li>
+<li><a href="https://stackoverflow.com/questions/tagged/docker">Docker Tag on Stack Overflow</a></li>
+<li><a href="https://reddit.com/r/docker">Docker Subreddit</a></li>
+</ul></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->Scroll to top</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"en","localName":"English","name":"English","langDir":"ltr","dateFormat":"MM.DD.YYYY","hrefLang":"en-US","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"Scroll to top","components.header.links.home":"Home","components.header.links.about":"About","components.header.links.download":"Downloads","components.header.links.docs":"Docs","components.header.links.getInvolved":"Get Involved","components.header.links.security":"Security","components.header.links.certification":"Certification","components.header.links.blog":"News","components.navigation.about.links.governance":"Governance","components.navigation.docs.links.es6":"ES6 and beyond","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"Guides","components.navigation.docs.links.dependencies":"Dependencies","components.navigation.getInvolved.links.collabSummit":"Collab Summit","components.navigation.getInvolved.links.contribute":"Contribute","components.navigation.getInvolved.links.codeOfConduct":"Code of Conduct","components.downloadList.links.previousReleases":"Previous Releases","components.downloadList.links.packageManager":"Installing Node.js via package manager","components.downloadList.links.shaSums":"Signed SHASUMS for release files","components.downloadList.links.shaSums.howToVerify":" (How to verify)","components.downloadList.links.allDownloads":"All download options","components.downloadList.links.nightlyReleases":"Nightly builds","components.downloadList.links.unofficialBuilds":"Unofficial builds","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Installing Node.js via binary archive","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"Changelog","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"Docs","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"Newer | ","components.pagination.previous":"Older","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/en/docs/guides/nodejs-docker-webapp","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Timers in Node.js | Node.js node js 学习 中文网</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Timers in Node.js | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Timers in Node.js | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/en/docs/guides/timers-in-node"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/en/docs/guides/timers-in-node-d3ad23d926948ea0.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-2WRNZHGVQT"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-2WRNZHGVQT");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8264273508355034" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/en"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/en">Home</a></li><li class=""><a href="/en/about">About</a></li><li class=""><a href="/en/download">Downloads</a></li><li class="active"><a href="/en/docs">Docs</a></li><li class=""><a href="/en/get-involved">Get Involved</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">Security</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class=""><a href="/en/blog">News</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/timers-in-node">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/timers-in-node">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/timers-in-node">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/timers-in-node">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/timers-in-node">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/timers-in-node">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/timers-in-node">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/timers-in-node">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/timers-in-node">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/timers-in-node">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/timers-in-node">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/timers-in-node">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/timers-in-node">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/timers-in-node">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/timers-in-node">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/timers-in-node">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/timers-in-node">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/timers-in-node">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/en/docs">Docs</a></li><li class=""><a href="/en/docs/es6">ES6 and beyond</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/en/docs/guides">Guides</a></li><li class=""><a href="/en/docs/meta/topics/dependencies">Dependencies</a></li></ul></nav><article dir="auto"><h1 id="timers-in-node.js-and-beyond">Timers in Node.js and beyond<a id="header-timers-in-node.js-and-beyond" class="anchor" href="#timers-in-node.js-and-beyond" aria-labelledby="timers-in-node.js-and-beyond"></a></h1>
+<p>The Timers module in Node.js contains functions that execute code after a set
+period of time. Timers do not need to be imported via <code>require()</code>, since
+all the methods are available globally to emulate the browser JavaScript API.
+To fully understand when timer functions will be executed, it&#x27;s a good idea to
+read up on the Node.js
+<a href="/en/docs/guides/event-loop-timers-and-nexttick/">Event Loop</a>.</p>
+<h2 id="controlling-the-time-continuum-with-nodejs">Controlling the Time Continuum with Node.js<a id="header-controlling-the-time-continuum-with-nodejs" class="anchor" href="#controlling-the-time-continuum-with-nodejs" aria-labelledby="controlling-the-time-continuum-with-nodejs"></a></h2>
+<p>The Node.js API provides several ways of scheduling code to execute at
+some point after the present moment. The functions below may seem familiar,
+since they are available in most browsers, but Node.js actually provides
+its own implementation of these methods. Timers integrate very closely
+with the system, and despite the fact that the API mirrors the browser
+API, there are some differences in implementation.</p>
+<h3 id="when-i-say-so-execution--settimeout">&quot;When I say so&quot; Execution ~ <em><code>setTimeout()</code></em><a id="header-when-i-say-so-execution--settimeout" class="anchor" href="#when-i-say-so-execution--settimeout" aria-labelledby="when-i-say-so-execution--settimeout"></a></h3>
+<p><code>setTimeout()</code> can be used to schedule code execution after a designated
+amount of milliseconds. This function is similar to
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout"><code>window.setTimeout()</code></a>
+from the browser JavaScript API, however a string of code cannot be passed
+to be executed.</p>
+<p><code>setTimeout()</code> accepts a function to execute as its first argument and the
+millisecond delay defined as a number as the second argument. Additional
+arguments may also be included and these will be passed on to the function. Here
+is an example of that:</p>
+<pre><code class="language-js">function myFunc(arg) {
+  console.log(`arg was =&gt; ${arg}`);
+}
+
+setTimeout(myFunc, 1500, &#x27;funky&#x27;);
+</code></pre>
+<p>The above function <code>myFunc()</code> will execute as close to 1500
+milliseconds (or 1.5 seconds) as possible due to the call of <code>setTimeout()</code>.</p>
+<p>The timeout interval that is set cannot be relied upon to execute after
+that <em>exact</em> number of milliseconds. This is because other executing code that
+blocks or holds onto the event loop will push the execution of the timeout
+back. The <em>only</em> guarantee is that the timeout will not execute <em>sooner</em> than
+the declared timeout interval.</p>
+<p><code>setTimeout()</code> returns a <code>Timeout</code> object that can be used to reference the
+timeout that was set. This returned object can be used to cancel the timeout (
+see <code>clearTimeout()</code> below) as well as change the execution behavior (see
+<code>unref()</code> below).</p>
+<h3 id="right-after-this-execution--setimmediate">&quot;Right after this&quot; Execution ~ <em><code>setImmediate()</code></em><a id="header-right-after-this-execution--setimmediate" class="anchor" href="#right-after-this-execution--setimmediate" aria-labelledby="right-after-this-execution--setimmediate"></a></h3>
+<p><code>setImmediate()</code> will execute code at the end of the current event loop cycle.
+This code will execute <em>after</em> any I/O operations in the current event loop and
+<em>before</em> any timers scheduled for the next event loop. This code execution
+could be thought of as happening &quot;right after this&quot;, meaning any code following
+the <code>setImmediate()</code> function call will execute before the <code>setImmediate()</code>
+function argument.</p>
+<p>The first argument to <code>setImmediate()</code> will be the function to execute. Any
+subsequent arguments will be passed to the function when it is executed.
+Here&#x27;s an example:</p>
+<pre><code class="language-js">console.log(&#x27;before immediate&#x27;);
+
+setImmediate((arg) =&gt; {
+  console.log(`executing immediate: ${arg}`);
+}, &#x27;so immediate&#x27;);
+
+console.log(&#x27;after immediate&#x27;);
+</code></pre>
+<p>The above function passed to <code>setImmediate()</code> will execute after all runnable
+code has executed, and the console output will be:</p>
+<pre><code class="language-text">before immediate
+after immediate
+executing immediate: so immediate
+</code></pre>
+<p><code>setImmediate()</code> returns an <code>Immediate</code> object, which can be used to cancel
+the scheduled immediate (see <code>clearImmediate()</code> below).</p>
+<div class="highlight-box">
+<p>Don&#x27;t get <code>setImmediate()</code> confused with <code>process.nextTick()</code>. There are
+some major ways they differ. The first is that <code>process.nextTick()</code> will run
+<em>before</em> any <code>Immediate</code>s that are set as well as before any scheduled I/O.
+The second is that <code>process.nextTick()</code> is non-clearable, meaning once
+code has been scheduled to execute with <code>process.nextTick()</code>, the execution
+cannot be stopped, just like with a normal function. Refer to <a href="/en/docs/guides/event-loop-timers-and-nexttick/#process-nexttick">this guide</a>
+to better understand the operation of <code>process.nextTick()</code>.</p>
+</div>
+<h3 id="infinite-loop-execution--setinterval">&quot;Infinite Loop&quot; Execution ~ <em><code>setInterval()</code></em><a id="header-infinite-loop-execution--setinterval" class="anchor" href="#infinite-loop-execution--setinterval" aria-labelledby="infinite-loop-execution--setinterval"></a></h3>
+<p>If there is a block of code that should execute multiple times, <code>setInterval()</code>
+can be used to execute that code. <code>setInterval()</code> takes a function
+argument that will run an infinite number of times with a given millisecond
+delay as the second argument. Just like <code>setTimeout()</code>, additional arguments
+can be added beyond the delay, and these will be passed on to the function call.
+Also like <code>setTimeout()</code>, the delay cannot be guaranteed because of operations
+that may hold on to the event loop, and therefore should be treated as an
+approximate delay. See the below example:</p>
+<pre><code class="language-js">function intervalFunc() {
+  console.log(&#x27;Cant stop me now!&#x27;);
+}
+
+setInterval(intervalFunc, 1500);
+</code></pre>
+<p>In the above example, <code>intervalFunc()</code> will execute about every 1500
+milliseconds, or 1.5 seconds, until it is stopped (see below).</p>
+<p>Just like <code>setTimeout()</code>, <code>setInterval()</code> also returns a <code>Timeout</code> object which
+can be used to reference and modify the interval that was set.</p>
+<h2 id="clearing-the-future">Clearing the Future<a id="header-clearing-the-future" class="anchor" href="#clearing-the-future" aria-labelledby="clearing-the-future"></a></h2>
+<p>What can be done if a <code>Timeout</code> or <code>Immediate</code> object needs to be cancelled?
+<code>setTimeout()</code>, <code>setImmediate()</code>, and <code>setInterval()</code> return a timer object
+that can be used to reference the set <code>Timeout</code> or <code>Immediate</code> object.
+By passing said object into the respective <code>clear</code> function, execution of
+that object will be halted completely. The respective functions are
+<code>clearTimeout()</code>, <code>clearImmediate()</code>, and <code>clearInterval()</code>. See the example
+below for an example of each:</p>
+<pre><code class="language-js">const timeoutObj = setTimeout(() =&gt; {
+  console.log(&#x27;timeout beyond time&#x27;);
+}, 1500);
+
+const immediateObj = setImmediate(() =&gt; {
+  console.log(&#x27;immediately executing immediate&#x27;);
+});
+
+const intervalObj = setInterval(() =&gt; {
+  console.log(&#x27;interviewing the interval&#x27;);
+}, 500);
+
+clearTimeout(timeoutObj);
+clearImmediate(immediateObj);
+clearInterval(intervalObj);
+</code></pre>
+<h2 id="leaving-timeouts-behind">Leaving Timeouts Behind<a id="header-leaving-timeouts-behind" class="anchor" href="#leaving-timeouts-behind" aria-labelledby="leaving-timeouts-behind"></a></h2>
+<p>Remember that <code>Timeout</code> objects are returned by <code>setTimeout</code> and <code>setInterval</code>.
+The <code>Timeout</code> object provides two functions intended to augment <code>Timeout</code>
+behavior with <code>unref()</code> and <code>ref()</code>. If there is a <code>Timeout</code> object scheduled
+using a <code>set</code> function, <code>unref()</code> can be called on that object. This will change
+the behavior slightly, and not call the <code>Timeout</code> object <em>if it is the last
+code to execute</em>. The <code>Timeout</code> object will not keep the process alive, waiting
+to execute.</p>
+<p>In similar fashion, a <code>Timeout</code> object that has had <code>unref()</code> called on it
+can remove that behavior by calling <code>ref()</code> on that same <code>Timeout</code> object,
+which will then ensure its execution. Be aware, however, that this does
+not <em>exactly</em> restore the initial behavior for performance reasons. See
+below for examples of both:</p>
+<pre><code class="language-js">const timerObj = setTimeout(() =&gt; {
+  console.log(&#x27;will i run?&#x27;);
+});
+
+// if left alone, this statement will keep the above
+// timeout from running, since the timeout will be the only
+// thing keeping the program from exiting
+timerObj.unref();
+
+// we can bring it back to life by calling ref() inside
+// an immediate
+setImmediate(() =&gt; {
+  timerObj.ref();
+});
+</code></pre>
+<h2 id="further-down-the-event-loop">Further Down the Event Loop<a id="header-further-down-the-event-loop" class="anchor" href="#further-down-the-event-loop" aria-labelledby="further-down-the-event-loop"></a></h2>
+<p>There&#x27;s much more to the Event Loop and Timers than this guide
+has covered. To learn more about the internals of the Node.js
+Event Loop and how Timers operate during execution, check out
+this Node.js guide: <a href="/en/docs/guides/event-loop-timers-and-nexttick/">The Node.js Event Loop, Timers, and
+process.nextTick()</a>.</p></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->Scroll to top</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"en","localName":"English","name":"English","langDir":"ltr","dateFormat":"MM.DD.YYYY","hrefLang":"en-US","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"Scroll to top","components.header.links.home":"Home","components.header.links.about":"About","components.header.links.download":"Downloads","components.header.links.docs":"Docs","components.header.links.getInvolved":"Get Involved","components.header.links.security":"Security","components.header.links.certification":"Certification","components.header.links.blog":"News","components.navigation.about.links.governance":"Governance","components.navigation.docs.links.es6":"ES6 and beyond","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"Guides","components.navigation.docs.links.dependencies":"Dependencies","components.navigation.getInvolved.links.collabSummit":"Collab Summit","components.navigation.getInvolved.links.contribute":"Contribute","components.navigation.getInvolved.links.codeOfConduct":"Code of Conduct","components.downloadList.links.previousReleases":"Previous Releases","components.downloadList.links.packageManager":"Installing Node.js via package manager","components.downloadList.links.shaSums":"Signed SHASUMS for release files","components.downloadList.links.shaSums.howToVerify":" (How to verify)","components.downloadList.links.allDownloads":"All download options","components.downloadList.links.nightlyReleases":"Nightly builds","components.downloadList.links.unofficialBuilds":"Unofficial builds","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Installing Node.js via binary archive","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"Changelog","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"Docs","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"Newer | ","components.pagination.previous":"Older","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/en/docs/guides/timers-in-node","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

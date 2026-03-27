@@ -1,0 +1,218 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Node v9.10.0 (Current) | Node.js</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Node v9.10.0 (Current) | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Node v9.10.0 (Current) | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/en/blog/release/v9.10.0"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/en/blog/release/v9.10.0-64c6a7b414d4e5ab.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NDMJQNDPS"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-6NDMJQNDPS");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7950559866369342" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/en"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/en">Home</a></li><li class=""><a href="/en/about">About</a></li><li class=""><a href="/en/download">Downloads</a></li><li class=""><a href="/en/docs">Docs</a></li><li class=""><a href="/en/get-involved">Get Involved</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">Security</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class="active"><a href="/en/blog">News</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/blog/release/v9.10.0">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/blog/release/v9.10.0">Catalan</a></li><li><a data-lang="de" title="German" href="/de/blog/release/v9.10.0">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/blog/release/v9.10.0">English</a></li><li><a data-lang="es" title="Spanish" href="/es/blog/release/v9.10.0">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/blog/release/v9.10.0">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/blog/release/v9.10.0">Français</a></li><li><a data-lang="it" title="Italian" href="/it/blog/release/v9.10.0">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/blog/release/v9.10.0">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/blog/release/v9.10.0">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/blog/release/v9.10.0">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/blog/release/v9.10.0">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/blog/release/v9.10.0">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/blog/release/v9.10.0">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/blog/release/v9.10.0">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/blog/release/v9.10.0">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/blog/release/v9.10.0">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/blog/release/v9.10.0">繁體中文</a></li></ul></div></header><main id="main"><div class="container"><article dir="auto"><div class="blogpost-header"><h1>Node v9.10.0 (Current)</h1><span class="blogpost-meta">By Myles Borins, <time dateTime="2018-03-29T00:31:48+0800">2018-03-29</time></span></div><h3 id="notable-changes">Notable Changes<a id="header-notable-changes" class="anchor" href="#notable-changes" aria-labelledby="notable-changes"></a></h3>
+<ul>
+<li>
+<p><strong>Upgrade to OpenSSL 1.0.2o</strong>: Does not contain any security fixes that are known to impact Node.js.</p>
+</li>
+<li>
+<p><strong>Fix for inspector DNS rebinding vulnerability (CVE-2018-7160)</strong>: A malicious website could use a DNS rebinding attack to trick a web browser to bypass same-origin-policy checks and allow HTTP connections to localhost or to hosts on the local network, potentially to an open inspector port as a debugger, therefore gaining full code execution access. The inspector now only allows connections that have a browser <code>Host</code> value that is either not subject to DNS resolution or matches <code>localhost</code> or <code>localhost6</code>.</p>
+</li>
+<li>
+<p><strong>Fix for <code>&#x27;path&#x27;</code> module regular expression denial of service (CVE-2018-7158)</strong>: A regular expression used for parsing POSIX paths could be used to cause a denial of service if an attacker were able to have a specially crafted path string passed through one of the impacted <code>&#x27;path&#x27;</code> module functions.</p>
+</li>
+<li>
+<p><strong>Reject spaces in HTTP <code>Content-Length</code> header values (CVE-2018-7159)</strong>: The Node.js HTTP parser allowed for spaces inside <code>Content-Length</code> header values. Such values now lead to rejected connections in the same way as non-numeric values.</p>
+</li>
+<li>
+<p><strong>Update root certificates</strong>: 5 additional root certificates have been added to the Node.js binary and 30 have been removed.</p>
+</li>
+<li>
+<p><strong>cluster</strong>:</p>
+<ul>
+<li>Add support for <code>NODE_OPTIONS=&quot;--inspect&quot;</code> (Sameer Srivastava) <a href="https://github.com/nodejs/node/pull/19165">#19165</a></li>
+</ul>
+</li>
+<li>
+<p><strong>crypto</strong>:</p>
+<ul>
+<li>Expose the public key of a certificate (Hannes Magnusson) <a href="https://github.com/nodejs/node/pull/17690">#17690</a></li>
+</ul>
+</li>
+<li>
+<p><strong>n-api</strong>:</p>
+<ul>
+<li>Add <code>napi_fatal_exception</code> to trigger an <code>uncaughtException</code> in JavaScript (Mathias Buus) <a href="https://github.com/nodejs/node/pull/19337">#19337</a></li>
+</ul>
+</li>
+<li>
+<p><strong>path</strong>:</p>
+<ul>
+<li>Fix regression in <code>posix.normalize</code> (Michaël Zasso) <a href="https://github.com/nodejs/node/pull/19520">#19520</a></li>
+</ul>
+</li>
+<li>
+<p><strong>stream</strong>:</p>
+<ul>
+<li>Improve stream creation performance (Brian White) <a href="https://github.com/nodejs/node/pull/19401">#19401</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Added new collaborators</strong></p>
+<ul>
+<li><a href="https://github.com/BethGriggs">BethGriggs</a> Beth Griggs</li>
+</ul>
+</li>
+</ul>
+<h3 id="commits">Commits<a id="header-commits" class="anchor" href="#commits" aria-labelledby="commits"></a></h3>
+<ul>
+<li>[<a href="https://github.com/nodejs/node/commit/926214aefe"><code>926214aefe</code></a>] - <strong>cluster</strong>: add support for NODE_OPTIONS=&quot;--inspect&quot; (Sameer Srivastava) <a href="https://github.com/nodejs/node/pull/19165">#19165</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/6ead99aa73"><code>6ead99aa73</code></a>] - <strong>console</strong>: don&#x27;t swallow call stack exceeded errors (Dan Kaplun) <a href="https://github.com/nodejs/node/pull/19423">#19423</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/02671dc12b"><code>02671dc12b</code></a>] - <strong>crypto</strong>: update root certificates (Ben Noordhuis) <a href="https://github.com/nodejs/node/pull/19322">#19322</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/fd8c79ddfc"><code>fd8c79ddfc</code></a>] - <strong>(SEMVER-MINOR)</strong> <strong>crypto</strong>: add docs &amp; tests for cert.pubkey &amp; cert.fingerprint256 (Hannes Magnusson) <a href="https://github.com/nodejs/node/pull/17690">#17690</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/23312675cb"><code>23312675cb</code></a>] - <strong>(SEMVER-MINOR)</strong> <strong>crypto</strong>: provide full cert details to checkServerIdentity (Hannes Magnusson) <a href="https://github.com/nodejs/node/pull/17690">#17690</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/26e2938a50"><code>26e2938a50</code></a>] - <strong>(SEMVER-MINOR)</strong> <strong>crypto</strong>: add cert.pubkey containing the raw pubkey of certificate (Hannes Magnusson) <a href="https://github.com/nodejs/node/pull/17690">#17690</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/f5d9324315"><code>f5d9324315</code></a>] - <strong>deps</strong>: add -no_rand_screen to openssl s_client (Shigeki Ohtsu) <a href="https://github.com/nodejs/io.js/pull/1836">nodejs/io.js#1836</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/f5eb182b50"><code>f5eb182b50</code></a>] - <strong>deps</strong>: fix asm build error of openssl in x86_win32 (Shigeki Ohtsu) <a href="https://github.com/iojs/io.js/pull/1389">iojs/io.js#1389</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/ddcb3fc886"><code>ddcb3fc886</code></a>] - <strong>deps</strong>: fix openssl assembly error on ia32 win32 (Fedor Indutny) <a href="https://github.com/iojs/io.js/pull/1389">iojs/io.js#1389</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/d908169bad"><code>d908169bad</code></a>] - <strong>deps</strong>: copy all openssl header files to include dir (Shigeki Ohtsu) <a href="https://github.com/nodejs/node/pull/19638">#19638</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/0cd883fe09"><code>0cd883fe09</code></a>] - <strong>deps</strong>: upgrade openssl sources to 1.0.2o (Shigeki Ohtsu) <a href="https://github.com/nodejs/node/pull/19638">#19638</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/c39167dc26"><code>c39167dc26</code></a>] - <strong>deps</strong>: reject interior blanks in Content-Length (Ben Noordhuis) <a href="https://github.com/nodejs-private/http-parser-private/pull/1">nodejs-private/http-parser-private#1</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/3bc15a69ae"><code>3bc15a69ae</code></a>] - <strong>deps</strong>: upgrade http-parser to v2.8.0 (Ben Noordhuis) <a href="https://github.com/nodejs-private/http-parser-private/pull/1">nodejs-private/http-parser-private#1</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/6591d9f761"><code>6591d9f761</code></a>] - <strong>deps</strong>: cherry-pick 0c35b72 from upstream V8 (Gus Caplan) <a href="https://github.com/nodejs/node/pull/18038">#18038</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/e533911696"><code>e533911696</code></a>] - <strong>doc</strong>: remove use of &quot;random port&quot; re dgram send (Thomas Hunter II) <a href="https://github.com/nodejs/node/pull/19620">#19620</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/3894981af2"><code>3894981af2</code></a>] - <strong>doc</strong>: improve assert legacy text (Rich Trott) <a href="https://github.com/nodejs/node/pull/19622">#19622</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/8191ada9ae"><code>8191ada9ae</code></a>] - <strong>doc</strong>: improve Buffer() text (Rich Trott) <a href="https://github.com/nodejs/node/pull/19567">#19567</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/2fadc9ef68"><code>2fadc9ef68</code></a>] - <strong>doc</strong>: fix run-on sentence in buffer.md (Rich Trott) <a href="https://github.com/nodejs/node/pull/19567">#19567</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/962c5816a2"><code>962c5816a2</code></a>] - <strong>doc</strong>: change v-notation for version in buffer.md (Rich Trott) <a href="https://github.com/nodejs/node/pull/19567">#19567</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/5a2f336994"><code>5a2f336994</code></a>] - <strong>doc</strong>: add missing fs.Stats.size section (Vse Mozhet Byt) <a href="https://github.com/nodejs/node/pull/19583">#19583</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/8653c42a41"><code>8653c42a41</code></a>] - <strong>doc</strong>: rename HTTP2 to HTTP/2 (Timothy Gu) <a href="https://github.com/nodejs/node/pull/19603">#19603</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/b70ac0ab2e"><code>b70ac0ab2e</code></a>] - <strong>doc</strong>: remove confusing note about child process stdio (Anna Henningsen) <a href="https://github.com/nodejs/node/pull/19552">#19552</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/5e3d971f79"><code>5e3d971f79</code></a>] - <strong>doc</strong>: add BethGriggs to collaborators (Beth Griggs) <a href="https://github.com/nodejs/node/pull/19610">#19610</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/5e9f9297b3"><code>5e9f9297b3</code></a>] - <strong>doc</strong>: document <code>make docopen</code> (Ayush Gupta) <a href="https://github.com/nodejs/node/pull/19321">#19321</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/4db7848e09"><code>4db7848e09</code></a>] - <strong>doc</strong>: remove example labels from buffer.md (Rich Trott) <a href="https://github.com/nodejs/node/pull/19582">#19582</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/f07e820e6d"><code>f07e820e6d</code></a>] - <strong>doc</strong>: add &#x27;v&#x27; prefix to all versions in metadata (Tobias Nießen) <a href="https://github.com/nodejs/node/pull/19590">#19590</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/7e9b7a5683"><code>7e9b7a5683</code></a>] - <strong>doc</strong>: add missing metadata for fs.open (Tobias Nießen) <a href="https://github.com/nodejs/node/pull/19585">#19585</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/d47e5d022f"><code>d47e5d022f</code></a>] - <strong>doc</strong>: add link &amp; simplify data event (net.Socket) (Christopher Hiller) <a href="https://github.com/nodejs/node/pull/19487">#19487</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/43f24c0406"><code>43f24c0406</code></a>] - <strong>doc</strong>: add directory structure in writing-tests.md (juggernaut451) <a href="https://github.com/nodejs/node/pull/18802">#18802</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/157fc28710"><code>157fc28710</code></a>] - <strong>doc</strong>: add added in versions to fs.Stats properties (jvelezpo) <a href="https://github.com/nodejs/node/pull/19266">#19266</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/fa17002215"><code>fa17002215</code></a>] - <strong>doc</strong>: add missing metadata for settings.windowsHide (Tobias Nießen) <a href="https://github.com/nodejs/node/pull/19578">#19578</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/4532a8913d"><code>4532a8913d</code></a>] - <strong>doc</strong>: add <code>require.main</code> to <code>require</code> properties (Vse Mozhet Byt) <a href="https://github.com/nodejs/node/pull/19573">#19573</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/1e8ece149a"><code>1e8ece149a</code></a>] - <strong>doc</strong>: add missing metadata for cluster.settings.cwd (Tobias Nießen) <a href="https://github.com/nodejs/node/pull/19569">#19569</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/933c58cd76"><code>933c58cd76</code></a>] - <strong>doc</strong>: add types for some <code>process</code> properties (Vse Mozhet Byt) <a href="https://github.com/nodejs/node/pull/19571">#19571</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/ae0e243028"><code>ae0e243028</code></a>] - <strong>doc</strong>: fix n-api example string (Steven R. Loomis) <a href="https://github.com/nodejs/node/pull/19205">#19205</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/7c9ba3db40"><code>7c9ba3db40</code></a>] - <strong>doc</strong>: correct introduced_in metadata for buffer doc (Rich Trott) <a href="https://github.com/nodejs/node/pull/19545">#19545</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/1073f09cad"><code>1073f09cad</code></a>] - <strong>doc</strong>: minor improvements to buffer.md (Rich Trott) <a href="https://github.com/nodejs/node/pull/19547">#19547</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/9845fc3e4a"><code>9845fc3e4a</code></a>] - <strong>doc</strong>: Add a missing comma (jiangq) <a href="https://github.com/nodejs/node/pull/19555">#19555</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/d1c45e258c"><code>d1c45e258c</code></a>] - <strong>doc</strong>: update child_process.md (Ari Leo Frankel) <a href="https://github.com/nodejs/node/pull/19075">#19075</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/8e3f59fbb5"><code>8e3f59fbb5</code></a>] - <strong>doc</strong>: clarify child_process promise rejections (TomCoded) <a href="https://github.com/nodejs/node/pull/19541">#19541</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/e9f41eecc8"><code>e9f41eecc8</code></a>] - <strong>doc</strong>: move StackOverflow to unofficial section (josephleon) <a href="https://github.com/nodejs/node/pull/19416">#19416</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/3f49174969"><code>3f49174969</code></a>] - <strong>doc</strong>: move who-to-cc to COLABORATOR_GUIDE.md (Rich Trott) <a href="https://github.com/nodejs/node/pull/19460">#19460</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/65c9a5278c"><code>65c9a5278c</code></a>] - <strong>doc</strong>: require passing CI for landing code (Rich Trott) <a href="https://github.com/nodejs/node/pull/19458">#19458</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/98d038a1f3"><code>98d038a1f3</code></a>] - <strong>doc</strong>: simplify COLLABORATOR_GUIDE.md instructions (Rich Trott) <a href="https://github.com/nodejs/node/pull/19458">#19458</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/e5bcd8d981"><code>e5bcd8d981</code></a>] - <strong>doc</strong>: reduce CI options in COLLABORATOR_GUIDE.md (Rich Trott) <a href="https://github.com/nodejs/node/pull/19458">#19458</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/26e97a124d"><code>26e97a124d</code></a>] - <strong>doc</strong>: add new documentation rule (estrada9166) <a href="https://github.com/nodejs/node/pull/18726">#18726</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/ed55386d74"><code>ed55386d74</code></a>] - <strong>doc</strong>: add fs declarations to stream doc js examples (Ivan Filenko) <a href="https://github.com/nodejs/node/pull/18804">#18804</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/9c672624b3"><code>9c672624b3</code></a>] - <strong>doc</strong>: remove **Note:** tags (James M Snell) <a href="https://github.com/nodejs/node/pull/18592">#18592</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/742b304ea3"><code>742b304ea3</code></a>] - <strong>doc</strong>: warn about using util.inspect/util.format (James M Snell) <a href="https://github.com/nodejs/node/pull/17791">#17791</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/d3833b0734"><code>d3833b0734</code></a>] - <strong>doc</strong>: update collaborator guide (Ruben Bridgewater) <a href="https://github.com/nodejs/node/pull/19116">#19116</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/c3886b50c9"><code>c3886b50c9</code></a>] - <strong>doc</strong>: add note about browsers and HTTP/2 (Steven) <a href="https://github.com/nodejs/node/pull/19476">#19476</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/cc7ba0bb9d"><code>cc7ba0bb9d</code></a>] - <strong>doc</strong>: fix/improve inspector profiler example (Ali Ijaz Sheikh) <a href="https://github.com/nodejs/node/pull/19379">#19379</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/9c9263e7cc"><code>9c9263e7cc</code></a>] - <strong>doc</strong>: add trivikr to collaborators (Trivikram) <a href="https://github.com/nodejs/node/pull/19384">#19384</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/5960cde4eb"><code>5960cde4eb</code></a>] - <strong>doc</strong>: fix changelog (Myles Borins) <a href="https://github.com/nodejs/node/pull/19515">#19515</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/b351e0eda6"><code>b351e0eda6</code></a>] - <strong>http</strong>: use more destructuring (Tobias Nießen) <a href="https://github.com/nodejs/node/pull/19481">#19481</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/49c0efd2a2"><code>49c0efd2a2</code></a>] - <strong>http2</strong>: remove some unnecessary next ticks (James M Snell) <a href="https://github.com/nodejs/node/pull/19451">#19451</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/583d5afa5e"><code>583d5afa5e</code></a>] - <strong>inspector</strong>: do not allow host names (Eugene Ostroukhov)</li>
+<li>[<a href="https://github.com/nodejs/node/commit/fc1a610a00"><code>fc1a610a00</code></a>] - <strong>inspector</strong>: check Host header for local connections (Eugene Ostroukhov)</li>
+<li>[<a href="https://github.com/nodejs/node/commit/419e88ea4a"><code>419e88ea4a</code></a>] - <strong>lib,test</strong>: lint fixes for linter upgrade (Rich Trott) <a href="https://github.com/nodejs/node/pull/19528">#19528</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/fd8523fe44"><code>fd8523fe44</code></a>] - <strong>n-api</strong>: re-write test_make_callback (Gabriel Schulhof) <a href="https://github.com/nodejs/node/pull/19448">#19448</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/29a04b7ed6"><code>29a04b7ed6</code></a>] - <strong>(SEMVER-MINOR)</strong> <strong>n-api</strong>: add napi_fatal_exception (Mathias Buus) <a href="https://github.com/nodejs/node/pull/19337">#19337</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/223b42648f"><code>223b42648f</code></a>] - <strong>openssl</strong>: fix keypress requirement in apps on win32 (Shigeki Ohtsu) <a href="https://github.com/iojs/io.js/pull/1389">iojs/io.js#1389</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/40916a27bc"><code>40916a27bc</code></a>] - <strong>path</strong>: fix regression in posix.normalize (Michaël Zasso) <a href="https://github.com/nodejs/node/pull/19520">#19520</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/fad5dcce3b"><code>fad5dcce3b</code></a>] - <strong>src</strong>: drop CNNIC+StartCom certificate whitelisting (Ben Noordhuis) <a href="https://github.com/nodejs/node/pull/19322">#19322</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/780a5d6f3a"><code>780a5d6f3a</code></a>] - <strong>src</strong>: use <code>unordered_map</code> for perf marks (Anna Henningsen) <a href="https://github.com/nodejs/node/pull/19558">#19558</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/f13cc3237e"><code>f13cc3237e</code></a>] - <strong>stream</strong>: improve stream creation performance (Brian White) <a href="https://github.com/nodejs/node/pull/19401">#19401</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/8996d3cf45"><code>8996d3cf45</code></a>] - <strong>test</strong>: remove third param from assert.strictEqual (<a href="mailto:davis.okoth@kemsa.co.ke">davis.okoth@kemsa.co.ke</a>) <a href="https://github.com/nodejs/node/pull/19536">#19536</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/c1a327b0ed"><code>c1a327b0ed</code></a>] - <strong>test</strong>: remove custom error message (DingDean) <a href="https://github.com/nodejs/node/pull/19526">#19526</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/9265f4bcb7"><code>9265f4bcb7</code></a>] - <strong>test</strong>: remove string literal from assertions (Nathaniel Weeks) <a href="https://github.com/nodejs/node/pull/19276">#19276</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/efa38bd1a0"><code>efa38bd1a0</code></a>] - <strong>test</strong>: remove message from assert.strictEqual() (willhayslett) <a href="https://github.com/nodejs/node/pull/19525">#19525</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/40be64d96d"><code>40be64d96d</code></a>] - <strong>test</strong>: rename regression tests more expressively (Ujjwal Sharma) <a href="https://github.com/nodejs/node/pull/19495">#19495</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/0310df8fe6"><code>0310df8fe6</code></a>] - <strong>test</strong>: refactor parallel/test-tls-ca-concat.js (juggernaut451) <a href="https://github.com/nodejs/node/pull/19092">#19092</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/5f1a01d816"><code>5f1a01d816</code></a>] - <strong>test</strong>: fix buggy getTTYfd() implementation (Rich Trott) <a href="https://github.com/nodejs/node/pull/17781">#17781</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/c6b993bde7"><code>c6b993bde7</code></a>] - <strong>test</strong>: move firstInvalidFD() out of common module (Rich Trott) <a href="https://github.com/nodejs/node/pull/17781">#17781</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/8e69026962"><code>8e69026962</code></a>] - <strong>test</strong>: remove getTTYfd() from common module (Rich Trott) <a href="https://github.com/nodejs/node/pull/17781">#17781</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/a8d9ccf8fe"><code>a8d9ccf8fe</code></a>] - <strong>test</strong>: remove common.projectDir (Rich Trott) <a href="https://github.com/nodejs/node/pull/17781">#17781</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/74582933c9"><code>74582933c9</code></a>] - <strong>test</strong>: refactor test-fs-readfile-tostring-fail (Rich Trott) <a href="https://github.com/nodejs/node/pull/19404">#19404</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/a56ba1258d"><code>a56ba1258d</code></a>] - <strong>tools</strong>: update certdata.txt (Ben Noordhuis) <a href="https://github.com/nodejs/node/pull/19322">#19322</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/e895d54224"><code>e895d54224</code></a>] - <strong>tools</strong>: simplify tools/doc/preprocess.js (Vse Mozhet Byt) <a href="https://github.com/nodejs/node/pull/19539">#19539</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/4c3465f68a"><code>4c3465f68a</code></a>] - <strong>tools</strong>: fix nits in tools/doc/common.js (Vse Mozhet Byt) <a href="https://github.com/nodejs/node/pull/19599">#19599</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/ab561c090b"><code>ab561c090b</code></a>] - <strong>tools</strong>: shorten metadata parsing (Tobias Nießen) <a href="https://github.com/nodejs/node/pull/19512">#19512</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/0db7b8cd87"><code>0db7b8cd87</code></a>] - <strong>tools</strong>: make metadata parsing less permissive (Tobias Nießen) <a href="https://github.com/nodejs/node/pull/19512">#19512</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/4007d6cbfe"><code>4007d6cbfe</code></a>] - <strong>tools</strong>: update ESLint to 4.19.1 (Rich Trott) <a href="https://github.com/nodejs/node/pull/19528">#19528</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/89e7a5faad"><code>89e7a5faad</code></a>] - <strong>tools</strong>: fix nits in tools/doc/preprocess.js (Vse Mozhet Byt) <a href="https://github.com/nodejs/node/pull/19473">#19473</a></li>
+<li>[<a href="https://github.com/nodejs/node/commit/0414a8c7ed"><code>0414a8c7ed</code></a>] - <strong>tools</strong>: fix logic nit in tools/doc/generate.js (Vse Mozhet Byt) <a href="https://github.com/nodejs/node/pull/19475">#19475</a></li>
+</ul>
+<p>Windows 32-bit Installer: <a href="https://nodejs.org/dist/v9.10.0/node-v9.10.0-x86.msi">https://nodejs.org/dist/v9.10.0/node-v9.10.0-x86.msi</a> <br/>
+<!-- -->Windows 64-bit Installer: <a href="https://nodejs.org/dist/v9.10.0/node-v9.10.0-x64.msi">https://nodejs.org/dist/v9.10.0/node-v9.10.0-x64.msi</a> <br/>
+<!-- -->Windows 32-bit Binary: <a href="https://nodejs.org/dist/v9.10.0/win-x86/node.exe">https://nodejs.org/dist/v9.10.0/win-x86/node.exe</a> <br/>
+<!-- -->Windows 64-bit Binary: <a href="https://nodejs.org/dist/v9.10.0/win-x64/node.exe">https://nodejs.org/dist/v9.10.0/win-x64/node.exe</a> <br/>
+<!-- -->macOS 64-bit Installer: <a href="https://nodejs.org/dist/v9.10.0/node-v9.10.0.pkg">https://nodejs.org/dist/v9.10.0/node-v9.10.0.pkg</a> <br/>
+<!-- -->macOS 64-bit Binary: <a href="https://nodejs.org/dist/v9.10.0/node-v9.10.0-darwin-x64.tar.gz">https://nodejs.org/dist/v9.10.0/node-v9.10.0-darwin-x64.tar.gz</a> <br/>
+<!-- -->Linux 32-bit Binary: <a href="https://nodejs.org/dist/v9.10.0/node-v9.10.0-linux-x86.tar.xz">https://nodejs.org/dist/v9.10.0/node-v9.10.0-linux-x86.tar.xz</a> <br/>
+<!-- -->Linux 64-bit Binary: <a href="https://nodejs.org/dist/v9.10.0/node-v9.10.0-linux-x64.tar.xz">https://nodejs.org/dist/v9.10.0/node-v9.10.0-linux-x64.tar.xz</a> <br/>
+<!-- -->Linux PPC LE 64-bit Binary: <a href="https://nodejs.org/dist/v9.10.0/node-v9.10.0-linux-ppc64le.tar.xz">https://nodejs.org/dist/v9.10.0/node-v9.10.0-linux-ppc64le.tar.xz</a> <br/>
+<!-- -->Linux s390x 64-bit Binary: <a href="https://nodejs.org/dist/v9.10.0/node-v9.10.0-linux-s390x.tar.xz">https://nodejs.org/dist/v9.10.0/node-v9.10.0-linux-s390x.tar.xz</a> <br/>
+<!-- -->AIX 64-bit Binary: <a href="https://nodejs.org/dist/v9.10.0/node-v9.10.0-aix-ppc64.tar.gz">https://nodejs.org/dist/v9.10.0/node-v9.10.0-aix-ppc64.tar.gz</a> <br/>
+<!-- -->SmartOS 32-bit Binary: <a href="https://nodejs.org/dist/v9.10.0/node-v9.10.0-sunos-x86.tar.xz">https://nodejs.org/dist/v9.10.0/node-v9.10.0-sunos-x86.tar.xz</a> <br/>
+<!-- -->SmartOS 64-bit Binary: <a href="https://nodejs.org/dist/v9.10.0/node-v9.10.0-sunos-x64.tar.xz">https://nodejs.org/dist/v9.10.0/node-v9.10.0-sunos-x64.tar.xz</a> <br/>
+<!-- -->ARMv6 32-bit Binary: <a href="https://nodejs.org/dist/v9.10.0/node-v9.10.0-linux-armv6l.tar.xz">https://nodejs.org/dist/v9.10.0/node-v9.10.0-linux-armv6l.tar.xz</a> <br/>
+<!-- -->ARMv7 32-bit Binary: <a href="https://nodejs.org/dist/v9.10.0/node-v9.10.0-linux-armv7l.tar.xz">https://nodejs.org/dist/v9.10.0/node-v9.10.0-linux-armv7l.tar.xz</a> <br/>
+<!-- -->ARMv8 64-bit Binary: <a href="https://nodejs.org/dist/v9.10.0/node-v9.10.0-linux-arm64.tar.xz">https://nodejs.org/dist/v9.10.0/node-v9.10.0-linux-arm64.tar.xz</a> <br/>
+<!-- -->Source Code: <a href="https://nodejs.org/dist/v9.10.0/node-v9.10.0.tar.gz">https://nodejs.org/dist/v9.10.0/node-v9.10.0.tar.gz</a> <br/>
+<!-- -->Other release files: <a href="https://nodejs.org/dist/v9.10.0/">https://nodejs.org/dist/v9.10.0/</a> <br/>
+<!-- -->Documentation: <a href="https://nodejs.org/docs/v9.10.0/api/">https://nodejs.org/docs/v9.10.0/api/</a></p>
+<h3 id="shasums">SHASUMS<a id="header-shasums" class="anchor" href="#shasums" aria-labelledby="shasums"></a></h3>
+<pre><code class="language-text">-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+3ad90e0ed617eaa19d77d9d02c5c42f8b03560abbd02ddaa0db0016725660b9a  node-v9.10.0-aix-ppc64.tar.gz
+c4b98cc2f3c00b770f24549de112902b56d57be7963a1047cd116b357bc61569  node-v9.10.0-darwin-x64.tar.gz
+35a2e934d475aaca229d4d054365118bd303baa9c9954d087d0cee02ec42ba90  node-v9.10.0-darwin-x64.tar.xz
+a41222cd88298b2e277cf1e04e88e9e962f9cbd0b0ce66837cea1f75ac21d33a  node-v9.10.0-headers.tar.gz
+efda9c7d6344e529b3966ef7e95e89d93528490032d6d8df1af23581ae8c2393  node-v9.10.0-headers.tar.xz
+2ff3351616e58d1355b643f6013cb45b30bf84aad523de05cdbf01d6c7b68e30  node-v9.10.0-linux-arm64.tar.gz
+ba1d682aa1d5a12eeb39e7f51e4c67c6122b24482869ca2547c6f094eae90658  node-v9.10.0-linux-arm64.tar.xz
+061f0a1d4563407626c826417f301913a6a6c61d12cc59b2f3ba806d995749b3  node-v9.10.0-linux-armv6l.tar.gz
+42d1c45dc27686f9d3ea93472f0723139b72524c72b46f81fc1514fbcd9d7707  node-v9.10.0-linux-armv6l.tar.xz
+8f1b5c62951f0dda9f3592d19198d8f8aea7a2c1ef43a6adf235ba8a65765e61  node-v9.10.0-linux-armv7l.tar.gz
+bafe8061f6b27710ee64284c6a01793645eeb914bb711a9e6fc752a536ddfdc4  node-v9.10.0-linux-armv7l.tar.xz
+fe4a120bc64065355956f22bf52695d35e68e7cefba6fcb94f6b53b445234b51  node-v9.10.0-linux-ppc64le.tar.gz
+f727a1f8350656a7149021b1ceae6e83bffb520c4ce9e20d9e329036eee58ace  node-v9.10.0-linux-ppc64le.tar.xz
+2f0693357d002f2e6be90bc2b6a9cf385b59a88adc2098a8afcbae3a8af88c6d  node-v9.10.0-linux-s390x.tar.gz
+e0887c4605d2f796c5e95fd9096672b77bd1d43c01f11450f1f8019a9b0d816d  node-v9.10.0-linux-s390x.tar.xz
+21a69c0f0181ec451444739d5c2f1df27cb96e7f328461dfa658e65846dc99ef  node-v9.10.0-linux-x64.tar.gz
+b9bfffc03ef0e2c97d463619911552c7f5b1b8699de07bb913990a8b33800cb9  node-v9.10.0-linux-x64.tar.xz
+c0113bc0ff5d48a5b2827ada0fa70ee9296f27b043ff4cec1f805374f7fe88f2  node-v9.10.0-linux-x86.tar.gz
+1e96a62e76dd93d2a1f49d164b5e3bcfb5722844ef5ac15158c299f73cd446e3  node-v9.10.0-linux-x86.tar.xz
+5959d1dec918b6585464c8022abcc0d2566931e4c2bcf0e4f5c935a737b3e742  node-v9.10.0.pkg
+44b49e36b7bc853e15028c6af4837c7e9d95f08127d6751d274a2dfc5345552e  node-v9.10.0-sunos-x64.tar.gz
+0b94e6d921f172f5ecb40b82f53d6bbf1836067b7897c7bd0362b450764221b8  node-v9.10.0-sunos-x64.tar.xz
+19fadd9e2488fd377b771384b28fc4f274dbb2ae43aebefcbafd8e73a9a6a5cd  node-v9.10.0-sunos-x86.tar.gz
+2385369de958788ecf5adaddabece9a4fae2646fffc1507993a71435cf5a82f5  node-v9.10.0-sunos-x86.tar.xz
+e5654e552bcc7d011fe0c5bade53ba5c3acbd8d26bfda2cf57057537a03c8d76  node-v9.10.0.tar.gz
+945a35a2599dfc0a306cdb3aae1c70034d6c28b03ab85daf8f2166fdaaade63a  node-v9.10.0.tar.xz
+56bfb27221c35273d17ed2edac19ceaf62a2c76a1fd911af94b976c19e98345f  node-v9.10.0-win-x64.7z
+3f159de87fd987e7bf30bbffce722e2e5133c44fc847883053359e9b08d6fa88  node-v9.10.0-win-x64.zip
+0374a0cd01f932d836a032462ce7105b73850f7f4232a4f9b5cc77a506eba4a1  node-v9.10.0-win-x86.7z
+833a0f4ea29ed16e61774918f38921c41e1e9f7ba53209e0442163e7d30bb3ed  node-v9.10.0-win-x86.zip
+c053e4fe3b6c9f68231c28df41eb2569453abb0404c1fb22cc78a5cf2b967283  node-v9.10.0-x64.msi
+d590505b28ee081c592efc82899d57418ee6c0665423a121589614e493281ad3  node-v9.10.0-x86.msi
+bda61e2a5f0b4043475735743892649854710fb30e73335b2cd71d2349c1e13d  win-x64/node.exe
+a280cbf7597330557094cf782896c42d2043f322349908d494be201cd77c6167  win-x64/node.lib
+a6d89e52142d0953a4520c81d3b66a3ce9344106c9cf41d2e596fbc6b22f16d8  win-x64/node_pdb.7z
+38481709e85e5e7d58d01ff4fadf73b7670f53db7550fe1ea882bb399d5900dd  win-x64/node_pdb.zip
+280a5a8bc64f87c7288c310d4aacebd6916bad5948e9de7e544b533df3c89ea4  win-x86/node.exe
+d80069347fa780a4e9864385e472d0d2da628a3ae7ee559f691700b609d571d1  win-x86/node.lib
+b3516fa691896f723e05dba0dc15590e8ef35090333fd6b623c6a1dd0055dec9  win-x86/node_pdb.7z
+0f1e89b86a807805b307699079de06b84f655bef3ecc6ac84619a91c0b113b7b  win-x86/node_pdb.zip
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEDv/hvO/ZyE49CYFSkzsB9AtcqUYFAlq7wk0ACgkQkzsB9Atc
+qUZuAggAhvUCCGt8fOhW1i4t/GManaPYBME0zG+rJ85Ou/33q7CgQ//z5dWfRMb5
+dzCNjK2FaEbdTH2PZkYIsG444zHqQWCHdlIJ2N2+Qg7+kJ+1WGiphi6ERtTCEK8n
+M7TtlKBZIAqN8hcxVaNMLoJOa51GHiHQoyW7e8W7GCeCBOSBt7kvS9l1GJtV/D7J
+AbHmE2MVJFp7i0AdVoanhMBtrAXKNjjseeFQAFUMG5t66oJUGDPWDdDEVyRu8kLd
+fVQkWWWiXwbmwyGoX/ocS+OjFMgYTKCcuMswHIx5U7DQGaOynPWGJW3yk9goTwjD
+PETIRrZngctYUrgJFiEWx7tJZ+ENiQ==
+=tHfb
+-----END PGP SIGNATURE-----
+
+</code></pre></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->Scroll to top</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"en","localName":"English","name":"English","langDir":"ltr","dateFormat":"MM.DD.YYYY","hrefLang":"en-US","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"Scroll to top","components.header.links.home":"Home","components.header.links.about":"About","components.header.links.download":"Downloads","components.header.links.docs":"Docs","components.header.links.getInvolved":"Get Involved","components.header.links.security":"Security","components.header.links.certification":"Certification","components.header.links.blog":"News","components.navigation.about.links.governance":"Governance","components.navigation.docs.links.es6":"ES6 and beyond","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"Guides","components.navigation.docs.links.dependencies":"Dependencies","components.navigation.getInvolved.links.collabSummit":"Collab Summit","components.navigation.getInvolved.links.contribute":"Contribute","components.navigation.getInvolved.links.codeOfConduct":"Code of Conduct","components.downloadList.links.previousReleases":"Previous Releases","components.downloadList.links.packageManager":"Installing Node.js via package manager","components.downloadList.links.shaSums":"Signed SHASUMS for release files","components.downloadList.links.shaSums.howToVerify":" (How to verify)","components.downloadList.links.allDownloads":"All download options","components.downloadList.links.nightlyReleases":"Nightly builds","components.downloadList.links.unofficialBuilds":"Unofficial builds","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Installing Node.js via binary archive","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"Changelog","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"Docs","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"Newer | ","components.pagination.previous":"Older","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}}},"__N_SSG":true},"page":"/en/blog/release/v9.10.0","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

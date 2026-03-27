@@ -1,0 +1,161 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Установка Node.js через пакетный менеджер | Node.js</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Установка Node.js через пакетный менеджер | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Установка Node.js через пакетный менеджер | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/ru/download/package-manager"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/ru/download/package-manager-07568b7a4cadab93.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NDMJQNDPS"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-6NDMJQNDPS");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7950559866369342" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/ru"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/ru">Главная</a></li><li class=""><a href="/ru/about">О проекте</a></li><li class="active"><a href="/ru/download">Загрузка</a></li><li class=""><a href="/ru/docs">Документация</a></li><li class=""><a href="/ru/get-involved">Присоединиться</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">Безопасность</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class=""><a href="/ru/blog">Новости</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/download/package-manager">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/download/package-manager">Catalan</a></li><li><a data-lang="de" title="German" href="/de/download/package-manager">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/download/package-manager">English</a></li><li><a data-lang="es" title="Spanish" href="/es/download/package-manager">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/download/package-manager">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/download/package-manager">Français</a></li><li><a data-lang="it" title="Italian" href="/it/download/package-manager">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/download/package-manager">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/download/package-manager">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/download/package-manager">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/download/package-manager">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/download/package-manager">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/download/package-manager">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/download/package-manager">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/download/package-manager">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/download/package-manager">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/download/package-manager">繁體中文</a></li></ul></div></header><main id="main"><div class="container"><h1 id="установка-node.js-через-пакетный-менеджер">Установка Node.js через пакетный менеджер<a id="header-установка-node.js-через-пакетный-менеджер" class="anchor" href="#установка-node.js-через-пакетный-менеджер" aria-labelledby="установка-node.js-через-пакетный-менеджер"></a></h1>
+<p><em><strong>Заметка:</strong></em> Пакеты, описанные на этой странице, разрабатываются и поддерживаются соответствующими упаковщиками, <strong>а не</strong> командой Node.js. Пожалуйста, сообщайте о любых проблемах, с которыми вы сталкиваетесь с конкретным пакетом. Если выяснится, что ваша проблема ― ошибка в самом Node.js, проблема будет передана выше.</p>
+<hr/>
+<ul>
+<li><a href="#android">Android</a></li>
+<li><a href="#arch-linux">Arch Linux</a></li>
+<li><a href="#debian-and-ubuntu-based-linux-distributions-enterprise-linux-fedora-and-snap-packages">Дистрибутивы Linux на основе Debian и Ubuntu, пакеты Enterprise Linux/Fedora и Snap</a></li>
+<li><a href="#freebsd">FreeBSD</a></li>
+<li><a href="#gentoo">Gentoo</a></li>
+<li><a href="#netbsd">NetBSD</a></li>
+<li><a href="#nvm">nvm</a></li>
+<li><a href="#nvs">nvs</a></li>
+<li><a href="#openbsd">OpenBSD</a></li>
+<li><a href="#opensuse-and-sle">openSUSE и SLE</a></li>
+<li><a href="#macos">macOS</a></li>
+<li><a href="#smartos-and-illumos">SmartOS и illumos</a></li>
+<li><a href="#solus">Solus</a></li>
+<li><a href="#void-linux">Void Linux</a></li>
+<li><a href="#windows-1">Windows</a></li>
+</ul>
+<hr/>
+<h2 id="android">Android<a id="header-android" class="anchor" href="#android" aria-labelledby="android"></a></h2>
+<p>Поддержка Android все еще является экспериментальной в Node.js, поэтому предварительно скомпилированные
+двоичные файлы еще не предоставлены в открытом доступе.</p>
+<p>Однако есть и сторонние решения. Например, сообщество <a href="https://termux.com/">Termux</a> предоставляет эмулятор терминала и среду Linux для Android, а также собственный менеджер пакетов и <a href="https://github.com/termux/termux-packages">обширную коллекцию</a> многих предварительно скомпилированных приложений. Эта команда в приложении Termux установит последнюю доступную версию Node.js:</p>
+<pre><code class="language-bash">pkg install nodejs
+</code></pre>
+<p>В настоящее время двоичные файлы Termux Node.js связаны с <code>system-icu</code> (в зависимости от пакета <code>libicu</code>).</p>
+<h2 id="arch-linux">Arch Linux<a id="header-arch-linux" class="anchor" href="#arch-linux" aria-labelledby="arch-linux"></a></h2>
+<p>Пакеты Node.js и npm доступны в репозитории сообщества.</p>
+<pre><code class="language-bash">pacman -S nodejs npm
+</code></pre>
+<h2 id="дистрибутивы-linux-на-основе-debian-и-ubuntu-пакеты-enterprise-linuxfedora-и-snap">Дистрибутивы Linux на основе Debian и Ubuntu, пакеты Enterprise Linux/Fedora и Snap<a id="header-дистрибутивы-linux-на-основе-debian-и-ubuntu-пакеты-enterprise-linuxfedora-и-snap" class="anchor" href="#дистрибутивы-linux-на-основе-debian-и-ubuntu-пакеты-enterprise-linuxfedora-и-snap" aria-labelledby="дистрибутивы-linux-на-основе-debian-и-ubuntu-пакеты-enterprise-linuxfedora-и-snap"></a></h2>
+<p><a href="https://github.com/nodesource/distributions">Официальный Node.js бинарный дистрибутив</a> предоставляемый NodeSource.</p>
+<h2 id="freebsd">FreeBSD<a id="header-freebsd" class="anchor" href="#freebsd" aria-labelledby="freebsd"></a></h2>
+<p>Самый последний выпуск Node.js доступен через порт <a href="https://www.freshports.org/www/node">www/node</a>.</p>
+<p>Установите бинарный пакет через <a href="https://www.freebsd.org/cgi/man.cgi?pkg">pkg</a>:</p>
+<pre><code class="language-bash">pkg install node
+</code></pre>
+<p>Или скомпилируйте свой используя <a href="https://www.freebsd.org/cgi/man.cgi?ports">порты</a>:</p>
+<pre><code class="language-bash">cd /usr/ports/www/node &amp;&amp; make install
+</code></pre>
+<h2 id="gentoo">Gentoo<a id="header-gentoo" class="anchor" href="#gentoo" aria-labelledby="gentoo"></a></h2>
+<p>Node.js доступен в дереве портежей.</p>
+<pre><code class="language-bash">emerge nodejs
+</code></pre>
+<h2 id="netbsd">NetBSD<a id="header-netbsd" class="anchor" href="#netbsd" aria-labelledby="netbsd"></a></h2>
+<p>Node.js доступен в дереве pkgsrc:</p>
+<pre><code class="language-bash">cd /usr/pkgsrc/lang/nodejs &amp;&amp; make install
+</code></pre>
+<p>Или установите бинарный пакет (если он доступен для вашей платформы) с помощью pkgin:</p>
+<pre><code class="language-bash">pkgin -y install nodejs
+</code></pre>
+<h2 id="nvm">nvm<a id="header-nvm" class="anchor" href="#nvm" aria-labelledby="nvm"></a></h2>
+<p>Node Version Manager ― это bash-скрипт, используемый для управления несколькими выпущенными версиями Node.js. Он позволяет
+выполнять такие операции, как установка, удаление, переключение версий и т.д..
+Чтобы установить nvm, используйте этот <a href="https://github.com/nvm-sh/nvm#install--update-script">скрипт установки</a>.</p>
+<p>В системах Unix/OS X Node.js, созданный из исходного кода, можно установить с помощью
+<a href="https://github.com/creationix/nvm">nvm</a> путем установки в папку по умолчанию nvm:</p>
+<pre><code class="language-bash">env VERSION=`python tools/getnodeversion.py` make install DESTDIR=`nvm_version_path v$VERSION` PREFIX=&quot;&quot;
+</code></pre>
+<p>После этого вы можете использовать <code>nvm</code> для переключения между выпущенными версиями и версиями
+построенных из исходного кода.
+Например, если версия Node.js v8.0.0-pre:</p>
+<pre><code class="language-bash">nvm use 8
+</code></pre>
+<p>После выхода официального релиза вы захотите удалить встроенную версию:</p>
+<pre><code class="language-bash">nvm uninstall 8
+</code></pre>
+<h2 id="nvs">nvs<a id="header-nvs" class="anchor" href="#nvs" aria-labelledby="nvs"></a></h2>
+<h4 id="windows">Windows<a id="header-windows" class="anchor" href="#windows" aria-labelledby="windows"></a></h4>
+<p>The <code>nvs</code> version manager is cross-platform and can be used on Windows, macOS, and Unix-like systems</p>
+<p>To install <code>nvs</code> on Windows go to the <a href="https://github.com/jasongin/nvs/releases">release page</a> here and download the MSI installer file of the latest release.</p>
+<p>You can also use <code>chocolatey</code> to install it:</p>
+<pre><code class="language-bash">choco install nvs
+</code></pre>
+<h4 id="macosunixlike">macOS,UnixLike<a id="header-macosunixlike" class="anchor" href="#macosunixlike" aria-labelledby="macosunixlike"></a></h4>
+<p>You can find the documentation regarding the installation steps of <code>nvs</code> in macOS/Unix-like systems <a href="https://github.com/jasongin/nvs/blob/master/doc/SETUP#mac-linux">here</a></p>
+<h4 id="usage">Usage<a id="header-usage" class="anchor" href="#usage" aria-labelledby="usage"></a></h4>
+<p>After this you can use <code>nvs</code> to switch between different versions of node.</p>
+<p>To add the latest version of node:</p>
+<pre><code class="language-bash">nvs add latest
+</code></pre>
+<p>Or to add the latest LTS version of node:</p>
+<pre><code class="language-bash">nvs add lts
+</code></pre>
+<p>Then run the <code>nvs use</code> command to add a version of node to your <code>PATH</code> for the current shell:</p>
+<pre><code class="language-bash">$ nvs use lts
+PATH -= %LOCALAPPDATA%\nvs\default
+PATH += %LOCALAPPDATA%\nvs\node\14.17.0\x64
+</code></pre>
+<p>To add it to <code>PATH</code> permanently, use <code>nvs link</code>:</p>
+<pre><code class="language-bash">nvs link lts
+</code></pre>
+<h2 id="openbsd">OpenBSD<a id="header-openbsd" class="anchor" href="#openbsd" aria-labelledby="openbsd"></a></h2>
+<p>Node.js доступен через систему портов.</p>
+<pre><code class="language-bash">/usr/ports/lang/node
+</code></pre>
+<p>Использование <a href="https://man.openbsd.org/OpenBSD-current/man1/pkg_add.1">pkg_add</a> в OpenBSD:</p>
+<pre><code class="language-bash">pkg_add node
+</code></pre>
+<h2 id="opensuse-и-sle">openSUSE и SLE<a id="header-opensuse-и-sle" class="anchor" href="#opensuse-и-sle" aria-labelledby="opensuse-и-sle"></a></h2>
+<p>Node.js доступен в основных репозиториях в следующих пакетах:</p>
+<ul>
+<li><strong>openSUSE Leap 42.2</strong>: <code>nodejs4</code></li>
+<li><strong>openSUSE Leap 42.3</strong>: <code>nodejs4</code>, <code>nodejs6</code></li>
+<li><strong>openSUSE Tumbleweed</strong>: <code>nodejs4</code>, <code>nodejs6</code>, <code>nodejs8</code></li>
+<li><strong>SUSE Linux Enterprise Server (SLES) 12</strong>: <code>nodejs4</code>, <code>nodejs6</code>
+(&quot;Модуль Web и Scripting&quot; должен быть <a href="https://www.suse.com/documentation/sles-12/book_sle_deployment/data/sec_add-ons_extensions.html">добавлен перед установкой</a>.)</li>
+</ul>
+<p>Например, чтобы установить Node.js 4.x в openSUSE Leap 42.2, запустите следующее от имени пользователя root:</p>
+<pre><code class="language-bash">zypper install nodejs4
+</code></pre>
+<h2 id="macos">macOS<a id="header-macos" class="anchor" href="#macos" aria-labelledby="macos"></a></h2>
+<p>Просто загрузите <a href="https://nodejs.org/ru/#home-downloadhead">установщик macOS</a> прямо с веб-сайта <a href="https://nodejs.org/">nodejs.org</a>.</p>
+<p><em>Если вы хотите скачать пакет с bash:</em></p>
+<pre><code class="language-bash">curl &quot;https://nodejs.org/dist/latest/node-${VERSION:-$(wget -qO- https://nodejs.org/dist/latest/ | sed -nE &#x27;s|.*&gt;node-(.*)\.pkg&lt;/a&gt;.*|\1|p&#x27;)}.pkg&quot; &gt; &quot;$HOME/Downloads/node-latest.pkg&quot; &amp;&amp; sudo installer -store -pkg &quot;$HOME/Downloads/node-latest.pkg&quot; -target &quot;/&quot;
+</code></pre>
+<h3 id="альтернативы">Альтернативы<a id="header-альтернативы" class="anchor" href="#альтернативы" aria-labelledby="альтернативы"></a></h3>
+<p>Использование <strong><a href="https://brew.sh/">Homebrew</a></strong>:</p>
+<pre><code class="language-bash">brew install node
+</code></pre>
+<p>Использование <strong><a href="https://www.macports.org/">MacPorts</a></strong>:</p>
+<pre><code class="language-bash">port install nodejs&lt;major version&gt;
+
+# Пример
+port install nodejs7
+</code></pre>
+<p>Использование <strong><a href="https://pkgsrc.joyent.com/install-on-osx/">pkgsrc</a></strong>:</p>
+<p>Установка бинарных файлов:</p>
+<pre><code class="language-bash">pkgin -y install nodejs
+</code></pre>
+<p>Или сборка с помощью pkgsrc:</p>
+<pre><code class="language-bash">cd pkgsrc/lang/nodejs &amp;&amp; bmake install
+</code></pre>
+<h2 id="smartos-и-illumos">SmartOS и illumos<a id="header-smartos-и-illumos" class="anchor" href="#smartos-и-illumos" aria-labelledby="smartos-и-illumos"></a></h2>
+<p>Образы SmartOS поставляются с предустановленным pkgsrc. В других дистрибутивах Illumos сначала установите <strong><a href="https://pkgsrc.joyent.com/install-on-illumos/">pkgsrc</a></strong>, затем вы сможете установить бинарный пакет как обычно:</p>
+<pre><code class="language-bash">pkgin -y install nodejs
+</code></pre>
+<p>Или собрать с помощью pkgsrc:</p>
+<pre><code class="language-bash">cd pkgsrc/lang/nodejs &amp;&amp; bmake install
+</code></pre>
+<h2 id="solus">Solus<a id="header-solus" class="anchor" href="#solus" aria-labelledby="solus"></a></h2>
+<p>Solus предоставляет Node.js в своем основном репозитории.</p>
+<pre><code class="language-bash">sudo eopkg install nodejs
+</code></pre>
+<h2 id="void-linux">Void Linux<a id="header-void-linux" class="anchor" href="#void-linux" aria-labelledby="void-linux"></a></h2>
+<p>Void Linux поставляет стабильный файл Node.js в основном репозитории.</p>
+<pre><code class="language-bash">xbps-install -Sy nodejs
+</code></pre>
+<h2 id="windows-1">Windows<a id="header-windows-1" class="anchor" href="#windows-1" aria-labelledby="windows-1"></a></h2>
+<p>Просто загрузите <a href="https://nodejs.org/ru/#home-downloadhead">Установщик Windows</a> прямо с веб-сайта <a href="https://nodejs.org/">nodejs.org</a>.</p>
+<h3 id="альтернативы-1">Альтернативы<a id="header-альтернативы-1" class="anchor" href="#альтернативы-1" aria-labelledby="альтернативы-1"></a></h3>
+<p>Использование <strong><a href="https://chocolatey.org/">Chocolatey</a></strong>:</p>
+<pre><code class="language-bash">cinst nodejs
+# или полная установка с npm
+cinst nodejs.install
+</code></pre>
+<p>Использование <strong><a href="https://scoop.sh/">Scoop</a></strong>:</p>
+<pre><code class="language-bash">scoop install nodejs
+</code></pre></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->Вверх</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"ru","localName":"Русский","name":"Russian","langDir":"ltr","dateFormat":"DD.MM.YYYY","hrefLang":"ru","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"Вверх","components.header.links.home":"Главная","components.header.links.about":"О проекте","components.header.links.download":"Загрузка","components.header.links.docs":"Документация","components.header.links.getInvolved":"Присоединиться","components.header.links.security":"Безопасность","components.header.links.certification":"Certification","components.header.links.blog":"Новости","components.navigation.about.links.governance":"Управление","components.navigation.docs.links.es6":"ES6 и выше","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"Руководства","components.navigation.docs.links.dependencies":"Зависимости","components.navigation.getInvolved.links.collabSummit":"Саммит сотрудников","components.navigation.getInvolved.links.contribute":"Участие","components.navigation.getInvolved.links.codeOfConduct":"Правила","components.downloadList.links.previousReleases":"Предыдущие релизы","components.downloadList.links.packageManager":"Установка Node.js с помощью пакетного менеджера","components.downloadList.links.shaSums":"Подписанные SHASUMS для файлов релиза","components.downloadList.links.shaSums.howToVerify":" (Как проверить)","components.downloadList.links.allDownloads":"Все варианты загрузки","components.downloadList.links.nightlyReleases":"Ночные сборки","components.downloadList.links.unofficialBuilds":"Неофициальные сборки","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Установка Node.js через бинарный архив в Linux","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"Список изменений","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"Документация","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"Следующий | ","components.pagination.previous":"Предыдущий","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/ru/download/package-manager","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>여러 파일 시스템에서 작업하기 | Node.js node js 学习 中文网</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="여러 파일 시스템에서 작업하기 | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="여러 파일 시스템에서 작업하기 | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/ko/docs/guides/working-with-different-filesystems"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/ko/docs/guides/working-with-different-filesystems-80c3ab1b8bc9ba5b.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-2WRNZHGVQT"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-2WRNZHGVQT");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8264273508355034" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/ko"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/ko">홈</a></li><li class=""><a href="/ko/about">About</a></li><li class=""><a href="/ko/download">다운로드</a></li><li class="active"><a href="/ko/docs">문서</a></li><li class=""><a href="/ko/get-involved">참여하기</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">보안</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class=""><a href="/ko/blog">뉴스</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/working-with-different-filesystems">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/working-with-different-filesystems">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/working-with-different-filesystems">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/working-with-different-filesystems">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/working-with-different-filesystems">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/working-with-different-filesystems">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/working-with-different-filesystems">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/working-with-different-filesystems">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/working-with-different-filesystems">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/working-with-different-filesystems">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/working-with-different-filesystems">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/working-with-different-filesystems">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/working-with-different-filesystems">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/working-with-different-filesystems">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/working-with-different-filesystems">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/working-with-different-filesystems">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/working-with-different-filesystems">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/working-with-different-filesystems">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/ko/docs">문서</a></li><li class=""><a href="/ko/docs/es6">ES6와 그 이후</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/ko/docs/guides">안내</a></li><li class=""><a href="/ko/docs/meta/topics/dependencies">의존성</a></li></ul></nav><article dir="auto"><h1 id="여러-파일-시스템에서-작업하기">여러 파일 시스템에서 작업하기<a id="header-여러-파일-시스템에서-작업하기" class="anchor" href="#여러-파일-시스템에서-작업하기" aria-labelledby="여러-파일-시스템에서-작업하기"></a></h1>
+<p>Node는 파일 시스템에서 다양한 기능을 제공합니다. 하지만 모든 파일 시스템이 같은 것은 아닙니다.
+여러 파일 시스템에서 동작할 때 코드를 간단하고 안전하게 유지하기 위한 모범 예제를
+아래에서 제시합니다.</p>
+<!-- -->
+<h2 id="파일-시스템의-동작">파일 시스템의 동작<a id="header-파일-시스템의-동작" class="anchor" href="#파일-시스템의-동작" aria-labelledby="파일-시스템의-동작"></a></h2>
+<p>파일 시스템을 사용하기 전에 파일 시스템이 어떻게 동작하는지 알아야 합니다. 다른 파일 시스템은
+다르게 동작하고 파일 시스템마다 기능이 더 많거나 적거나 합니다. 예를 들어 대소문자 구분/비구분,
+대소문자 유지, 유니코드 형식 보존, 타임스탬프 처리방법, 속성 확장, 아이노드, 유닉스 권한,
+데이터 스트림 대안 등이 있습니다.</p>
+<p><code>process.platform</code>에서 파일 시스템의 동작을 추측하는 것을 주의해야 합니다. 예를 들어 사용자가
+대소문자를 구별하는 파일 시스템(HFSX)를 사용할 수도 있으므로 프로그램이 Darwin에서 동작하고 있다고
+대소문자를 구별하지 않는 파일 시스템(HFS+)을 사용한다고 가정해서는 안 됩니다. 유사하게 유닉스 권한이나
+아이노드를 지원하지 않는 외장 드라이브나 USB, 네트워크 드라이브를 사용할 수도 있으므로 Linux에서
+돌아가고 있다고 파일 시스템이 유닉스 권한이나 아이노드를 지원한다고 가정해서는 안 됩니다.</p>
+<p>운영체제로 파일 시스템의 동작을 쉽게 예상할 수 없지만 모두 필요 없는 것은 아닙니다. 알려진 모든
+파일 시스템과 동작의 목록을 관리하는 대신(절대 완료된 목록을 갖지 못할 것입니다.) 파일 시스템이
+실제로 어떻게 동작하는지 확인할 수 있습니다. 쉽게 확인할 수 있는 특정 기능의 존재 여부 만으로도
+확인하기 더 어려운 다른 기능의 동작을 예측하기에 대부분 충분합니다.</p>
+<p>일부 사용자는 워킹 트리의 다양한 경로에 여러 가지 파일 시스템을 마운트해서
+사용할 수도 있다는 것을 명심하세요.</p>
+<!-- -->
+<h2 id="최소-공통분모-접근-피하기">최소 공통분모 접근 피하기<a id="header-최소-공통분모-접근-피하기" class="anchor" href="#최소-공통분모-접근-피하기" aria-labelledby="최소-공통분모-접근-피하기"></a></h2>
+<p>모든 파일명을 대문자로 정규화하고 모든 파일명을 NFC 유니코드 형식으로 정규화하고 파일의 타임스탬프를
+1초 해상도로 정규화함으로써 파일 시스템의 최소 공통분모로 프로그램이 동작하게 하고 싶을 수도 있습니다.
+이를 최소 공통분모 접근이라고 합니다.</p>
+<p>이렇게 하면 안 됩니다. 모든 부분에서 최소 공통분모의 특성과 정확히 같은 파일 시스템에서만 안전하게
+사용할 수 있을 것입니다. 더 향상된 파일 시스템에서는 사용자가 기대하는 방법으로 동작하지 않을 것이고
+파일 시스템이나 타임스탭프 충돌이 발생할 것입니다. 복잡하게 의존하는 이벤트 사이에서 사용자 데이터를
+잃어버리거나 훼손할 가능성이 아주 크고 해결할 수 없거나 어려운 버그를 만들 것입니다.</p>
+<p>2초나 24시간 타임스탬프 해상도만 가진 파일 시스템을 나중에 지원해야 한다면 어떻게 할 것입니까?
+유니코드 표준이 정규화 알고리즘과 약간 다른 내용을 포함하게 된다면(이런 일은 과거에도 일어났습니다.)
+어떻게 할 것입니까?</p>
+<p>최소 공통분모 접근은 &quot;이식성 있는(portable)&quot; 시스템 호출만 사용해서 이식성 있는 프로그램을 만들려고
+하는 경향이 있습니다. 이는 누출되기 쉽고 실제로는 이식성이 없는 프로그램이 됩니다.</p>
+<!-- -->
+<h2 id="슈퍼셋-접근-도입">슈퍼셋 접근 도입<a id="header-슈퍼셋-접근-도입" class="anchor" href="#슈퍼셋-접근-도입" aria-labelledby="슈퍼셋-접근-도입"></a></h2>
+<p>슈퍼셋 접근으로 지원하는 각 플랫폼을 최상으로 사용하게 하세요. 예를 들어, 이식성 있는 백업 프로그램은
+리눅스 시스템에서는 btimes을 지원하지 않더라도 윈도우 시스템에서 btimes(파일이나 폴더의 생성 시간)를
+제대로 동기화해야 하고 btimes를 없애거나 바꾸지 않아야 합니다. 같은 이식성 있는 백업 프로그램은
+리눅스 시스템에서 유닉스 권한을 제대로 동기화해야 하고 윈도우 시스템이 유닉스 권한을 지원하지 않더라도
+유닉스 권한을 없애거나 바꾸면 안 됩니다.</p>
+<p>더 진보된 파일 시스템처럼 동작하게 프로그램을 만들어서 여러 파일 시스템을 처리하세요. 대소문자 구별,
+대소문자 유지, 유니코드 형식 구별, 유니코드 형식 보존, 유닉스 권한, 고행상도 나노초 타임스탬프,
+확장 속성 등 가능한 모든 기능의 슈퍼셋을 지원하세요.</p>
+<p>프로그램이 대소문자를 보존하고 있다면 대소문자를 구별하지 않는 파일 시스템을 사용해야 할 때 항상
+대소문자를 구별하지 않도록 구현할 수 있습니다. 하지만 프로그램이 대소문자를 유지하지 않는다면 대소문자를
+유지하는 파일 시스템에서 안전하게 사용할 수 없을 것입니다. 유니코드 형식 보존과 타임스탬프 해상도
+보존에서도 마찬가지입니다.</p>
+<p>파일 시스템에 대소문자가 섞인 파일명을 준다면 받은 그대로의 파일명을 유지하세요. 파일 시스템이
+유니코드 형식이나 NFC, NFD(혹은 NFKC나 NFKD)가 섞인 파일명을 준다면 주어진 바이트 순서
+그대로의 파일명을 유지하세요. 파일 시스템이 밀리 초 단위의 타임스탬프를 준다면 밀리 초단위의 해상도로
+타임스탬프를 유지하세요.</p>
+<p>프로그램이 돌아가는 파일 시스템의 동작에서 필요로 하는 기능과 비교해서 기능이 더 부족한 파일 시스템에서
+동작할 때 언제나 적절하게 기능을 줄일 수 있습니다. 파일 시스템 유닉스 권한을 지원하지 않는 것을 알고
+있다면 작성한 유닉스 권한과 같은 권한을 읽으려고 하면 안 됩니다. 파일 시스템이 대소문자를 보존하지
+않는 것을 알고 있지만, 프로그램이 <code>ab</code>를 생성할 때 디렉터리 목록에서 <code>ABC</code>를 볼 대비를 해야 합니다.
+하지만 파일 시스템이 대소문자를 유지하는 것을 알고 있다면 파일명 변경을 감지하거나 파일 시스템에
+대소문자를 구별 하는 경우 <code>ABC</code>와 <code>abc</code>를 다른 파일명으로 간주해야 합니다.</p>
+<!-- -->
+<h2 id="대소문자-보존">대소문자 보존<a id="header-대소문자-보존" class="anchor" href="#대소문자-보존" aria-labelledby="대소문자-보존"></a></h2>
+<p><code>test/abc</code>라는 디렉터리를 생성한 뒤 <code>fs.readdir(&#x27;test&#x27;)</code>가 <code>[&#x27;ABC&#x27;]</code>를 반환할 때 놀랄 수도
+있습니다. 이는 Node의 버그가 아닙니다. Node는 파일 시스템이 저장한 파일명을 반환하고 모든
+파일 시스템이 대소문자를 보존하는 것은 아닙니다. 어떤 파일 시스템은 모든 파일명을
+대문자(혹은 소문자)로 바꿉니다.</p>
+<!-- -->
+<h2 id="유니코드-형식-보존">유니코드 형식 보존<a id="header-유니코드-형식-보존" class="anchor" href="#유니코드-형식-보존" aria-labelledby="유니코드-형식-보존"></a></h2>
+<p><em>대소문자 보존과 유니코드 형식 보존은 비슷한 개념입니다. 유니코드 형식을 보존해야 하는 이유를
+이해하려면 먼저 왜 대소문자를 보존해야 하는지를 확실히 이해해야 합니다. 제대로 이해한다면
+유니코드 형식 보존은 아주 간단합니다.</em></p>
+<p>유니코드는 여러 가지 다른 바이트 순서를 사용해서 같은 문자를 인코딩할 수 있습니다. 여러 가지 문자열이
+같아 보일 수 있지만 다른 바이트 순서를 가질 수 있습니다. UTF-8 문자열에서 줄과 관련해서 유니코드가
+동작하는 방식에 대해서 조심해야 합니다. 모든 UTF-8 문자를 하나의 바이트로 인코딩되기를 기대하면
+안 되듯이 사람 눈에는 같아 보이는 여러 가지 UTF-8 문자열이 같은 바이트 표현을 한다고 생각해서는
+안 됩니다. ASCII에서는 이런 기대를 해도 되지만 UTF-8에서는 안 됩니다.</p>
+<p><code>test/café</code>라는 디렉터리(<code>&lt;63 61 66 c3 a9&gt;</code>의 바이트 순서와 <code>string.length === 5</code>를 가진
+NFC 유니코드 형식)를 만들고 <code>fs.readdir(&#x27;test&#x27;)</code>가 <code>[&#x27;café&#x27;]</code>(<code>&lt;63 61 66 65 cc 81&gt;</code>의
+바이트 순서와 <code>string.length === 6</code>를 가진 NFD 유니코드 형식)을 반환하면 놀랄 수도 있습니다.
+이는 Node의 버그가 아닙니다. Node는 파일 시스템이 저장한 파일명을 반환하는데 모든 파일 시스템이
+유니코드 형식을 보존하는 것은 아닙니다.</p>
+<p>예를 들어 HFS+는 거의 항상 모든 파일명을 NFD 형식으로 정규화할 것입니다. HFS+가 NTFS나 EXT4처럼
+동작하기를 기대해도 안 되고 그 반대를 기대해도 안 됩니다. 파일 시스템마다 다른 유니코드를 감추려고 취약한
+추상화로 정규화함으로써 데이터를 항상 바꾸려고 하지 마세요. 이는 아무런 문제도 해결하지 못하고 문제를
+만들어 낼 것입니다. 대신 유니코드 형식을 보존하고 비교함수처럼 정규화만 사용하세요.</p>
+<!-- -->
+<h2 id="유니코드-형식-비구별">유니코드 형식 비구별<a id="header-유니코드-형식-비구별" class="anchor" href="#유니코드-형식-비구별" aria-labelledby="유니코드-형식-비구별"></a></h2>
+<p>유니코드 형식을 비구별과 유니코드 형식 보존은 종종 헷갈리는 파일 시스템의 다른 두 가지 동작입니다.
+때로 대소문자 비구별을 파일명을 저장하고 전송할 때 항상 대문자로 정규화하게 잘못 구현하듯이 유니코드
+형식 비구별도 종종 파일명을 저장하고 전송할 때 파일명을 특정 유니코드 형식(HFS+의 경우 NFD)으로
+항상 정규화하도록 잘못 구현하곤 합니다. 비교할 때만 유니코드를 정규화함으로써 유니코드 형식은
+보존하면서도 유니코드 형식 비구별을 구현하는 것이 가능하고 이 방법이 훨씬 좋습니다.</p>
+<!-- -->
+<h2 id="다른-유니코드-형식의-비교">다른 유니코드 형식의 비교<a id="header-다른-유니코드-형식의-비교" class="anchor" href="#다른-유니코드-형식의-비교" aria-labelledby="다른-유니코드-형식의-비교"></a></h2>
+<p>Node는 UTF-8 문자열을 NFC나 NFD로 정규화하는 데 사용할 수 있는
+<code>string.normalize(&#x27;NFC&#x27; / &#x27;NFD&#x27;)</code>를 제공합니다. 이 함수의 반환 값은 절대 저장하면 안 되고
+두 UTF-8 문자열이 사용자에게 같아 보이는지 확인하는 비교 함수에서만 사용해야 합니다.</p>
+<p>비교 함수로 <code>string1.normalize(&#x27;NFC&#x27;) === string2.normalize(&#x27;NFC&#x27;)</code>나
+<code>string1.normalize(&#x27;NFD&#x27;) === string2.normalize(&#x27;NFD&#x27;)</code>를 사용할 수 있습니다.
+어느 방법을 사용하든 상관없습니다.</p>
+<p>정규화는 빠르지만 같은 문자열을 여러 번 정규화하는 것을 피하고자 비교함수의 입력값에 캐시를
+사용하려고 할 수 있습니다. 캐시에 문자열이 없다면 정규화하고 이를 저장합니다. 캐시를 저장하거나
+유지하지 않도록 조심하고 캐시로써만 사용해야 합니다.</p>
+<p><code>normalize()</code>를 사용하려면 사용하는 Node 버전에 ICU를 포함해야 합니다.(그렇지 않으면
+<code>normalize()</code>가 원래의 문자열을 그냥 반환할 것입니다.) 웹사이트에서 최신 버전의 Node를
+다운로드 했다면 ICU가 포함되어 있습니다.</p>
+<!-- -->
+<h2 id="타임스탬프-해상도">타임스탬프 해상도<a id="header-타임스탬프-해상도" class="anchor" href="#타임스탬프-해상도" aria-labelledby="타임스탬프-해상도"></a></h2>
+<p>파일의 <code>mtime</code>(수정시간)을 <code>1444291759414</code>(밀리 초 해상도)로 설정했는데 <code>fs.stat</code>가 mtime을
+<code>1444291759000</code>(1초 해상도)나 <code>1444291758000</code>(2초 해상도)로 반환하는 것에 당황할 수도
+있습니다. 이는 Node의 버그가 아닙니다. Node는 파일 시스템이 저장한 타임스탬프를 반환하고 모든
+파일 시스템이 나노초, 밀리 초, 1초 타임스탬프 해상도를 지원하는 것은 아닙니다. 일부 파일 시스템은
+atime 타임스탬프에 아주 거친 해상도를 쓰기도 합니다.(예를 들어 일부 FAT 파일 시스템은 24시간입니다.)</p>
+<!-- -->
+<h2 id="정규화로-파일명과-타임스탬프를-훼손시키지-마세요">정규화로 파일명과 타임스탬프를 훼손시키지 마세요.<a id="header-정규화로-파일명과-타임스탬프를-훼손시키지-마세요" class="anchor" href="#정규화로-파일명과-타임스탬프를-훼손시키지-마세요" aria-labelledby="정규화로-파일명과-타임스탬프를-훼손시키지-마세요"></a></h2>
+<p>파일명과 타임스탬프는 사용자 데이터입니다. 데이터를 대문자로 바꾸거나 <code>CRLF</code>나 <code>LF</code>같은 줄 끝 문자를
+정규화해서 사용자 파일 데이터를 자동으로 재작성하지 말아야 하듯이 대소문자 / 유니코드 형식 / 타임스탬프
+정규화로 파일명이나 타임스탬프를 절대 변경하거나 훼손시키지 않아야 합니다. 정규화는 비교할 때만 사용하고
+데이터를 바꾸면 안 됩니다.</p>
+<p>정규화는 효율적인 손실을 주는 해시 코드입니다. 어떤 종류든 동등한지 검사할 때 사용할 수 있지만(여러
+문자열이 다른 바이트 순서를 가지고 있더라도 같아 보이는지 등) 실제 데이터를 교체하는 데 사용할 수는
+없습니다. 프로그램은 있는 그대로의 파일명과 타임스탬프를 전달해야 합니다.</p>
+<p>프로그램이 NFC(또는 선호하는 어떤 유니코드 형식의 조합이더라도)에서, 혹은 소문자나 대문자 파일명으로,
+혹은 2초 해상도 타임스탬프로 새로운 데이터를 만들 수 있지만, 대소문자 / 유니코드 형식 / 타임스탬프
+정규화를 적용해서 기존의 사용자 데이터를 훼손시키면 안됩니다. 대신 슈퍼셋 접근을 적용하고 프로그램에서
+대소문자, 유니코드 형식, 타임스탬프 해상도를 보존하세요. 이 방법을 적용하면 같은 동작을 하는
+파일 시스템을 안정하게 사용할 수 있습니다.</p>
+<!-- -->
+<h2 id="정규화-비교-함수를-적절하게-사용하세요">정규화 비교 함수를 적절하게 사용하세요.<a id="header-정규화-비교-함수를-적절하게-사용하세요" class="anchor" href="#정규화-비교-함수를-적절하게-사용하세요" aria-labelledby="정규화-비교-함수를-적절하게-사용하세요"></a></h2>
+<p>대소문자 / 유니코드 형식 / 타임스탬프 비교 함수를 적절하게 사용하세요. 대소문자를 구별하는
+파일 시스템에서 동작한다면 대소문자를 구별하지 않는 파일명 비교 함수를 사용하지 말아야 합니다. 유니코드
+형식을 구별하는 파일 시스템에서 동작한다면(예를 들어 NFC와 NFD를 둘 다 보존하거나 혼합된 유니코드
+형식을 사용하는 NTFS와 대부분의 리눅스 파일 시스템) 유니코드 형식을 구별하지 않는 비교 함수를
+사용하지 마세요. 나노초 타임스탬프 해상도를 가진 파일 시스템에서 동작한다면 2초 해상도로 타임스탬프를
+비교하지 마세요.</p>
+<!-- -->
+<h2 id="비교함수에-있는-약간의-차이점에-대비하세요">비교함수에 있는 약간의 차이점에 대비하세요.<a id="header-비교함수에-있는-약간의-차이점에-대비하세요" class="anchor" href="#비교함수에-있는-약간의-차이점에-대비하세요" aria-labelledby="비교함수에-있는-약간의-차이점에-대비하세요"></a></h2>
+<p>비교함수로 파일 시스템에서 일치 여부를 판단할 때는 주의해야 합니다.(또는 실제로 파일 시스템이 어떻게
+비교하는지 볼 수 있다면 파일 시스템을 탐구해야 합니다.) 예를 들어 대소문자 구분없이 비교하는 것은 단순한
+<code>toLowerCase()</code> 비교보다 훨씬 복잡합니다. 사실 <code>toUpperCase()</code>가 <code>toLowerCase()</code>보다
+보통 더 좋습니다.(<code>toLowerCase()</code>가 특정 외국어 문자를 다르게 다루기 때문입니다.) 하지만 모든
+파일 시스템은 자신만의 대소문자 비교 테이블을 가지고 있으므로 파일시스템을 탐구하는 것이 좋습니다.</p>
+<p>예를 들어, Apple의 HFS+는 파일 이름을 NFD 형식으로 정규화 하지만 실제 이 NFD 형식은 현재 NFD 형식의
+이전 버전이며 최신 유니코드 표준의 NFD 형식과는 조금 다를 수 있습니다. HFS+ NFD가 유니코드의 NFD와 항상
+같을 거라고 기대하면 안 됩니다.</p></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->맨 위로</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"ko","localName":"한국어","name":"Korean","langDir":"ltr","dateFormat":"YYYY.MM.DD","hrefLang":"ko","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"맨 위로","components.header.links.home":"홈","components.header.links.about":"About","components.header.links.download":"다운로드","components.header.links.docs":"문서","components.header.links.getInvolved":"참여하기","components.header.links.security":"보안","components.header.links.certification":"Certification","components.header.links.blog":"뉴스","components.navigation.about.links.governance":"거버넌스","components.navigation.docs.links.es6":"ES6와 그 이후","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"안내","components.navigation.docs.links.dependencies":"의존성","components.navigation.getInvolved.links.collabSummit":"협업자 서밋","components.navigation.getInvolved.links.contribute":"기여하기","components.navigation.getInvolved.links.codeOfConduct":"행동강령","components.downloadList.links.previousReleases":"이전 릴리스","components.downloadList.links.packageManager":"패키지 관리자를 통한 Node.js 설치","components.downloadList.links.shaSums":"릴리스 파일에 서명된 SHASUMS","components.downloadList.links.shaSums.howToVerify":" (검증 방법)","components.downloadList.links.allDownloads":"모든 다운로드 보기","components.downloadList.links.nightlyReleases":"나이틀리 빌드","components.downloadList.links.unofficialBuilds":"비공식 빌드","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Linux에서 바이너리 아카이브를 통해 Node.js 설치하기","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"변경사항","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"문서","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"다음 | ","components.pagination.previous":"이전","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/ko/docs/guides/working-with-different-filesystems","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

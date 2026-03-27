@@ -1,0 +1,165 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>تثبيت Node.js عن طريق مدير الحزم | Node.js</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="تثبيت Node.js عن طريق مدير الحزم | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="تثبيت Node.js عن طريق مدير الحزم | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/ar/download/package-manager"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/ar/download/package-manager-99c325a071858c77.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NDMJQNDPS"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-6NDMJQNDPS");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7950559866369342" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/ar"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/ar">الرئيسية</a></li><li class=""><a href="/ar/about">عن الموقع</a></li><li class="active"><a href="/ar/download">تنزيلات</a></li><li class=""><a href="/ar/docs">التوثيق</a></li><li class=""><a href="/ar/get-involved">إنضم إلينا</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">أمن</a></li><li class=""><a href="https://openjsf.org/certification">شهادة</a></li><li class=""><a href="/ar/blog">المدونة</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/download/package-manager">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/download/package-manager">Catalan</a></li><li><a data-lang="de" title="German" href="/de/download/package-manager">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/download/package-manager">English</a></li><li><a data-lang="es" title="Spanish" href="/es/download/package-manager">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/download/package-manager">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/download/package-manager">Français</a></li><li><a data-lang="it" title="Italian" href="/it/download/package-manager">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/download/package-manager">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/download/package-manager">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/download/package-manager">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/download/package-manager">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/download/package-manager">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/download/package-manager">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/download/package-manager">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/download/package-manager">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/download/package-manager">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/download/package-manager">繁體中文</a></li></ul></div></header><main id="main"><div class="container"><h1 id="تثبيت-النود-جي-اس-عبر-مدير-حزم">تثبيت النود جي اس عبر مدير حزم<a id="header-تثبيت-النود-جي-اس-عبر-مدير-حزم" class="anchor" href="#تثبيت-النود-جي-اس-عبر-مدير-حزم" aria-labelledby="تثبيت-النود-جي-اس-عبر-مدير-حزم"></a></h1>
+<p><em><strong>ملاحظة</strong></em> إن صيانة و دعم الحزم المذكورة في هذه الصفحة تتم عبر المشرفين على مديري الحزم، و <strong>ليس</strong> فريق النود جي اس الأساسي. تفضل بإبلاغ أية مشكلة إلى المشرفين على الحزم و إذا كانت مشكلتك عبارة عن خطأ في النود جي اس بحد ذاتها فسيبلغ المشرف عن هذه المشكلة صعودا.</p>
+<hr/>
+<ul>
+<li><a href="#android">آندرويد</a></li>
+<li><a href="#arch-linux">Arch Linux</a></li>
+<li><a href="#debian-and-ubuntu-based-linux-distributions-enterprise-linux-fedora-and-snap-packages">التوزيعات المبنية على ديبيان أو اوبنتو، لينكس للمؤسسات / فيدورا و حزم سناب</a></li>
+<li><a href="#freebsd">FreeBSD</a></li>
+<li><a href="#gentoo">Gentoo</a></li>
+<li><a href="#ibm-i">IBM i</a></li>
+<li><a href="#netbsd">NetBSD</a></li>
+<li><a href="#nvm">nvm</a></li>
+<li><a href="#nvs">nvs</a></li>
+<li><a href="#openbsd">OpenBSD</a></li>
+<li><a href="#opensuse-and-sle">openSUSE و SLE</a></li>
+<li><a href="#macos">macOS</a></li>
+<li><a href="#smartos-and-illumos">SmartOS و illumos</a></li>
+<li><a href="#solus">Solus</a></li>
+<li><a href="#void-linux">Void Linux</a></li>
+<li><a href="#windows1">Windows</a></li>
+</ul>
+<hr/>
+<h2 id="android">آندرويد<a id="header-android" class="anchor" href="#android" aria-labelledby="android"></a></h2>
+<p>لا يزال دعم النود جي اس على الاندرويد قيد التجربة، لذلك فإن الملفات الثنائية المنتجة قبلا لا تزال غير متوفرة من قبل مطوري النود جي اس.</p>
+<p>رغم ذلك، هناك بعض الحلول الموفرة من طرف ثالث، فمثلا يوفر مجتمع <a href="https://termux.com/">Termux</a> محاكي طرفية و بيئة لينكس للأندرويد، إضافة إلى مدير حزم خاص و <a href="https://github.com/termux/termux-packages">مجموعة واسعة</a> من العديد من التطبيقات المنتجة قبلا.
+الأمر التالي سيثبت آخر نسخة متوفرة من النود جي اس:</p>
+<pre><code class="language-bash">pkg install nodejs
+</code></pre>
+<p>حاليا، النسخ الثنائية الخاصة بـ Termux و هي مربوطة بـ <code>system-icu</code> (تعتمد على حزمة <code>libicu</code>).</p>
+<h2 id="arch-linux">Arch Linux<a id="header-arch-linux" class="anchor" href="#arch-linux" aria-labelledby="arch-linux"></a></h2>
+<p>تتوفر حزم النود جي اس و الـ npm على مستوى مستودعات المجتمع.</p>
+<pre><code class="language-bash">pacman -S nodejs npm
+</code></pre>
+<h2 id="debian-and-ubuntu-based-linux-distributions-enterprise-linux-fedora-and-snap-packages">التوزيعات المبنية على ديبيان أو اوبنتو، لينكس للمؤسسات / فيدورا و حزم سناب<a id="header-debian-and-ubuntu-based-linux-distributions-enterprise-linux-fedora-and-snap-packages" class="anchor" href="#debian-and-ubuntu-based-linux-distributions-enterprise-linux-fedora-and-snap-packages" aria-labelledby="debian-and-ubuntu-based-linux-distributions-enterprise-linux-fedora-and-snap-packages"></a></h2>
+<p>يتم توفير <a href="https://github.com/nodesource/distributions">الملف الثنائي الرسمي للنود جي اس</a> من قبل NodeSource.</p>
+<h2 id="freebsd">FreeBSD<a id="header-freebsd" class="anchor" href="#freebsd" aria-labelledby="freebsd"></a></h2>
+<p>آخر إصدارات النود جي اس متوفرة عبر <a href="https://www.freshports.org/www/node">www/node</a></p>
+<p>يمكنك تثبيت حزمة ثنائية عبر <a href="https://www.freebsd.org/cgi/man.cgi?pkg">pkg</a>:</p>
+<pre><code class="language-bash">pkg install node
+</code></pre>
+<p>او يمكنك انتاجها باستعمال الـ<a href="https://www.freebsd.org/cgi/man.cgi?ports">ports</a> الخاص بك:</p>
+<pre><code class="language-bash">cd /usr/ports/www/node &amp;&amp; make install
+</code></pre>
+<h2 id="gentoo">Gentoo<a id="header-gentoo" class="anchor" href="#gentoo" aria-labelledby="gentoo"></a></h2>
+<p>النود جي اس متوفر عبر portage tree.</p>
+<pre><code class="language-bash">emerge nodejs
+</code></pre>
+<h2 id="ibm-i">IBM i<a id="header-ibm-i" class="anchor" href="#ibm-i" aria-labelledby="ibm-i"></a></h2>
+<p>نسخ LTS لـNode.js متوفرة من IBM و متوفرة عبر <a href="https://ibm.biz/ibmi-rpms">مدير الحزمة الـ&#x27;yum&#x27;</a>. إسم الحزمة هو <code>nodejs</code> متبوعا برقم الإصدار الرائد (مثلا، <code>nodejs8</code>، <code>nodejs10</code>، <code>nodejs12</code>، إلخ</p>
+<p>لتثبيت Node.js 12.x باستخدام سطر الأوامر، شغل الامر التالي كمستخدم مع سلطة *ALLOBJ الخاصة :</p>
+<pre><code class="language-bash">yum install nodejs12
+</code></pre>
+<p>يمكن أيضًا تثبيت Node.js مع منتج IBM i الخاص بحلول وصول العملاء. انظر <a href="http://www-01.ibm.com/support/docview.wss?uid=nas8N1022619">وثيقة الدعم هذه</a> لتفاصيل أكثر</p>
+<h2 id="netbsd">NetBSD<a id="header-netbsd" class="anchor" href="#netbsd" aria-labelledby="netbsd"></a></h2>
+<p>النود جي اس متوفر في pkgsrc tree:</p>
+<pre><code class="language-bash">cd /usr/pkgsrc/lang/nodejs &amp;&amp; make install
+</code></pre>
+<p>أو يمكنك تثبيت حزمة ثنائية (إذا كانت متوفرة لمنصتك) باستعمال pkgin:</p>
+<pre><code class="language-bash">pkgin -y install nodejs
+</code></pre>
+<h2 id="nvm">nvm<a id="header-nvm" class="anchor" href="#nvm" aria-labelledby="nvm"></a></h2>
+<p>مدير نسخ النود هو عبارة عن سكريبت خاص بالباش يستخدم لإدارة عدة نسخ من النود جي اس، حيث يسمح لك بالقيام بعمليات مختلفة كتثبيت و إلغاء تثبيت و تبديل نسخة معينة و اكثر من ذلك.
+لتثبيت مدير نسخ النود استعمل <a href="https://github.com/nvm-sh/nvm#install--update-script">سكريبت التثبيت</a>.</p>
+<p>على انظمة يونيكس و OS X، يمكن تثبيت نسخة من النود جي اس تم بنائها من المصدر عبر <a href="https://github.com/creationix/nvm">مدير نسخ النود (nvm)</a> عبر تثبيتها في المسار الذي يتوقعه مدير نسخ النود:</p>
+<pre><code class="language-bash">env VERSION=`python tools/getnodeversion.py` make install DESTDIR=`nvm_version_path v$VERSION` PREFIX=&quot;&quot;
+</code></pre>
+<p>بعد قيامك بهذه الخطوة، يمكنك استعمال مدير نسخ النود للتبديل بين النسخ المحررة و النسخ المبنية من المصدر.
+على سبيل المثال ، اذا كانت نسخة النود جي اس الحالية هي <!-- -->v8.0.0-pre<!-- -->:</p>
+<pre><code class="language-bash">nvm use 8
+</code></pre>
+<p>حالما يتم إطلاق نسخة رسمية، قم بإلغاء تثبيت النسخة المبنية من المصدر:</p>
+<pre><code class="language-bash">nvm uninstall 8
+</code></pre>
+<h2 id="nvs">nvs<a id="header-nvs" class="anchor" href="#nvs" aria-labelledby="nvs"></a></h2>
+<h4 id="windows">Windows<a id="header-windows" class="anchor" href="#windows" aria-labelledby="windows"></a></h4>
+<p>The <code>nvs</code> version manager is cross-platform and can be used on Windows, macOS, and Unix-like systems</p>
+<p>To install <code>nvs</code> on Windows go to the <a href="https://github.com/jasongin/nvs/releases">release page</a> here and download the MSI installer file of the latest release.</p>
+<p>You can also use <code>chocolatey</code> to install it:</p>
+<pre><code class="language-bash">choco install nvs
+</code></pre>
+<h4 id="macosunixlike">macOS,UnixLike<a id="header-macosunixlike" class="anchor" href="#macosunixlike" aria-labelledby="macosunixlike"></a></h4>
+<p>You can find the documentation regarding the installation steps of <code>nvs</code> in macOS/Unix-like systems <a href="https://github.com/jasongin/nvs/blob/master/doc/SETUP#mac-linux">here</a></p>
+<h4 id="usage">Usage<a id="header-usage" class="anchor" href="#usage" aria-labelledby="usage"></a></h4>
+<p>After this you can use <code>nvs</code> to switch between different versions of node.</p>
+<p>To add the latest version of node:</p>
+<pre><code class="language-bash">nvs add latest
+</code></pre>
+<p>Or to add the latest LTS version of node:</p>
+<pre><code class="language-bash">nvs add lts
+</code></pre>
+<p>Then run the <code>nvs use</code> command to add a version of node to your <code>PATH</code> for the current shell:</p>
+<pre><code class="language-bash">$ nvs use lts
+PATH -= %LOCALAPPDATA%\nvs\default
+PATH += %LOCALAPPDATA%\nvs\node\14.17.0\x64
+</code></pre>
+<p>To add it to <code>PATH</code> permanently, use <code>nvs link</code>:</p>
+<pre><code class="language-bash">nvs link lts
+</code></pre>
+<h2 id="openbsd">OpenBSD<a id="header-openbsd" class="anchor" href="#openbsd" aria-labelledby="openbsd"></a></h2>
+<p>يتوفر النود جي اس حاليا عبر نظام البوابات.</p>
+<pre><code class="language-bash">/usr/ports/lang/node
+</code></pre>
+<p>باستعمال <a href="https://man.openbsd.org/OpenBSD-current/man1/pkg_add.1">pkg_add</a> على OpenBSD:</p>
+<pre><code class="language-bash">pkg_add node
+</code></pre>
+<h2 id="opensuse-and-sle">openSUSE و SLE<a id="header-opensuse-and-sle" class="anchor" href="#opensuse-and-sle" aria-labelledby="opensuse-and-sle"></a></h2>
+<p>يتوفر النود جي اس في المستودعات الرئيسية تحت الحزم الاتية:</p>
+<ul>
+<li><strong>openSUSE Leap 42.2</strong>: <code>nodejs4</code></li>
+<li><strong>openSUSE Leap 42.3</strong>: <code>nodejs4</code>, <code>nodejs6</code></li>
+<li><strong>openSUSE Tumbleweed</strong>: <code>nodejs4</code>, <code>nodejs6</code>, <code>nodejs8</code></li>
+<li><strong>SUSE Linux Enterprise Server (SLES) 12</strong>: <code>nodejs4</code>, <code>nodejs6</code>
+(يجب إضافة الـ &quot;موديل الويب و البرمجة&quot; <a href="https://www.suse.com/documentation/sles-12/book_sle_deployment/data/sec_add-ons_extensions.html">قبل التثبيت</a>)</li>
+</ul>
+<p>على سبيل المثال، لتثبيت النود جي اس <!-- -->4.x<!-- --> على <!-- -->openSUSE Leap 42.2<!-- --> قم بتنفيذ ما يلي كجذر:</p>
+<pre><code class="language-bash">zypper install nodejs4
+</code></pre>
+<h2 id="macos">macOS<a id="header-macos" class="anchor" href="#macos" aria-labelledby="macos"></a></h2>
+<p>بكل بساطة، قم بتنزيل <a href="https://nodejs.org/ar/#home-downloadhead">مثبت الماك او اس</a> مباشرة من موقع <a href="https://nodejs.org/">nodejs.org</a>.</p>
+<p><em>إذا كنت تريد تنزيل الحزمة باستعمال الباش:</em></p>
+<pre><code class="language-bash">curl &quot;https://nodejs.org/dist/latest/node-${VERSION:-$(wget -qO- https://nodejs.org/dist/latest/ | sed -nE &#x27;s|.*&gt;node-(.*)\.pkg&lt;/a&gt;.*|\1|p&#x27;)}.pkg&quot; &gt; &quot;$HOME/Downloads/node-latest.pkg&quot; &amp;&amp; sudo installer -store -pkg &quot;$HOME/Downloads/node-latest.pkg&quot; -target &quot;/&quot;
+</code></pre>
+<h3 id="البدائل">البدائل<a id="header-البدائل" class="anchor" href="#البدائل" aria-labelledby="البدائل"></a></h3>
+<p>باستعمال <strong><a href="https://brew.sh/">Homebrew</a></strong>:</p>
+<pre><code class="language-bash">brew install node
+</code></pre>
+<p>باستعمال <strong><a href="https://www.macports.org/">MacPorts</a></strong>:</p>
+<pre><code class="language-bash">port install nodejs&lt;major version&gt;
+
+# على سبيل المثال
+port install nodejs7
+</code></pre>
+<p>باستعمال <strong><a href="https://pkgsrc.joyent.com/install-on-osx/">pkgsrc</a></strong>:</p>
+<p>تثبيت الحزمة الثنائية:</p>
+<pre><code class="language-bash">pkgin -y install nodejs
+</code></pre>
+<p>من أو قم ببنائها يدويا من pkgsrc:</p>
+<pre><code class="language-bash">cd pkgsrc/lang/nodejs &amp;&amp; bmake install
+</code></pre>
+<h2 id="smartos-and-illumos">SmartOS و illumos<a id="header-smartos-and-illumos" class="anchor" href="#smartos-and-illumos" aria-labelledby="smartos-and-illumos"></a></h2>
+<p>تأتي اسطوانة SmartOS مثبتة افتراضيا مع pkgsrc. على توزيعات أخرى من illumos، قم بتثبيت <strong><a href="https://pkgsrc.joyent.com/install-on-illumos/">pkgsrc</a></strong> أولا و عندها يمكنك تثبيت الحزمة الثنائية اعتياديا:</p>
+<pre><code class="language-bash">pkgin -y install nodejs
+</code></pre>
+<p>او قم ببنائها يدويا من pkgsrc:</p>
+<pre><code class="language-bash">cd pkgsrc/lang/nodejs &amp;&amp; bmake install
+</code></pre>
+<h2 id="solus">Solus<a id="header-solus" class="anchor" href="#solus" aria-labelledby="solus"></a></h2>
+<p>توفر Solus النود جي اس في مستودعها الرئيسي.</p>
+<pre><code class="language-bash">sudo eopkg install nodejs
+</code></pre>
+<h2 id="void-linux">Void Linux<a id="header-void-linux" class="anchor" href="#void-linux" aria-labelledby="void-linux"></a></h2>
+<p>يوفر Void Linux نسخة مستقرة من النود جي اس في المستودع الرئيسي.</p>
+<pre><code class="language-bash">xbps-install -Sy nodejs
+</code></pre>
+<h2 id="windows1">ويندوز<a id="header-windows1" class="anchor" href="#windows1" aria-labelledby="windows1"></a></h2>
+<p>قم بتحميل <a href="https://nodejs.org/ar/#home-downloadhead">المثبت الخاص بويندوز</a> مباشرة من موقع <a href="https://nodejs.org/">nodejs.org</a>.</p>
+<h3 id="البدائل-1">البدائل<a id="header-البدائل-1" class="anchor" href="#البدائل-1" aria-labelledby="البدائل-1"></a></h3>
+<p>باستعمال <strong><a href="https://chocolatey.org/">Chocolatey</a></strong>:</p>
+<pre><code class="language-bash">cinst nodejs
+# أو للتثبيت الكامل بواسطة npm
+cinst nodejs.install
+</code></pre>
+<p>باستعمال <strong><a href="https://scoop.sh/">Scoop</a></strong>:</p>
+<pre><code class="language-bash">scoop install nodejs
+</code></pre></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->إنتقل إلى الأعلى</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"ar","localName":"العربية","name":"Arabic","langDir":"rtl","dateFormat":"YYYY.MM.DD","hrefLang":"ar","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"إنتقل إلى الأعلى","components.header.links.home":"الرئيسية","components.header.links.about":"عن الموقع","components.header.links.download":"تنزيلات","components.header.links.docs":"التوثيق","components.header.links.getInvolved":"إنضم إلينا","components.header.links.security":"أمن","components.header.links.certification":"شهادة","components.header.links.blog":"المدونة","components.navigation.about.links.governance":"الحوكمة","components.navigation.docs.links.es6":"ES6 وما بعدها","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"إرشادات","components.navigation.docs.links.dependencies":"تبعيات","components.navigation.getInvolved.links.collabSummit":"القمة التعاونية","components.navigation.getInvolved.links.contribute":"مساهمة","components.navigation.getInvolved.links.codeOfConduct":"القواعد السلوكية","components.downloadList.links.previousReleases":"الاصدارات السابقة","components.downloadList.links.packageManager":"تحميل Node.js عن طريق نظام إدارة الحزم الافتراضي","components.downloadList.links.shaSums":"وثائق الاصدارات مختومة SHASUMS","components.downloadList.links.shaSums.howToVerify":" (كيفية التحقق)","components.downloadList.links.allDownloads":"تحميل جميع النسخ","components.downloadList.links.nightlyReleases":"إصدارات ليلية","components.downloadList.links.unofficialBuilds":"بُنْيَات غير رسمية","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"تثبيت Node.js باستعمال أرشيف ثنائي على لينكس","components.downloadList.links.installingOnWsl":"التثبيت على ويندوز في النظام الفرعي لينكس (WSL)","components.downloadReleasesTable.changelog":"سجل التغييرات","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"التوثيق","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"التالي | ","components.pagination.previous":"السابق","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/ar/download/package-manager","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

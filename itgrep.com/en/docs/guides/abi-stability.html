@@ -1,0 +1,106 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>ABI Stability | Node.js</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="ABI Stability | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="ABI Stability | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/en/docs/guides/abi-stability"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/en/docs/guides/abi-stability-9195e1b415319aa6.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NDMJQNDPS"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-6NDMJQNDPS");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7950559866369342" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/en"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/en">Home</a></li><li class=""><a href="/en/about">About</a></li><li class=""><a href="/en/download">Downloads</a></li><li class="active"><a href="/en/docs">Docs</a></li><li class=""><a href="/en/get-involved">Get Involved</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">Security</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class=""><a href="/en/blog">News</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/abi-stability">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/abi-stability">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/abi-stability">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/abi-stability">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/abi-stability">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/abi-stability">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/abi-stability">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/abi-stability">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/abi-stability">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/abi-stability">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/abi-stability">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/abi-stability">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/abi-stability">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/abi-stability">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/abi-stability">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/abi-stability">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/abi-stability">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/abi-stability">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/en/docs">Docs</a></li><li class=""><a href="/en/docs/es6">ES6 and beyond</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/en/docs/guides">Guides</a></li><li class=""><a href="/en/docs/meta/topics/dependencies">Dependencies</a></li></ul></nav><article dir="auto"><h1 id="abi-stability">ABI Stability<a id="header-abi-stability" class="anchor" href="#abi-stability" aria-labelledby="abi-stability"></a></h1>
+<h2 id="introduction">Introduction<a id="header-introduction" class="anchor" href="#introduction" aria-labelledby="introduction"></a></h2>
+<p>An Application Binary Interface (ABI) is a way for programs to call functions
+and use data structures from other compiled programs. It is the compiled version
+of an Application Programming Interface (API). In other words, the headers files
+describing the classes, functions, data structures, enumerations, and constants
+which enable an application to perform a desired task correspond by way of
+compilation to a set of addresses and expected parameter values and memory
+structure sizes and layouts with which the provider of the ABI was compiled.</p>
+<p>The application using the ABI must be compiled such that the available
+addresses, expected parameter values, and memory structure sizes and layouts
+agree with those with which the ABI provider was compiled. This is usually
+accomplished by compiling against the headers provided by the ABI provider.</p>
+<p>Since the provider of the ABI and the user of the ABI may be compiled at
+different times with different versions of the compiler, a portion of the
+responsibility for ensuring ABI compatibility lies with the compiler. Different
+versions of the compiler, perhaps provided by different vendors, must all
+produce the same ABI from a header file with a certain content, and must produce
+code for the application using the ABI that accesses the API described in a
+given header according to the conventions of the ABI resulting from the
+description in the header. Modern compilers have a fairly good track record of
+not breaking the ABI compatibility of the applications they compile.</p>
+<p>The remaining responsibility for ensuring ABI compatibility lies with the team
+maintaining the header files which provide the API that results, upon
+compilation, in the ABI that is to remain stable. Changes to the header files
+can be made, but the nature of the changes has to be closely tracked to ensure
+that, upon compilation, the ABI does not change in a way that will render
+existing users of the ABI incompatible with the new version.</p>
+<h2 id="abi-stability-in-nodejs">ABI Stability in Node.js<a id="header-abi-stability-in-nodejs" class="anchor" href="#abi-stability-in-nodejs" aria-labelledby="abi-stability-in-nodejs"></a></h2>
+<p>Node.js provides header files maintained by several independent teams. For
+example, header files such as <code>node.h</code> and <code>node_buffer.h</code> are maintained by
+the Node.js team. <code>v8.h</code> is maintained by the V8 team, which, although in close
+co-operation with the Node.js team, is independent, and with its own schedule
+and priorities. Thus, the Node.js team has only partial control over the
+changes that are introduced in the headers the project provides. As a result,
+the Node.js project has adopted <a href="https://semver.org/">semantic versioning</a>.
+This ensures that the APIs provided by the project will result in a stable ABI
+for all minor and patch versions of Node.js released within one major version.
+In practice, this means that the Node.js project has committed itself to
+ensuring that a Node.js native addon compiled against a given major version of
+Node.js will load successfully when loaded by any Node.js minor or patch version
+within the major version against which it was compiled.</p>
+<h2 id="n-api">N-API<a id="header-n-api" class="anchor" href="#n-api" aria-labelledby="n-api"></a></h2>
+<p>Demand has arisen for equipping Node.js with an API that results in an ABI that
+remains stable across multiple Node.js major versions. The motivation for
+creating such an API is as follows:</p>
+<ul>
+<li>
+<p>The JavaScript language has remained compatible with itself since its very
+early days, whereas the ABI of the engine executing the JavaScript code changes
+with every major version of Node.js. This means that applications consisting of
+Node.js packages written entirely in JavaScript need not be recompiled,
+reinstalled, or redeployed as a new major version of Node.js is dropped into
+the production environment in which such applications run. In contrast, if an
+application depends on a package that contains a native addon, the application
+has to be recompiled, reinstalled, and redeployed whenever a new major version
+of Node.js is introduced into the production environment. This disparity
+between Node.js packages containing native addons and those that are written
+entirely in JavaScript has added to the maintenance burden of production
+systems which rely on native addons.</p>
+</li>
+<li>
+<p>Other projects have started to produce JavaScript interfaces that are
+essentially alternative implementations of Node.js. Since these projects are
+usually built on a different JavaScript engine than V8, their native addons
+necessarily take on a different structure and use a different API. Nevertheless,
+using a single API for a native addon across different implementations of the
+Node.js JavaScript API would allow these projects to take advantage of the
+ecosystem of JavaScript packages that has accrued around Node.js.</p>
+</li>
+<li>
+<p>Node.js may contain a different JavaScript engine in the future. This means
+that, externally, all Node.js interfaces would remain the same, but the V8
+header file would be absent. Such a step would cause the disruption of the
+Node.js ecosystem in general, and that of the native addons in particular, if
+an API that is JavaScript engine agnostic is not first provided by Node.js and
+adopted by native addons.</p>
+</li>
+</ul>
+<p>To these ends Node.js has introduced N-API in version 8.6.0 and marked it as a
+stable component of the project as of Node.js 8.12.0. The API is defined in the
+headers <a href="https://github.com/nodejs/node/blob/main/src/node_api.h"><code>node_api.h</code></a> and <a href="https://github.com/nodejs/node/blob/main/src/node_api_types.h"><code>node_api_types.h</code></a>, and provides a forward-
+compatibility guarantee that crosses the Node.js major version boundary. The
+guarantee can be stated as follows:</p>
+<p><strong>A given version <em>n</em> of N-API will be available in the major version of
+Node.js in which it was published, and in all subsequent versions of Node.js,
+including subsequent major versions.</strong></p>
+<p>A native addon author can take advantage of the N-API forward compatibility
+guarantee by ensuring that the addon makes use only of APIs defined in
+<code>node_api.h</code> and data structures and constants defined in <code>node_api_types.h</code>.
+By doing so, the author facilitates adoption of their addon by indicating to
+production users that the maintenance burden for their application will increase
+no more by the addition of the native addon to their project than it would by
+the addition of a package written purely in JavaScript.</p>
+<p>N-API is versioned because new APIs are added from time to time. Unlike
+semantic versioning, N-API versioning is cumulative. That is, each version of
+N-API conveys the same meaning as a minor version in the semver system, meaning
+that all changes made to N-API will be backwards compatible. Additionally, new
+N-APIs are added under an experimental flag to give the community an opportunity
+to vet them in a production environment. Experimental status means that,
+although care has been taken to ensure that the new API will not have to be
+modified in an ABI-incompatible way in the future, it has not yet been
+sufficiently proven in production to be correct and useful as designed and, as
+such, may undergo ABI-incompatible changes before it is finally incorporated
+into a forthcoming version of N-API. That is, an experimental N-API is not yet
+covered by the forward compatibility guarantee.</p></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->Scroll to top</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"en","localName":"English","name":"English","langDir":"ltr","dateFormat":"MM.DD.YYYY","hrefLang":"en-US","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"Scroll to top","components.header.links.home":"Home","components.header.links.about":"About","components.header.links.download":"Downloads","components.header.links.docs":"Docs","components.header.links.getInvolved":"Get Involved","components.header.links.security":"Security","components.header.links.certification":"Certification","components.header.links.blog":"News","components.navigation.about.links.governance":"Governance","components.navigation.docs.links.es6":"ES6 and beyond","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"Guides","components.navigation.docs.links.dependencies":"Dependencies","components.navigation.getInvolved.links.collabSummit":"Collab Summit","components.navigation.getInvolved.links.contribute":"Contribute","components.navigation.getInvolved.links.codeOfConduct":"Code of Conduct","components.downloadList.links.previousReleases":"Previous Releases","components.downloadList.links.packageManager":"Installing Node.js via package manager","components.downloadList.links.shaSums":"Signed SHASUMS for release files","components.downloadList.links.shaSums.howToVerify":" (How to verify)","components.downloadList.links.allDownloads":"All download options","components.downloadList.links.nightlyReleases":"Nightly builds","components.downloadList.links.unofficialBuilds":"Unofficial builds","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Installing Node.js via binary archive","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"Changelog","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"Docs","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"Newer | ","components.pagination.previous":"Older","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/en/docs/guides/abi-stability","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

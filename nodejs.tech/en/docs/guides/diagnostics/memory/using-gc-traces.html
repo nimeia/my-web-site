@@ -1,0 +1,301 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Memory Diagnostics - Using GC Trace | Node.js node js 学习 中文网</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Memory Diagnostics - Using GC Trace | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Memory Diagnostics - Using GC Trace | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/en/docs/guides/diagnostics/memory/using-gc-traces"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/en/docs/guides/diagnostics/memory/using-gc-traces-6dfe7ef786a2f49a.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-2WRNZHGVQT"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-2WRNZHGVQT");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8264273508355034" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/en"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/en">Home</a></li><li class=""><a href="/en/about">About</a></li><li class=""><a href="/en/download">Downloads</a></li><li class="active"><a href="/en/docs">Docs</a></li><li class=""><a href="/en/get-involved">Get Involved</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">Security</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class=""><a href="/en/blog">News</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/diagnostics/memory/using-gc-traces">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/diagnostics/memory/using-gc-traces">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/diagnostics/memory/using-gc-traces">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/diagnostics/memory/using-gc-traces">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/diagnostics/memory/using-gc-traces">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/diagnostics/memory/using-gc-traces">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/diagnostics/memory/using-gc-traces">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/diagnostics/memory/using-gc-traces">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/diagnostics/memory/using-gc-traces">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/diagnostics/memory/using-gc-traces">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/diagnostics/memory/using-gc-traces">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/diagnostics/memory/using-gc-traces">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/diagnostics/memory/using-gc-traces">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/diagnostics/memory/using-gc-traces">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/diagnostics/memory/using-gc-traces">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/diagnostics/memory/using-gc-traces">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/diagnostics/memory/using-gc-traces">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/diagnostics/memory/using-gc-traces">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/en/docs">Docs</a></li><li class=""><a href="/en/docs/es6">ES6 and beyond</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/en/docs/guides">Guides</a></li><li class=""><a href="/en/docs/meta/topics/dependencies">Dependencies</a></li></ul></nav><article dir="auto"><h1 id="tracing-garbage-collection">Tracing garbage collection<a id="header-tracing-garbage-collection" class="anchor" href="#tracing-garbage-collection" aria-labelledby="tracing-garbage-collection"></a></h1>
+<p>This guide will go through the fundamentals of garbage collection traces.</p>
+<p>By the end of this guide, you&#x27;ll be able to:</p>
+<ul>
+<li>Enable traces in your Node.js application</li>
+<li>Interpret traces</li>
+<li>Identify potential memory issues in your Node.js application</li>
+</ul>
+<p>There&#x27;s a lot to learn about how the garbage collector works, but if you learn
+one thing it&#x27;s that when GC is running, your code is not.</p>
+<p>You may want to know how often and long the garbage collection runs,
+and what is the outcome.</p>
+<h2 id="setup">Setup<a id="header-setup" class="anchor" href="#setup" aria-labelledby="setup"></a></h2>
+<p>For the proposal of this guide, we&#x27;ll use this script:</p>
+<pre><code class="language-js">// script.mjs
+
+import os from &#x27;os&#x27;;
+
+let len = 1_000_000;
+const entries = new Set();
+
+function addEntry () {
+  const entry = {
+    timestamp: Date.now(),
+    memory: os.freemem(),
+    totalMemory: os.totalmem(),
+    uptime: os.uptime(),
+  };
+
+  entries.add(entry);
+}
+
+function summary () {
+  console.log(`Total: ${entries.size} entries`);
+}
+
+// execution
+(() =&gt; {
+  while (len &gt; 0) {
+    addEntry();
+    process.stdout.write(`~~&gt; ${len} entries to record\r`);
+    len--;
+  };
+
+  summary();
+})();
+</code></pre>
+<div class="highlight-box">
+<p>Even if the leak is evident here, finding the source of a leak
+could be cumbersome in the context of a real-world application.</p>
+</div>
+<h2 id="running-with-garbage-collection-traces">Running with garbage collection traces<a id="header-running-with-garbage-collection-traces" class="anchor" href="#running-with-garbage-collection-traces" aria-labelledby="running-with-garbage-collection-traces"></a></h2>
+<p>You can see traces for garbage collection in console output of your process
+using the <code>--trace-gc</code> flag.</p>
+<pre><code class="language-console">$ node --trace-gc script.mjs
+</code></pre>
+<div class="highlight-box">
+<p>Note: you can find the source code of this <a href="https://github.com/nodejs/diagnostics/tree/main/documentation/memory/step3/exercise">exercise</a>
+in the Node.js Diagnostics repository.</p>
+</div>
+<p>It should output something like:</p>
+<pre><code class="language-bash">[39067:0x158008000]     2297 ms: Scavenge 117.5 (135.8) -&gt; 102.2 (135.8) MB, 0.8 / 0.0 ms  (average mu = 0.994, current mu = 0.994) allocation failure
+[39067:0x158008000]     2375 ms: Scavenge 120.0 (138.3) -&gt; 104.7 (138.3) MB, 0.9 / 0.0 ms  (average mu = 0.994, current mu = 0.994) allocation failure
+[39067:0x158008000]     2453 ms: Scavenge 122.4 (140.8) -&gt; 107.1 (140.8) MB, 0.7 / 0.0 ms  (average mu = 0.994, current mu = 0.994) allocation failure
+[39067:0x158008000]     2531 ms: Scavenge 124.9 (143.3) -&gt; 109.6 (143.3) MB, 0.7 / 0.0 ms  (average mu = 0.994, current mu = 0.994) allocation failure
+[39067:0x158008000]     2610 ms: Scavenge 127.1 (145.5) -&gt; 111.8 (145.5) MB, 0.7 / 0.0 ms  (average mu = 0.994, current mu = 0.994) allocation failure
+[39067:0x158008000]     2688 ms: Scavenge 129.6 (148.0) -&gt; 114.2 (148.0) MB, 0.8 / 0.0 ms  (average mu = 0.994, current mu = 0.994) allocation failure
+[39067:0x158008000]     2766 ms: Scavenge 132.0 (150.5) -&gt; 116.7 (150.5) MB, 1.1 / 0.0 ms  (average mu = 0.994, current mu = 0.994) allocation failure
+Total: 1000000 entries
+</code></pre>
+<p>Hard to read? Maybe we should pass in review a few concepts
+and explain the outputs of the <code>--trace-gc</code> flag.</p>
+<h3 id="examining-a-trace-with---trace-gc">Examining a trace with <code>--trace-gc</code><a id="header-examining-a-trace-with---trace-gc" class="anchor" href="#examining-a-trace-with---trace-gc" aria-labelledby="examining-a-trace-with---trace-gc"></a></h3>
+<p>The <code>--trace-gc</code> (or <code>--trace_gc</code>, either is fine) flag outputs all garbage collection
+events in the console.
+The composition of each line can be described as:</p>
+<pre><code class="language-bash">[13973:0x110008000]       44 ms: Scavenge 2.4 (3.2) -&gt; 2.0 (4.2) MB, 0.5 / 0.0 ms  (average mu = 1.000, current mu = 1.000) allocation failure
+</code></pre>
+<table><thead><tr><th>Token value</th><th>Interpretation</th></tr></thead><tbody><tr><td>13973</td><td>PID of the running process</td></tr><tr><td>0x110008000</td><td>Isolate (JS heap instance)</td></tr><tr><td>44 ms</td><td>The time since the process started in ms</td></tr><tr><td>Scavenge</td><td>Type / Phase of GC</td></tr><tr><td>2.4</td><td>Heap used before GC in MB</td></tr><tr><td>(3.2)</td><td>Total heap before GC in MB</td></tr><tr><td>2.0</td><td>Heap used after GC in MB</td></tr><tr><td>(4.2)</td><td>Total heap after GC in MB</td></tr><tr><td>0.5 / 0.0 ms (average mu = 1.000, current mu = 1.000)</td><td>Time spent in GC in ms</td></tr><tr><td>allocation failure</td><td>Reason for GC</td></tr></tbody></table>
+<p>We&#x27;ll only focus on two events here:</p>
+<ul>
+<li>Scavenge</li>
+<li>Mark-sweep</li>
+</ul>
+<p>The heap is divided into <em>spaces</em>. Amongst these, we have a space called
+the &quot;new&quot; space and another one called the &quot;old&quot; space.</p>
+<div class="highlight-box">
+<p>👉 In reality, the heap structure is a bit different, but we&#x27;ll stick
+to a simpler version for this article. If you want more details
+we encourage you to look at this <a href="https://v8.dev/blog/trash-talk">talk of Peter Marshall</a> about Orinoco.</p>
+</div>
+<h3 id="scavenge">Scavenge<a id="header-scavenge" class="anchor" href="#scavenge" aria-labelledby="scavenge"></a></h3>
+<p>Scavenge is the name of an algorithm that will perform garbage collection
+into new space. The new space is where objects are created.
+The new space is designed to be small and fast for garbage collection.</p>
+<p>Let&#x27;s imagine a Scavenge scenario:</p>
+<ul>
+<li>we allocated <code>A</code>, <code>B</code>, <code>C</code> &amp; <code>D</code>.<!-- -->
+<pre><code class="language-bash">| A | B | C | D | &lt;unallocated&gt; |
+</code></pre>
+</li>
+<li>we want to allocate <code>E</code></li>
+<li>not enough space, the memory is exhausted</li>
+<li>then, a (garbage) collection is triggered</li>
+<li>dead objects are collected</li>
+<li>living object will stay</li>
+<li>assuming <code>B</code> and <code>D</code> were dead<!-- -->
+<pre><code class="language-bash">| A | C | &lt;unallocated&gt; |
+</code></pre>
+</li>
+<li>now we can allocate <code>E</code>
+<pre><code class="language-bash">| A | C | E | &lt;unallocated&gt; |
+</code></pre>
+</li>
+</ul>
+<p>v8 will promote objects, not garbage collected after two Scavenge
+operations to the old space.</p>
+<div class="highlight-box">
+<p>👉 Full <a href="https://github.com/thlorenz/v8-perf/blob/master/gc.md#sample-scavenge-scenario">Scavenge scenario</a></p>
+</div>
+<h3 id="mark-sweep">Mark-sweep<a id="header-mark-sweep" class="anchor" href="#mark-sweep" aria-labelledby="mark-sweep"></a></h3>
+<p>Mark-sweep is used to collect objects from old space. The old space
+is where objects that survived the new space are living.</p>
+<p>This algorithm is composed of two phases:</p>
+<ul>
+<li><strong>Mark</strong>: Will mark still alive objects as black and others as white.</li>
+<li><strong>Sweep</strong>: Scans for white objects and converts them to free spaces.</li>
+</ul>
+<div class="highlight-box">
+<p>👉 In fact, the Mark and Sweep steps are a bit more elaborate.
+Please read this <a href="https://github.com/thlorenz/v8-perf/blob/master/gc.md#marking-state">document</a> for more details.</p>
+</div>
+<!-- -->
+<h2 id="--trace-gc-in-action"><code>--trace-gc</code> in action<a id="header---trace-gc-in-action" class="anchor" href="#--trace-gc-in-action" aria-labelledby="--trace-gc-in-action"></a></h2>
+<h3 id="memory-leak">Memory leak<a id="header-memory-leak" class="anchor" href="#memory-leak" aria-labelledby="memory-leak"></a></h3>
+<p>Now, if you return quickly to the previous terminal window:
+you will see many <code>Mark-sweep</code> events in the console.
+We also see that the amount of memory collected after
+the event is insignificant.</p>
+<p>Now that we are experts in garbage collection! What could we deduce?</p>
+<p>We probably have a memory leak! But how could we be sure of that?
+(Reminder: it is pretty apparent in this example,
+but what about a real-world application?)</p>
+<p>But how could we spot the context?</p>
+<h3 id="how-to-get-the-context-of-bad-allocations">How to get the context of bad allocations<a id="header-how-to-get-the-context-of-bad-allocations" class="anchor" href="#how-to-get-the-context-of-bad-allocations" aria-labelledby="how-to-get-the-context-of-bad-allocations"></a></h3>
+<ol>
+<li>Suppose we observe that the old space is continously increasing.</li>
+<li>Reduce <a href="https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes"><code>--max-old-space-size</code></a> such that the total heap is closer to the limit</li>
+<li>Run the program until you hit the out of memory.</li>
+<li>The produced log shows the failing context.</li>
+<li>If it hits OOM, increment the heap size by ~10% and repeat a few times. If the same pattern is observed, it indicates a memory leak.</li>
+<li>If there is no OOM, then freeze the heap size to that value - A packed heap reduces memory footprint and computation latency.</li>
+</ol>
+<p>For example, try to run <code>script.mjs</code> with the following command:</p>
+<pre><code class="language-bash">node --trace-gc --max-old-space-size=50 script.mjs
+</code></pre>
+<p>You should experience an OOM:</p>
+<pre><code class="language-bash">[...]
+&lt;--- Last few GCs ---&gt;
+[40928:0x148008000]      509 ms: Mark-sweep 46.8 (65.8) -&gt; 40.6 (77.3) MB, 6.4 / 0.0 ms  (+ 1.4 ms in 11 steps since start of marking, biggest step 0.2 ms, walltime since start of marking 24 ms) (average mu = 0.977, current mu = 0.977) finalize incrementa[40928:0x148008000]      768 ms: Mark-sweep 56.3 (77.3) -&gt; 47.1 (83.0) MB, 35.9 / 0.0 ms  (average mu = 0.927, current mu = 0.861) allocation failure scavenge might not succeed
+&lt;--- JS stacktrace ---&gt;
+FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory [...]
+</code></pre>
+<p>Now, try to it for 100mb:</p>
+<pre><code class="language-bash">node --trace-gc --max-old-space-size=100 script.mjs
+</code></pre>
+<p>You should experience something similar, the only difference
+should be that the last GC trace will contain a bigger heap size.</p>
+<pre><code class="language-bash">&lt;--- Last few GCs ---&gt;
+[40977:0x128008000]     2066 ms: Mark-sweep (reduce) 99.6 (102.5) -&gt; 99.6 (102.5) MB, 46.7 / 0.0 ms  (+ 0.0 ms in 0 steps since start of marking, biggest step 0.0 ms, walltime since start of marking 47 ms) (average mu = 0.154, current mu = 0.155) allocati[40977:0x128008000]     2123 ms: Mark-sweep (reduce) 99.6 (102.5) -&gt; 99.6 (102.5) MB, 47.7 / 0.0 ms  (+ 0.0 ms in 0 steps since start of marking, biggest step 0.0 ms, walltime since start of marking 48 ms) (average mu = 0.165, current mu = 0.175) allocati
+</code></pre>
+<div class="highlight-box">
+<p>Note: In the context of real application, it could be cumbersome to find the leaked object in the code. Heap snpashot could help you to find it. Visit the <a href="https://github.com/nodejs/nodejs.org/blob/main/locale/en/docs/guides/diagnostics/memory/using-heap-snapshot.md#how-to-find-a-memory-leak-with-heap-snapshots">guide dedicated to heap snapshot</a></p>
+</div>
+<h3 id="slowness">Slowness<a id="header-slowness" class="anchor" href="#slowness" aria-labelledby="slowness"></a></h3>
+<p>How do you assert whether too many garbage collections
+are happening or causing an overhead?</p>
+<ol>
+<li>Review the trace data, precisely the time between consecutive collections.</li>
+<li>Review the trace data, specifically around time spent in GC.</li>
+<li>If the time between two GC is less than the time spent in GC, the application is severely starving.</li>
+<li>If the time between two GCS and the time spent in GC are very high, probably the application can use a smaller heap.</li>
+<li>If the time between two GCS is much greater than the time spent in GC, the application is relatively healthy.</li>
+</ol>
+<h2 id="fix-the-leak">Fix the leak<a id="header-fix-the-leak" class="anchor" href="#fix-the-leak" aria-labelledby="fix-the-leak"></a></h2>
+<p>Now let&#x27;s fix the leak. Instead of using an object to store
+our entries, we could use a file.</p>
+<p>Let&#x27;s modify our script a bit:</p>
+<pre><code class="language-js">// script-fix.mjs
+import os from &#x27;os&#x27;;
+import fs from &#x27;fs/promises&#x27;;
+
+let len = 1_000_000;
+const fileName = `entries-${Date.now()}`;
+
+async function addEntry () {
+  const entry = {
+    timestamp: Date.now(),
+    memory: os.freemem(),
+    totalMemory: os.totalmem(),
+    uptime: os.uptime(),
+  };
+  await fs.appendFile(fileName, JSON.stringify(entry) + &#x27;\n&#x27;);
+}
+
+async function summary () {
+  const stats = await fs.lstat(fileName);
+  console.log(`File size ${stats.size} bytes`);
+}
+
+// execution
+(async () =&gt; {
+  await fs.writeFile(fileName, &quot;----START---\n&quot;);
+  while (len &gt; 0) {
+    await addEntry();
+    process.stdout.write(`~~&gt; ${len} entries to record\r`);
+    len--;
+  };
+
+  await summary();
+})();
+</code></pre>
+<p>Using a <code>Set</code> to store data is not a bad practice at all;
+you should just care about the memory footprint of your program.</p>
+<div class="highlight-box">
+<p>Note: you can find the source code of this <a href="https://github.com/nodejs/diagnostics/tree/main/documentation/memory/step3/exercise">exercise</a>
+in the Node.js Diagnostics repository.</p>
+</div>
+<p>Now, let&#x27;s execute this script.</p>
+<pre><code class="language-text">node --trace-gc script-fix.mjs
+</code></pre>
+<p>You should observe two things:</p>
+<ul>
+<li>Mark-sweep events appear less frequently</li>
+<li>the memory footprint doesn&#x27;t exceed 25MB versus more than 130MB with the first script.</li>
+</ul>
+<p>It makes a lot of sense as the new version puts less pressure on
+the memory than the first one.</p>
+<p><strong>Takeaway</strong>: What do you think about improving this script?
+You probably see that the new version of the script is slow.
+What if we use a <code>Set</code> again and write its content into a
+file only when the memory reaches a specific size?</p>
+<div class="highlight-box">
+<p><a href="https://nodejs.org/dist/latest-v16.x/docs/api/v8.html#v8getheapstatistics"><code>getheapstatistics</code></a> API could help you.</p>
+</div>
+<h2 id="bonus-trace-garbage-collection-programmatically">Bonus: Trace garbage collection programmatically<a id="header-bonus-trace-garbage-collection-programmatically" class="anchor" href="#bonus-trace-garbage-collection-programmatically" aria-labelledby="bonus-trace-garbage-collection-programmatically"></a></h2>
+<h3 id="using-v8-module">Using <code>v8</code> module<a id="header-using-v8-module" class="anchor" href="#using-v8-module" aria-labelledby="using-v8-module"></a></h3>
+<p>You might want to avoid getting traces from the entire lifetime of your process.
+In that case, set the flag from within the process.
+The <code>v8</code> module exposes an API to put flags on the fly.</p>
+<pre><code class="language-js">import v8 from &#x27;v8&#x27;;
+
+// enabling trace-gc
+v8.setFlagsFromString(&#x27;--trace-gc&#x27;);
+
+// disabling trace-gc
+v8.setFlagsFromString(&#x27;--notrace-gc&#x27;);
+</code></pre>
+<h3 id="using-performance-hooks">Using performance hooks<a id="header-using-performance-hooks" class="anchor" href="#using-performance-hooks" aria-labelledby="using-performance-hooks"></a></h3>
+<p>In Node.js, you can use <a href="https://nodejs.org/api/perf_hooks.html">performance hooks</a> to trace
+garbage collection.</p>
+<pre><code class="language-js">const { PerformanceObserver } = require(&#x27;perf_hooks&#x27;);
+
+// Create a performance observer
+const obs = new PerformanceObserver((list) =&gt; {
+  const entry = list.getEntries()[0];
+  /*
+  The entry is an instance of PerformanceEntry containing
+  metrics of a single garbage collection event.
+  For example:
+  PerformanceEntry {
+    name: &#x27;gc&#x27;,
+    entryType: &#x27;gc&#x27;,
+    startTime: 2820.567669,
+    duration: 1.315709,
+    kind: 1
+  }
+  */
+});
+
+// Subscribe to notifications of GCs
+obs.observe({ entryTypes: [&#x27;gc&#x27;] });
+
+// Stop subscription
+obs.disconnect();
+</code></pre>
+<h3 id="examining-a-trace-with-performance-hooks">Examining a trace with performance hooks<a id="header-examining-a-trace-with-performance-hooks" class="anchor" href="#examining-a-trace-with-performance-hooks" aria-labelledby="examining-a-trace-with-performance-hooks"></a></h3>
+<p>You can get GC statistics as <a href="https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performanceentry">PerformanceEntry</a> from the callback in
+<a href="https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performanceobserver">PerformanceObserver</a>.</p>
+<p>For example:</p>
+<pre><code class="language-ts">PerformanceEntry {
+  name: &#x27;gc&#x27;,
+  entryType: &#x27;gc&#x27;,
+  startTime: 2820.567669,
+  duration: 1.315709,
+  kind: 1
+}
+</code></pre>
+<table><thead><tr><th>Property</th><th>Interpretation</th></tr></thead><tbody><tr><td>name</td><td>The name of the performance entry.</td></tr><tr><td>entryType</td><td>The type of the performance entry.</td></tr><tr><td>startTime</td><td>The high-resolution millisecond timestamp is marking the starting time of the Performance Entry.</td></tr><tr><td>duration</td><td>The total number of milliseconds elapsed for this entry.</td></tr><tr><td>kind</td><td>The type of garbage collection operation that occurred.</td></tr><tr><td>flags</td><td>The additional information about GC.</td></tr></tbody></table>
+<p>For more information, you can refer to
+<a href="https://nodejs.org/api/perf_hooks.html">the documentation about performance hooks</a>.</p></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->Scroll to top</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"en","localName":"English","name":"English","langDir":"ltr","dateFormat":"MM.DD.YYYY","hrefLang":"en-US","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"Scroll to top","components.header.links.home":"Home","components.header.links.about":"About","components.header.links.download":"Downloads","components.header.links.docs":"Docs","components.header.links.getInvolved":"Get Involved","components.header.links.security":"Security","components.header.links.certification":"Certification","components.header.links.blog":"News","components.navigation.about.links.governance":"Governance","components.navigation.docs.links.es6":"ES6 and beyond","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"Guides","components.navigation.docs.links.dependencies":"Dependencies","components.navigation.getInvolved.links.collabSummit":"Collab Summit","components.navigation.getInvolved.links.contribute":"Contribute","components.navigation.getInvolved.links.codeOfConduct":"Code of Conduct","components.downloadList.links.previousReleases":"Previous Releases","components.downloadList.links.packageManager":"Installing Node.js via package manager","components.downloadList.links.shaSums":"Signed SHASUMS for release files","components.downloadList.links.shaSums.howToVerify":" (How to verify)","components.downloadList.links.allDownloads":"All download options","components.downloadList.links.nightlyReleases":"Nightly builds","components.downloadList.links.unofficialBuilds":"Unofficial builds","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Installing Node.js via binary archive","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"Changelog","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"Docs","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"Newer | ","components.pagination.previous":"Older","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/en/docs/guides/diagnostics/memory/using-gc-traces","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

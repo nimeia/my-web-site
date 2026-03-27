@@ -1,0 +1,227 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Porting to the Buffer.from()/Buffer.alloc() API | Node.js node js 学习 中文网</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Porting to the Buffer.from()/Buffer.alloc() API | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Porting to the Buffer.from()/Buffer.alloc() API | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/en/docs/guides/buffer-constructor-deprecation"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/en/docs/guides/buffer-constructor-deprecation-d2ea0050f4920636.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-2WRNZHGVQT"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-2WRNZHGVQT");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8264273508355034" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/en"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/en">Home</a></li><li class=""><a href="/en/about">About</a></li><li class=""><a href="/en/download">Downloads</a></li><li class="active"><a href="/en/docs">Docs</a></li><li class=""><a href="/en/get-involved">Get Involved</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">Security</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class=""><a href="/en/blog">News</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/buffer-constructor-deprecation">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/buffer-constructor-deprecation">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/buffer-constructor-deprecation">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/buffer-constructor-deprecation">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/buffer-constructor-deprecation">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/buffer-constructor-deprecation">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/buffer-constructor-deprecation">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/buffer-constructor-deprecation">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/buffer-constructor-deprecation">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/buffer-constructor-deprecation">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/buffer-constructor-deprecation">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/buffer-constructor-deprecation">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/buffer-constructor-deprecation">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/buffer-constructor-deprecation">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/buffer-constructor-deprecation">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/buffer-constructor-deprecation">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/buffer-constructor-deprecation">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/buffer-constructor-deprecation">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/en/docs">Docs</a></li><li class=""><a href="/en/docs/es6">ES6 and beyond</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/en/docs/guides">Guides</a></li><li class=""><a href="/en/docs/meta/topics/dependencies">Dependencies</a></li></ul></nav><article dir="auto"><h1 id="porting-to-the-,[object-object],/,[object-object],-api">Porting to the <code>Buffer.from()</code>/<code>Buffer.alloc()</code> API<a id="header-porting-to-the-,[object-object],/,[object-object],-api" class="anchor" href="#porting-to-the-,[object-object],/,[object-object],-api" aria-labelledby="porting-to-the-,[object-object],/,[object-object],-api"></a></h1>
+<h2 id="overview">Overview<a id="header-overview" class="anchor" href="#overview" aria-labelledby="overview"></a></h2>
+<p>This guide explains how to migrate to safe <code>Buffer</code> constructor methods. The migration fixes the following deprecation warning:</p>
+<div class="highlight-box">
+<p>The Buffer() and new Buffer() constructors are not recommended for use due to security and usability concerns. Please use the new Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() construction methods instead.</p>
+</div>
+<ul>
+<li><a href="#variant-1">Variant 1: Drop support for Node.js ≤ 4.4.x and 5.0.0 — 5.9.x</a> (<em>recommended</em>)</li>
+<li><a href="#variant-2">Variant 2: Use a polyfill</a></li>
+<li><a href="#variant-3">Variant 3: Manual detection, with safeguards</a></li>
+</ul>
+<h3 id="finding-problematic-bits-of-code-using-grep">Finding problematic bits of code using <code>grep</code><a id="header-finding-problematic-bits-of-code-using-grep" class="anchor" href="#finding-problematic-bits-of-code-using-grep" aria-labelledby="finding-problematic-bits-of-code-using-grep"></a></h3>
+<p>Just run <code>grep -nrE &#x27;[^a-zA-Z](Slow)?Buffer\s*\(&#x27; --exclude-dir node_modules</code>.</p>
+<p>It will find all the potentially unsafe places in your own code (with some considerably unlikely
+exceptions).</p>
+<h3 id="finding-problematic-bits-of-code-using-nodejs-8">Finding problematic bits of code using Node.js 8<a id="header-finding-problematic-bits-of-code-using-nodejs-8" class="anchor" href="#finding-problematic-bits-of-code-using-nodejs-8" aria-labelledby="finding-problematic-bits-of-code-using-nodejs-8"></a></h3>
+<p>If you’re using Node.js ≥ 8.0.0 (which is recommended), Node.js exposes multiple options that help with finding the relevant pieces of code:</p>
+<ul>
+<li><code>--trace-warnings</code> will make Node.js show a stack trace for this warning and other warnings that are printed by Node.js.</li>
+<li><code>--trace-deprecation</code> does the same thing, but only for deprecation warnings.</li>
+<li><code>--pending-deprecation</code> will show more types of deprecation warnings. In particular, it will show the <code>Buffer()</code> deprecation warning, even on Node.js 8.</li>
+</ul>
+<p>You can set these flags using environment variables:</p>
+<pre><code class="language-bash">$ export NODE_OPTIONS=&#x27;--trace-warnings --pending-deprecation&#x27;
+$ cat example.js
+&#x27;use strict&#x27;;
+const foo = new Buffer(&#x27;foo&#x27;);
+$ node example.js
+(node:7147) [DEP0005] DeprecationWarning: The Buffer() and new Buffer() constructors are not recommended for use due to security and usability concerns. Please use the new Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() construction methods instead.
+    at showFlaggedDeprecation (buffer.js:127:13)
+    at new Buffer (buffer.js:148:3)
+    at Object.&lt;anonymous&gt; (/path/to/example.js:2:13)
+    [... more stack trace lines ...]
+</code></pre>
+<h3 id="finding-problematic-bits-of-code-using-linters">Finding problematic bits of code using linters<a id="header-finding-problematic-bits-of-code-using-linters" class="anchor" href="#finding-problematic-bits-of-code-using-linters" aria-labelledby="finding-problematic-bits-of-code-using-linters"></a></h3>
+<p>ESLint rules <a href="https://eslint.org/docs/rules/no-buffer-constructor">no-buffer-constructor</a>
+or
+<a href="https://github.com/mysticatea/eslint-plugin-node/blob/master/docs/rules/no-deprecated-api">node/no-deprecated-api</a>
+also find calls to deprecated <code>Buffer()</code> API. Those rules are included in some presets.</p>
+<p>There is a drawback, though, that it doesn&#x27;t always
+<a href="https://github.com/chalker/safer-buffer#why-not-safe-buffer">work correctly</a> when <code>Buffer</code> is
+overridden e.g. with a polyfill, so recommended is a combination of this and some other method
+described above.</p>
+<h2 id="variant-1-variant-1-drop-support-for-nodejs-44x-and-500">Variant 1: Drop support for Node.js ≤ 4.4.x and 5.0.0 — 5.9.x<a id="header-variant-1-variant-1-drop-support-for-nodejs-44x-and-500" class="anchor" href="#variant-1-variant-1-drop-support-for-nodejs-44x-and-500" aria-labelledby="variant-1-variant-1-drop-support-for-nodejs-44x-and-500"></a></h2>
+<p>This is the recommended solution nowadays that would imply only minimal overhead.</p>
+<p>The Node.js 5.x release line has been unsupported since July 2016, and the Node.js 4.x release line reaches its End of Life in April 2018 (→ <a href="https://github.com/nodejs/Release#release-schedule">Schedule</a>). This means that these versions of Node.js will <em>not</em> receive any updates, even in case of security issues, so using these release lines should be avoided, if at all possible.</p>
+<p>What you would do in this case is to convert all <code>new Buffer()</code> or <code>Buffer()</code> calls to use <code>Buffer.alloc()</code> or <code>Buffer.from()</code>, in the following way:</p>
+<ul>
+<li>For <code>new Buffer(number)</code>, replace it with <code>Buffer.alloc(number)</code>.</li>
+<li>For <code>new Buffer(string)</code> (or <code>new Buffer(string, encoding)</code>), replace it with <code>Buffer.from(string)</code> (or <code>Buffer.from(string, encoding)</code>).</li>
+<li>For all other combinations of arguments (these are much rarer), also replace <code>new Buffer(...arguments)</code> with <code>Buffer.from(...arguments)</code>.</li>
+</ul>
+<p>Note that <code>Buffer.alloc()</code> is also <em>faster</em> on the current Node.js versions than
+<code>new Buffer(size).fill(0)</code>, which is what you would otherwise need to ensure zero-filling.</p>
+<p>Enabling ESLint rule <a href="https://eslint.org/docs/rules/no-buffer-constructor">no-buffer-constructor</a>
+or
+<a href="https://github.com/mysticatea/eslint-plugin-node/blob/master/docs/rules/no-deprecated-api">node/no-deprecated-api</a>
+is recommended to avoid accidental unsafe <code>Buffer</code> API usage.</p>
+<p>There is also a <a href="https://github.com/joyeecheung/node-dep-codemod#dep005">JSCodeshift codemod</a>
+for automatically migrating <code>Buffer</code> constructors to <code>Buffer.alloc()</code> or <code>Buffer.from()</code>.
+Note that it currently only works with cases where the arguments are literals or where the
+constructor is invoked with two arguments.</p>
+<p><em>If you currently support those older Node.js versions and dropping support for them is not possible, or if you support older branches of your packages, consider using <a href="#variant-2">Variant 2</a>
+or <a href="#variant-3">Variant 3</a> on older branches, so people using those older branches will also receive
+the fix. That way, you will eradicate potential issues caused by unguarded <code>Buffer</code> API usage and
+your users will not observe a runtime deprecation warning when running your code on Node.js 10.</em></p>
+<h2 id="variant-2">Variant 2: Use a polyfill<a id="header-variant-2" class="anchor" href="#variant-2" aria-labelledby="variant-2"></a></h2>
+<p>There are three different polyfills available:</p>
+<ul>
+<li>
+<p><strong><a href="https://www.npmjs.com/package/safer-buffer">safer-buffer</a></strong> is a drop-in replacement for the
+entire <code>Buffer</code> API, that will <em>throw</em> when using <code>new Buffer()</code>.</p>
+<p>You would take exactly the same steps as in <a href="#variant-1">Variant 1</a>, but with a polyfill
+<code>const Buffer = require(&#x27;safer-buffer&#x27;).Buffer</code> in all files where you use the new <code>Buffer</code> API.</p>
+<p>Do not use the old <code>new Buffer()</code> API. In any files where the line above is added,
+using old <code>new Buffer()</code> API will <em>throw</em>.</p>
+</li>
+<li>
+<p><strong><a href="https://www.npmjs.com/package/buffer-from">buffer-from</a> and/or
+<a href="https://www.npmjs.com/package/buffer-alloc">buffer-alloc</a></strong> are
+<a href="https://ponyfill.com/">ponyfills</a> for their respective part of the <code>Buffer</code> API. You only need
+to add the package(s) corresponding to the API you are using.</p>
+<p>You would import the module needed with an appropriate name, e.g.
+<code>const bufferFrom = require(&#x27;buffer-from&#x27;)</code> and then use that instead of the call to
+<code>new Buffer()</code>, e.g. <code>new Buffer(&#x27;test&#x27;)</code> becomes <code>bufferFrom(&#x27;test&#x27;)</code>.</p>
+<p>A downside with this approach is slightly more code changes to migrate off them (as you would be
+using e.g. <code>Buffer.from()</code> under a different name).</p>
+</li>
+<li>
+<p><strong><a href="https://www.npmjs.com/package/safe-buffer">safe-buffer</a></strong> is also a drop-in replacement for
+the entire <code>Buffer</code> API, but using <code>new Buffer()</code> will still work as before.</p>
+<p>A downside to this approach is that it will allow you to also use the older <code>new Buffer()</code> API
+in your code, which is problematic since it can cause issues in your code, and will start
+emitting runtime deprecation warnings starting with Node.js 10
+(<a href="https://github.com/chalker/safer-buffer#why-not-safe-buffer">read more here</a>).</p>
+</li>
+</ul>
+<p>Note that in either case, it is important that you also remove all calls to the old <code>Buffer</code>
+API manually — just throwing in <code>safe-buffer</code> doesn&#x27;t fix the problem by itself, it just provides
+a polyfill for the new API. I have seen people doing that mistake.</p>
+<p>Enabling ESLint rule <a href="https://eslint.org/docs/rules/no-buffer-constructor">no-buffer-constructor</a>
+or
+<a href="https://github.com/mysticatea/eslint-plugin-node/blob/master/docs/rules/no-deprecated-api">node/no-deprecated-api</a>
+is recommended.</p>
+<p><em>Don&#x27;t forget to drop the polyfill usage once you drop support for Node.js &lt; 4.5.0.</em></p>
+<h2 id="variant-3-variant-3">Variant 3 — Manual detection, with safeguards<a id="header-variant-3-variant-3" class="anchor" href="#variant-3-variant-3" aria-labelledby="variant-3-variant-3"></a></h2>
+<p>This is useful if you create <code>Buffer</code> instances in only a few places (e.g. one), or you have your own
+wrapper around them.</p>
+<h3 id="buffer0"><code>Buffer(0)</code><a id="header-buffer0" class="anchor" href="#buffer0" aria-labelledby="buffer0"></a></h3>
+<p>This special case for creating empty buffers can be safely replaced with <code>Buffer.concat([])</code>, which
+returns the same result all the way down to Node.js 0.8.x.</p>
+<h3 id="buffernotnumber"><code>Buffer(notNumber)</code><a id="header-buffernotnumber" class="anchor" href="#buffernotnumber" aria-labelledby="buffernotnumber"></a></h3>
+<p>Before:</p>
+<pre><code class="language-js">const buf = new Buffer(notNumber, encoding);
+</code></pre>
+<p>After:</p>
+<pre><code class="language-js">let buf;
+if (Buffer.from &amp;&amp; Buffer.from !== Uint8Array.from) {
+  buf = Buffer.from(notNumber, encoding);
+} else {
+  if (typeof notNumber === &#x27;number&#x27;) {
+    throw new Error(&#x27;The &quot;size&quot; argument must be not of type number.&#x27;);
+  }
+  buf = new Buffer(notNumber, encoding);
+}
+</code></pre>
+<p><code>encoding</code> is optional.</p>
+<p>Note that the <code>typeof notNumber</code> before <code>new Buffer()</code> is required (for cases when <code>notNumber</code> argument is not
+hard-coded) and <em>is not caused by the deprecation of <code>Buffer</code> constructor</em> — it&#x27;s exactly <em>why</em> the
+<code>Buffer</code> constructor is deprecated. Ecosystem packages lacking this type-check caused numerous
+security issues — situations when unsanitized user input could end up in the <code>Buffer(arg)</code> create
+problems ranging from DoS to leaking sensitive information to the attacker from the process memory.</p>
+<p>When <code>notNumber</code> argument is hardcoded (e.g. literal <code>&quot;abc&quot;</code> or <code>[0,1,2]</code>), the <code>typeof</code> check can
+be omitted.</p>
+<p>Also, note that using TypeScript does not fix this problem for you — when libs written in
+<code>TypeScript</code> are used from JS, or when user input ends up there — it behaves exactly as pure JS, as
+all type checks are translation-time only and are not present in the actual JS code which TS
+compiles to.</p>
+<h3 id="buffernumber"><code>Buffer(number)</code><a id="header-buffernumber" class="anchor" href="#buffernumber" aria-labelledby="buffernumber"></a></h3>
+<p>For Node.js 0.10.x (and below) support:</p>
+<pre><code class="language-js">let buf;
+if (Buffer.alloc) {
+  buf = Buffer.alloc(number);
+} else {
+  buf = new Buffer(number);
+  buf.fill(0);
+}
+</code></pre>
+<p>Otherwise (Node.js ≥ 0.12.x):</p>
+<pre><code class="language-js">const buf = Buffer.alloc ? Buffer.alloc(number) : new Buffer(number).fill(0);
+</code></pre>
+<h2 id="regarding-bufferallocunsafe">Regarding <code>Buffer.allocUnsafe()</code><a id="header-regarding-bufferallocunsafe" class="anchor" href="#regarding-bufferallocunsafe" aria-labelledby="regarding-bufferallocunsafe"></a></h2>
+<p>Be extra cautious when using <code>Buffer.allocUnsafe()</code>:</p>
+<ul>
+<li>Don&#x27;t use it if you don&#x27;t have a good reason to<!-- -->
+<ul>
+<li>e.g. you probably won&#x27;t ever see a performance difference for small buffers, in fact, those
+might be even faster with <code>Buffer.alloc()</code>,</li>
+<li>if your code is not in the hot code path — you also probably won&#x27;t notice a difference,</li>
+<li>keep in mind that zero-filling minimizes the potential risks.</li>
+</ul>
+</li>
+<li>If you use it, make sure that you never return the buffer in a partially-filled state,<!-- -->
+<ul>
+<li>if you are writing to it sequentially — always truncate it to the actual written length</li>
+</ul>
+</li>
+</ul>
+<p>Errors in handling buffers allocated with <code>Buffer.allocUnsafe()</code> could result in various issues,
+ranged from undefined behavior of your code to sensitive data (user input, passwords, certs)
+leaking to the remote attacker.</p>
+<p><em>Note that the same applies to <code>new Buffer()</code> usage without zero-filling, depending on the Node.js
+version (and lacking type checks also adds DoS to the list of potential problems).</em></p>
+<h2 id="faq">FAQ<a id="header-faq" class="anchor" href="#faq" aria-labelledby="faq"></a></h2>
+<h3 id="design-flaws">What is wrong with the <code>Buffer</code> constructor?<a id="header-design-flaws" class="anchor" href="#design-flaws" aria-labelledby="design-flaws"></a></h3>
+<p>The <code>Buffer</code> constructor could be used to create a buffer in many different ways:</p>
+<ul>
+<li><code>new Buffer(42)</code> creates a <code>Buffer</code> of 42 bytes. Before Node.js 8, this buffer contained
+<em>arbitrary memory</em> for performance reasons, which could include anything ranging from
+program source code to passwords and encryption keys.</li>
+<li><code>new Buffer(&#x27;abc&#x27;)</code> creates a <code>Buffer</code> that contains the UTF-8-encoded version of
+the string <code>&#x27;abc&#x27;</code>. A second argument could specify another encoding: for example,
+<code>new Buffer(string, &#x27;base64&#x27;)</code> could be used to convert a Base64 string into the original
+sequence of bytes that it represents.</li>
+<li>There are several other combinations of arguments.</li>
+</ul>
+<p>This meant that in code like <code>var buffer = new Buffer(foo);</code>, <em>it is not possible to tell
+what exactly the contents of the generated buffer are</em> without knowing the type of <code>foo</code>.</p>
+<p>Sometimes, the value of <code>foo</code> comes from an external source. For example, this function
+could be exposed as a service on a web server, converting a UTF-8 string into its Base64 form:</p>
+<pre><code class="language-js">function stringToBase64(req, res) {
+  // The request body should have the format of `{ string: &#x27;foobar&#x27; }`.
+  const rawBytes = new Buffer(req.body.string);
+  const encoded = rawBytes.toString(&#x27;base64&#x27;);
+  res.end({ encoded });
+}
+</code></pre>
+<p>Note that this code does <em>not</em> validate the type of <code>req.body.string</code>:</p>
+<ul>
+<li><code>req.body.string</code> is expected to be a string. If this is the case, all goes well.</li>
+<li><code>req.body.string</code> is controlled by the client that sends the request.</li>
+<li>If <code>req.body.string</code> is the <em>number</em> <code>50</code>, the <code>rawBytes</code> would be <code>50</code> bytes:<!-- -->
+<ul>
+<li>Before Node.js 8, the content would be uninitialized</li>
+<li>After Node.js 8, the content would be <code>50</code> bytes with the value <code>0</code></li>
+</ul>
+</li>
+</ul>
+<p>Because of the missing type check, an attacker could intentionally send a number
+as part of the request. Using this, they can either:</p>
+<ul>
+<li>Read uninitialized memory. This <strong>will</strong> leak passwords, encryption keys and other
+kinds of sensitive information. (Information leak)</li>
+<li>Force the program to allocate a large amount of memory. For example, when specifying
+<code>500000000</code> as the input value, each request will allocate 500MB of memory.
+This can be used to either exhaust the memory available of a program completely
+and make it crash, or slow it down significantly. (Denial of Service)</li>
+</ul>
+<p>Both of these scenarios are considered serious security issues in a real-world
+web server context.</p>
+<p>When using <code>Buffer.from(req.body.string)</code> instead, passing a number will always
+throw an exception instead, giving a controlled behavior that can always be
+handled by the program.</p>
+<h3 id="ecosystem-usage">The <code>Buffer()</code> constructor has been deprecated for a while. Is this really an issue?<a id="header-ecosystem-usage" class="anchor" href="#ecosystem-usage" aria-labelledby="ecosystem-usage"></a></h3>
+<p>Surveys of code in the <code>npm</code> ecosystem have shown that the <code>Buffer()</code> constructor is still
+widely used. This includes new code, and overall usage of such code has actually been
+<em>increasing</em>.</p></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->Scroll to top</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"en","localName":"English","name":"English","langDir":"ltr","dateFormat":"MM.DD.YYYY","hrefLang":"en-US","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"Scroll to top","components.header.links.home":"Home","components.header.links.about":"About","components.header.links.download":"Downloads","components.header.links.docs":"Docs","components.header.links.getInvolved":"Get Involved","components.header.links.security":"Security","components.header.links.certification":"Certification","components.header.links.blog":"News","components.navigation.about.links.governance":"Governance","components.navigation.docs.links.es6":"ES6 and beyond","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"Guides","components.navigation.docs.links.dependencies":"Dependencies","components.navigation.getInvolved.links.collabSummit":"Collab Summit","components.navigation.getInvolved.links.contribute":"Contribute","components.navigation.getInvolved.links.codeOfConduct":"Code of Conduct","components.downloadList.links.previousReleases":"Previous Releases","components.downloadList.links.packageManager":"Installing Node.js via package manager","components.downloadList.links.shaSums":"Signed SHASUMS for release files","components.downloadList.links.shaSums.howToVerify":" (How to verify)","components.downloadList.links.allDownloads":"All download options","components.downloadList.links.nightlyReleases":"Nightly builds","components.downloadList.links.unofficialBuilds":"Unofficial builds","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Installing Node.js via binary archive","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"Changelog","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"Docs","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"Newer | ","components.pagination.previous":"Older","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/en/docs/guides/buffer-constructor-deprecation","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

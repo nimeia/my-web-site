@@ -1,0 +1,386 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>도메인 모듈 포스트모템 | Node.js node js 学习 中文网</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="도메인 모듈 포스트모템 | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="도메인 모듈 포스트모템 | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/ko/docs/guides/domain-postmortem"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/ko/docs/guides/domain-postmortem-b62fec9ee022aff4.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-2WRNZHGVQT"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-2WRNZHGVQT");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8264273508355034" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/ko"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/ko">홈</a></li><li class=""><a href="/ko/about">About</a></li><li class=""><a href="/ko/download">다운로드</a></li><li class="active"><a href="/ko/docs">문서</a></li><li class=""><a href="/ko/get-involved">참여하기</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">보안</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class=""><a href="/ko/blog">뉴스</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/domain-postmortem">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/domain-postmortem">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/domain-postmortem">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/domain-postmortem">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/domain-postmortem">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/domain-postmortem">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/domain-postmortem">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/domain-postmortem">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/domain-postmortem">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/domain-postmortem">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/domain-postmortem">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/domain-postmortem">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/domain-postmortem">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/domain-postmortem">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/domain-postmortem">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/domain-postmortem">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/domain-postmortem">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/domain-postmortem">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/ko/docs">문서</a></li><li class=""><a href="/ko/docs/es6">ES6와 그 이후</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/ko/docs/guides">안내</a></li><li class=""><a href="/ko/docs/meta/topics/dependencies">의존성</a></li></ul></nav><article dir="auto"><h1 id="도메인-모듈-포스트모템">도메인 모듈 포스트모템<a id="header-도메인-모듈-포스트모템" class="anchor" href="#도메인-모듈-포스트모템" aria-labelledby="도메인-모듈-포스트모템"></a></h1>
+<h2 id="사용성-이슈">사용성 이슈<a id="header-사용성-이슈" class="anchor" href="#사용성-이슈" aria-labelledby="사용성-이슈"></a></h2>
+<h3 id="암묵적인-동작">암묵적인 동작<a id="header-암묵적인-동작" class="anchor" href="#암묵적인-동작" aria-labelledby="암묵적인-동작"></a></h3>
+<p>개발자가 새로운 도메인을 만들고 <code>domain.enter()</code>를 실행할 수 있습니다. 이는 이후 모든 예외를
+잡는 것처럼 동작하므로 오류를 던진 쪽에서 관찰할 수 없게 했습니다. 이는 모듈 작성자가 다른 모듈의
+관련 없는 코드의 예외를 가로챌 수 있게 했고 코드의 작성자가 자신의 예외를 알지 못하게 했습니다.</p>
+<p>다음 예제는 간접적으로 연결된 모듈이 다른 모듈에 어떻게 영향을 끼칠 수 있는지를 보여줍니다.</p>
+<!-- -->
+<pre><code class="language-js">// 모듈 a.js
+const b = require(&#x27;./b&#x27;);
+const c = require(&#x27;./c&#x27;);
+
+// 모듈 b.js
+const d = require(&#x27;domain&#x27;).create();
+d.on(&#x27;error&#x27;, () =&gt; {
+  /* 모든 것을 무시합니다. */
+});
+d.enter();
+
+// 모듈 c.js
+const dep = require(&#x27;some-dep&#x27;);
+dep.method(); // 앗! 이 메서드는 실제로 존재하지 않습니다.
+</code></pre>
+<p>모듈 <code>b</code>가 도메인에 들어갔지만 나오지는 않았으므로 잡지 않은 모든 예외가 무시될 것입니다. 이는
+모듈 <code>c</code>가 왜 전체 스크립트를 실행하지 않는지를 알지 못하게 둡니다. 부분적으로 존재하는
+<code>module.exports</code>를 잠재적으로 둡니다. 이렇게 하는 것은 전역적으로 오류를 잡겠다고 명시적으로
+나타내는 <code>&#x27;uncaughtException&#x27;</code>을 사용하는 것과 다릅니다. 도메인이
+어떤 <code>&#x27;uncaughtException&#x27;</code> 핸들러보다도 먼저 처리되어
+<code>&#x27;uncaughtException&#x27;</code>이 실행되지 않도록 한다는 것은 또 다른 문제입니다.</p>
+<!-- -->
+<p>또 다른 문제는 도메인 라우트가 이벤트 이미터에 <code>&#x27;error&#x27;</code> 핸들러가 설정되어 있지 않다면 오류를
+발생시킨다는 것입니다. 이를 위한 옵트인 메커니즘은 존재하지 않고 전체 비동기 체인에 자동으로 전파됩니다.
+처음에는 유용해 보이지만 비동기 호출이 두 개 이상의 모듈을 호출하고 이 중 하나가 오류 핸들러를
+작성하지 않았다면 도메인 생성자는 예상치 못한 예외를 갑자기 받을 것이고 오류가 발생한 곳의
+작성자는 알지 못할 것입니다.</p>
+<p>다음 예제는 빠진 <code>&#x27;error&#x27;</code> 핸들러 때문에 어떻게 활성화된 도메인이 오류를 가로채는지 보여줍니다.</p>
+<pre><code class="language-js">const domain = require(&#x27;domain&#x27;);
+const net = require(&#x27;net&#x27;);
+const d = domain.create();
+d.on(&#x27;error&#x27;, (err) =&gt; console.error(err.message));
+
+d.run(() =&gt;
+  net
+    .createServer((c) =&gt; {
+      c.end();
+      c.write(&#x27;bye&#x27;);
+    })
+    .listen(8000)
+);
+</code></pre>
+<!-- -->
+<p><code>d.remove(c)</code>를 통해 수동으로 연결을 제거하더라도 연결 오류가 자동으로
+가로채지는 것을 막지 못합니다.</p>
+<p>오류 라우팅과 예외처리를 모두 괴롭히는 실패는 오류를 버블링하는 방법의 불일치입니다.
+다음은 중첩된 도메인이 언제 발생한 오류에 따라 어떻게 버블링하고 버블링하지 않는지를 보여줍니다.</p>
+<pre><code class="language-js">const domain = require(&#x27;domain&#x27;);
+const net = require(&#x27;net&#x27;);
+const d = domain.create();
+d.on(&#x27;error&#x27;, () =&gt; console.error(&#x27;d intercepted an error&#x27;));
+
+d.run(() =&gt; {
+  const server = net
+    .createServer((c) =&gt; {
+      const e = domain.create(); // &#x27;error&#x27; 핸들러가 설정되지 않았습니다.
+      e.run(() =&gt; {
+        // 이 오류는 d의 오류 핸들러가 잡지 못합니다.
+        setImmediate(() =&gt; {
+          throw new Error(&#x27;thrown from setImmediate&#x27;);
+        });
+        // 그런데도 이 오류는 d의 오류 핸들러에 버블링 될 것입니다.
+        throw new Error(&#x27;immediately thrown&#x27;);
+      });
+    })
+    .listen(8080);
+});
+</code></pre>
+<p>중첩된 도메인은 항상 중첩된 상태로 남아있고 예외는 항상 도메인 스택으로 전파되기를 기대할 수 있습니다.
+아니면 이 예외가 절대 자동으로 버블링되지 않기를 기대할 수 있습니다. 불행히도 두 가지 상황이 모두
+발생하고 이는 시점의 충돌을 디버깅하기 어렵게 만들기 쉬운 혼란스러운 동작입니다.</p>
+<!-- -->
+<h3 id="api-차이">API 차이<a id="header-api-차이" class="anchor" href="#api-차이" aria-labelledby="api-차이"></a></h3>
+<p><code>EventEmitter</code>에 기반을 둔 API는 <code>bind()</code>를 사용할 수 있고 에러를 다시 받는 형식의 콜백은
+<code>intercept()</code>를 사용할 수 있지만, 활성화된 도메인에 암묵적으로 바인딩 되는 다른 API는
+<code>run()</code> 안에서 실행되어야 합니다. 이는 모듈 작성자가 앞에서 말한 방식의 대안 메커니즘을 사용해서
+도메인을 지원하고자 하면 이미 적소에 있는 암묵적인 메커니즘을 이용하지 않고 직접 도메인 지원을
+구현해야 한다는 의미입니다.</p>
+<!-- -->
+<h3 id="오류-전파">오류 전파<a id="header-오류-전파" class="anchor" href="#오류-전파" aria-labelledby="오류-전파"></a></h3>
+<p>중첩된 도메인에 걸친 오류 전파는 직관적이지 않습니다. 기존의 문서는 요청 핸들러에 오류가 있다면
+<code>http</code> 서버를 어떻게 <code>close()</code>하는지 간단한 예제를 보여줍니다. 여기서 설명하지 않은 것은
+요청 핸들러가 또 다른 비동기 요청을 위한 다른 도메인 인스턴스를 생성한다면 어떻게 닫을 것인가입니다.
+오류 전파의 실패를 보여주는 다음 예제를 보겠습니다.</p>
+<pre><code class="language-js">const d1 = domain.create();
+d1.foo = true; // 콘솔에서 더 가시적으로 만드는 커스텀 멤버
+d1.on(&#x27;error&#x27;, (er) =&gt; {
+  /* 오류 처리 */
+});
+
+d1.run(() =&gt;
+  setTimeout(() =&gt; {
+    const d2 = domain.create();
+    d2.bar = 43;
+    d2.on(&#x27;error&#x27;, (er) =&gt; console.error(er.message, domain._stack));
+    d2.run(() =&gt; {
+      setTimeout(() =&gt; {
+        setTimeout(() =&gt; {
+          throw new Error(&#x27;outer&#x27;);
+        });
+        throw new Error(&#x27;inner&#x27;);
+      });
+    });
+  })
+);
+</code></pre>
+<!-- -->
+<p>도메인 인스턴스가 로컬 스토리지에 사용되어 자원에 대한 액세스가 가능해지더라도 여전히 오류가 <code>d2</code>에서
+<code>d1</code>으로 다시 계속 전파되도록 허용할 수 있는 방법이 없습니다. 빠른 검사는 <code>d2</code> 도메인의
+<code>&#x27;error&#x27;</code> 핸들러를 던지기만 하면 <code>d1</code>이 예외를 잡아서 자체 에러 핸들러를 실행할 수 있게 합니다.
+지금은 이 경우가 아니지만 <code>domain._stack</code>을 검사하면 스택에 <code>d2</code>만 포함되어 있음을 알 수 있습니다.</p>
+<p>이것이 API의 실패라고 생각할 수 있습니다만 이러한 방식으로 동작하더라도 비동기 실행의 분기가 실패했다는
+사실을 전달하는 문제가 여전히 남아있고 이 분기의 추가작업은 중단되어야 합니다. http 요청 핸들러
+예제에서 다수의 비동기 요청을 보내고 각 요청에서 <code>write()</code>의 데이터를 다시 클라이언트에 보내면
+닫힌 핸들에 <code>write()</code>를 시도하면서 더 많은 오류가 발생합니다.
+이것에 대한 자세한 내용은 _예외발생시 자원 정리_를 참고하세요.</p>
+<!-- -->
+<h3 id="예외-발생-시-자원-정리">예외 발생 시 자원 정리<a id="header-예외-발생-시-자원-정리" class="anchor" href="#예외-발생-시-자원-정리" aria-labelledby="예외-발생-시-자원-정리"></a></h3>
+<p>다음 스크립트는 해당 연결이나 의존성에서 예외가 발생한 경우 작은 자원 의존성 트리를 적절하게
+정리하는 꽤 복잡한 예제입니다. 기본 작업으로 스크립트를 나누었습니다.</p>
+<pre><code class="language-js">&#x27;use strict&#x27;;
+
+const domain = require(&#x27;domain&#x27;);
+const EE = require(&#x27;events&#x27;);
+const fs = require(&#x27;fs&#x27;);
+const net = require(&#x27;net&#x27;);
+const util = require(&#x27;util&#x27;);
+const print = process._rawDebug;
+
+const pipeList = [];
+const FILENAME = &#x27;/tmp/tmp.tmp&#x27;;
+const PIPENAME = &#x27;/tmp/node-domain-example-&#x27;;
+const FILESIZE = 1024;
+let uid = 0;
+
+// 임시 자원을 설정합니다
+const buf = Buffer.alloc(FILESIZE);
+for (let i = 0; i &lt; buf.length; i++) buf[i] = ((Math.random() * 1e3) % 78) + 48; // Basic ASCII
+fs.writeFileSync(FILENAME, buf);
+
+function ConnectionResource(c) {
+  EE.call(this);
+  this._connection = c;
+  this._alive = true;
+  this._domain = domain.create();
+  this._id = Math.random().toString(32).substr(2).substr(0, 8) + ++uid;
+
+  this._domain.add(c);
+  this._domain.on(&#x27;error&#x27;, () =&gt; {
+    this._alive = false;
+  });
+}
+util.inherits(ConnectionResource, EE);
+
+ConnectionResource.prototype.end = function end(chunk) {
+  this._alive = false;
+  this._connection.end(chunk);
+  this.emit(&#x27;end&#x27;);
+};
+
+ConnectionResource.prototype.isAlive = function isAlive() {
+  return this._alive;
+};
+
+ConnectionResource.prototype.id = function id() {
+  return this._id;
+};
+
+ConnectionResource.prototype.write = function write(chunk) {
+  this.emit(&#x27;data&#x27;, chunk);
+  return this._connection.write(chunk);
+};
+
+// 예제 시작
+net
+  .createServer((c) =&gt; {
+    const cr = new ConnectionResource(c);
+
+    const d1 = domain.create();
+    fs.open(
+      FILENAME,
+      &#x27;r&#x27;,
+      d1.intercept((fd) =&gt; {
+        streamInParts(fd, cr, 0);
+      })
+    );
+
+    pipeData(cr);
+
+    c.on(&#x27;close&#x27;, () =&gt; cr.end());
+  })
+  .listen(8080);
+
+function streamInParts(fd, cr, pos) {
+  const d2 = domain.create();
+  const alive = true;
+  d2.on(&#x27;error&#x27;, (er) =&gt; {
+    print(&#x27;d2 error:&#x27;, er.message);
+    cr.end();
+  });
+  fs.read(
+    fd,
+    Buffer.alloc(10),
+    0,
+    10,
+    pos,
+    d2.intercept((bRead, buf) =&gt; {
+      if (!cr.isAlive()) {
+        return fs.close(fd);
+      }
+      if (cr._connection.bytesWritten &lt; FILESIZE) {
+        // 문서에는 콜백이 선택사항으로 나와 있지만
+        // 작성이 실패하면 예외가 던져진다고는 얘기하지 않았습니다.
+        const goodtogo = cr.write(buf);
+        if (goodtogo) {
+          setTimeout(() =&gt; streamInParts(fd, cr, pos + bRead), 1000);
+        } else {
+          cr._connection.once(&#x27;drain&#x27;, () =&gt;
+            streamInParts(fd, cr, pos + bRead)
+          );
+        }
+        return;
+      }
+      cr.end(buf);
+      fs.close(fd);
+    })
+  );
+}
+
+function pipeData(cr) {
+  const pname = PIPENAME + cr.id();
+  const ps = net.createServer();
+  const d3 = domain.create();
+  const connectionList = [];
+  d3.on(&#x27;error&#x27;, (er) =&gt; {
+    print(&#x27;d3 error:&#x27;, er.message);
+    cr.end();
+  });
+  d3.add(ps);
+  ps.on(&#x27;connection&#x27;, (conn) =&gt; {
+    connectionList.push(conn);
+    conn.on(&#x27;data&#x27;, () =&gt; {}); // 들어오는 데이터는 무시합니다.
+    conn.on(&#x27;close&#x27;, () =&gt; {
+      connectionList.splice(connectionList.indexOf(conn), 1);
+    });
+  });
+  cr.on(&#x27;data&#x27;, (chunk) =&gt; {
+    for (let i = 0; i &lt; connectionList.length; i++) {
+      connectionList[i].write(chunk);
+    }
+  });
+  cr.on(&#x27;end&#x27;, () =&gt; {
+    for (let i = 0; i &lt; connectionList.length; i++) {
+      connectionList[i].end();
+    }
+    ps.close();
+  });
+  pipeList.push(pname);
+  ps.listen(pname);
+}
+
+process.on(&#x27;SIGINT&#x27;, () =&gt; process.exit());
+process.on(&#x27;exit&#x27;, () =&gt; {
+  try {
+    for (let i = 0; i &lt; pipeList.length; i++) {
+      fs.unlinkSync(pipeList[i]);
+    }
+    fs.unlinkSync(FILENAME);
+  } catch (e) {}
+});
+</code></pre>
+<!-- -->
+<ul>
+<li>새로운 연결이 이뤄지면 동시에<!-- -->
+<ul>
+<li>파일시스템에서 파일을 엽니다.</li>
+<li>유일한 소켓과 파이프를 연결합니다.</li>
+</ul>
+</li>
+<li>파일의 청크를 비동기로 읽습니다.</li>
+<li>TCP 연결과 리스닝 중인 모든 소켓에 청크를 작성합니다.</li>
+<li>이러한 자원에서 오류가 발생하면 정리하고 종료해야 하는 모든 연결된 자원에 알립니다.</li>
+</ul>
+<p>이 예제에서 알 수 있듯이 도메인 API로 엄격하게 수행할 수 있는 것보다 실패했을 때 자원을 적절하게
+정리하려면 더 많은 작업을 해야 합니다. 도메인이 제공하는 모든 것은 예외를 수집하는 메커니즘입니다.
+이 예제에서 함수의 인자로 필요한 자원을 전달해서 도메인으로 데이터를 전파할 수 있는 잠재적으로
+유용한 기능조차도 쉽게 대응할 수 있습니다.</p>
+<p>도메인이 유지되는 한 가지 문제는 문서에 나와 있는 것과는 달리 예기치 않은 예외에도 불구하고
+애플리케이션을 계속 실행할 수 있다는 단순한 생각이었습니다.
+이 예제는 이 생각에 오류가 있다는 것을 보여줍니다.</p>
+<!-- -->
+<p>예기치 않은 예외가 발생했을 때 적절하게 자원 정리를 시도하면 애플리케이션 자체의 복잡도가 증가하므로
+더 복잡해집니다. 이 예제는 3가지의 기본적인 자원만 가지고 있고 이 자원는 모두 명확한 의존성 경로를
+가집니다. 애플리케이션이 공유된 자원이나 자원 재사용을 사용하는 경우 정리 기능과 정리가
+제대로 이뤄졌는지 확인하는 적절한 테스트는 복잡도가 더 증가합니다.</p>
+<p>결국, 오류처리 관점에서 도메인은 더 암묵적이고 서드파티가 관찰할 수 없는 동작이라는 점을 제외하면
+<code>&#x27;uncaughtException&#x27;</code> 핸들러와 별반 다르지 않습니다.</p>
+<!-- -->
+<h3 id="자원-전파">자원 전파<a id="header-자원-전파" class="anchor" href="#자원-전파" aria-labelledby="자원-전파"></a></h3>
+<p>도메인의 또 다른 사용방법은 비동기 데이터 경로를 따라 데이터를 전파하는 데 사용하는 것입니다.
+한 가지 문제점은 스택에 여러 개가 있을 때(비동기 스택이 다른 모듈과 동작한다고 가정해야 한다면)
+올바른 도메인을 기대하는 경우의 모호함입니다. 필요한 데이터를 얻는 데 사용하려고 도메인을 가지면서
+오류처리를 도메인에 의존하는 것에 충돌도 있습니다.</p>
+<p>비동기 스택을 따라 데이터를 전파하려고 도메인을 사용할 때의 실패를 다음 예제에서 보여줍니다.</p>
+<pre><code class="language-js">const domain = require(&#x27;domain&#x27;);
+const net = require(&#x27;net&#x27;);
+
+const server = net
+  .createServer((c) =&gt; {
+    // 모든 곳에서 인자를 전달할 수 없으므로
+    // 연결 내에서 이벤트 간에 데이터를 전파하려고 도메인을 사용합니다.
+    const d = domain.create();
+    d.data = { connection: c };
+    d.add(c);
+    // 데모용으로 쓸모없는 비동기 데이터 변환을 하는 Mock 클래스
+    const ds = new DataStream(dataTransformed);
+    c.on(&#x27;data&#x27;, (chunk) =&gt; ds.data(chunk));
+  })
+  .listen(8080, () =&gt; console.log(&#x27;listening on 8080&#x27;));
+
+function dataTransformed(chunk) {
+  // 실패! DataStream 인스턴스도 도메인을 생성했으므로
+  // 사용하려고 했던 활성 도메인을 잃어버렸습니다.
+  domain.active.data.connection.write(chunk);
+}
+
+function DataStream(cb) {
+  this.cb = cb;
+  // DataStream은 데이터 전파에도 도메인을 사용하려고 합니다!
+  // 불행히도 이는 이미 존재하는 다른 도메인과 충돌할 것입니다.
+  this.domain = domain.create();
+  this.domain.data = { inst: this };
+}
+
+DataStream.prototype.data = function data(chunk) {
+  // 이 코드는 자기충족적이지만 최소한 하나의 다른 모듈과의 복잡한 작업인 척합니다.
+  // 그러므로 &quot;this&quot;를 함께 전달하기는 쉽지 않습니다.
+  this.domain.run(() =&gt; {
+    // 데이터를 변환하는 비동기 작업을 시뮬레이트합니다.
+    setImmediate(() =&gt; {
+      for (let i = 0; i &lt; chunk.length; i++)
+        chunk[i] = ((chunk[i] + Math.random() * 100) % 96) + 33;
+      // 활성화된 도메인에서 인스턴스를 가져오고 사용자 콜백을 호출하는 데 사용합니다.
+      const self = domain.active.data.inst;
+      self.cb(chunk);
+    });
+  });
+};
+</code></pre>
+<!-- -->
+<p>위 예제는 데이터를 전파하려고 도메인을 사용하는 두 개 이상의 비동기 API를 가지기가 어렵다는 것을
+보여줍니다. 이 예제는 <code>DataStream</code> 생성자에서 <code>parent: domain.active</code>를 할당해서
+고칠 수 있습니다. 그런 다음 사용자의 콜백이 호출되기 직전에
+<code>domain.active = domain.active.data.parent</code>로 도메인을 복구합니다.
+<code>&#x27;connection&#x27;</code> 콜백에서 <code>DataStream</code>의 인스턴스 생성은 단순히 <code>d.add(c)</code>를 사용하는 대신
+<code>d.run()</code> 안에서 실행되어야 합니다. 그렇지 않으면 활성화된 도메인이 없을 것입니다.</p>
+<p>간단히 말해, 이렇게 하려면 적용이나 테스트가 어려울 수 있는 일련의 가이드라인을 엄격하게 따라야 합니다.</p>
+<!-- -->
+<h2 id="성능-문제">성능 문제<a id="header-성능-문제" class="anchor" href="#성능-문제" aria-labelledby="성능-문제"></a></h2>
+<p>도메인을 사용할 때의 중요한 방해요소는 오버헤드입니다. 도메인 없이 node에 내장된 http 벤치마크
+<code>http_simple.js</code>를 사용하면 초당 22,000 요청 이상을 처리할 수 있습니다. 그에 비해
+<code>NODE_USE_DOMAINS=1</code>로 실행하면 초당 17,000 요청 이하로 떨어집니다. 이 경우에는 단 하나의
+전역 도메인만 있습니다. 벤치마크의 http 요청 콜백이 새로운 도메인 인스턴스를 생성하도록 수정하면
+성능은 초당 15,000 요청으로 떨어집니다.</p>
+<p>이 문제가 초당 수백, 수천 요청만 처리하는 서버에는 영향을 주지 않을 수 있지만, 오버헤드의 규모는
+비동기 요청 수에 비례합니다. 그러므로 하나의 연결에 다른 여러 서비스로의 연결이 필요하다면
+이 모든 요청은 클라이언트에게 전달하는 최종 제품의 전체 지연시간에 영향을 주게 됩니다.</p>
+<p>앞에서 얘기한 벤치마크에서 <code>AsyncWrap</code>을 사용하고 <code>init</code>/<code>pre</code>/<code>post</code>/<code>destroy</code>가
+호출된 횟수를 추적하자 호출된 모든 이벤트의 합이 초당 170,000번 이상이라는 것을 알 수 있었습니다.
+이는 어떤 종류의 설정이나 정리를 위한 호출당 1마이크로초의 오버헤드가 추가되어 17%의 성능 저하가
+발생한다는 것을 의미합니다. 당연히 이는 벤치마크에 최적화된 시나리오이지만 도메인 같은 메커니즘은
+가능한 한 싸게 실행되어야 할 필요성을 보여준다고 생각합니다.</p>
+<!-- -->
+<h2 id="앞을-내다-보며">앞을 내다 보며<a id="header-앞을-내다-보며" class="anchor" href="#앞을-내다-보며" aria-labelledby="앞을-내다-보며"></a></h2>
+<p>도메인 모듈은 2014년 12월부터 소프트 폐기되었지만, 지금은 node가 대체 기능을 제공하지 않으므로
+아직 제거하지 않았습니다. 이 글을 쓰는 시점에 <code>AsyncWrap</code> API와 TC39를 위해 준비하고 있는
+Zone에 관한 제안을 만들고 있습니다. 도메인을 교체할 적당한 기능이 있을 때 전체 폐기 주기를
+진행할 것이고 결국 코어에서 제거할 것입니다.</p></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->맨 위로</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"ko","localName":"한국어","name":"Korean","langDir":"ltr","dateFormat":"YYYY.MM.DD","hrefLang":"ko","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"맨 위로","components.header.links.home":"홈","components.header.links.about":"About","components.header.links.download":"다운로드","components.header.links.docs":"문서","components.header.links.getInvolved":"참여하기","components.header.links.security":"보안","components.header.links.certification":"Certification","components.header.links.blog":"뉴스","components.navigation.about.links.governance":"거버넌스","components.navigation.docs.links.es6":"ES6와 그 이후","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"안내","components.navigation.docs.links.dependencies":"의존성","components.navigation.getInvolved.links.collabSummit":"협업자 서밋","components.navigation.getInvolved.links.contribute":"기여하기","components.navigation.getInvolved.links.codeOfConduct":"행동강령","components.downloadList.links.previousReleases":"이전 릴리스","components.downloadList.links.packageManager":"패키지 관리자를 통한 Node.js 설치","components.downloadList.links.shaSums":"릴리스 파일에 서명된 SHASUMS","components.downloadList.links.shaSums.howToVerify":" (검증 방법)","components.downloadList.links.allDownloads":"모든 다운로드 보기","components.downloadList.links.nightlyReleases":"나이틀리 빌드","components.downloadList.links.unofficialBuilds":"비공식 빌드","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Linux에서 바이너리 아카이브를 통해 Node.js 설치하기","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"변경사항","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"문서","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"다음 | ","components.pagination.previous":"이전","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/ko/docs/guides/domain-postmortem","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

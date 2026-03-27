@@ -1,0 +1,229 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Простое профилирование Node.js приложений | Node.js</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Простое профилирование Node.js приложений | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Простое профилирование Node.js приложений | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/ru/docs/guides/simple-profiling"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/ru/docs/guides/simple-profiling-10f479ab63923a89.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NDMJQNDPS"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-6NDMJQNDPS");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7950559866369342" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/ru"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/ru">Главная</a></li><li class=""><a href="/ru/about">О проекте</a></li><li class=""><a href="/ru/download">Загрузка</a></li><li class="active"><a href="/ru/docs">Документация</a></li><li class=""><a href="/ru/get-involved">Присоединиться</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">Безопасность</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class=""><a href="/ru/blog">Новости</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/docs/guides/simple-profiling">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/docs/guides/simple-profiling">Catalan</a></li><li><a data-lang="de" title="German" href="/de/docs/guides/simple-profiling">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/docs/guides/simple-profiling">English</a></li><li><a data-lang="es" title="Spanish" href="/es/docs/guides/simple-profiling">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/docs/guides/simple-profiling">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/docs/guides/simple-profiling">Français</a></li><li><a data-lang="it" title="Italian" href="/it/docs/guides/simple-profiling">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/docs/guides/simple-profiling">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/docs/guides/simple-profiling">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/docs/guides/simple-profiling">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/docs/guides/simple-profiling">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/docs/guides/simple-profiling">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/docs/guides/simple-profiling">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/docs/guides/simple-profiling">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/docs/guides/simple-profiling">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/docs/guides/simple-profiling">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/docs/guides/simple-profiling">繁體中文</a></li></ul></div></header><main id="main"><div class="container has-side-nav"><nav aria-label="secondary"><ul><li class=""><a href="/ru/docs">Документация</a></li><li class=""><a href="/ru/docs/es6">ES6 и выше</a></li><li class=""><a href="https://nodejs.org/dist/latest-v18.x/docs/api">v18.16.1 API <span class="small color-lightgray">LTS</span></a></li><li class=""><a href="https://nodejs.org/dist/latest-v20.x/docs/api">v20.3.1 API</a></li><li class=""><a href="/ru/docs/guides">Руководства</a></li><li class=""><a href="/ru/docs/meta/topics/dependencies">Зависимости</a></li></ul></nav><article dir="auto"><h1 id="простое-профилирование-node.js-приложений">Простое профилирование Node.js приложений<a id="header-простое-профилирование-node.js-приложений" class="anchor" href="#простое-профилирование-node.js-приложений" aria-labelledby="простое-профилирование-node.js-приложений"></a></h1>
+<p>Для профилирования приложений Node.js доступно множество сторонних инструментов,
+но во многих случаях проще всего использовать встроенный профайлер Node.js.
+Встроенный профайлер использует <a href="https://v8.dev/docs/profile">профайлер V8</a>, который делит стек
+выполняющейся программы на фрагменты через равные промежутки времени. Профайлер
+представляет результаты этих фрагментов с учетом оптимизаций, таких как
+Jit-компиляция, в виде ряда тиков:</p>
+<pre><code class="language-text">code-creation,LazyCompile,0,0x2d5000a337a0,396,&quot;bp native array.js:1153:16&quot;,0x289f644df68,~
+code-creation,LazyCompile,0,0x2d5000a33940,716,&quot;hasOwnProperty native v8natives.js:198:30&quot;,0x289f64438d0,~
+code-creation,LazyCompile,0,0x2d5000a33c20,284,&quot;ToName native runtime.js:549:16&quot;,0x289f643bb28,~
+code-creation,Stub,2,0x2d5000a33d40,182,&quot;DoubleToIStub&quot;
+code-creation,Stub,2,0x2d5000a33e00,507,&quot;NumberToStringStub&quot;
+</code></pre>
+<p>В прошлом требовался бы исходный код V8, чтобы иметь возможность анализировать
+тики. К счастью, начиная с Node.js 4.4.0 были представлены инструменты, которые
+облегчают использование этой информации без отдельной сборки V8. Давайте посмотрим,
+как встроенный профайлер дает представление о производительности приложений.</p>
+<p>Возьмем простое приложением Express, чтобы проиллюстрировать использование профайлера.
+Приложение будет иметь два обработчика, один из которых будет использоваться для
+добавления новых пользователей в систему:</p>
+<pre><code class="language-javascript">app.get(&#x27;/newUser&#x27;, (req, res) =&gt; {
+  let username = req.query.username || &#x27;&#x27;;
+  const password = req.query.password || &#x27;&#x27;;
+
+  username = username.replace(/[!@#$%^&amp;*]/g, &#x27;&#x27;);
+
+  if (!username || !password || users[username]) {
+    return res.sendStatus(400);
+  }
+
+  const salt = crypto.randomBytes(128).toString(&#x27;base64&#x27;);
+  const hash = crypto.pbkdf2Sync(password, salt, 10000, 512, &#x27;sha512&#x27;);
+
+  users[username] = { salt, hash };
+
+  res.sendStatus(200);
+});
+</code></pre>
+<p>а другой - для проверки аутентификации пользователей:</p>
+<pre><code class="language-javascript">app.get(&#x27;/auth&#x27;, (req, res) =&gt; {
+  let username = req.query.username || &#x27;&#x27;;
+  const password = req.query.password || &#x27;&#x27;;
+
+  username = username.replace(/[!@#$%^&amp;*]/g, &#x27;&#x27;);
+
+  if (!username || !password || !users[username]) {
+    return res.sendStatus(400);
+  }
+
+  const { salt, hash } = users[username];
+  const encryptHash = crypto.pbkdf2Sync(password, salt, 10000, 512, &#x27;sha512&#x27;);
+
+  if (crypto.timingSafeEqual(hash, encryptHash)) {
+    res.sendStatus(200);
+  } else {
+    res.sendStatus(401);
+  }
+});
+</code></pre>
+<p><em>Обратите внимание, что это НЕ рекомендуемые обработчики для аутентификации
+пользователей в приложениях Node.js. Они используются исключительно в качестве
+примера. В целом, не следует пытаться разработать свои собственные механизмы
+криптографической аутентификации. Гораздо лучше использовать готовые проверенные
+решения.</em></p>
+<p>Теперь предположим, что мы развернули наше приложение, и пользователи жалуются
+на высокую задержку запросов. Мы можем легко запустить приложение с помощью
+встроенного профайлера:</p>
+<pre><code class="language-text">NODE_ENV=production node --prof app.js
+</code></pre>
+<p>и добавить нагрузку на сервер с помощью <code>ab</code> (ApacheBench):</p>
+<pre><code class="language-text">curl -X GET &quot;http://localhost:8080/newUser?username=matt&amp;password=password&quot;
+ab -k -c 20 -n 250 &quot;http://localhost:8080/auth?username=matt&amp;password=password&quot;
+</code></pre>
+<p>и получить на выходе:</p>
+<pre><code class="language-text">Concurrency Level:      20
+Time taken for tests:   46.932 seconds
+Complete requests:      250
+Failed requests:        0
+Keep-Alive requests:    250
+Total transferred:      50250 bytes
+HTML transferred:       500 bytes
+Requests per second:    5.33 [#/sec] (mean)
+Time per request:       3754.556 [ms] (mean)
+Time per request:       187.728 [ms] (mean, across all concurrent requests)
+Transfer rate:          1.05 [Kbytes/sec] received
+
+...
+
+Percentage of the requests served within a certain time (ms)
+  50%   3755
+  66%   3804
+  75%   3818
+  80%   3825
+  90%   3845
+  95%   3858
+  98%   3874
+  99%   3875
+ 100%   4225 (longest request)
+</code></pre>
+<p>По выводу видно, что обрабатывается только около 5 запросов в секунду, и в среднем
+занимает чуть менее 4 секунд в обе стороны. В реальной ситуации могло бы
+последовать еще множество вычислений от имени пользовательского запроса, но даже
+в нашем простом примере могут возникать временные потери как при компиляции
+регулярных выражений, генерации случайных солей и хешей из паролей пользователей,
+так и внутри самого фреймворка Express.</p>
+<p>Так как мы запустили приложение, используя опцию <code>--prof</code>, тиковый файл был
+сгенерирован в том же каталоге, откуда приложение было запущено. Он должен быть
+вида <code>isolate-0xnnnnnnnnnnnn-v8.log</code> (где <code>n</code> - цифра).</p>
+<p>Чтобы разобраться в этом файле, используйте тиковый процессор в комплекте с двоичным
+файлом Node.js. Чтобы запустить процессор, используйте флаг <code>--prof-process</code>:</p>
+<pre><code class="language-text">node --prof-process isolate-0xnnnnnnnnnnnn-v8.log &gt; processed.txt
+</code></pre>
+<p>Открыв обработанный текст в вашем любимом текстовом редакторе, вы увидите различного
+вида информацию. Файл разбит на секции, которые разбиты по языкам. Взглянем сначала
+на итоговый раздел:</p>
+<pre><code class="language-text"> [Summary]:
+   ticks  total  nonlib   name
+     79    0.2%    0.2%  JavaScript
+  36703   97.2%   99.2%  C++
+      7    0.0%    0.0%  GC
+    767    2.0%          Shared libraries
+    215    0.6%          Unaccounted
+</code></pre>
+<p>Это говорит нам о том, что 97% всех собранных замеров происходили в коде C++,
+и что при просмотре других разделов обработанного вывода мы должны уделять
+больше внимания работе, выполняемой именно в C++ (а не, к примеру, JavaScript).
+Имея это в виду, мы затем находим раздел [C++], который содержит информацию о том,
+какие функции C++ отнимают больше всего процессорного времени, и видим:</p>
+<pre><code class="language-text"> [C++]:
+   ticks  total  nonlib   name
+  19557   51.8%   52.9%  node::crypto::PBKDF2(v8::FunctionCallbackInfo&lt;v8::Value&gt; const&amp;)
+   4510   11.9%   12.2%  _sha1_block_data_order
+   3165    8.4%    8.6%  _malloc_zone_malloc
+</code></pre>
+<p>Мы видим, что на первые три записи приходится 72,1% процессорного времени,
+используемого программой. Мы также сразу видим, что как минимум 51,8%
+процессорного времени занято функцией PBKDF2, которая соответствует нашей
+генерации хеш-кода из пароля пользователя. Тем не менее, может быть
+не сразу очевидно, как две нижние записи влияют на наше приложение
+(если же вы догадываетесь об этом, мы притворимся, что это не очевидно, в целях примера).
+Чтобы лучше понять взаимосвязь между этими функциями, мы обратимся затем к
+разделу [Bottom up (heavy) profile], который предоставляет информацию о том,
+где чаще всего вызывается каждая функция. Исследуя этот раздел, мы находим:</p>
+<pre><code class="language-text">   ticks parent  name
+  19557   51.8%  node::crypto::PBKDF2(v8::FunctionCallbackInfo&lt;v8::Value&gt; const&amp;)
+  19557  100.0%    v8::internal::Builtins::~Builtins()
+  19557  100.0%      LazyCompile: ~pbkdf2 crypto.js:557:16
+
+   4510   11.9%  _sha1_block_data_order
+   4510  100.0%    LazyCompile: *pbkdf2 crypto.js:557:16
+   4510  100.0%      LazyCompile: *exports.pbkdf2Sync crypto.js:552:30
+
+   3165    8.4%  _malloc_zone_malloc
+   3161   99.9%    LazyCompile: *pbkdf2 crypto.js:557:16
+   3161  100.0%      LazyCompile: *exports.pbkdf2Sync crypto.js:552:30
+</code></pre>
+<p>Анализ этого раздела требует немного больше работы, чем простой подсчет тиков как выше.
+В каждом из вышеприведенных стеков вызовов процент в родительском столбце показывает
+процент выборок, для которых функция в строке выше была вызвана функцией в текущей строке.
+Например, в среднем стеке для _sha1_block_data_order мы видим,
+что вызов <code>_sha1_block_data_order</code> встречался в 11,9% выборок, что мы и так знали
+исходя из подсчетов выше. Однако теперь мы также можем сказать,
+что он всегда вызывался функцией pbkdf2 внутри модуля crypto Node.js. Мы видим,
+что аналогичным образом <code>_malloc_zone_malloc</code> вызывалась практически всегда
+той же функцией pbkdf2. Таким образом, используя информацию в этом представлении,
+мы можем сказать, что наше вычисление хеша из пароля пользователя составляет
+не только указанные 51,8%, а все процессорное время в 3 самых часто вызываемых функциях,
+так как вызовы <code>_sha1_block_data_order</code> и <code>_malloc_zone_malloc</code> были сделаны
+от имени функции pbkdf2.</p>
+<p>Теперь становится ясно, что целью нашей оптимизации должна быть генерация хеша на основе пароля.
+К счастью, вы полностью усвоили <a href="https://nodesource.com/blog/why-asynchronous">преимущества асинхронного программирования</a>
+и понимаете, что работа по генерации хеша выполняется синхронно
+и, таким образом, связывает цикл обработки событий. Это лишает нас возможности работать с
+другими входящими запросами во время вычисления хеша.</p>
+<p>Чтобы устранить эту проблему, внесем небольшую модификацию в наши обработчики,
+используя асинхронную версию функции pbkdf2:</p>
+<pre><code class="language-javascript">app.get(&#x27;/auth&#x27;, (req, res) =&gt; {
+  let username = req.query.username || &#x27;&#x27;;
+  const password = req.query.password || &#x27;&#x27;;
+
+  username = username.replace(/[!@#$%^&amp;*]/g, &#x27;&#x27;);
+
+  if (!username || !password || users[username]) {
+    return res.sendStatus(400);
+  }
+
+  crypto.pbkdf2(password, users[username].salt, 10000, 512, &#x27;sha512&#x27;, (err, hash) =&gt; {
+    if (users[username].hash.toString() === hash.toString()) {
+      res.sendStatus(200);
+    } else {
+      res.sendStatus(401);
+    }
+  });
+});
+</code></pre>
+<p>В результате нового запуска теста ab для асинхронной версии приложения
+получаем результат:</p>
+<pre><code class="language-text">Concurrency Level:      20
+Time taken for tests:   12.846 seconds
+Complete requests:      250
+Failed requests:        0
+Keep-Alive requests:    250
+Total transferred:      50250 bytes
+HTML transferred:       500 bytes
+Requests per second:    19.46 [#/sec] (mean)
+Time per request:       1027.689 [ms] (mean)
+Time per request:       51.384 [ms] (mean, across all concurrent requests)
+Transfer rate:          3.82 [Kbytes/sec] received
+
+...
+
+Percentage of the requests served within a certain time (ms)
+  50%   1018
+  66%   1035
+  75%   1041
+  80%   1043
+  90%   1049
+  95%   1063
+  98%   1070
+  99%   1071
+ 100%   1079 (longest request)
+</code></pre>
+<p>Ура! Наше приложение теперь обрабатывает около 20 запросов в секунду,
+что примерно в 4 раза больше, чем при синхронном генерировании хешей.
+Кроме того, средняя задержка снизилась с 4 секунд
+до чуть более 1 секунды.</p>
+<p>Надеемся, что благодаря разбору производительности этого
+(заведомо надуманного) примера вы увидели, как тиковый процессор
+V8 может дать вам лучшее понимание производительности ваших приложений Node.js.</p></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->Вверх</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"ru","localName":"Русский","name":"Russian","langDir":"ltr","dateFormat":"DD.MM.YYYY","hrefLang":"ru","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"Вверх","components.header.links.home":"Главная","components.header.links.about":"О проекте","components.header.links.download":"Загрузка","components.header.links.docs":"Документация","components.header.links.getInvolved":"Присоединиться","components.header.links.security":"Безопасность","components.header.links.certification":"Certification","components.header.links.blog":"Новости","components.navigation.about.links.governance":"Управление","components.navigation.docs.links.es6":"ES6 и выше","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"Руководства","components.navigation.docs.links.dependencies":"Зависимости","components.navigation.getInvolved.links.collabSummit":"Саммит сотрудников","components.navigation.getInvolved.links.contribute":"Участие","components.navigation.getInvolved.links.codeOfConduct":"Правила","components.downloadList.links.previousReleases":"Предыдущие релизы","components.downloadList.links.packageManager":"Установка Node.js с помощью пакетного менеджера","components.downloadList.links.shaSums":"Подписанные SHASUMS для файлов релиза","components.downloadList.links.shaSums.howToVerify":" (Как проверить)","components.downloadList.links.allDownloads":"Все варианты загрузки","components.downloadList.links.nightlyReleases":"Ночные сборки","components.downloadList.links.unofficialBuilds":"Неофициальные сборки","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Установка Node.js через бинарный архив в Linux","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"Список изменений","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"Документация","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"Следующий | ","components.pagination.previous":"Предыдущий","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/ru/docs/guides/simple-profiling","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

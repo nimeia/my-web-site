@@ -1,0 +1,202 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>通过包管理器安装 Node.js | Node.js</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="通过包管理器安装 Node.js | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="通过包管理器安装 Node.js | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/zh-cn/download/package-manager"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/zh-cn/download/package-manager-d9957deb8c00fe70.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NDMJQNDPS"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-6NDMJQNDPS");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7950559866369342" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/zh-cn"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/zh-cn">首页</a></li><li class=""><a href="/zh-cn/about">关于</a></li><li class="active"><a href="/zh-cn/download">下载</a></li><li class=""><a href="/zh-cn/docs">文档</a></li><li class=""><a href="/zh-cn/get-involved">加入我们</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">安全</a></li><li class=""><a href="https://openjsf.org/certification">相关认证</a></li><li class=""><a href="/zh-cn/blog">新闻</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/download/package-manager">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/download/package-manager">Catalan</a></li><li><a data-lang="de" title="German" href="/de/download/package-manager">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/download/package-manager">English</a></li><li><a data-lang="es" title="Spanish" href="/es/download/package-manager">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/download/package-manager">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/download/package-manager">Français</a></li><li><a data-lang="it" title="Italian" href="/it/download/package-manager">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/download/package-manager">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/download/package-manager">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/download/package-manager">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/download/package-manager">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/download/package-manager">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/download/package-manager">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/download/package-manager">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/download/package-manager">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/download/package-manager">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/download/package-manager">繁體中文</a></li></ul></div></header><main id="main"><div class="container"><h1 id="通过包管理器方式安装-node.js">通过包管理器方式安装 Node.js<a id="header-通过包管理器方式安装-node.js" class="anchor" href="#通过包管理器方式安装-node.js" aria-labelledby="通过包管理器方式安装-node.js"></a></h1>
+<p><em><strong>注意：</strong></em> 此页面上所有的安装包均有它们各自作者，<strong>而非</strong> Node.js 核心团队负责进行维护和支持。如遇任何问题，请直接向有关作者报告。 如你的问题被证实是因为 Node.js 的缺陷引发的，维护者将直接向 Node.js 汇报此问题。</p>
+<hr/>
+<ul>
+<li><a href="#android">Android</a></li>
+<li><a href="#arch-linux">Arch Linux</a></li>
+<li><a href="#centos-fedora-and-red-hat-enterprise-linux">CentOS，Fedora 和 Red Hat Enterprise Linux</a></li>
+<li><a href="#debian-and-ubuntu-based-linux-distributions-enterprise-linux-fedora-and-snap-packages">基于 Linux 的 Debian 和 Ubuntu 发行版，Enterprise Linux/Fedora 和 Snap packages</a></li>
+<li><a href="#fnm">fnm</a></li>
+<li><a href="#freebsd">FreeBSD</a></li>
+<li><a href="#gentoo">Gentoo</a></li>
+<li><a href="#ibm-i">IBM i</a></li>
+<li><a href="#netbsd">NetBSD</a></li>
+<li><a href="#nvm">nvm</a></li>
+<li><a href="#nvs">nvs</a></li>
+<li><a href="#openbsd">OpenBSD</a></li>
+<li><a href="#opensuse-and-sle">openSUSE 和 SLE</a></li>
+<li><a href="#macos">macOS</a></li>
+<li><a href="#smartos-and-illumos">SmartOS 和 illumos</a></li>
+<li><a href="#solus">Solus</a></li>
+<li><a href="#void-linux">Void Linux</a></li>
+<li><a href="#windows-1">Windows</a></li>
+<li><a href="#zos">z/OS</a></li>
+</ul>
+<hr/>
+<h2 id="android">Android<a id="header-android" class="anchor" href="#android" aria-labelledby="android"></a></h2>
+<p>因为 Android 版的 Node.js 目前处于实验阶段，所以当下不提供预编译版本。</p>
+<p>但是你有一些第三方的解决方案可供选择：拿 <a href="https://termux.com/">Termux</a> 来说，它为安卓提供了终端模拟器和 Linux 环境，以及内置的包管理器和<a href="https://github.com/termux/termux-packages">可扩展应用集</a>，其中包含了大量预编译的应用。在 Termux 中，以下的命令将会安装最新版 Node.js：</p>
+<pre><code class="language-bash">pkg install nodejs
+pkg install nodejs-current
+</code></pre>
+<p>目前，Termux 的 Node.js 二进制程序包与 <code>system-icu</code> （依赖于 <code>libicu</code> 包）相关联。</p>
+<h2 id="arch-linux">Arch Linux<a id="header-arch-linux" class="anchor" href="#arch-linux" aria-labelledby="arch-linux"></a></h2>
+<p>Node.js 以及 npm 包管理器在社区库中可如下方式使用：</p>
+<pre><code class="language-bash">pacman -S nodejs npm
+</code></pre>
+<h2 id="centos-fedora-and-red-hat-enterprise-linux">CentOS，Fedora 和 Red Hat Enterprise Linux<a id="header-centos-fedora-and-red-hat-enterprise-linux" class="anchor" href="#centos-fedora-and-red-hat-enterprise-linux" aria-labelledby="centos-fedora-and-red-hat-enterprise-linux"></a></h2>
+<p>在 CentOS/RHEL 8 和 Fedora 系统中，Node.js 作为 <code>nodejs</code> 模块而变得可用。</p>
+<pre><code class="language-bash">dnf module install nodejs:&lt;stream&gt;
+</code></pre>
+<p>这里的 <code>&lt;stream&gt;</code> 对应了 Node.js 的主版本。
+可以使用如下命令查看可用流的列表：</p>
+<pre><code class="language-bash">dnf module list nodejs
+</code></pre>
+<p>举个例子，安装 Node.js 12：</p>
+<pre><code class="language-bash">dnf module install nodejs:12
+</code></pre>
+<p>对于 CentOS/RHEL 7，Node.js 可以通过 <a href="https://www.softwarecollections.org/en/scls/?search=NodeJS">软件合集</a> 获得。</p>
+<h3 id="可替换项">可替换项<a id="header-可替换项" class="anchor" href="#可替换项" aria-labelledby="可替换项"></a></h3>
+<p>以下是提供了 CentOS，Fedora，和 RHEL 系统相兼容安装包的资源：</p>
+<ul>
+<li><a href="#snap">Node.js 快照</a> 在 <a href="https://github.com/nodejs/snap">https://github.com/nodejs/snap</a> 得到支持和维护。</li>
+<li><a href="#debian-and-ubuntu-based-linux-distributions">Node.js 二进制发布版</a> 通过 <a href="https://github.com/nodesource/distributions">NodeSource</a> 得到维护支持。</li>
+</ul>
+<!-- -->
+<h2 id="debian-and-ubuntu-based-linux-distributions-enterprise-linux-fedora-and-snap-packages"> 基于 Linux 的 Debian 和 Ubuntu 发行版，Enterprise Linux/Fedora 和 Snap packages<a id="header-debian-and-ubuntu-based-linux-distributions-enterprise-linux-fedora-and-snap-packages" class="anchor" href="#debian-and-ubuntu-based-linux-distributions-enterprise-linux-fedora-and-snap-packages" aria-labelledby="debian-and-ubuntu-based-linux-distributions-enterprise-linux-fedora-and-snap-packages"></a></h2>
+<p><a href="https://github.com/nodesource/distributions">Node.js 官方二进制发行版</a> 由 NodeSource 提供。</p>
+<h3 id="可替换项-1">可替换项<a id="header-可替换项-1" class="anchor" href="#可替换项-1" aria-labelledby="可替换项-1"></a></h3>
+<p>与 Debian 以及 Ubuntu 发布版本的兼容安装包可以通过 <a href="#snap">Node.js 快照</a> 获得。</p>
+<h2 id="fnm">fnm<a id="header-fnm" class="anchor" href="#fnm" aria-labelledby="fnm"></a></h2>
+<p>这是一个内置了 Rust，用于 Node.js 多发布版本的快速便捷管理工具。它可以让你处理诸如安装、卸载，以及根据当前目录自动切换 Node.js 版本的行为操作。
+安装 fnm，请使用此<a href="https://github.com/Schniz/fnm#using-a-script-macoslinux">安装脚本</a>。</p>
+<p>fnm 有跨版本的支持（macOS、Windows 以及 Linux），以及一系列衍生命令（Bash, Zsh, Fish, PowerShell, Windows 命令行），它以“脑速”编译，并兼容性支持 <code>.node-version</code> 和 <code>.nvmrc</code> 文件。</p>
+<h2 id="freebsd">FreeBSD<a id="header-freebsd" class="anchor" href="#freebsd" aria-labelledby="freebsd"></a></h2>
+<p>可以通过 <a href="https://www.freshports.org/www/node">www/node</a> 获取最近的 Node.js。</p>
+<p>通过 <a href="https://www.freebsd.org/cgi/man.cgi?pkg">pkg</a> 安装二进制文件包：</p>
+<pre><code class="language-bash">pkg install node
+</code></pre>
+<p>或通过 <a href="https://www.freebsd.org/cgi/man.cgi?ports">ports</a> 进行构建。</p>
+<pre><code class="language-bash">cd /usr/ports/www/node &amp;&amp; make install
+</code></pre>
+<h2 id="gentoo">Gentoo<a id="header-gentoo" class="anchor" href="#gentoo" aria-labelledby="gentoo"></a></h2>
+<p>可以在 portage tree 中获得 Node.js：</p>
+<pre><code class="language-bash">emerge nodejs
+</code></pre>
+<h2 id="ibm-i">IBM i<a id="header-ibm-i" class="anchor" href="#ibm-i" aria-labelledby="ibm-i"></a></h2>
+<p>Node.js 长期维护版（LTS）各类版本可以通过 IBM 处获得，使用 <a href="https://ibm.biz/ibmi-rpms">&#x27;yum&#x27; 包管理器</a>。包名字的组成是 <code>nodejs</code> 加上一个主版本号（举个例子，<code>nodejs8</code>，<code>nodejs10</code>，<code>nodejs12</code> 等)。</p>
+<p>如果你要通过命令行安装 Node.js 12.x，请以*ALLOBJ 特殊权限方式进行：</p>
+<pre><code class="language-bash">yum install nodejs12
+</code></pre>
+<p>Node.js 也可以通过客户端访问解决方案产品（IBM i Access Client Solutions）安装。具体参考<a href="http://www-01.ibm.com/support/docview.wss?uid=nas8N1022619">支持文档</a>。</p>
+<h2 id="netbsd">NetBSD<a id="header-netbsd" class="anchor" href="#netbsd" aria-labelledby="netbsd"></a></h2>
+<p>可以在 pkgsrc 目录树中获得 Node.js：</p>
+<pre><code class="language-bash">cd /usr/pkgsrc/lang/nodejs &amp;&amp; make install
+</code></pre>
+<p>或者使用 pkgin 安装一个二进制文件包 (如果它支持你的系统)：</p>
+<pre><code class="language-bash">pkgin -y install nodejs
+</code></pre>
+<h2 id="nvm">nvm<a id="header-nvm" class="anchor" href="#nvm" aria-labelledby="nvm"></a></h2>
+<p>Node 版本管理器是一个用于管理多个已发布的 Node.js 不同版本的 bash 脚本。它允许你执行诸如“安装”、“卸载”以及“版本切换”等诸多功能。
+使用<a href="https://github.com/nvm-sh/nvm#install--update-script">安装脚本</a>安装 nvm。</p>
+<p>对于 Unix / OS X 系统，Node.js 从源代码构建，并通过 <a href="https://github.com/creationix/nvm">nvm</a> 安装到你所期望的地方。</p>
+<pre><code class="language-bash">env VERSION=`python tools/getnodeversion.py` make install DESTDIR=`nvm_version_path v$VERSION` PREFIX=&quot;&quot;
+</code></pre>
+<p>随后你可以通过 <code>nvm</code> 在“发布版本”和“从源代码构建版本”中选择。</p>
+<p>举个例子，如果你的 Node.js 版本是 v8.0.0-pre：</p>
+<pre><code class="language-bash">nvm use 8
+</code></pre>
+<p>一旦官方发布了版本，并且你希望卸载从源代码编译的版本，可以这样做：</p>
+<pre><code class="language-bash">nvm uninstall 8
+</code></pre>
+<h2 id="nvs">nvs<a id="header-nvs" class="anchor" href="#nvs" aria-labelledby="nvs"></a></h2>
+<h4 id="windows">Windows<a id="header-windows" class="anchor" href="#windows" aria-labelledby="windows"></a></h4>
+<p><code>nvs</code>版本管理器是一个跨平台，可用于 Windows、macOS 以及形如 Unix 的操作系统。</p>
+<p>在 Windows 上安装 <code>nvs</code>，请到此 <a href="https://github.com/jasongin/nvs/releases">发布页</a> 下载最新发布的 MSI 安装源。</p>
+<p>你也可以使用 <code>chocolatey</code> 进行安装：</p>
+<pre><code class="language-bash">choco install nvs
+</code></pre>
+<h4 id="macosunixlike">macOS，UnixLike<a id="header-macosunixlike" class="anchor" href="#macosunixlike" aria-labelledby="macosunixlike"></a></h4>
+<p>你可以在 <a href="https://github.com/jasongin/nvs/blob/master/doc/SETUP#mac-linux">此处</a> 找到关于在 macOS / 形如 Unix 操作系统的安装步骤文档。</p>
+<h4 id="使用方法">使用方法<a id="header-使用方法" class="anchor" href="#使用方法" aria-labelledby="使用方法"></a></h4>
+<p>安装完成后，你可以使用 <code>nvs</code> 在不同版本的 node 中来回切换。</p>
+<p>添加最新版本的 node：</p>
+<pre><code class="language-bash">nvs add latest
+</code></pre>
+<p>添加最新 LTS 版本的 node：</p>
+<pre><code class="language-bash">nvs add lts
+</code></pre>
+<p>然后运行 <code>nvs use</code> ，为当前脚本的 <code>PATH</code> 路径下添加一个 node 版本：</p>
+<pre><code class="language-bash">$ nvs use lts
+PATH -= %LOCALAPPDATA%\nvs\default
+PATH += %LOCALAPPDATA%\nvs\node\14.17.0\x64
+</code></pre>
+<p>如果需要永久在 <code>PATH</code> 里添加，使用 <code>nvs link</code>：</p>
+<pre><code class="language-bash">nvs link lts
+</code></pre>
+<h2 id="openbsd">OpenBSD<a id="header-openbsd" class="anchor" href="#openbsd" aria-labelledby="openbsd"></a></h2>
+<p>Node.js 也可以通过 ports 系统获取。</p>
+<pre><code class="language-bash">/usr/ports/lang/node
+</code></pre>
+<p>在 OpenBSD 上中使用<a href="https://man.openbsd.org/OpenBSD-current/man1/pkg_add.1">pkg_add</a>：</p>
+<pre><code class="language-bash">pkg_add node
+</code></pre>
+<h2 id="opensuse-and-sle">openSUSE 和 SLE<a id="header-opensuse-and-sle" class="anchor" href="#opensuse-and-sle" aria-labelledby="opensuse-and-sle"></a></h2>
+<p>在以下安装包中，Node.js 在以下主版本库中可用：</p>
+<ul>
+<li><strong>openSUSE Leap 42.2</strong>: <code>nodejs4</code></li>
+<li><strong>openSUSE Leap 42.3</strong>: <code>nodejs4</code>, <code>nodejs6</code></li>
+<li><strong>openSUSE Tumbleweed</strong>: <code>nodejs4</code>, <code>nodejs6</code>, <code>nodejs8</code></li>
+<li><strong>SUSE Linux Enterprise Server (SLES) 12</strong>: <code>nodejs4</code>, <code>nodejs6</code>
+（“Web 和 Scripting 模块” <a href="https://www.suse.com/documentation/sles-12/book_sle_deployment/data/sec_add-ons_extensions.html">安装前必须添加</a>。）</li>
+</ul>
+<p>举个例子，在 openSUSE Leap 42.2 上安装 Node.js，用 root 角色运行命令：</p>
+<pre><code class="language-bash">zypper install nodejs4
+</code></pre>
+<h2 id="macos">macOS<a id="header-macos" class="anchor" href="#macos" aria-labelledby="macos"></a></h2>
+<p>从 <a href="https://nodejs.org/">nodejs.org</a> 官网直接下载 <a href="https://nodejs.org/zh-cn/#home-downloadhead">macOS Installer</a>。</p>
+<p><em>如果你想用 bash 命令下载：</em></p>
+<pre><code class="language-bash">curl &quot;https://nodejs.org/dist/latest/node-${VERSION:-$(wget -qO- https://nodejs.org/dist/latest/ | sed -nE &#x27;s|.*&gt;node-(.*)\.pkg&lt;/a&gt;.*|\1|p&#x27;)}.pkg&quot; &gt; &quot;$HOME/Downloads/node-latest.pkg&quot; &amp;&amp; sudo installer -store -pkg &quot;$HOME/Downloads/node-latest.pkg&quot; -target &quot;/&quot;
+</code></pre>
+<h3 id="可替代方案">可替代方案<a id="header-可替代方案" class="anchor" href="#可替代方案" aria-labelledby="可替代方案"></a></h3>
+<p>使用 <strong><a href="https://brew.sh/">Homebrew</a></strong>:</p>
+<pre><code class="language-bash">brew install node
+</code></pre>
+<p>使用 <strong><a href="https://www.macports.org/">MacPorts</a></strong>:</p>
+<pre><code class="language-bash">port install nodejs&lt;major version&gt;
+
+# Example
+port install nodejs7
+</code></pre>
+<p>使用 <strong><a href="https://pkgsrc.joyent.com/install-on-osx/">pkgsrc</a></strong>:</p>
+<p>安装二进制文件包：</p>
+<pre><code class="language-bash">pkgin -y install nodejs
+</code></pre>
+<p>或者通过 pkgsrc 手动构建：</p>
+<pre><code class="language-bash">cd pkgsrc/lang/nodejs &amp;&amp; bmake install
+</code></pre>
+<h2 id="smartos-and-illumos">SmartOS 和 illumos<a id="header-smartos-and-illumos" class="anchor" href="#smartos-and-illumos" aria-labelledby="smartos-and-illumos"></a></h2>
+<p>SmartOS 镜像随 pkgsrc 预装。在其它的 illumos 发布版中，先安装 <strong><a href="https://pkgsrc.joyent.com/install-on-illumos/">pkgsrc</a></strong>，然后你可以正常安装二进制文件包：</p>
+<pre><code class="language-bash">pkgin -y install nodejs
+</code></pre>
+<p>或通过 pkgsrc 手动构建：</p>
+<pre><code class="language-bash">cd pkgsrc/lang/nodejs &amp;&amp; bmake install
+</code></pre>
+<h2 id="snap">Snap<a id="header-snap" class="anchor" href="#snap" aria-labelledby="snap"></a></h2>
+<p><a href="https://github.com/nodejs/snap">Node.js 快照</a>在 <a href="https://snapcraft.io/node"><code>node</code></a> 快照商店可以获得。</p>
+<h2 id="solus">Solus<a id="header-solus" class="anchor" href="#solus" aria-labelledby="solus"></a></h2>
+<p>在主版本库中，Solus 提供了 Node.js。</p>
+<pre><code class="language-bash">sudo eopkg install nodejs
+</code></pre>
+<h2 id="void-linux">Void Linux<a id="header-void-linux" class="anchor" href="#void-linux" aria-labelledby="void-linux"></a></h2>
+<p>在主版本库中 Void Linux 发布稳定的 Node.js。</p>
+<pre><code class="language-bash">xbps-install -Sy nodejs
+</code></pre>
+<h2 id="windows-1">Windows<a id="header-windows-1" class="anchor" href="#windows-1" aria-labelledby="windows-1"></a></h2>
+<p>直接通过 <a href="https://nodejs.org/">nodejs.org</a> 下载 <a href="https://nodejs.org/zh-cn/#home-downloadhead">Windows Installer</a> 安装。</p>
+<h3 id="可替代方案-1">可替代方案<a id="header-可替代方案-1" class="anchor" href="#可替代方案-1" aria-labelledby="可替代方案-1"></a></h3>
+<p>使用 <strong><a href="https://chocolatey.org/">Chocolatey</a></strong>:</p>
+<pre><code class="language-bash">cinst nodejs
+# or for full install with npm
+cinst nodejs.install
+</code></pre>
+<p>使用 <strong><a href="https://scoop.sh/">Scoop</a></strong>:</p>
+<pre><code class="language-bash">scoop install nodejs
+</code></pre>
+<h2 id="zos">z/OS<a id="header-zos" class="anchor" href="#zos" aria-labelledby="zos"></a></h2>
+<p>IBM® 提供给 Node.js 的 SDK - z/OS® 它有两种可用的安装方式：
+SMP/E and PAX。 你可选择一种合适的方式安装：</p>
+<ul>
+<li><a href="https://www.ibm.com/docs/en/sdk-nodejs-zos/14.0?topic=configuring-installing-smpe-edition">在 z/OS 上安装配置 Node.js 的 SMP/E 版本</a></li>
+<li><a href="https://www.ibm.com/docs/en/sdk-nodejs-zos/14.0?topic=configuring-installing-pax-edition">在 z/OS 上安装配置 Node.js 的 PAX 版本</a></li>
+</ul></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->回到页顶</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"zh-cn","localName":"简体中文","name":"Simplified Chinese","langDir":"ltr","dateFormat":"YYYY/MM/DD","hrefLang":"zh-Hans","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"回到页顶","components.header.links.home":"首页","components.header.links.about":"关于","components.header.links.download":"下载","components.header.links.docs":"文档","components.header.links.getInvolved":"加入我们","components.header.links.security":"安全","components.header.links.certification":"相关认证","components.header.links.blog":"新闻","components.navigation.about.links.governance":"管理规则","components.navigation.docs.links.es6":"ES6 及更高","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"指南","components.navigation.docs.links.dependencies":"依赖项","components.navigation.getInvolved.links.collabSummit":"协作者峰会","components.navigation.getInvolved.links.contribute":"贡献","components.navigation.getInvolved.links.codeOfConduct":"管理","components.downloadList.links.previousReleases":"以往的版本","components.downloadList.links.packageManager":"使用包管理器安装 Node.js","components.downloadList.links.shaSums":"Signed SHASUMS for release files","components.downloadList.links.shaSums.howToVerify":" (如何校验)","components.downloadList.links.allDownloads":"所有下载选项","components.downloadList.links.nightlyReleases":"每日构建","components.downloadList.links.unofficialBuilds":"非官方构建版","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"在 Linux 上，通过二进制文件安装 Node.js","components.downloadList.links.installingOnWsl":"在适用于 Linux 的 Windows 子系统（WSL）上安装 Node.js","components.downloadReleasesTable.changelog":"更新日志","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"文档","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"下一个 | ","components.pagination.previous":"以前","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}},"nodeVersionData":[{"node":"v20.3.1","nodeNumeric":"20.3.1","nodeMajor":"v20.x","npm":"9.6.7","isLts":false},{"node":"v18.16.1","nodeNumeric":"18.16.1","nodeMajor":"v18.x","npm":"9.5.1","isLts":true}]},"__N_SSG":true},"page":"/zh-cn/download/package-manager","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><title>Node v0.11.0 (Unstable) | Node.js node js 学习 中文网</title><meta name="theme-color" content="#333"/><link rel="icon" href="/static/images/favicons/favicon.png" type="image/png"/><meta name="robots" content="index, follow"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:title" content="Node v0.11.0 (Unstable) | Node.js"/><meta property="og:site_name" content="Node.js"/><meta property="og:description" content="Node.js® is a JavaScript runtime built on Chrome&#x27;s V8 JavaScript engine."/><meta property="og:image" content="/static/images/logo-hexagon-card.png"/><meta property="og:image:type" content="image/png"/><meta property="og:image:width" content="224"/><meta property="og:image:height" content="256"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@nodejs"/><meta name="twitter:title" content="Node v0.11.0 (Unstable) | Node.js"/><meta name="twitter:image" content="/static/images/logo-hexagon-card.png"/><meta name="twitter:image:alt" content="The Node.js Hexagon Logo"/><link rel="canonical" href="https://nodejs.org/en/blog/release/v0.11.0"/><link rel="alternate" href="/en/feed/blog.xml" title="Node.js Blog" type="application/rss+xml"/><link rel="alternate" href="/en/feed/releases.xml" title="Node.js Blog: Releases" type="application/rss+xml"/><link rel="alternate" href="/en/feed/vulnerability.xml" title="Node.js Blog: Vulnerability Reports" type="application/rss+xml"/><link rel="preload" as="image" href="/static/images/logo.svg"/><link rel="preload" as="image" href="/static/images/light-mode.svg"/><link rel="preload" as="image" href="/static/images/dark-mode.svg"/><link rel="preload" as="image" href="/static/images/language-picker.svg"/><meta name="next-head-count" content="27"/><link rel="preload" href="/_next/static/media/0ac14a3c407fb3c4-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/media/fc6fba7ce0876fef-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="/_next/static/css/b4603cbbc7e2580f.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b4603cbbc7e2580f.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/static/js/legacyMain.js" defer="" data-nscript="beforeInteractive"></script><script src="/_next/static/chunks/webpack-16ca7aacbf7ee910.js" defer=""></script><script src="/_next/static/chunks/framework-75746eeb80cbf23f.js" defer=""></script><script src="/_next/static/chunks/main-38be3f05f3ba62e4.js" defer=""></script><script src="/_next/static/chunks/pages/_app-da2ba5ef2a6f35ae.js" defer=""></script><script src="/_next/static/chunks/48863-303c76a7746f7fd7.js" defer=""></script><script src="/_next/static/chunks/pages/en/blog/release/v0.11.0-3029dc88be973e79.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_buildManifest.js" defer=""></script><script src="/_next/static/GoiUein7BU6Vneo97F66k/_ssgManifest.js" defer=""></script><style id="__jsx-2232683522">body{font:400 20px/1.5 '__Source_Sans_Pro_356a32', '__Source_Sans_Pro_Fallback_356a32',"Open Sans",Roboto,"San Francisco",Helvetica,Arial,sans-serif}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-2WRNZHGVQT"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-2WRNZHGVQT");</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8264273508355034" crossorigin="anonymous"></script></head><body><div id="__next"><header aria-label="Primary"><div class="container"><a class="logo" href="/en"><img alt="Node.js" width="111" height="33" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/logo.svg"/></a><nav aria-label="primary"><ul class="list-divider-pipe"><li class=""><a href="/en">Home</a></li><li class=""><a href="/en/about">About</a></li><li class=""><a href="/en/download">Downloads</a></li><li class=""><a href="/en/docs">Docs</a></li><li class=""><a href="/en/get-involved">Get Involved</a></li><li class=""><a href="https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security">Security</a></li><li class=""><a href="https://openjsf.org/certification">Certification</a></li><li class="active"><a href="/en/blog">News</a></li></ul></nav><div class="switchers"><button class="dark-theme-switcher" type="button" title="Toggle dark/light mode" aria-label="Toggle dark/light mode"><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="dark-image" style="color:transparent" src="/static/images/light-mode.svg"/><img alt="Dark Theme Switcher" width="28" height="28" decoding="async" data-nimg="1" class="light-image" style="color:transparent" src="/static/images/dark-mode.svg"/></button><button class="lang-picker-toggler" type="button" title="Toggle Language" aria-label="Toggle Language" aria-controls="lang-picker" aria-expanded="false"><img alt="Language Switcher" width="25" height="28" decoding="async" data-nimg="1" style="color:transparent" src="/static/images/language-picker.svg"/></button></div><ul id="lang-picker" class="lang-picker hidden"><li><a data-lang="ar" title="Arabic" href="/ar/blog/release/v0.11.0">العربية</a></li><li><a data-lang="ca" title="Catalan" href="/ca/blog/release/v0.11.0">Catalan</a></li><li><a data-lang="de" title="German" href="/de/blog/release/v0.11.0">Deutsch</a></li><li><a data-lang="en" title="English" href="/en/blog/release/v0.11.0">English</a></li><li><a data-lang="es" title="Spanish" href="/es/blog/release/v0.11.0">Español</a></li><li><a data-lang="fa" title="Persian" href="/fa/blog/release/v0.11.0">زبان فارسی</a></li><li><a data-lang="fr" title="French" href="/fr/blog/release/v0.11.0">Français</a></li><li><a data-lang="it" title="Italian" href="/it/blog/release/v0.11.0">Italiano</a></li><li><a data-lang="ja" title="Japanese" href="/ja/blog/release/v0.11.0">日本語</a></li><li><a data-lang="ka" title="Georgian" href="/ka/blog/release/v0.11.0">ქართული</a></li><li><a data-lang="ko" title="Korean" href="/ko/blog/release/v0.11.0">한국어</a></li><li><a data-lang="pt-br" title="Brazilian Portuguese" href="/pt-br/blog/release/v0.11.0">Português do Brasil</a></li><li><a data-lang="ro" title="Romanian" href="/ro/blog/release/v0.11.0">limba română</a></li><li><a data-lang="ru" title="Russian" href="/ru/blog/release/v0.11.0">Русский</a></li><li><a data-lang="tr" title="Turkish" href="/tr/blog/release/v0.11.0">Türkçe</a></li><li><a data-lang="uk" title="Ukrainian" href="/uk/blog/release/v0.11.0">Українська</a></li><li><a data-lang="zh-cn" title="Simplified Chinese" href="/zh-cn/blog/release/v0.11.0">简体中文</a></li><li><a data-lang="zh-tw" title="Traditional Chinese" href="/zh-tw/blog/release/v0.11.0">繁體中文</a></li></ul></div></header><main id="main"><div class="container"><article dir="auto"><div class="blogpost-header"><h1>Node v0.11.0 (Unstable)</h1><span class="blogpost-meta"><time dateTime="2013-03-29T05:52:55+0800">2013-03-29</time></span></div><p>2013.03.28, Version 0.11.0 (Unstable)</p>
+<ul>
+<li>
+<p>V8: update to 3.17.13</p>
+</li>
+<li>
+<p>os: use %SystemRoot% or %windir% in os.tmpdir() (Suwon Chae)</p>
+</li>
+<li>
+<p>util: fix util.inspect() line width calculation (Marcin Kostrzewa)</p>
+</li>
+<li>
+<p>buffer: remove _charsWritten (Trevor Norris)</p>
+</li>
+<li>
+<p>fs: uv_[fl]stat now reports subsecond resolution (Timothy J Fontaine)</p>
+</li>
+<li>
+<p>fs: Throw if error raised and missing callback (bnoordhuis)</p>
+</li>
+<li>
+<p>tls: expose SSL_CTX_set_timeout via tls.createServer (Manav Rathi)</p>
+</li>
+<li>
+<p>tls: remove harmful unnecessary bounds checking (Marcel Laverdet)</p>
+</li>
+<li>
+<p>buffer: write ascii strings using WriteOneByte (Trevor Norris)</p>
+</li>
+<li>
+<p>dtrace: fix generation of v8 constants on freebsd (Fedor Indutny)</p>
+</li>
+<li>
+<p>dtrace: x64 ustack helper (Fedor Indutny)</p>
+</li>
+<li>
+<p>readline: handle wide characters properly (Nao Iizuka)</p>
+</li>
+<li>
+<p>repl: Use a domain to catch async errors safely (isaacs)</p>
+</li>
+<li>
+<p>repl: emit &#x27;reset&#x27; event when context is reset (Sami Samhuri)</p>
+</li>
+<li>
+<p>util: custom <code>inspect()</code> method may return an Object (Nathan Rajlich)</p>
+</li>
+<li>
+<p>console: <code>console.dir()</code> bypasses inspect() methods (Nathan Rajlich)</p>
+</li>
+</ul>
+<p>Source Code: <a href="https://nodejs.org/dist/v0.11.0/node-v0.11.0.tar.gz">https://nodejs.org/dist/v0.11.0/node-v0.11.0.tar.gz</a></p>
+<p>Macintosh Installer (Universal): <a href="https://nodejs.org/dist/v0.11.0/node-v0.11.0.pkg">https://nodejs.org/dist/v0.11.0/node-v0.11.0.pkg</a></p>
+<p>Windows Installer: <a href="https://nodejs.org/dist/v0.11.0/node-v0.11.0-x86.msi">https://nodejs.org/dist/v0.11.0/node-v0.11.0-x86.msi</a></p>
+<p>Windows x64 Installer: <a href="https://nodejs.org/dist/v0.11.0/x64/node-v0.11.0-x64.msi">https://nodejs.org/dist/v0.11.0/x64/node-v0.11.0-x64.msi</a></p>
+<p>Windows x64 Files: <a href="https://nodejs.org/dist/v0.11.0/x64/">https://nodejs.org/dist/v0.11.0/x64/</a></p>
+<p>Linux 32-bit Binary: <a href="https://nodejs.org/dist/v0.11.0/node-v0.11.0-linux-x86.tar.gz">https://nodejs.org/dist/v0.11.0/node-v0.11.0-linux-x86.tar.gz</a></p>
+<p>Linux 64-bit Binary: <a href="https://nodejs.org/dist/v0.11.0/node-v0.11.0-linux-x64.tar.gz">https://nodejs.org/dist/v0.11.0/node-v0.11.0-linux-x64.tar.gz</a></p>
+<p>Solaris 32-bit Binary: <a href="https://nodejs.org/dist/v0.11.0/node-v0.11.0-sunos-x86.tar.gz">https://nodejs.org/dist/v0.11.0/node-v0.11.0-sunos-x86.tar.gz</a></p>
+<p>Solaris 64-bit Binary: <a href="https://nodejs.org/dist/v0.11.0/node-v0.11.0-sunos-x64.tar.gz">https://nodejs.org/dist/v0.11.0/node-v0.11.0-sunos-x64.tar.gz</a></p>
+<p>Other release files: <a href="https://nodejs.org/dist/v0.11.0/">https://nodejs.org/dist/v0.11.0/</a></p>
+<p>Website: <a href="https://nodejs.org/docs/v0.11.0/">https://nodejs.org/docs/v0.11.0/</a></p>
+<p>Documentation: <a href="https://nodejs.org/docs/v0.11.0/api/">https://nodejs.org/docs/v0.11.0/api/</a></p>
+<p>Shasums:</p>
+<pre><code class="language-text">4889d63a4a08d146d59cd057b1c8b341ceac07cf  node-v0.11.0-darwin-x64.tar.gz
+4ef64fa36c095edfa3c6da852ed1ec46c6f3cf23  node-v0.11.0-darwin-x86.tar.gz
+04c4d1fb71f98dfc921d9558667a727ca1aa6586  node-v0.11.0-linux-x64.tar.gz
+b1507837292e23464e2d184007f2567db3db1483  node-v0.11.0-linux-x86.tar.gz
+cd195da08ea5208a6c08b95511fa888d750f4cd7  node-v0.11.0-sunos-x64.tar.gz
+4698b9a6cb911cbea3deac38ea191cef3051b3ab  node-v0.11.0-sunos-x86.tar.gz
+829649fe65133459c7fc231b8d048f19ae870c7b  node-v0.11.0-x86.msi
+7958b8212aaa9787724c552197d37cf5602ff645  node-v0.11.0.pkg
+0402aae18f847238409e9d1a5ddd806beb5fe678  node-v0.11.0.tar.gz
+320778de3329437815daa4f86d1a89db33458126  node.exe
+1f4f509a9dc48c519064ca7f2deddeaff2b6b15b  node.exp
+5f83864acae194c0652a61af71262bd1ba55a04c  node.lib
+0d100a18ba569e5e9bb9e216355959261c4cd77b  node.pdb
+b55553c83e12f253f23dec4d998b05bd673db83b  x64/node-v0.11.0-x64.msi
+7100ef58f9a8428d2bdd9d4de8ffb679d0198b1e  x64/node.exe
+12bf810852e7097bde1bf4bff6cd7f802603cdb9  x64/node.exp
+28f83178241353dc727ba6d8ff38f9b9177be79a  x64/node.lib
+6c0f43db501facc3d9ed542a090f9ba2e84bdc41  x64/node.pdb
+</code></pre></article></div></main><a href="#" id="scroll-to-top"><span>↑ <!-- -->Scroll to top</span></a><footer><div class="container"><div class="openjsfoundation-footer"><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and Node.js contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> <!-- -->and <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p class="openjsfoundation-footer-links"><a href="https://openjsf.org">The OpenJS Foundation</a> | <a href="https://terms-of-use.openjsf.org">Terms of Use</a> | <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> | <a href="https://bylaws.openjsf.org">Bylaws</a> | <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> | <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> | <a href="https://trademark-list.openjsf.org">Trademark List</a> | <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p><div class="openjsfoundation-footer-edit"></div></div></div></footer></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"i18nData":{"currentLocale":{"code":"en","localName":"English","name":"English","langDir":"ltr","dateFormat":"MM.DD.YYYY","hrefLang":"en-US","enabled":true},"localeMessages":{"components.footer.scrollToTop.button":"Scroll to top","components.header.links.home":"Home","components.header.links.about":"About","components.header.links.download":"Downloads","components.header.links.docs":"Docs","components.header.links.getInvolved":"Get Involved","components.header.links.security":"Security","components.header.links.certification":"Certification","components.header.links.blog":"News","components.navigation.about.links.governance":"Governance","components.navigation.docs.links.es6":"ES6 and beyond","components.navigation.docs.links.apiLts":"{fullLtsNodeVersion} API {spanLts}","components.navigation.docs.links.apiCurrent":"{fullCurrentNodeVersion} API","components.navigation.docs.links.guides":"Guides","components.navigation.docs.links.dependencies":"Dependencies","components.navigation.getInvolved.links.collabSummit":"Collab Summit","components.navigation.getInvolved.links.contribute":"Contribute","components.navigation.getInvolved.links.codeOfConduct":"Code of Conduct","components.downloadList.links.previousReleases":"Previous Releases","components.downloadList.links.packageManager":"Installing Node.js via package manager","components.downloadList.links.shaSums":"Signed SHASUMS for release files","components.downloadList.links.shaSums.howToVerify":" (How to verify)","components.downloadList.links.allDownloads":"All download options","components.downloadList.links.nightlyReleases":"Nightly builds","components.downloadList.links.unofficialBuilds":"Unofficial builds","components.downloadList.links.buildingFromSource":"Building Node.js from source on supported platforms","components.downloadList.links.installingOnLinux":"Installing Node.js via binary archive","components.downloadList.links.installingOnWsl":"Install on Windows Subsystem for Linux (WSL)","components.downloadReleasesTable.changelog":"Changelog","components.downloadReleasesTable.releases":"Releases","components.downloadReleasesTable.docs":"Docs","components.header.buttons.toggleLanguage":"Toggle Language","components.header.buttons.toggleDarkMode":"Toggle dark/light mode","components.pagination.next":"Newer | ","components.pagination.previous":"Older","layouts.blogPost.author.byLine":"{author, select, null {} other {By {author}, }}","layouts.blogIndex.currentYear":"News from {year}"}}},"__N_SSG":true},"page":"/en/blog/release/v0.11.0","query":{},"buildId":"GoiUein7BU6Vneo97F66k","isFallback":false,"gsp":true,"scriptLoader":[]}</script><a rel="me" href="https://social.lfx.dev/@nodejs"></a></body></html>
