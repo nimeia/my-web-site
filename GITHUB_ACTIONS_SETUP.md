@@ -34,6 +34,7 @@ Set each value to the matching Cloudflare Pages project name.
 - `.github/workflows/deploy-itgrep-pages.yml`
 - `.github/workflows/deploy-nodejs-tech-pages.yml`
 - `.github/workflows/deploy-traefik-tech-pages.yml`
+- `.github/workflows/deploy-preview-pages.yml`
 - `.github/workflows/_deploy-pages-site.yml`
 
 ## What the workflow does
@@ -48,6 +49,7 @@ Each workflow:
 
 - Automatic production deploy on `push` to `main` when the relevant site files change.
 - Manual deploy from the GitHub Actions UI with `workflow_dispatch`.
+- Automatic preview deploy on pull requests for changed sites only.
 
 ## One-time Cloudflare setup
 
@@ -57,3 +59,7 @@ Before the workflows can deploy successfully:
 2. Set each project's production branch to `main`.
 3. Bind the custom domains in Cloudflare Pages.
 4. Configure `www -> apex` redirects and `Always Use HTTPS` in Cloudflare.
+
+Cloudflare rule checklist:
+
+- `docs/cloudflare-redirect-rules.md`

@@ -11,16 +11,31 @@ on:
         description: Cloudflare Pages project name
         required: true
         type: string
+      branch_name:
+        description: Branch name to associate with the Pages deployment
+        required: false
+        default: ""
+        type: string
     secrets:
       CLOUDFLARE_API_TOKEN:
         required: true
       CLOUDFLARE_ACCOUNT_ID:
         required: true
+    outputs:
+      deployment_url:
+        description: Pages deployment URL
+        value: ${{ jobs.deploy.outputs.deployment_url }}
+      pages_deployment_alias_url:
+        description: Pages alias URL
+        value: ${{ jobs.deploy.outputs.pages_deployment_alias_url }}
 
 jobs:
   deploy:
     name: Deploy ${{ inputs.site_dir }}
     runs-on: ubuntu-latest
+    outputs:
+      deployment_url: ${{ steps.deploy.outputs.deployment-url }}
+      pages_deployment_alias_url: ${{ steps.deploy.outputs.pages-deployment-alias-url }}
     permissions:
       contents: read
       deployments: write
@@ -56,6 +71,7 @@ jobs:
           command: >-
             pages deploy ${{ inputs.site_dir }}
             --project-name=${{ inputs.pages_project_name }}
+            ${{ inputs.branch_name != '' && format('--branch={0}', inputs.branch_name) || '' }}
 
       - name: Print deployment URLs
         env:

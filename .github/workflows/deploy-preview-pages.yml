@@ -1,0 +1,154 @@
+name: Deploy PR Preview
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+
+jobs:
+  detect-changes:
+    name: Detect site changes
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      itgrep: ${{ steps.detect.outputs.itgrep }}
+      nodejs_tech: ${{ steps.detect.outputs.nodejs_tech }}
+      traefik_tech: ${{ steps.detect.outputs.traefik_tech }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect changed files
+        id: detect
+        shell: bash
+        run: |
+          changed_files="$(git diff --name-only "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}")"
+          printf '%s\n' "$changed_files"
+
+          matches() {
+            local pattern="$1"
+            printf '%s\n' "$changed_files" | grep -Eq "$pattern"
+          }
+
+          if matches '^(itgrep\.com/|ads\.txt/itgrep\.com\.txt|scripts/prepare-cloudflare-static\.mjs|\.github/workflows/_deploy-pages-site\.yml|\.github/workflows/deploy-preview-pages\.yml)$'; then
+            echo "itgrep=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "itgrep=false" >> "$GITHUB_OUTPUT"
+          fi
+
+          if matches '^(nodejs\.tech/|ads\.txt/nodejs\.tech\.txt|scripts/prepare-cloudflare-static\.mjs|\.github/workflows/_deploy-pages-site\.yml|\.github/workflows/deploy-preview-pages\.yml)$'; then
+            echo "nodejs_tech=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "nodejs_tech=false" >> "$GITHUB_OUTPUT"
+          fi
+
+          if matches '^(traefik\.tech/|ads\.txt/traefik\.tech\.txt|scripts/prepare-cloudflare-static\.mjs|\.github/workflows/_deploy-pages-site\.yml|\.github/workflows/deploy-preview-pages\.yml)$'; then
+            echo "traefik_tech=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "traefik_tech=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  preview-itgrep:
+    if: ${{ !github.event.pull_request.draft && needs.detect-changes.outputs.itgrep == 'true' }}
+    needs: detect-changes
+    uses: ./.github/workflows/_deploy-pages-site.yml
+    with:
+      site_dir: itgrep.com
+      pages_project_name: ${{ vars.CF_PAGES_PROJECT_ITGREP }}
+      branch_name: ${{ github.head_ref }}
+    secrets: inherit
+
+  preview-nodejs-tech:
+    if: ${{ !github.event.pull_request.draft && needs.detect-changes.outputs.nodejs_tech == 'true' }}
+    needs: detect-changes
+    uses: ./.github/workflows/_deploy-pages-site.yml
+    with:
+      site_dir: nodejs.tech
+      pages_project_name: ${{ vars.CF_PAGES_PROJECT_NODEJS_TECH }}
+      branch_name: ${{ github.head_ref }}
+    secrets: inherit
+
+  preview-traefik-tech:
+    if: ${{ !github.event.pull_request.draft && needs.detect-changes.outputs.traefik_tech == 'true' }}
+    needs: detect-changes
+    uses: ./.github/workflows/_deploy-pages-site.yml
+    with:
+      site_dir: traefik.tech
+      pages_project_name: ${{ vars.CF_PAGES_PROJECT_TRAEFIK_TECH }}
+      branch_name: ${{ github.head_ref }}
+    secrets: inherit
+
+  comment:
+    name: Comment preview URLs
+    if: ${{ !github.event.pull_request.draft }}
+    runs-on: ubuntu-latest
+    needs:
+      - detect-changes
+      - preview-itgrep
+      - preview-nodejs-tech
+      - preview-traefik-tech
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Upsert PR comment
+        uses: actions/github-script@v7
+        env:
+          ITGREP_ALIAS: ${{ needs.preview-itgrep.outputs.pages_deployment_alias_url }}
+          NODEJS_ALIAS: ${{ needs.preview-nodejs-tech.outputs.pages_deployment_alias_url }}
+          TRAEFIK_ALIAS: ${{ needs.preview-traefik-tech.outputs.pages_deployment_alias_url }}
+        with:
+          script: |
+            const marker = "<!-- cf-pages-preview -->";
+            const lines = [marker, "## Cloudflare Pages Preview"];
+            const previews = [
+              ["itgrep.com", process.env.ITGREP_ALIAS],
+              ["nodejs.tech", process.env.NODEJS_ALIAS],
+              ["traefik.tech", process.env.TRAEFIK_ALIAS],
+            ].filter(([, url]) => url && url.trim().length > 0);
+
+            if (previews.length === 0) {
+              lines.push("");
+              lines.push("No site preview was deployed for this PR.");
+            } else {
+              lines.push("");
+              for (const [name, url] of previews) {
+                lines.push(`- ${name}: ${url}`);
+              }
+            }
+
+            const body = lines.join("\n");
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner,
+              repo,
+              issue_number,
+              per_page: 100,
+            });
+
+            const existing = comments.find((comment) =>
+              comment.user?.type === "Bot" && comment.body?.includes(marker),
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number,
+                body,
+              });
+            }
